@@ -16,6 +16,8 @@ class Text {
   constructor(textValue) {
     this.#validate(textValue);
     this.value = this.#cleanUp(textValue);
+    //Prevent user from making ANY changes to the created object
+    Object.freeze(this);
   }
 }
 
@@ -32,6 +34,8 @@ class BooleanType {
   constructor(boolValue) {
     this.#validate(boolValue);
     this.value = /^true$/i.test(boolValue) ? 'TRUE' : 'FALSE';
+    //Prevent user from making ANY changes to the created object
+    Object.freeze(this);
   }
 }
 
@@ -176,6 +180,8 @@ class DateTime {
 
   constructor(dateTimeValue, options) {
     this.#validateAndSet(dateTimeValue, options);
+    //Prevent user from making ANY changes to the created object
+    Object.freeze(this);
   }
 }
 
@@ -195,6 +201,8 @@ class Integer {
   constructor(intValue) {
     this.#validate(intValue);
     this.value = intValue.toString();
+    //Prevent user from making ANY changes to the created object
+    Object.freeze(this);
   }
 }
 
@@ -213,6 +221,8 @@ class Float {
   constructor(floatValue) {
     this.#validate(floatValue);
     this.value = floatValue.toString();
+    //Prevent user from making ANY changes to the created object
+    Object.freeze(this);
   }
 }
 
@@ -229,6 +239,8 @@ class LanguageTag {
   constructor(langTagValue) {
     this.#validate(langTagValue);
     this.value = langTagValue;
+    //Prevent user from making ANY changes to the created object
+    Object.freeze(this);
   }
 }
 
@@ -247,10 +259,12 @@ class URIType {
   constructor(uriValue) {
     this.#validate(uriValue);
     this.value = uriValue;
+    //Prevent user from making ANY changes to the created object
+    Object.freeze(this);
   }
 }
 
-module.exports = {
+export {
   Text,
   BooleanType,
   DateTime,
