@@ -1,0 +1,25 @@
+{
+  "name": "csv-vcf-project",
+  "version": "0.0.1",
+  "description": "Convert CSV to VCF",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kelseykm/CSV-VCF-Project.git"
+  },
+  "keywords": [
+    "CSV-to-VCF"
+  ],
+  "authors": [
+    "Kelsey Mwongeli",
+    "TheBThinker"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kelseykm/CSV-VCF-Project/issues"
+  },
+  "homepage": "https://github.com/kelseykm/CSV-VCF-Project#readme"
+}
