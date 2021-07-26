@@ -1,4 +1,4 @@
-class Text {
+class TextType {
   type = 'TEXT';
 
   #validate(textValue) {
@@ -39,7 +39,7 @@ class BooleanType {
   }
 }
 
-class DateTime {
+class DateTimeType {
   #dateRegExp = /^(?:(?:\d{4})|(?:\d{4}-\d{2})|(?:-{2}\d{2}(?:\d{2})?)|(?:-{3}\d{2})|(?:\d{8})|(?:-{2}\d{4}))$/;
   #timeRegExp = /^(?:(?:\d{2})|(?:\d{4})|(?:\d{6})|(?:-\d{4})|(?:-{2}\d{2}))(?:Z|[-+]\d{2}(?:0{2})?)?$/;
   #dateTimeRegExp = /^(?:(?:\d{8})|(?:-{2}\d{4})|(?:-{3}\d{2}))T(?:(?:\d{2})|(?:\d{4})|(?:\d{6}))(?:Z|[-+]\d{2}(?:0{2})?)?$/;
@@ -47,11 +47,12 @@ class DateTime {
   #timestampRegExp = /^\d{8}T\d{6}(?:Z|[-+]\d{2}(?:0{2})?)?$/;
 
   #validateAndSet(dateTimeValue, options) {
+    if (!dateTimeValue) throw new Error('dateTimeValue must be supplied');
     //ensure options is an object with a type property specifying either
     // date, time, datetime, dateandortime or timestamp
-    if (!options?.type)
+    else if (!options?.type)
     throw new Error('Second argument should be an object with a type property');
-    else if (! /^(date|datetime|dateandortime|datetime|timestamp)$/i.test(options.type))
+    else if (! /^(date|time|dateandortime|datetime|timestamp)$/i.test(options.type))
     throw new Error('Accepted values for type property are date, time, datetime, dateandortime or timestamp');
 
     //ensure dateTimeValue corresponds to type given in options
@@ -185,7 +186,7 @@ class DateTime {
   }
 }
 
-class Integer {
+class IntegerType {
   type = 'INTEGER';
 
   #validate(intValue) {
@@ -206,7 +207,7 @@ class Integer {
   }
 }
 
-class Float {
+class FloatType {
   type = 'FLOAT';
 
   #validate(floatValue) {
@@ -226,7 +227,7 @@ class Float {
   }
 }
 
-class LanguageTag {
+class LanguageTagType {
   type = 'LANGUAGE-TAG';
 
   #validate(langTagValue) {
@@ -265,11 +266,11 @@ class URIType {
 }
 
 export {
-  Text,
+  TextType,
   BooleanType,
-  DateTime,
-  Integer,
-  Float,
-  LanguageTag,
+  DateTimeType,
+  IntegerType,
+  FloatType,
+  LanguageTagType,
   URIType
 };
