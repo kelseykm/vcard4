@@ -40,7 +40,7 @@ class BooleanType {
 }
 
 class DateTimeType {
-  #dateRegExp = /^(?:(?:\d{4})|(?:\d{4}-\d{2})|(?:-{2}\d{2}(?:\d{2})?)|(?:-{3}\d{2})|(?:\d{8})|(?:-{2}\d{4}))$/;
+  #dateRegExp = /^(?:(?:(?<year1>\d{4})(?:(?<month1>\d{2})(?<day1>\d{2}))?)|(?:(?<year2>\d{4})-(?<month2>\d{2}))|(?:-{2}(?<month3>\d{2})(?<day2>\d{2})?)|(?:-{3}(?<day3>\d{2}))|)$/;
   #timeRegExp = /^(?:(?:\d{2})|(?:\d{4})|(?:\d{6})|(?:-\d{4})|(?:-{2}\d{2}))(?:Z|[-+]\d{2}(?:0{2})?)?$/;
   #dateTimeRegExp = /^(?:(?:\d{8})|(?:-{2}\d{4})|(?:-{3}\d{2}))T(?:(?:\d{2})|(?:\d{4})|(?:\d{6}))(?:Z|[-+]\d{2}(?:0{2})?)?$/;
   #dateAndOrTimeRegExp = new RegExp(`(?:${this.#dateRegExp.source}|${this.#timeRegExp.source.replace('^', '^T')}|${this.#dateTimeRegExp.source})`);
@@ -56,7 +56,6 @@ class DateTimeType {
     throw new Error('Accepted values for type property are date, time, datetime, dateandortime or timestamp');
 
     //ensure dateTimeValue corresponds to type given in options
-    if (!dateTimeValue) throw new Error('dateTimeValue must be supplied');
     switch (true) {
       case /^date$/i.test(options.type):
         if (!this.#dateRegExp.test(dateTimeValue))
@@ -82,8 +81,58 @@ class DateTimeType {
           of the extended format.
         `);
 
+        let match = this.#dateRegExp.exec(dateTimeValue);
+        let matchGroups = match.groups;
+
+        //This is safe to do because there can only be one year captured and
+        // one month captured, so they won't get overwritten twice
+        let leapYear = false;
+        let monthNumber = 0;
+
+        Reflect.ownKeys(matchGroups).forEach(captureGroup => {
+          switch (true) {
+            case /year/.test(captureGroup):
+              if (matchGroups[captureGroup]) {
+                let year = matchGroups[captureGroup];
+                year = new Number(year).valueOf();
+
+                if (!((0 <= year) && (year <= 9999)))
+                throw new Error('Invalid year. Year should be between 0000-9999');
+
+                if (year % 4 === 0) leapYear = true;
+              }
+              break;
+            case /month/.test(captureGroup):
+              if (matchGroups[captureGroup]) {
+                let month = matchGroups[captureGroup];
+                month = new Number(month).valueOf();
+
+                if (!((1 <= month) && (month <= 12)))
+                throw new Error('Invalid month. Month should be between 01-12');
+
+                monthNumber = month;
+              }
+              break;
+            case /day/.test(captureGroup):
+              if (matchGroups[captureGroup]) {
+                let day = matchGroups[captureGroup];
+                day = new Number(day).valueOf();
+
+                if (!((1 <= day) && (day <= 31)))
+                throw new Error('Invalid day. Day should be between 1-31');
+                else if (leapYear && (monthNumber === 2) && (day > 29))
+                throw new Error('Invalid day. Day for month 02 in a leap year should be between 1-29');
+                else if (!leapYear && (monthNumber === 2) && (day > 28))
+                throw new Error('Invalid day. Day for month 02 in a should be between 1-28');
+                else if (/^(4|6|9|11)$/.test(monthNumber) && (day > 30))
+                throw new Error('Invalid day. Day for months 04, 06, 09 and 11 should be between 1-30');
+              }
+              break;
+          }
+        });
+
         this.type = 'DATE';
-        this.value = dateTimeValue;
+        this.value = dateTimeValue.toString();
         break;
       case /^time$/i.test(options.type):
         if (!this.#timeRegExp.test(dateTimeValue))
