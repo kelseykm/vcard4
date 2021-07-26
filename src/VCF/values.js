@@ -154,7 +154,7 @@ class DateTimeType {
         `);
 
         this.type = 'TIME';
-        this.value = dateTimeValue;
+        this.value = dateTimeValue.toString();
         break;
       case /^datetime$/i.test(options.type):
         if (!this.#dateTimeRegExp.test(dateTimeValue))
@@ -175,7 +175,7 @@ class DateTimeType {
         `);
 
         this.type = 'DATE-TIME';
-        this.value = dateTimeValue;
+        this.value = dateTimeValue.toString();
         break;
       case /^dateandortime$/i.test(options.type):
         if (!this.#dateAndOrTimeRegExp.test(dateTimeValue))
@@ -201,7 +201,7 @@ class DateTimeType {
         `);
 
         this.type = 'DATE-AND-OR-TIME';
-        this.value = dateTimeValue;
+        this.value = dateTimeValue.toString();
         break;
       case /^timestamp$/i.test(options.type):
         if (!this.#timestampRegExp.test(dateTimeValue))
@@ -221,7 +221,7 @@ class DateTimeType {
         `);
 
         this.type = 'TIMESTAMP';
-        this.value = dateTimeValue;
+        this.value = dateTimeValue.toString();
         break;
       default:
         throw new Error('Accepted values for type property are date, time, datetime, dateandortime or timestamp');
