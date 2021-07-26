@@ -119,13 +119,13 @@ class DateTimeType {
                 day = new Number(day).valueOf();
 
                 if (!((1 <= day) && (day <= 31)))
-                throw new Error('Invalid day. Day should be between 1-31');
+                throw new Error('Invalid day. Day should be between 01-31');
                 else if (leapYear && (monthNumber === 2) && (day > 29))
-                throw new Error('Invalid day. Day for month 02 in a leap year should be between 1-29');
+                throw new Error('Invalid day. Day for month 02 in a leap year should be between 01-29');
                 else if (!leapYear && (monthNumber === 2) && (day > 28))
-                throw new Error('Invalid day. Day for month 02 in should be between 1-28');
+                throw new Error('Invalid day. Day for month 02 should be between 01-28');
                 else if (/^(4|6|9|11)$/.test(monthNumber) && (day > 30))
-                throw new Error('Invalid day. Day for months 04, 06, 09 and 11 should be between 1-30');
+                throw new Error('Invalid day. Day for months 04, 06, 09 and 11 should be between 01-30');
               }
               break;
           }
