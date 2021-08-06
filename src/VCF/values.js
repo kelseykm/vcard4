@@ -8,8 +8,8 @@ class TextType {
   }
 
   #cleanUp(textValue) {
-    //commas, semi-colons, backslashes and new-lines must be escaped/encoded
-    return textValue.replaceAll('\\', '\\\\').replaceAll(',', '\\,').replaceAll(';', '\\;').replaceAll('\n', '\\n');
+    //commas, colons, semi-colons, backslashes and new-lines must be escaped/encoded
+    return textValue.replaceAll('\\', '\\\\').replaceAll(',', '\\,').replaceAll(':', '\\:').replaceAll(';', '\\;').replaceAll('\n', '\\n');
   }
 
   constructor(textValue) {
@@ -154,9 +154,14 @@ class LanguageTagType {
     //user to ensure their Language Tag is according to the RFC.
   }
 
+  #cleanUp(langTagValue) {
+    //commas, colons, semi-colons, backslashes and new-lines must be escaped/encoded
+    return langTagValue.replaceAll('\\', '\\\\').replaceAll(',', '\\,').replaceAll(':', '\\:').replaceAll(';', '\\;').replaceAll('\n', '\\n');
+  }
+
   constructor(langTagValue) {
     this.#validate(langTagValue);
-    this.value = langTagValue;
+    this.value = this.#cleanUp(langTagValue);
 
     Object.freeze(this);
   }
