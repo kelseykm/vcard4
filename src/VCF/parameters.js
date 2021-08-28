@@ -69,7 +69,7 @@ class ValueParameter extends AbstractBaseParameter {
   #valueType;
 
   get value() {
-    return this.#valueType.repr();
+    return this.#valueType.type;
   }
 
   #validate(valType) {
