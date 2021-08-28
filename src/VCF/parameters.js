@@ -1,4 +1,9 @@
 import {
+  MissingArgument,
+  InvalidArgument
+} from './errors.js';
+
+import {
   TextType,
   BooleanType,
   DateTimeType,
@@ -18,9 +23,10 @@ class LanguageParameter {
   }
 
   constructor(langTag) {
-    if (!langTag) throw new Error('Language Tag for LanguageParameter must be supplied');
+    if (typeof langTag === 'undefined')
+    throw new MissingArgument('Language Tag for LanguageParameter must be supplied');
     else if (!(langTag instanceof LanguageTagType))
-    throw new Error('The value of the LANGUAGE property parameter should be of type LanguageTagType');
+    throw new InvalidArgument('The value of the LANGUAGE property parameter should be of type LanguageTagType');
 
     this.#langTag = langTag;
     Object.freeze(this);
@@ -37,7 +43,8 @@ class ValueParameter {
   }
 
   #validate(valType) {
-    if (!valType) throw new Error('Value Type for ValueParameter must be supplied');
+    if (typeof valType === 'undefined')
+    throw new MissingArgument('Value for ValueParameter must be supplied');
 
     const types = [
       TextType,
@@ -49,7 +56,7 @@ class ValueParameter {
       URIType
     ];
     if (!types.some(type => valType instanceof type))
-    throw new Error('Value Type not recognized');
+    throw new InvalidArgument('Value for ValueParameter not recognized');
   }
 
   constructor(valType) {
@@ -64,9 +71,10 @@ class PrefParameter {
   param = 'PREF';
 
   #validate(prefValue) {
-    if (!prefValue) throw new Error('Value for PrefParameter must be supplied');
-    else if (typeof prefValue !== 'number')
-    throw new Error('Value MUST be an integer between 1 and 100');
+    if (typeof prefValue === 'undefined')
+    throw new MissingArgument('Value for PrefParameter must be supplied');
+    else if (typeof prefValue !== 'number' || !(prefValue >= 1 && prefValue <= 100))
+    throw new InvalidArgument('Value for PrefParameter must be an integer between 1 and 100');
   }
 
   constructor(prefValue) {
@@ -81,7 +89,8 @@ class AltidParameter {
   param = 'ALTID';
 
   #validate(altidValue) {
-    if (!altidValue) throw new Error('Altid value must be supplied');
+    if (typeof altidValue === 'undefined')
+    throw new MissingArgument('Value for AltidParameter must be supplied');
   }
 
   constructor(altidValue) {
@@ -98,9 +107,10 @@ class PIDParameter {
   #pidRegExp = /^\d+\.?\d+(?:,\d+\.?\d+)*$/;
 
   #validate(pidValue) {
-    if (!pidValue) throw new Error('Value for PIDParameter must be supplied');
+    if (typeof pidValue === 'undefined')
+    throw new MissingArgument('Value for PIDParameter must be supplied');
     else if (!this.#pidRegExp.test(pidValue))
-    throw new Error('Invalid value for PIDParameter');
+    throw new InvalidArgument('Invalid value for PIDParameter');
   }
 
   constructor(pidValue) {
@@ -117,9 +127,10 @@ class TypeParameter {
   #typeRegExp = /^(?:work|home|text|voice|fax|cell|video|pager|textphone|contact|acquaintance|friend|met|co-worker|colleague|co-resident|neighbor|child|parent|sibling|spouse|kin|muse|crush|date|sweetheart|me|agent|emergency|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)(?:,(?:work|home|text|voice|fax|cell|video|pager|textphone|contact|acquaintance|friend|met|co-worker|colleague|co-resident|neighbor|child|parent|sibling|spouse|kin|muse|crush|date|sweetheart|me|agent|emergency|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+))*$/i;
 
   #validate(typeValue) {
-    if (!typeValue) throw new Error('Value for TypeParameter must be supplied');
+    if (typeof typeValue === 'undefined')
+    throw new MissingArgument('Value for TypeParameter must be supplied');
     else if (!this.#typeRegExp.test(typeValue))
-    throw new Error('Invalid value for TypeParameter');
+    throw new InvalidArgument('Invalid value for TypeParameter');
   }
 
   constructor(typeValue) {
@@ -136,9 +147,10 @@ class MediatypeParameter {
   #mediaTypeRegExp = /^(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}\/(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}(?:;.+=.+)*$/;
 
   #validate(mediaValue) {
-    if (!mediaValue) throw new Error('Value for MediatypeParameter must be supplied');
+    if (typeof mediaValue === 'undefined')
+    throw new MissingArgument('Value for MediatypeParameter must be supplied');
     else if (!this.#mediaTypeRegExp.test(mediaValue))
-    throw new Error('Invalid media type');
+    throw new InvalidArgument('Invalid media type');
   }
 
   constructor(mediaValue) {
@@ -155,9 +167,10 @@ class CalscaleParameter {
   #calscaleRegExp = /^(?:gregorian|x-[A-Za-z0-9]+)$/;
 
   #validate(calscaleValue) {
-    if (!calscaleValue) throw new Error('Value for CalscaleParameter must be supplied');
+    if (typeof calscaleValue === 'undefined')
+    throw new MissingArgument('Value for CalscaleParameter must be supplied');
     else if (!this.#calscaleRegExp.test(calscaleValue))
-    throw new Error('Invalid calscale value');
+    throw new InvalidArgument('Invalid calscale value');
   }
 
   constructor(calscaleValue) {
@@ -172,7 +185,8 @@ class SortAsParameter {
   param = 'SORT-AS';
 
   #validate(sortValue) {
-    if (!sortValue) throw new Error('Value for SortAsParameter must be supplied');
+    if (typeof sortValue === 'undefined')
+    throw new MissingArgument('Value for SortAsParameter must be supplied');
   }
 
   constructor(sortValue) {
@@ -190,9 +204,10 @@ class GeoParameter {
   #uriRegExp = new RegExp("([A-Za-z][A-Za-z0-9+\\-.]*):(?:(//)(?:((?:[A-Za-z0-9\\-._~!$&'()*+,;=:]|%[0-9A-Fa-f]{2})*)@)?((?:\\[(?:(?:(?:(?:[0-9A-Fa-f]{1,4}:){6}|::(?:[0-9A-Fa-f]{1,4}:){5}|(?:[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,1}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){3}|(?:(?:[0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){2}|(?:(?:[0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}:|(?:(?:[0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})?::)(?:[0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{1,4}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|(?:(?:[0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})?::)|[Vv][0-9A-Fa-f]+\\.[A-Za-z0-9\\-._~!$&'()*+,;=:]+)\\]|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|(?:[A-Za-z0-9\\-._~!$&'()*+,;=]|%[0-9A-Fa-f]{2})*))(?::([0-9]*))?((?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)|/((?:(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)?)|((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)|)(?:\\?((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@/?]|%[0-9A-Fa-f]{2})*))?(?:\\#((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@/?]|%[0-9A-Fa-f]{2})*))?");
 
   #validate(geoValue) {
-    if (!geoValue) throw new Error('Value for GeoParameter must be supplied');
+    if (typeof geoValue === 'undefined')
+    throw new MissingArgument('Value for GeoParameter must be supplied');
     else if (!(this.#uriRegExp.test(geoValue)))
-    throw new Error('Invalid value for GeoParameter');
+    throw new InvalidArgument('Invalid value for GeoParameter');
   }
 
   constructor(geoValue) {
@@ -210,14 +225,34 @@ class TzParameter {
   #uriRegExp = new RegExp("([A-Za-z][A-Za-z0-9+\\-.]*):(?:(//)(?:((?:[A-Za-z0-9\\-._~!$&'()*+,;=:]|%[0-9A-Fa-f]{2})*)@)?((?:\\[(?:(?:(?:(?:[0-9A-Fa-f]{1,4}:){6}|::(?:[0-9A-Fa-f]{1,4}:){5}|(?:[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,1}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){3}|(?:(?:[0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){2}|(?:(?:[0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}:|(?:(?:[0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})?::)(?:[0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{1,4}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|(?:(?:[0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})?::)|[Vv][0-9A-Fa-f]+\\.[A-Za-z0-9\\-._~!$&'()*+,;=:]+)\\]|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|(?:[A-Za-z0-9\\-._~!$&'()*+,;=]|%[0-9A-Fa-f]{2})*))(?::([0-9]*))?((?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)|/((?:(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)?)|((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)|)(?:\\?((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@/?]|%[0-9A-Fa-f]{2})*))?(?:\\#((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@/?]|%[0-9A-Fa-f]{2})*))?");
 
   #validate(tzValue) {
-    if (!tzValue) throw new Error('Value for TzParameter must be supplied');
+    if (typeof tzValue === 'undefined')
+    throw new MissingArgument('Value for TzParameter must be supplied');
     else if (!(this.#uriRegExp.test(tzValue)))
-    throw new Error('Invalid value for TzParameter');
+    throw new InvalidArgument('Invalid value for TzParameter');
   }
 
   constructor(tzValue) {
     this.#validate(tzValue);
     this.value = `"${tzValue}"`;
+
+    Object.freeze(this);
+  }
+}
+
+class AnyParameter {
+  #anyParamRegExp = /^(?:A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)(?:,(?:A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+))*$/i;
+
+  #validate(param, value) {
+    if (typeof param === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Param and value for AnyParameter must be supplied');
+    else if (!this.#anyParamRegExp.test(param))
+    throw new InvalidArgument('Invalid param for AnyParameter');
+  }
+
+  constructor(param, value) {
+    this.#validate(param, value);
+    this.param = param.toString();
+    this.value = value.toString();
 
     Object.freeze(this);
   }
@@ -234,5 +269,6 @@ export {
   CalscaleParameter,
   SortAsParameter,
   GeoParameter,
-  TzParameter
+  TzParameter,
+  AnyParameter
 };
