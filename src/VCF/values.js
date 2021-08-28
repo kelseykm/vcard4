@@ -51,6 +51,32 @@ class TextType extends AbstractBaseValue {
   }
 }
 
+class TextListType extends AbstractBaseValue {
+  type = 'TEXT';
+
+  #validate(textlist) {
+    if (typeof textlist === 'undefined')
+    throw new MissingArgument('Value for TextListType must be supplied');
+    else if (!Array.isArray(textlist))
+    throw new TypeError('Invalid type for value of TextListType. It should be an array of TextTypes');
+    else if (!textlist.every(text => text instanceof TextType))
+    throw new TypeError('Invalid type for value of TextListType. It should be an array of TextTypes');
+  }
+
+  constructor(textlist) {
+    super();
+
+    this.#validate(textlist);
+    this.value = textlist.reduce((accumulatedTextTypes, currentTextType) => {
+      accumulatedTextTypes.push(currentTextType.repr());
+      return accumulatedTextTypes;
+    }, []).join(',');
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
 class BooleanType extends AbstractBaseValue {
   type = 'BOOLEAN';
 
@@ -244,26 +270,76 @@ class URIType extends AbstractBaseValue {
   }
 }
 
+class SexType extends AbstractBaseValue {
+  type = 'TEXT';
+
+  #sexRegExp = /^[MFONU]$/;
+
+  #validate(sexValue) {
+    if (typeof sexValue === 'undefined')
+    throw new MissingArgument('Value for SEXType must be supplied');
+    else if (!this.#sexRegExp.test(sexValue))
+    throw new InvalidArgument('Invalid sex');
+  }
+
+  constructor(sexValue) {
+    super();
+
+    this.#validate(sexValue);
+    this.value = sexValue;
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
 class SpecialValueType extends AbstractBaseValue {
   #typeRegExp = /^(?:text(?:-list)?|date(?:-list)?|time(?:-list)?|date-time(?:-list)?|date-and-or-time(?:-list)?|timestamp(?:-list)?|boolean|integer(?:-list)?|float(?:-list)?|URI|utc-offset|Language-Tag|iana-valuespec)$/i;
 
   #valueRegExp = /^(?:vcard|individual|group|org|location|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)$/i;
 
-  #validate(type, value) {
+  #validate(type, value, targetProp) {
     if (typeof type === 'undefined' || typeof value === 'undefined')
     throw new MissingArgument('Type and value for SpecialValueType must be supplied');
     else if (!this.#typeRegExp.test(type))
     throw new InvalidArgument('Invalid type for SpecialValueType');
-    else if (!this.#valueRegExp.test(value))
+    else if (!Array.isArray(value) && !this.#valueRegExp.test(value))
     throw new InvalidArgument('Invalid value for SpecialValueType');
+    else if (Array.isArray(value) && typeof targetProp === 'undefined')
+    throw new MissingArgument('Type, value and targetProp for SpecialValueType must be supplied');
+
+    if (Array.isArray(value) && /^NProperty$/i.test(targetProp)) {
+      if (value.length !== 5)
+      throw new InvalidArgument('Invalid value for SpecialValueType for NProperty. It should be an array with a length of 5');
+
+      for (let index = 0; index < value.length; index++)
+      if (value[index])
+      if (!(value[index] instanceof TextType))
+      throw new TypeError('Invalid value for SpecialValueType for NProperty. The items in the array, if present, should be of type TextType');
+    }
+    else if (Array.isArray(value) && /^GenderProperty$/i.test(targetProp)) {
+      if (value.length !== 2)
+      throw new InvalidArgument('Invalid value for SpecialValueType for GenderProperty. It should be an array with a length of 2');
+      else if (value[0] && !(value[0] instanceof SexType))
+      throw new TypeError('Invalid value for SpecialValueType for GenderProperty. The first item in the array, if present, should be of type SexType');
+      else if (value[1] && !(value[1] instanceof TextType))
+      throw new TypeError('Invalid value for SpecialValueType for GenderProperty. The first item in the array, if present, should be of type TextType');
+    }
   }
 
-  constructor(type, value) {
+  constructor(type, value, targetProp) {
     super();
 
-    this.#validate(type, value);
+    this.#validate(type, value, targetProp);
     this.type = type.toString();
-    this.value = value.toString();
+
+    if (Array.isArray(value)) {
+      for (let index = 0; index < value.length; index++)
+      if (value[index])
+      value[index] = value[index].repr();
+      this.value = value.join(';');
+    }
+    else this.value = value.toString();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
@@ -272,11 +348,13 @@ class SpecialValueType extends AbstractBaseValue {
 
 export {
   TextType,
+  TextListType,
   BooleanType,
   DateTimeType,
   IntegerType,
   FloatType,
   LanguageTagType,
   URIType,
+  SexType,
   SpecialValueType
 };

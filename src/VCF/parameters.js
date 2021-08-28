@@ -5,12 +5,14 @@ import {
 
 import {
   TextType,
+  TextListType,
   BooleanType,
   DateTimeType,
   IntegerType,
   FloatType,
   LanguageTagType,
   URIType,
+  SexType,
   SpecialValueType
 } from './values.js';
 
