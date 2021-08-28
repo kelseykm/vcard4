@@ -10,7 +10,8 @@ import {
   IntegerType,
   FloatType,
   LanguageTagType,
-  URIType
+  URIType,
+  SpecialValueType
 } from './values.js';
 
 // Abstract Base Class for parameters
@@ -83,7 +84,8 @@ class ValueParameter extends AbstractBaseParameter {
       IntegerType,
       FloatType,
       LanguageTagType,
-      URIType
+      URIType,
+      SpecialValueType
     ];
     if (!types.some(type => valType instanceof type))
     throw new InvalidArgument('Value for ValueParameter not recognized');
