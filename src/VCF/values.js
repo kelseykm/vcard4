@@ -244,12 +244,26 @@ class URIType extends AbstractBaseValue {
   }
 }
 
-class VcardValueType extends AbstractBaseValue {
-  type = 'TEXT';
-  value = 'VCARD';
+class SpecialValueType extends AbstractBaseValue {
+  #typeRegExp = /^(?:text(?:-list)?|date(?:-list)?|time(?:-list)?|date-time(?:-list)?|date-and-or-time(?:-list)?|timestamp(?:-list)?|boolean|integer(?:-list)?|float(?:-list)?|URI|utc-offset|Language-Tag|iana-valuespec)$/i;
 
-  constructor() {
+  #valueRegExp = /^(?:vcard|individual|group|org|location|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)$/i;
+
+  #validate(type, value) {
+    if (typeof type === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Type and value for SpecialValueType must be supplied');
+    else if (!this.#typeRegExp.test(type))
+    throw new InvalidArgument('Invalid type for SpecialValueType');
+    else if (!this.#valueRegExp.test(value))
+    throw new InvalidArgument('Invalid value for SpecialValueType');
+  }
+
+  constructor(type, value) {
     super();
+
+    this.#validate(type, value);
+    this.type = type.toString();
+    this.value = value.toString();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
@@ -264,5 +278,5 @@ export {
   FloatType,
   LanguageTagType,
   URIType,
-  VcardValueType
+  SpecialValueType
 };
