@@ -3,7 +3,30 @@ import {
   InvalidArgument,
 } from './errors.js';
 
-class TextType {
+// Abstract Base Class for values
+class AbstractBaseValue {
+  #abstractPropertiesAndMethods = [
+    'type',
+    'value'
+  ];
+
+  checkAbstractPropertiesAndMethods() {
+    if (!this.#abstractPropertiesAndMethods.every(abstractPropertyOrMethod => this.hasOwnProperty(abstractPropertyOrMethod) || Object.getPrototypeOf(this).hasOwnProperty(abstractPropertyOrMethod)))
+    throw new Error('All abstract properties and methods in abstract base class must be defined in child class');
+  }
+
+  repr() {
+    return this.value;
+  }
+
+  constructor() {
+    if (this.constructor === AbstractBaseValue)
+    throw new Error('Cannot create instance of abstract class');
+  }
+}
+
+// Values
+class TextType extends AbstractBaseValue {
   type = 'TEXT';
 
   #validate(textValue) {
@@ -19,14 +42,16 @@ class TextType {
   }
 
   constructor(textValue) {
+    super();
     this.#validate(textValue);
     this.value = this.#cleanUp(textValue);
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class BooleanType {
+class BooleanType extends AbstractBaseValue {
   type = 'BOOLEAN';
 
   #validate(boolValue) {
@@ -37,14 +62,17 @@ class BooleanType {
   }
 
   constructor(boolValue) {
+    super();
+
     this.#validate(boolValue);
     this.value = /^true$/i.test(boolValue) ? 'TRUE' : 'FALSE';
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class DateTimeType {
+class DateTimeType extends AbstractBaseValue {
   #dateRegExp = /^(?:(?:\d{4})|(?:(?:\d{4}(?:(?:(?:0[469]|11)(?:[0-2]\d|30))|(?:(?:0[13578]|1[02])(?:[0-2]\d|3[01]))))|(?:\d{2}(?:(?:(?:[02468][048]|[13579][26])(?:02)(?:[0-2]\d))|(?:(:?\d[13579]|[02468][26]|[13579][048])(?:02)(?:[0-2][0-8])))))|(?:-{2}(?:(?:(?:0[469]|11)(?:[0-2]\d|30)?)|(?:(?:0[13578]|1[02])(?:[0-2]\d|3[01])?)|(?:(?:02)(?:[0-2]\d)?)))|(?:-{3}(?:[0-2]\d|3[01]))|(?:\d{4}-(?:(?:0[1-9])|1[0-2])))$/;
 
   #timeRegExp = /^(?:(?:(?:(?:[01]\d)|(?:2[0-3]))(?:(?:[0-5]\d){1,2})?)|(?:-(?:[0-5]\d){1,2})|(?:-{2}[0-5]\d))(?:Z|(?:[+-]((?:[01]\d)|(?:2[0-3]))(?:[0-5]\d)?))?$/;
@@ -105,13 +133,15 @@ class DateTimeType {
   }
 
   constructor(dateTimeValue, options) {
+    super();
     this.#validateAndSet(dateTimeValue, options);
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class IntegerType {
+class IntegerType extends AbstractBaseValue {
   type = 'INTEGER';
 
   #validate(intValue) {
@@ -126,14 +156,17 @@ class IntegerType {
   }
 
   constructor(intValue) {
+    super();
+
     this.#validate(intValue);
     this.value = intValue.toString();
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class FloatType {
+class FloatType extends AbstractBaseValue {
   type = 'FLOAT';
 
   #validate(floatValue) {
@@ -147,14 +180,17 @@ class FloatType {
   }
 
   constructor(floatValue) {
+    super();
+
     this.#validate(floatValue);
     this.value = floatValue.toString();
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class LanguageTagType {
+class LanguageTagType extends AbstractBaseValue {
   type = 'LANGUAGE-TAG';
 
   #validate(langTagValue) {
@@ -172,14 +208,17 @@ class LanguageTagType {
   }
 
   constructor(langTagValue) {
+    super();
+
     this.#validate(langTagValue);
     this.value = this.#cleanUp(langTagValue);
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class URIType {
+class URIType extends AbstractBaseValue {
   type = 'URI';
 
   //Credit for the following regex goes to Jonas Hermsmeier, who got it from Jeff Roberson and added capture groups
@@ -195,9 +234,24 @@ class URIType {
   }
 
   constructor(uriValue) {
+    super();
+
     this.#validate(uriValue);
     this.value = uriValue;
 
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class VcardValueType extends AbstractBaseValue {
+  type = 'TEXT';
+  value = 'VCARD';
+
+  constructor() {
+    super();
+
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
@@ -209,5 +263,6 @@ export {
   IntegerType,
   FloatType,
   LanguageTagType,
-  URIType
+  URIType,
+  VcardValueType
 };

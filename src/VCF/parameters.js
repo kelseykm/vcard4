@@ -13,33 +13,63 @@ import {
   URIType
 } from './values.js';
 
-class LanguageParameter {
+// Abstract Base Class for parameters
+class AbstractBaseParameter {
+  #abstractPropertiesAndMethods = [
+    'param',
+    'value'
+  ];
+
+  checkAbstractPropertiesAndMethods() {
+    if (!this.#abstractPropertiesAndMethods.every(abstractPropertyOrMethod => this.hasOwnProperty(abstractPropertyOrMethod) || Object.getPrototypeOf(this).hasOwnProperty(abstractPropertyOrMethod)))
+    throw new Error('All abstract properties and methods in abstract base class must be defined in child class');
+  }
+
+  repr() {
+    return `${this.param}=${this.value}`;
+  }
+
+  constructor() {
+    if (this.constructor === AbstractBaseParameter)
+    throw new Error('Cannot create instance of abstract class');
+  }
+}
+
+// Parameters
+class LanguageParameter extends AbstractBaseParameter {
   param = 'LANGUAGE';
 
   #langTag;
 
   get value() {
-    return this.#langTag.value;
+    return this.#langTag.repr();
   }
 
-  constructor(langTag) {
+  #validate(langTag) {
     if (typeof langTag === 'undefined')
     throw new MissingArgument('Language Tag for LanguageParameter must be supplied');
     else if (!(langTag instanceof LanguageTagType))
     throw new InvalidArgument('The value of the LANGUAGE property parameter should be of type LanguageTagType');
+  }
 
+  constructor(langTag) {
+    super();
+
+    this.#validate(langTag);
     this.#langTag = langTag;
+
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class ValueParameter {
+class ValueParameter extends AbstractBaseParameter {
   param = 'VALUE';
 
   #valueType;
 
   get value() {
-    return this.#valueType.type;
+    return this.#valueType.repr();
   }
 
   #validate(valType) {
@@ -60,14 +90,17 @@ class ValueParameter {
   }
 
   constructor(valType) {
+    super();
+
     this.#validate(valType);
     this.#valueType = valType;
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class PrefParameter {
+class PrefParameter extends AbstractBaseParameter {
   param = 'PREF';
 
   #validate(prefValue) {
@@ -78,14 +111,17 @@ class PrefParameter {
   }
 
   constructor(prefValue) {
+    super();
+
     this.#validate(prefValue);
     this.value = prefValue.toString();
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class AltidParameter {
+class AltidParameter extends AbstractBaseParameter {
   param = 'ALTID';
 
   #validate(altidValue) {
@@ -94,14 +130,17 @@ class AltidParameter {
   }
 
   constructor(altidValue) {
+    super();
+
     this.#validate(altidValue);
     this.value = altidValue.toString();
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class PIDParameter {
+class PIDParameter extends AbstractBaseParameter {
   param = 'PID';
 
   #pidRegExp = /^\d+\.?\d+(?:,\d+\.?\d+)*$/;
@@ -114,14 +153,17 @@ class PIDParameter {
   }
 
   constructor(pidValue) {
+    super();
+
     this.#validate(pidValue);
     this.value = pidValue.toString();
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class TypeParameter {
+class TypeParameter extends AbstractBaseParameter {
   param = 'TYPE';
 
   #typeRegExp = /^(?:work|home|text|voice|fax|cell|video|pager|textphone|contact|acquaintance|friend|met|co-worker|colleague|co-resident|neighbor|child|parent|sibling|spouse|kin|muse|crush|date|sweetheart|me|agent|emergency|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)(?:,(?:work|home|text|voice|fax|cell|video|pager|textphone|contact|acquaintance|friend|met|co-worker|colleague|co-resident|neighbor|child|parent|sibling|spouse|kin|muse|crush|date|sweetheart|me|agent|emergency|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+))*$/i;
@@ -134,14 +176,17 @@ class TypeParameter {
   }
 
   constructor(typeValue) {
+    super();
+
     this.#validate(typeValue);
     this.value = typeValue.toString();
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class MediatypeParameter {
+class MediatypeParameter extends AbstractBaseParameter {
   param = 'MEDIATYPE';
 
   #mediaTypeRegExp = /^(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}\/(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}(?:;.+=.+)*$/;
@@ -154,14 +199,17 @@ class MediatypeParameter {
   }
 
   constructor(mediaValue) {
+    super();
+
     this.#validate(mediaValue);
     this.value = mediaValue.toString();
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class CalscaleParameter {
+class CalscaleParameter extends AbstractBaseParameter {
   param = 'CALSCALE';
 
   #calscaleRegExp = /^(?:gregorian|x-[A-Za-z0-9]+)$/;
@@ -174,14 +222,17 @@ class CalscaleParameter {
   }
 
   constructor(calscaleValue) {
+    super();
+
     this.#validate(calscaleValue);
     this.value = calscaleValue;
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class SortAsParameter {
+class SortAsParameter extends AbstractBaseParameter {
   param = 'SORT-AS';
 
   #validate(sortValue) {
@@ -190,14 +241,17 @@ class SortAsParameter {
   }
 
   constructor(sortValue) {
+    super();
+
     this.#validate(sortValue);
     this.value = sortValue.toString();
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class GeoParameter {
+class GeoParameter extends AbstractBaseParameter {
   param = 'GEO';
 
   //Credit for the following regex goes to Jonas Hermsmeier, who got it from Jeff Roberson and added capture groups
@@ -211,14 +265,17 @@ class GeoParameter {
   }
 
   constructor(geoValue) {
+    super();
+
     this.#validate(geoValue);
     this.value = `"${geoValue}"`;
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class TzParameter {
+class TzParameter extends AbstractBaseParameter {
   param = 'TZ';
 
   //Credit for the following regex goes to Jonas Hermsmeier, who got it from Jeff Roberson and added capture groups
@@ -232,15 +289,18 @@ class TzParameter {
   }
 
   constructor(tzValue) {
+    super();
+
     this.#validate(tzValue);
     this.value = `"${tzValue}"`;
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
 
-class AnyParameter {
-  #anyParamRegExp = /^(?:A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)(?:,(?:A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+))*$/i;
+class AnyParameter extends AbstractBaseParameter {
+  #anyParamRegExp = /^(?:A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)$/i;
 
   #validate(param, value) {
     if (typeof param === 'undefined' || typeof value === 'undefined')
@@ -250,10 +310,13 @@ class AnyParameter {
   }
 
   constructor(param, value) {
+    super();
+
     this.#validate(param, value);
     this.param = param.toString();
     this.value = value.toString();
 
+    this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
   }
 }
