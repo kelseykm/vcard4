@@ -52,7 +52,7 @@ class LanguageParameter extends AbstractBaseParameter {
     if (typeof langTag === 'undefined')
     throw new MissingArgument('Language Tag for LanguageParameter must be supplied');
     else if (!(langTag instanceof LanguageTagType))
-    throw new InvalidArgument('The value of the LANGUAGE property parameter should be of type LanguageTagType');
+    throw new TypeError('The value of the LANGUAGE property parameter should be of type LanguageTagType');
   }
 
   constructor(langTag) {
@@ -72,7 +72,7 @@ class ValueParameter extends AbstractBaseParameter {
   #valueType;
 
   get value() {
-    return this.#valueType.type;
+    return this.#valueType.type.toLowerCase();
   }
 
   #validate(valType) {
@@ -175,7 +175,9 @@ class TypeParameter extends AbstractBaseParameter {
   #validate(typeValue) {
     if (typeof typeValue === 'undefined')
     throw new MissingArgument('Value for TypeParameter must be supplied');
-    else if (!this.#typeRegExp.test(typeValue))
+    else if (!Array.isArray(typeValue) && !this.#typeRegExp.test(typeValue))
+    throw new InvalidArgument('Invalid value for TypeParameter');
+    else if (Array.isArray(typeValue) && !typeValue.every(type => this.#typeRegExp.test(type)))
     throw new InvalidArgument('Invalid value for TypeParameter');
   }
 
@@ -183,7 +185,10 @@ class TypeParameter extends AbstractBaseParameter {
     super();
 
     this.#validate(typeValue);
-    this.value = typeValue.toString();
+    this.value = Array.isArray(typeValue) ? `"${typeValue.reduce((accumulatedTypes, currentType) => {
+      accumulatedTypes.push(currentType.toString());
+      return accumulatedTypes;
+    }, []).join(',')}"` : typeValue.toString();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
@@ -258,21 +263,18 @@ class SortAsParameter extends AbstractBaseParameter {
 class GeoParameter extends AbstractBaseParameter {
   param = 'GEO';
 
-  //Credit for the following regex goes to Jonas Hermsmeier, who got it from Jeff Roberson and added capture groups
-  #uriRegExp = new RegExp("([A-Za-z][A-Za-z0-9+\\-.]*):(?:(//)(?:((?:[A-Za-z0-9\\-._~!$&'()*+,;=:]|%[0-9A-Fa-f]{2})*)@)?((?:\\[(?:(?:(?:(?:[0-9A-Fa-f]{1,4}:){6}|::(?:[0-9A-Fa-f]{1,4}:){5}|(?:[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,1}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){3}|(?:(?:[0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){2}|(?:(?:[0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}:|(?:(?:[0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})?::)(?:[0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{1,4}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|(?:(?:[0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})?::)|[Vv][0-9A-Fa-f]+\\.[A-Za-z0-9\\-._~!$&'()*+,;=:]+)\\]|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|(?:[A-Za-z0-9\\-._~!$&'()*+,;=]|%[0-9A-Fa-f]{2})*))(?::([0-9]*))?((?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)|/((?:(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)?)|((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)|)(?:\\?((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@/?]|%[0-9A-Fa-f]{2})*))?(?:\\#((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@/?]|%[0-9A-Fa-f]{2})*))?");
-
   #validate(geoValue) {
     if (typeof geoValue === 'undefined')
     throw new MissingArgument('Value for GeoParameter must be supplied');
-    else if (!(this.#uriRegExp.test(geoValue)))
-    throw new InvalidArgument('Invalid value for GeoParameter');
+    else if (!(geoValue instanceof URIType))
+    throw new TypeError('Value for GeoParameter must be of type URIType');
   }
 
   constructor(geoValue) {
     super();
 
     this.#validate(geoValue);
-    this.value = `"${geoValue}"`;
+    this.value = `"${geoValue.repr()}"`;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
@@ -304,12 +306,12 @@ class TzParameter extends AbstractBaseParameter {
 }
 
 class AnyParameter extends AbstractBaseParameter {
-  #anyParamRegExp = /^(?:A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)$/i;
+  #paramRegExp = /^(?:A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)$/i;
 
   #validate(param, value) {
     if (typeof param === 'undefined' || typeof value === 'undefined')
     throw new MissingArgument('Param and value for AnyParameter must be supplied');
-    else if (!this.#anyParamRegExp.test(param))
+    else if (!this.#paramRegExp.test(param))
     throw new InvalidArgument('Invalid param for AnyParameter');
   }
 
@@ -319,6 +321,32 @@ class AnyParameter extends AbstractBaseParameter {
     this.#validate(param, value);
     this.param = param.toString();
     this.value = value.toString();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class LabelParameter extends AbstractBaseParameter {
+  param = 'LABEL';
+
+  #validate(value) {
+    if (typeof value === 'undefined')
+    throw new MissingArgument('Value for LabelParameter must be supplied');
+    else if (typeof value !== 'string')
+    throw new TypeError('Only type string allowed for LabelParameter value');
+  }
+
+  #cleanUp(value) {
+    //new-lines must be encoded
+    return value.replaceAll('\n', '\\n');
+  }
+
+  constructor(value) {
+    super();
+
+    this.#validate(value);
+    this.value = `"${this.#cleanUp(value)}"`;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
@@ -337,5 +365,6 @@ export {
   SortAsParameter,
   GeoParameter,
   TzParameter,
-  AnyParameter
+  AnyParameter,
+  LabelParameter
 };
