@@ -687,6 +687,95 @@ class LangProperty extends AbstractBaseProperty {
   }
 }
 
+// Geographical Properties
+class TzProperty extends AbstractBaseProperty {
+  prop = 'TZ';
+  cardinality = '*';
+  acceptableParamTypes = [
+    ValueParameter,
+    AltidParameter,
+    PIDParameter,
+    PrefParameter,
+    TypeParameter,
+    MediatypeParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = [
+    TextType,
+    URIType,
+    DateTimeType
+  ];
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for TzProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for TzProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => param instanceof acceptableParamType)))
+    throw new TypeError('Some of the parameters passed are not valid parameters for TzProperty');
+    else if (!this.acceptableValTypes.some(valType => {
+      if (valType === DateTimeType)
+      return value instanceof valType && value.type === 'UTC-OFFSET';
+      return value instanceof valType;
+    }))
+    throw new TypeError('Invalid type for value of TzProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class GeoProperty extends AbstractBaseProperty {
+  prop = 'GEO';
+  cardinality = '*';
+  acceptableParamTypes = [
+    ValueParameter,
+    PIDParameter,
+    PrefParameter,
+    TypeParameter,
+    MediatypeParameter,
+    AltidParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = URIType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for GeoProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for GeoProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => param instanceof acceptableParamType)))
+    throw new TypeError('Some of the parameters passed are not valid parameters for GeoProperty');
+    else if (!(value instanceof this.acceptableValTypes))
+    throw new TypeError('Invalid type for value of GeoProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
 export {
   BeginProperty,
   EndProperty,
@@ -704,5 +793,7 @@ export {
   TelProperty,
   EmailProperty,
   IMPPProperty,
-  LangProperty
+  LangProperty,
+  TzProperty,
+  GeoProperty
 };
