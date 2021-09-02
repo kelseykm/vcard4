@@ -109,58 +109,65 @@ class DateTimeType extends AbstractBaseValue {
 
   #timestampRegExp = /^(?:(?:\d{4}(?:(?:(?:0[469]|11)(?:[0-2]\d|30))|(?:(?:0[13578]|1[02])(?:[0-2]\d|3[01]))))|(?:\d{2}(?:(?:(?:[02468][048]|[13579][26])(?:02)(?:[0-2]\d))|(?:(:?\d[13579]|[02468][26]|[13579][048])(?:02)(?:[0-2][0-8])))))(?:T)(?:(?:(?:(?:[01]\d)|(?:2[0-3]))(?:[0-5]\d){2})(?:Z|(?:[+-]((?:[01]\d)|(?:2[0-3]))(?:[0-5]\d)?))?)$/;
 
-  #validateAndSet(dateTimeValue, options) {
-    if (typeof dateTimeValue === 'undefined')
-    throw new MissingArgument('Value for DateTimeType must be supplied');
-    else if (typeof options?.type === 'undefined')
-    throw new InvalidArgument('Second argument for DateTimeType should be an object with a type property');
-    else if (! /^(?:(?:date((?:andor)?(?:time))?)|(?:time(?:stamp)?))$/.test(options.type))
-    throw new InvalidArgument('Accepted values for type property of options object for DateTimeType are date, time, datetime, dateandortime or timestamp');
+  #utcOffsetRegExp = /^(?:[+-]((?:[01]\d)|(?:2[0-3]))(?:[0-5]\d)?)$/;
+
+  #validateAndSet(dateTimeValue, type) {
+    if (typeof dateTimeValue === 'undefined' || typeof type === 'undefined')
+    throw new MissingArgument('Value and type for DateTimeType must be supplied');
+    else if (! /^(?:(?:date((?:andor)?(?:time))?)|(?:time(?:stamp)?)|(?:utcoffset))$/.test(type))
+    throw new InvalidArgument('Accepted values of type for DateTimeType are date, time, datetime, dateandortime, timestamp or utcoffset');
 
     switch (true) {
-      case /^date$/.test(options.type):
+      case /^date$/.test(type):
         if (!this.#dateRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type date of DateTimeType');
 
         this.type = 'DATE';
         this.value = dateTimeValue.toString();
         break;
-      case /^time$/.test(options.type):
+      case /^time$/.test(type):
         if (!this.#timeRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type time of DateTimeType');
 
         this.type = 'TIME';
         this.value = dateTimeValue.toString();
         break;
-      case /^datetime$/.test(options.type):
+      case /^datetime$/.test(type):
         if (!this.#dateTimeRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type datetime of DateTimeType');
 
         this.type = 'DATE-TIME';
         this.value = dateTimeValue.toString();
         break;
-      case /^dateandortime$/.test(options.type):
+      case /^dateandortime$/.test(type):
         if (!this.#dateAndOrTimeRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type dateandortime of DateTimeType');
 
         this.type = 'DATE-AND-OR-TIME';
         this.value = dateTimeValue.toString();
         break;
-      case /^timestamp$/.test(options.type):
+      case /^timestamp$/.test(type):
         if (!this.#timestampRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type timestamp of DateTimeType');
 
         this.type = 'TIMESTAMP';
         this.value = dateTimeValue.toString();
         break;
+      case /^utcoffset$/.test(type):
+        if (!this.#utcOffsetRegExp.test(dateTimeValue))
+        throw new InvalidArgument('Invalid value for type utcoffset of DateTimeType');
+
+        this.type = 'UTC-OFFSET';
+        this.value = dateTimeValue.toString();
+        break;
       default:
-        throw new InvalidArgument('Accepted values for type property of options object for DateTimeType are date, time, datetime, dateandortime or timestamp');
+        throw new InvalidArgument('Accepted values for type property of type object for DateTimeType are date, time, datetime, dateandortime, timestamp or utcoffset');
     }
   }
 
-  constructor(dateTimeValue, options) {
+  constructor(dateTimeValue, type) {
     super();
-    this.#validateAndSet(dateTimeValue, options);
+    this.#validateAndSet(dateTimeValue, type);
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
