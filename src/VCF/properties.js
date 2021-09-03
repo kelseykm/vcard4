@@ -1488,6 +1488,54 @@ class VersionProperty extends AbstractBaseProperty {
   }
 }
 
+// Security Properties
+class KeyProperty extends AbstractBaseProperty {
+  prop = 'KEY';
+  cardinality = '*';
+  acceptableParamTypes = [
+    ValueParameter,
+    MediatypeParameter,
+    AltidParameter,
+    PIDParameter,
+    PrefParameter,
+    TypeParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = [
+    TextType,
+    URIType
+  ];
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for KeyProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for KeyProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => {
+      if (acceptableParamType === TypeParameter)
+      return param instanceof acceptableParamType && !/^(?:Related|Tel)Property$/i.test(param.targetProp);
+      return param instanceof acceptableParamType;
+    })))
+    throw new TypeError('Some of the parameters passed are not valid parameters for KeyProperty');
+    else if (!this.acceptableValTypes.some(valType => value instanceof valType))
+    throw new TypeError('Invalid type for value of KeyProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
 export {
   BeginProperty,
   EndProperty,
@@ -1522,5 +1570,6 @@ export {
   UIDProperty,
   ClientpidmapProperty,
   URLProperty,
-  VersionProperty
+  VersionProperty,
+  KeyProperty
 };
