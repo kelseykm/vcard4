@@ -337,9 +337,9 @@ class AnyParameter extends AbstractBaseParameter {
 
   #validate(param, value) {
     if (typeof param === 'undefined' || typeof value === 'undefined')
-    throw new MissingArgument('Param and value for AnyParameter must be supplied');
+    throw new MissingArgument('Parameter and value for AnyParameter must be supplied');
     else if (!this.#paramRegExp.test(param))
-    throw new InvalidArgument('Invalid param for AnyParameter');
+    throw new InvalidArgument('Invalid parameter for AnyParameter');
   }
 
   constructor(param, value) {
