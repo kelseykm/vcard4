@@ -37,7 +37,6 @@ class TextType extends AbstractBaseValue {
   }
 
   #cleanUp(textValue) {
-    //commas, colons, semi-colons, backslashes and new-lines must be escaped/encoded
     return textValue.replaceAll('\\', '\\\\').replaceAll(',', '\\,').replaceAll(':', '\\:').replaceAll(';', '\\;').replaceAll('\n', '\\n');
   }
 
@@ -180,12 +179,12 @@ class IntegerType extends AbstractBaseValue {
   #validate(intValue) {
     if (typeof intValue === 'undefined')
     throw new MissingArgument('Value for IntegerType must be supplied');
-    //The maximum value is 9223372036854775807, and the minimum value is -9223372036854775808.
-    //But these numbers are higher/lower than Number.MAX_SAFE_INTEGER, therefore accept only bigint type integers
-    else if (typeof intValue !== 'bigint')
-    throw new TypeError('Only bigint type values allowed for IntegerType');
-    else if (!((-9223372036854775809n < intValue) && (intValue < 9223372036854775808n)))
-    throw new InvalidArgument('The maximum value is 9223372036854775807, and the minimum value is -9223372036854775808 for IntegerType');
+    else if ((typeof intValue !== 'number') && (typeof intValue !== 'bigint'))
+    throw new TypeError('Value for IntegerType must be of type number or bigint');
+    else if ((typeof intValue === 'number') && (!((-Number.MAX_SAFE_INTEGER < intValue) && (intValue < Number.MAX_SAFE_INTEGER))))
+    throw new InvalidArgument(`The maximum value is ${Number.MAX_SAFE_INTEGER}, and the minimum value is -${Number.MAX_SAFE_INTEGER} for number IntegerType`);
+    else if ((typeof intValue === 'bigint') && (!((-9223372036854775809n < intValue) && (intValue < 9223372036854775808n))))
+    throw new InvalidArgument('The maximum value is 9223372036854775807n, and the minimum value is -9223372036854775808n for bigint IntegerType');
   }
 
   constructor(intValue) {
@@ -205,9 +204,6 @@ class FloatType extends AbstractBaseValue {
   #validate(floatValue) {
     if (typeof floatValue === 'undefined')
     throw new MissingArgument('Value for FloatType must be supplied');
-    //Implementations MUST support a precision equal or better than that of the IEEE
-    //"binary64" format, therefore allow only number type which is essentially IEEE
-    //754 basic 64-bit binary floating-point
     if (typeof floatValue !== 'number')
     throw new TypeError('Only number type values allowed for FloatType');
   }
@@ -231,12 +227,9 @@ class LanguageTagType extends AbstractBaseValue {
     throw new MissingArgument('Value for LanguageTagType must be supplied');
     else if (typeof langTagValue !== 'string')
     throw new TypeError('Value for LanguageTagType should be of type string');
-    //Should be according to RFC5646. I leave the burden to the
-    //user to ensure their Language Tag is according to the RFC.
   }
 
   #cleanUp(langTagValue) {
-    //commas, colons, semi-colons, backslashes and new-lines must be escaped/encoded
     return langTagValue.replaceAll('\\', '\\\\').replaceAll(',', '\\,').replaceAll(':', '\\:').replaceAll(';', '\\;').replaceAll('\n', '\\n');
   }
 
@@ -369,6 +362,17 @@ class SpecialValueType extends AbstractBaseValue {
         throw new TypeError('Invalid value for SpecialValueType for OrgProperty. The items in the array, if present, should be of type TextType');
 
         break;
+      case /^ClientpidmapProperty$/i.test(targetProp):
+        if (!Array.isArray(value) && value.length !== 2)
+        throw new InvalidArgument('Invalid value for SpecialValueType for ClientpidmapProperty. It should be an array with a length of 2');
+        else if (!(value[0] instanceof IntegerType))
+        throw new TypeError('Invalid value for SpecialValueType for ClientpidmapProperty. The first item in the array should be of type IntegerType');
+        else if (0 > Number(value[0].repr()))
+        throw new InvalidArgument('Invalid value for SpecialValueType for ClientpidmapProperty. The first item in the array should be a positive integer of type IntegerType')
+        else if (!(value[1] instanceof URIType))
+        throw new TypeError('Invalid value for SpecialValueType for ClientpidmapProperty. The second item in the array should be of type URIType');
+
+        break;
       default:
         throw new InvalidArgument('Invalid target property for SpecialValueType');
     }
@@ -378,8 +382,8 @@ class SpecialValueType extends AbstractBaseValue {
     super();
 
     this.#validate(type, value, targetProp);
-    this.type = type.toString();
-    this.targetProp = targetProp.toString();
+    this.type = type;
+    this.targetProp = targetProp;
 
     if (Array.isArray(value)) {
       for (let index = 0; index < value.length; index++)
@@ -388,7 +392,7 @@ class SpecialValueType extends AbstractBaseValue {
 
       this.value = value.join(';');
     }
-    else this.value = value.toString();
+    else this.value = value;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
