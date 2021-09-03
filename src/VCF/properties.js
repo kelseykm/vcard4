@@ -1122,6 +1122,372 @@ class RelatedProperty extends AbstractBaseProperty {
   }
 }
 
+// Explanatory Properties
+class CategoriesProperty extends AbstractBaseProperty {
+  prop = 'CATEGORIES';
+  cardinality = '*';
+  acceptableParamTypes = [
+    ValueParameter,
+    PIDParameter,
+    PrefParameter,
+    TypeParameter,
+    AltidParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = [
+    TextType,
+    TextListType
+  ];
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for CategoriesProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for CategoriesProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => {
+      if (acceptableParamType === TypeParameter)
+      return param instanceof acceptableParamType && !/^(?:Related|Tel)Property$/i.test(param.targetProp);
+      return param instanceof acceptableParamType;
+    })))
+    throw new TypeError('Some of the parameters passed are not valid parameters for CategoriesProperty');
+    else if (!this.acceptableValTypes.some(valType => value instanceof valType))
+    throw new TypeError('Invalid type for value of CategoriesProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class NoteProperty extends AbstractBaseProperty {
+  prop = 'NOTE';
+  cardinality = '*';
+  acceptableParamTypes = [
+    ValueParameter,
+    LanguageParameter,
+    PIDParameter,
+    PrefParameter,
+    TypeParameter,
+    AltidParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = TextType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for NoteProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for NoteProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => {
+      if (acceptableParamType === TypeParameter)
+      return param instanceof acceptableParamType && !/^(?:Related|Tel)Property$/i.test(param.targetProp);
+      return param instanceof acceptableParamType;
+    })))
+    throw new TypeError('Some of the parameters passed are not valid parameters for NoteProperty');
+    else if (!(value instanceof this.acceptableValTypes))
+    throw new TypeError('Invalid type for value of NoteProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class ProdidProperty extends AbstractBaseProperty {
+  prop = 'PRODID';
+  cardinality = '*1';
+  acceptableParamTypes = [
+    ValueParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = TextType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for ProdidProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for ProdidProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => param instanceof acceptableParamType)))
+    throw new TypeError('Some of the parameters passed are not valid parameters for ProdidProperty');
+    else if (!(value instanceof this.acceptableValTypes))
+    throw new TypeError('Invalid type for value of ProdidProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class RevProperty extends AbstractBaseProperty {
+  prop = 'REV';
+  cardinality = '*1';
+  acceptableParamTypes = [
+    ValueParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = DateTimeType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for RevProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for RevProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => param instanceof acceptableParamType)))
+    throw new TypeError('Some of the parameters passed are not valid parameters for RevProperty');
+    else if (!(value instanceof this.acceptableValTypes) || value.type !== 'TIMESTAMP')
+    throw new TypeError('Invalid type for value of RevProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class SoundProperty extends AbstractBaseProperty {
+  prop = 'SOUND';
+  cardinality = '*';
+  acceptableParamTypes = [
+    ValueParameter,
+    LanguageParameter,
+    PIDParameter,
+    PrefParameter,
+    TypeParameter,
+    MediatypeParameter,
+    AltidParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = URIType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for SoundProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for SoundProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => {
+      if (acceptableParamType === TypeParameter)
+      return param instanceof acceptableParamType && !/^(?:Related|Tel)Property$/i.test(param.targetProp);
+      return param instanceof acceptableParamType;
+    })))
+    throw new TypeError('Some of the parameters passed are not valid parameters for SoundProperty');
+    else if (!(value instanceof this.acceptableValTypes))
+    throw new TypeError('Invalid type for value of SoundProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class UIDProperty extends AbstractBaseProperty {
+  prop = 'UID';
+  cardinality = '*1';
+  acceptableParamTypes = [
+    ValueParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = [
+    URIType,
+    TextType
+  ];
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for UIDProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for UIDProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => {
+      if (acceptableParamType === TypeParameter)
+      return param instanceof acceptableParamType && !/^(?:Related|Tel)Property$/i.test(param.targetProp);
+      return param instanceof acceptableParamType;
+    })))
+    throw new TypeError('Some of the parameters passed are not valid parameters for UIDProperty');
+    else if (!this.acceptableValTypes.some(valType => value instanceof valType))
+    throw new TypeError('Invalid type for value of UIDProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class ClientpidmapProperty extends AbstractBaseProperty {
+  prop = 'CLIENTPIDMAP';
+  cardinality = '*';
+  acceptableParamTypes = AnyParameter;
+  acceptableValTypes = SpecialValueType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for ClientpidmapProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for ClientpidmapProperty must be passed in an array');
+    else if (!params.every(param => parmam instanceof this.acceptableParamTypes))
+    throw new TypeError('Some of the parameters passed are not valid parameters for ClientpidmapProperty');
+    else if (!(value instanceof this.acceptableValTypes))
+    throw new TypeError('Invalid type for value of ClientpidmapProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class URLProperty extends AbstractBaseProperty {
+  prop = 'URL';
+  cardinality = '*';
+  acceptableParamTypes = [
+    ValueParameter,
+    PIDParameter,
+    PrefParameter,
+    TypeParameter,
+    MediatypeParameter,
+    AltidParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = URIType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for URLProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for URLProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => {
+      if (acceptableParamType === TypeParameter)
+      return param instanceof acceptableParamType && !/^(?:Related|Tel)Property$/i.test(param.targetProp);
+      return param instanceof acceptableParamType;
+    })))
+    throw new TypeError('Some of the parameters passed are not valid parameters for URLProperty');
+    else if (!(value instanceof this.acceptableValTypes))
+    throw new TypeError('Invalid type for value of URLProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class VersionProperty extends AbstractBaseProperty {
+  prop = 'VERSION';
+  cardinality = '1';
+  acceptableParamTypes = [
+    ValueParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = TextType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for VersionProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for VersionProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => param instanceof acceptableParamType)))
+    throw new TypeError('Some of the parameters passed are not valid parameters for VersionProperty');
+    else if (!(value instanceof this.acceptableValTypes))
+    throw new TypeError('Invalid type for value of VersionProperty');
+    else if (value.repr() !== '4.0')
+    throw new InvalidArgument('Invalid value for VersionProperty')
+  }
+
+  constructor(params, val) {
+    super();
+
+    if (typeof params === 'undefined' || typeof val === 'undefined') {
+      this.params = '';
+      this.value = '4.0';
+    } else {
+      this.#validate(params, val);
+      this.params = params.reduce((parametersArray, currentParameter) => {
+        parametersArray.push(currentParameter.repr());
+        return parametersArray;
+      }, []).join(';');
+      this.value = val.repr();
+    }
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
 export {
   BeginProperty,
   EndProperty,
@@ -1147,5 +1513,14 @@ export {
   LogoProperty,
   OrgProperty,
   MemberProperty,
-  RelatedProperty
+  RelatedProperty,
+  CategoriesProperty,
+  NoteProperty,
+  ProdidProperty,
+  RevProperty,
+  SoundProperty,
+  UIDProperty,
+  ClientpidmapProperty,
+  URLProperty,
+  VersionProperty
 };
