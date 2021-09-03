@@ -301,51 +301,76 @@ class SexType extends AbstractBaseValue {
 }
 
 class SpecialValueType extends AbstractBaseValue {
-  #typeRegExp = /^(?:text(?:-list)?|date(?:-list)?|time(?:-list)?|date-time(?:-list)?|date-and-or-time(?:-list)?|timestamp(?:-list)?|boolean|integer(?:-list)?|float(?:-list)?|URI|utc-offset|Language-Tag|iana-valuespec)$/i;
-
-  #valueRegExp = /^(?:vcard|individual|group|org|location|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)$/i;
-
   #validate(type, value, targetProp) {
-    if (typeof type === 'undefined' || typeof value === 'undefined')
-    throw new MissingArgument('Type and value for SpecialValueType must be supplied');
-    else if (!this.#typeRegExp.test(type))
-    throw new InvalidArgument('Invalid type for SpecialValueType');
-    else if (!Array.isArray(value) && !this.#valueRegExp.test(value))
-    throw new InvalidArgument('Invalid value for SpecialValueType');
-    else if (Array.isArray(value) && typeof targetProp === 'undefined')
-    throw new MissingArgument('Type, value and targetProp for SpecialValueType must be supplied');
+    if (typeof type === 'undefined' || typeof value === 'undefined' || typeof targetProp === 'undefined')
+    throw new MissingArgument('Type, value and target property for SpecialValueType must be supplied');
 
-    if (Array.isArray(value)) {
-      switch (true) {
-        case /^NProperty$/i.test(targetProp):
-          if (value.length !== 5)
-          throw new InvalidArgument('Invalid value for SpecialValueType for NProperty. It should be an array with a length of 5');
+    switch (true) {
+      case /^(?:Begin|End)Property$/i.test(targetProp):
+        if (!/^text$/i.test(type))
+        throw new InvalidArgument(`Invalid type for SpecialValueType for ${/^Begin/i.test(targetProp) ? 'Begin' : 'End'}Property`);
+        else if (value !== 'VCARD')
+        throw new InvalidArgument(`Invalid value for SpecialValueType for ${/^Begin/i.test(targetProp) ? 'Begin' : 'End'}Property`);
 
-          for (let index = 0; index < value.length; index++)
-          if (value[index])
-          if (!(value[index] instanceof TextType))
-          throw new TypeError('Invalid value for SpecialValueType for NProperty. The items in the array, if present, should be of type TextType');
-          break;
-        case /^GenderProperty$/i.test(targetProp):
-          if (value.length !== 2)
-          throw new InvalidArgument('Invalid value for SpecialValueType for GenderProperty. It should be an array with a length of 2');
-          else if (value[0] && !(value[0] instanceof SexType))
-          throw new TypeError('Invalid value for SpecialValueType for GenderProperty. The first item in the array, if present, should be of type SexType');
-          else if (value[1] && !(value[1] instanceof TextType))
-          throw new TypeError('Invalid value for SpecialValueType for GenderProperty. The first item in the array, if present, should be of type TextType');
-          break;
-        case /^AdrProperty$/i.test(targetProp):
-          if (value.length !== 7)
-          throw new InvalidArgument('Invalid value for SpecialValueType for AdrProperty. It should be an array with a length of 7');
+        break;
+      case /^KindProperty$/i.test(targetProp):
+        let valueRegExp = /^(?:individual|group|org|location|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)$/i;
 
-          for (let index = 0; index < value.length; index++)
-          if (value[index])
-          if (!(value[index] instanceof TextType))
-          throw new TypeError('Invalid value for SpecialValueType for AdrProperty. The items in the array, if present, should be of type TextType');
-          break;
-        default:
-          throw new InvalidArgument('Invalid targetProp for SpecialValueType');
-      }
+        if (!/^text$/i.test(type))
+        throw new InvalidArgument('Invalid type for SpecialValueType for KindProperty');
+        else if (typeof value !== 'string' || !valueRegExp.test(value))
+        throw new InvalidArgument('Invalid value for SpecialValueType for KindProperty');
+
+        break;
+      case /^NProperty$/i.test(targetProp):
+        if (!/^text$/i.test(type))
+        throw new InvalidArgument('Invalid type for SpecialValueType for NProperty');
+        else if (!Array.isArray(value) && value.length !== 5)
+        throw new InvalidArgument('Invalid value for SpecialValueType for NProperty. It should be an array with a length of 5');
+
+        for (let index = 0; index < value.length; index++)
+        if (value[index])
+        if (!(value[index] instanceof TextType))
+        throw new TypeError('Invalid value for SpecialValueType for NProperty. The items in the array, if present, should be of type TextType');
+
+        break;
+      case /^GenderProperty$/i.test(targetProp):
+        if (!/^text$/i.test(type))
+        throw new InvalidArgument('Invalid type for SpecialValueType for GenderProperty');
+        else if (!Array.isArray(value) && value.length !== 2)
+        throw new InvalidArgument('Invalid value for SpecialValueType for GenderProperty. It should be an array with a length of 2');
+        else if (value[0] && !(value[0] instanceof SexType))
+        throw new TypeError('Invalid value for SpecialValueType for GenderProperty. The first item in the array, if present, should be of type SexType');
+        else if ((!value[0] && !value[1]) ||(value[1] && !(value[1] instanceof TextType)))
+        throw new TypeError('Invalid value for SpecialValueType for GenderProperty. The second item in the array, if present, should be of type TextType');
+
+        break;
+      case /^AdrProperty$/i.test(targetProp):
+        if (!/^text$/i.test(type))
+        throw new InvalidArgument('Invalid type for SpecialValueType for AdrProperty');
+        else if (!Array.isArray(value) && value.length !== 7)
+        throw new InvalidArgument('Invalid value for SpecialValueType for AdrProperty. It should be an array with a length of 7');
+
+        for (let index = 0; index < value.length; index++)
+        if (value[index])
+        if (!(value[index] instanceof TextType))
+        throw new TypeError('Invalid value for SpecialValueType for AdrProperty. The items in the array, if present, should be of type TextType');
+
+        break;
+      case /^OrgProperty$/i.test(targetProp):
+        if (!/^text$/i.test(type))
+        throw new InvalidArgument('Invalid type for SpecialValueType for OrgProperty');
+        else if (!Array.isArray(value))
+        throw new InvalidArgument('Invalid value for SpecialValueType for OrgProperty. It should be an array');
+
+        for (let index = 0; index < value.length; index++)
+        if (value[index])
+        if (!(value[index] instanceof TextType))
+        throw new TypeError('Invalid value for SpecialValueType for OrgProperty. The items in the array, if present, should be of type TextType');
+
+        break;
+      default:
+        throw new InvalidArgument('Invalid target property for SpecialValueType');
     }
   }
 
@@ -354,11 +379,13 @@ class SpecialValueType extends AbstractBaseValue {
 
     this.#validate(type, value, targetProp);
     this.type = type.toString();
+    this.targetProp = targetProp.toString();
 
     if (Array.isArray(value)) {
       for (let index = 0; index < value.length; index++)
       if (value[index])
       value[index] = value[index].repr();
+
       this.value = value.join(';');
     }
     else this.value = value.toString();
