@@ -1536,6 +1536,201 @@ class KeyProperty extends AbstractBaseProperty {
   }
 }
 
+// Calendar Properties
+class FburlProperty extends AbstractBaseProperty {
+  prop = 'FBURL';
+  cardinality = '*';
+  acceptableParamTypes = [
+    ValueParameter,
+    PIDParameter,
+    PrefParameter,
+    TypeParameter,
+    MediatypeParameter,
+    AltidParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = URIType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for FburlProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for FburlProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => {
+      if (acceptableParamType === TypeParameter)
+      return param instanceof acceptableParamType && !/^(?:Related|Tel)Property$/i.test(param.targetProp);
+      return param instanceof acceptableParamType;
+    })))
+    throw new TypeError('Some of the parameters passed are not valid parameters for FburlProperty');
+    else if (!(value instanceof this.acceptableValTypes))
+    throw new TypeError('Invalid type for value of FburlProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class CaladruriProperty extends AbstractBaseProperty {
+  prop = 'CALADRURI';
+  cardinality = '*';
+  acceptableParamTypes = [
+    ValueParameter,
+    PIDParameter,
+    PrefParameter,
+    TypeParameter,
+    MediatypeParameter,
+    AltidParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = URIType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for CaladruriProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for CaladruriProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => {
+      if (acceptableParamType === TypeParameter)
+      return param instanceof acceptableParamType && !/^(?:Related|Tel)Property$/i.test(param.targetProp);
+      return param instanceof acceptableParamType;
+    })))
+    throw new TypeError('Some of the parameters passed are not valid parameters for CaladruriProperty');
+    else if (!(value instanceof this.acceptableValTypes))
+    throw new TypeError('Invalid type for value of CaladruriProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class CaluriProperty extends AbstractBaseProperty {
+  prop = 'CALURI';
+  cardinality = '*';
+  acceptableParamTypes = [
+    ValueParameter,
+    PIDParameter,
+    PrefParameter,
+    TypeParameter,
+    MediatypeParameter,
+    AltidParameter,
+    AnyParameter
+  ];
+  acceptableValTypes = URIType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for CaluriProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for CaluriProperty must be passed in an array');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => {
+      if (acceptableParamType === TypeParameter)
+      return param instanceof acceptableParamType && !/^(?:Related|Tel)Property$/i.test(param.targetProp);
+      return param instanceof acceptableParamType;
+    })))
+    throw new TypeError('Some of the parameters passed are not valid parameters for CaluriProperty');
+    else if (!(value instanceof this.acceptableValTypes))
+    throw new TypeError('Invalid type for value of CaluriProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+// Extended Properties
+class ExtendedProperty extends AbstractBaseProperty {
+  cardinality = '*';
+  acceptableParamTypes = [
+    LanguageParameter,
+    ValueParameter,
+    PrefParameter,
+    AltidParameter,
+    PIDParameter,
+    TypeParameter,
+    MediatypeParameter,
+    CalscaleParameter,
+    SortAsParameter,
+    GeoParameter,
+    TzParameter,
+    AnyParameter,
+    LabelParameter
+  ];
+  acceptableValTypes = [
+    TextType,
+    TextListType,
+    BooleanType,
+    DateTimeType,
+    IntegerType,
+    FloatType,
+    LanguageTagType,
+    URIType,
+    SexType,
+    SpecialValueType
+  ];
+
+  #propRegExp = /^[Xx]-[A-Za-z0-9]+$/;
+
+  #validate(prop, params, value) {
+    if (typeof prop === 'undefined' || typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Property, parameter and value for ExtendedProperty must be supplied');
+    else if (!Array.isArray(params))
+    throw new TypeError('Parameters for ExtendedProperty must be passed in an array');
+    else if (!this.#propRegExp.test(prop))
+    throw new InvalidArgument('Invalid property for ExtendedProperty');
+    else if (!params.every(param => this.acceptableParamTypes.some(acceptableParamType => param instanceof acceptableParamType)))
+    throw new TypeError('Some of the parameters passed are not valid parameters for ExtendedProperty');
+    else if (!this.acceptableValTypes.some(valType => value instanceof valType))
+    throw new TypeError('Invalid type for value of ExtendedProperty');
+  }
+
+  constructor(prop, params, value) {
+    super();
+
+    this.#validate(prop, params, value);
+    this.prop = prop.toString().toUpperCase();
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = value.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
 export {
   BeginProperty,
   EndProperty,
@@ -1571,5 +1766,9 @@ export {
   ClientpidmapProperty,
   URLProperty,
   VersionProperty,
-  KeyProperty
+  KeyProperty,
+  FburlProperty,
+  CaladruriProperty,
+  CaluriProperty,
+  ExtendedProperty
 };
