@@ -170,25 +170,52 @@ class PIDParameter extends AbstractBaseParameter {
 class TypeParameter extends AbstractBaseParameter {
   param = 'TYPE';
 
-  #typeRegExp = /^(?:work|home|text|voice|fax|cell|video|pager|textphone|contact|acquaintance|friend|met|co-worker|colleague|co-resident|neighbor|child|parent|sibling|spouse|kin|muse|crush|date|sweetheart|me|agent|emergency|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)(?:,(?:work|home|text|voice|fax|cell|video|pager|textphone|contact|acquaintance|friend|met|co-worker|colleague|co-resident|neighbor|child|parent|sibling|spouse|kin|muse|crush|date|sweetheart|me|agent|emergency|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+))*$/i;
+  #typeRegExp = /^(?:work|home|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)$/i;
 
-  #validate(typeValue) {
-    if (typeof typeValue === 'undefined')
-    throw new MissingArgument('Value for TypeParameter must be supplied');
-    else if (!Array.isArray(typeValue) && !this.#typeRegExp.test(typeValue))
-    throw new InvalidArgument('Invalid value for TypeParameter');
-    else if (Array.isArray(typeValue) && !typeValue.every(type => this.#typeRegExp.test(type)))
-    throw new InvalidArgument('Invalid value for TypeParameter');
+  #telTypeRegExp = /^(?:text|voice|fax|cell|video|pager|textphone)$/i;
+
+  #relatedTypeRegExp = /(?:contact|acquaintance|friend|met|co-worker|colleague|co-resident|neighbor|child|parent|sibling|spouse|kin|muse|crush|date|sweetheart|me|agent|emergency)/i;
+
+  #validate(typeValue, targetProp) {
+    if (typeof typeValue === 'undefined' || typeof targetProp === 'undefined')
+    throw new MissingArgument('Value and target property for TypeParameter must be supplied');
+
+    switch (true) {
+      case /^TelProperty$/i.test(targetProp):
+        let telre = new RegExp(`(?:${this.#telTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
+
+        if (!Array.isArray(typeValue) && !telre.test(typeValue))
+        throw new InvalidArgument('Invalid value for TypeParameter for TelProperty');
+        else if (Array.isArray(typeValue) && !typeValue.every(type => telre.test(type)))
+        throw new InvalidArgument('Invalid value for TypeParameter for TelProperty');
+
+        break;
+      case /^RelatedProperty$/i.test(targetProp):
+        let relatedre = new RegExp(`(?:${this.#relatedTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
+
+        if (!Array.isArray(typeValue) && !relatedre.test(typeValue))
+        throw new InvalidArgument('Invalid value for TypeParameter for RelatedProperty');
+        else if (Array.isArray(typeValue) && !typeValue.every(type => relatedre.test(type)))
+        throw new InvalidArgument('Invalid value for TypeParameter for RelatedProperty');
+
+        break;
+      default:
+        if (!Array.isArray(typeValue) && !this.#typeRegExp.test(typeValue))
+        throw new InvalidArgument('Invalid value for TypeParameter');
+        else if (Array.isArray(typeValue) && !typeValue.every(type => this.#typeRegExp.test(type)))
+        throw new InvalidArgument('Invalid value for TypeParameter');
+    }
   }
 
-  constructor(typeValue) {
+  constructor(typeValue, targetProp) {
     super();
 
-    this.#validate(typeValue);
+    this.#validate(typeValue, targetProp);
     this.value = Array.isArray(typeValue) ? `"${typeValue.reduce((accumulatedTypes, currentType) => {
       accumulatedTypes.push(currentType.toString());
       return accumulatedTypes;
     }, []).join(',')}"` : typeValue.toString();
+    this.targetProp = targetProp;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
