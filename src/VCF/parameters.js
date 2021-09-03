@@ -147,12 +147,14 @@ class AltidParameter extends AbstractBaseParameter {
 class PIDParameter extends AbstractBaseParameter {
   param = 'PID';
 
-  #pidRegExp = /^\d+\.?\d+(?:,\d+\.?\d+)*$/;
+  #pidRegExp = /^\d+(?:\.\d+)?$/;
 
   #validate(pidValue) {
     if (typeof pidValue === 'undefined')
     throw new MissingArgument('Value for PIDParameter must be supplied');
-    else if (!this.#pidRegExp.test(pidValue))
+    else if (!Array.isArray(pidValue) && !this.#pidRegExp.test(pidValue))
+    throw new InvalidArgument('Invalid value for PIDParameter');
+    else if (Array.isArray(pidValue) && !pidValue.every(val => this.#pidRegExp.test(val)))
     throw new InvalidArgument('Invalid value for PIDParameter');
   }
 
@@ -160,7 +162,10 @@ class PIDParameter extends AbstractBaseParameter {
     super();
 
     this.#validate(pidValue);
-    this.value = pidValue.toString();
+    this.value = Array.isArray(pidValue) ? `${pidValue.reduce((accumulatedTypes, currentType) => {
+      accumulatedTypes.push(currentType.toString());
+      return accumulatedTypes;
+    }, []).join(',')}` : pidValue.toString();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
@@ -225,20 +230,32 @@ class TypeParameter extends AbstractBaseParameter {
 class MediatypeParameter extends AbstractBaseParameter {
   param = 'MEDIATYPE';
 
-  #mediaTypeRegExp = /^(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}\/(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}(?:;.+=.+)*$/;
+  #mediaTypeRegExp = /^(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}\/(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}$/;
+  #attributeRegExp = /^.+=.+$/;
 
   #validate(mediaValue) {
     if (typeof mediaValue === 'undefined')
     throw new MissingArgument('Value for MediatypeParameter must be supplied');
-    else if (!this.#mediaTypeRegExp.test(mediaValue))
+    else if (!Array.isArray(mediaValue) && !this.#mediaTypeRegExp.test(mediaValue))
     throw new InvalidArgument('Invalid media type');
+    else if (Array.isArray(mediaValue)) {
+      if (mediaValue.length !== 2)
+      throw new InvalidArgument('Invalid value for MediatypeParameter. It should be an array with a length of 2');
+      if (!this.#mediaTypeRegExp.test(mediaValue[0]))
+      throw new InvalidArgument('Invalid media type');
+      else if (!this.#attributeRegExp.test(mediaValue[1]))
+      throw new InvalidArgument('Invalid media type');
+    }
   }
 
   constructor(mediaValue) {
     super();
 
     this.#validate(mediaValue);
-    this.value = mediaValue.toString();
+    this.value = Array.isArray(mediaValue) ? `"${mediaValue.reduce((accumulatedTypes, currentType) => {
+      accumulatedTypes.push(currentType.toString());
+      return accumulatedTypes;
+    }, []).join(';')}"` : mediaValue.toString();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
@@ -311,21 +328,18 @@ class GeoParameter extends AbstractBaseParameter {
 class TzParameter extends AbstractBaseParameter {
   param = 'TZ';
 
-  //Credit for the following regex goes to Jonas Hermsmeier, who got it from Jeff Roberson and added capture groups
-  #uriRegExp = new RegExp("([A-Za-z][A-Za-z0-9+\\-.]*):(?:(//)(?:((?:[A-Za-z0-9\\-._~!$&'()*+,;=:]|%[0-9A-Fa-f]{2})*)@)?((?:\\[(?:(?:(?:(?:[0-9A-Fa-f]{1,4}:){6}|::(?:[0-9A-Fa-f]{1,4}:){5}|(?:[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,1}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){3}|(?:(?:[0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){2}|(?:(?:[0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}:|(?:(?:[0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})?::)(?:[0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{1,4}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|(?:(?:[0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})?::)|[Vv][0-9A-Fa-f]+\\.[A-Za-z0-9\\-._~!$&'()*+,;=:]+)\\]|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|(?:[A-Za-z0-9\\-._~!$&'()*+,;=]|%[0-9A-Fa-f]{2})*))(?::([0-9]*))?((?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)|/((?:(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)?)|((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)|)(?:\\?((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@/?]|%[0-9A-Fa-f]{2})*))?(?:\\#((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@/?]|%[0-9A-Fa-f]{2})*))?");
-
   #validate(tzValue) {
     if (typeof tzValue === 'undefined')
     throw new MissingArgument('Value for TzParameter must be supplied');
-    else if (!(this.#uriRegExp.test(tzValue)))
-    throw new InvalidArgument('Invalid value for TzParameter');
+    else if (!(tzValue instanceof URIType))
+    throw new InvalidArgument('Value for TzParameter must be of type URIType');
   }
 
   constructor(tzValue) {
     super();
 
     this.#validate(tzValue);
-    this.value = `"${tzValue}"`;
+    this.value = `"${tzValue.repr()}"`;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
