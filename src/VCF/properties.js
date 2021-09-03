@@ -44,7 +44,13 @@ class AbstractBaseProperty {
   ];
 
   checkAbstractPropertiesAndMethods() {
-    if (!this.#abstractPropertiesAndMethods.every(abstractPropertyOrMethod => this.hasOwnProperty(abstractPropertyOrMethod) || Object.getPrototypeOf(this).hasOwnProperty(abstractPropertyOrMethod)))
+    if (
+      !this.#abstractPropertiesAndMethods.every(
+        abstractPropertyOrMethod => this.hasOwnProperty(abstractPropertyOrMethod) ||
+        Object.getPrototypeOf(this).hasOwnProperty(abstractPropertyOrMethod) ||
+        this.constructor.hasOwnProperty(abstractPropertyOrMethod)
+      )
+    )
     throw new Error('All abstract properties and methods in abstract base class must be defined in child class');
   }
 
@@ -63,7 +69,7 @@ class AbstractBaseProperty {
 // General properties
 class BeginProperty extends AbstractBaseProperty {
   prop = 'BEGIN';
-  cardinality = '1';
+  static cardinality = '1';
   acceptableParamTypes = [];
   acceptableValTypes = SpecialValueType;
 
@@ -98,7 +104,7 @@ class BeginProperty extends AbstractBaseProperty {
 
 class EndProperty extends AbstractBaseProperty {
   prop = 'END';
-  cardinality = '1';
+  static cardinality = '1';
   acceptableParamTypes = [];
   acceptableValTypes = SpecialValueType;
 
@@ -133,7 +139,7 @@ class EndProperty extends AbstractBaseProperty {
 
 class SourceProperty extends AbstractBaseProperty {
   prop = 'SOURCE';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     PIDParameter,
@@ -172,7 +178,7 @@ class SourceProperty extends AbstractBaseProperty {
 
 class KindProperty extends AbstractBaseProperty {
   prop = 'KIND';
-  cardinality = '*1';
+  static cardinality = '*1';
   acceptableParamTypes = [
     ValueParameter,
     AnyParameter
@@ -207,7 +213,7 @@ class KindProperty extends AbstractBaseProperty {
 
 class XMLProperty extends AbstractBaseProperty {
   prop = 'XML';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     AltidParameter
@@ -243,7 +249,7 @@ class XMLProperty extends AbstractBaseProperty {
 // Identification properties
 class FNProperty extends AbstractBaseProperty {
   prop = 'FN';
-  cardinality = '1*';
+  static cardinality = '1*';
   acceptableParamTypes = [
     ValueParameter,
     TypeParameter,
@@ -287,7 +293,7 @@ class FNProperty extends AbstractBaseProperty {
 
 class NProperty extends AbstractBaseProperty {
   prop = 'N';
-  cardinality = '*1';
+  static cardinality = '*1';
   acceptableParamTypes = [
     ValueParameter,
     SortAsParameter,
@@ -325,7 +331,7 @@ class NProperty extends AbstractBaseProperty {
 
 class NicknameProperty extends AbstractBaseProperty {
   prop = 'NICKNAME';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     TypeParameter,
@@ -372,7 +378,7 @@ class NicknameProperty extends AbstractBaseProperty {
 
 class PhotoProperty extends AbstractBaseProperty {
   prop = 'PHOTO';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     AltidParameter,
@@ -416,7 +422,7 @@ class PhotoProperty extends AbstractBaseProperty {
 
 class BdayProperty extends AbstractBaseProperty {
   prop = 'BDAY';
-  cardinality = '*1';
+  static cardinality = '*1';
   acceptableParamTypes = [
     ValueParameter,
     LanguageParameter,
@@ -457,7 +463,7 @@ class BdayProperty extends AbstractBaseProperty {
 
 class AnniversaryProperty extends AbstractBaseProperty {
   prop = 'ANNIVERSARY';
-  cardinality = '*1';
+  static cardinality = '*1';
   acceptableParamTypes = [
     ValueParameter,
     AltidParameter,
@@ -497,7 +503,7 @@ class AnniversaryProperty extends AbstractBaseProperty {
 
 class GenderProperty extends AbstractBaseProperty {
   prop = 'GENDER';
-  cardinality = '*1';
+  static cardinality = '*1';
   acceptableParamTypes = [
     ValueParameter,
     AnyParameter
@@ -540,7 +546,7 @@ class GenderProperty extends AbstractBaseProperty {
 // Delivery Addressing Properties
 class AdrProperty extends AbstractBaseProperty {
   prop = 'ADR';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     LabelParameter,
     ValueParameter,
@@ -588,7 +594,7 @@ class AdrProperty extends AbstractBaseProperty {
 // Communications Properties
 class TelProperty extends AbstractBaseProperty {
   prop = 'TEL';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     TypeParameter,
@@ -631,7 +637,7 @@ class TelProperty extends AbstractBaseProperty {
 
 class EmailProperty extends AbstractBaseProperty {
   prop = 'EMAIL';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     PIDParameter,
@@ -674,7 +680,7 @@ class EmailProperty extends AbstractBaseProperty {
 
 class IMPPProperty extends AbstractBaseProperty {
   prop = 'IMPP';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     PIDParameter,
@@ -718,7 +724,7 @@ class IMPPProperty extends AbstractBaseProperty {
 
 class LangProperty extends AbstractBaseProperty {
   prop = 'LANG';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     PIDParameter,
@@ -762,7 +768,7 @@ class LangProperty extends AbstractBaseProperty {
 // Geographical Properties
 class TzProperty extends AbstractBaseProperty {
   prop = 'TZ';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     AltidParameter,
@@ -814,7 +820,7 @@ class TzProperty extends AbstractBaseProperty {
 
 class GeoProperty extends AbstractBaseProperty {
   prop = 'GEO';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     PIDParameter,
@@ -859,7 +865,7 @@ class GeoProperty extends AbstractBaseProperty {
 // Organizational Properties
 class TitleProperty extends AbstractBaseProperty {
   prop = 'TITLE';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     LanguageParameter,
@@ -903,7 +909,7 @@ class TitleProperty extends AbstractBaseProperty {
 
 class RoleProperty extends AbstractBaseProperty {
   prop = 'ROLE';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     LanguageParameter,
@@ -947,7 +953,7 @@ class RoleProperty extends AbstractBaseProperty {
 
 class LogoProperty extends AbstractBaseProperty {
   prop = 'LOGO';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     LanguageParameter,
@@ -992,7 +998,7 @@ class LogoProperty extends AbstractBaseProperty {
 
 class OrgProperty extends AbstractBaseProperty {
   prop = 'ORG';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     SortAsParameter,
@@ -1037,7 +1043,7 @@ class OrgProperty extends AbstractBaseProperty {
 
 class MemberProperty extends AbstractBaseProperty {
   prop = 'MEMBER';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     PIDParameter,
@@ -1076,7 +1082,7 @@ class MemberProperty extends AbstractBaseProperty {
 
 class RelatedProperty extends AbstractBaseProperty {
   prop = 'RELATED';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     LanguageParameter,
@@ -1125,7 +1131,7 @@ class RelatedProperty extends AbstractBaseProperty {
 // Explanatory Properties
 class CategoriesProperty extends AbstractBaseProperty {
   prop = 'CATEGORIES';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     PIDParameter,
@@ -1171,7 +1177,7 @@ class CategoriesProperty extends AbstractBaseProperty {
 
 class NoteProperty extends AbstractBaseProperty {
   prop = 'NOTE';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     LanguageParameter,
@@ -1215,7 +1221,7 @@ class NoteProperty extends AbstractBaseProperty {
 
 class ProdidProperty extends AbstractBaseProperty {
   prop = 'PRODID';
-  cardinality = '*1';
+  static cardinality = '*1';
   acceptableParamTypes = [
     ValueParameter,
     AnyParameter
@@ -1250,7 +1256,7 @@ class ProdidProperty extends AbstractBaseProperty {
 
 class RevProperty extends AbstractBaseProperty {
   prop = 'REV';
-  cardinality = '*1';
+  static cardinality = '*1';
   acceptableParamTypes = [
     ValueParameter,
     AnyParameter
@@ -1285,7 +1291,7 @@ class RevProperty extends AbstractBaseProperty {
 
 class SoundProperty extends AbstractBaseProperty {
   prop = 'SOUND';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     LanguageParameter,
@@ -1330,7 +1336,7 @@ class SoundProperty extends AbstractBaseProperty {
 
 class UIDProperty extends AbstractBaseProperty {
   prop = 'UID';
-  cardinality = '*1';
+  static cardinality = '*1';
   acceptableParamTypes = [
     ValueParameter,
     AnyParameter
@@ -1372,7 +1378,7 @@ class UIDProperty extends AbstractBaseProperty {
 
 class ClientpidmapProperty extends AbstractBaseProperty {
   prop = 'CLIENTPIDMAP';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = AnyParameter;
   acceptableValTypes = SpecialValueType;
 
@@ -1404,7 +1410,7 @@ class ClientpidmapProperty extends AbstractBaseProperty {
 
 class URLProperty extends AbstractBaseProperty {
   prop = 'URL';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     PIDParameter,
@@ -1448,7 +1454,7 @@ class URLProperty extends AbstractBaseProperty {
 
 class VersionProperty extends AbstractBaseProperty {
   prop = 'VERSION';
-  cardinality = '1';
+  static cardinality = '1';
   acceptableParamTypes = [
     ValueParameter,
     AnyParameter
@@ -1491,7 +1497,7 @@ class VersionProperty extends AbstractBaseProperty {
 // Security Properties
 class KeyProperty extends AbstractBaseProperty {
   prop = 'KEY';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     MediatypeParameter,
@@ -1539,7 +1545,7 @@ class KeyProperty extends AbstractBaseProperty {
 // Calendar Properties
 class FburlProperty extends AbstractBaseProperty {
   prop = 'FBURL';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     PIDParameter,
@@ -1583,7 +1589,7 @@ class FburlProperty extends AbstractBaseProperty {
 
 class CaladruriProperty extends AbstractBaseProperty {
   prop = 'CALADRURI';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     PIDParameter,
@@ -1627,7 +1633,7 @@ class CaladruriProperty extends AbstractBaseProperty {
 
 class CaluriProperty extends AbstractBaseProperty {
   prop = 'CALURI';
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     ValueParameter,
     PIDParameter,
@@ -1671,7 +1677,7 @@ class CaluriProperty extends AbstractBaseProperty {
 
 // Extended Properties
 class ExtendedProperty extends AbstractBaseProperty {
-  cardinality = '*';
+  static cardinality = '*';
   acceptableParamTypes = [
     LanguageParameter,
     ValueParameter,
