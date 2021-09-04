@@ -1,0 +1,29 @@
+{
+  "name": "vcard4",
+  "version": "0.1.0",
+  "description": "Strict vcard version 4.0 library with full implementation of RFC6350",
+  "type": "module",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kelseykm/vcard4.git"
+  },
+  "keywords": [
+    "vcard",
+    "vcard4",
+    "vcf",
+    "vcf4"
+  ],
+  "author": "Kelsey Mwongeli",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kelseykm/vcard4/issues"
+  },
+  "homepage": "https://github.com/kelseykm/vcard4#readme"
+}
