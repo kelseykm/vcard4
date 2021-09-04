@@ -24,12 +24,18 @@ class AbstractBaseParameter {
   ];
 
   checkAbstractPropertiesAndMethods() {
-    if (!this.#abstractPropertiesAndMethods.every(abstractPropertyOrMethod => this.hasOwnProperty(abstractPropertyOrMethod) || Object.getPrototypeOf(this).hasOwnProperty(abstractPropertyOrMethod)))
+    if (
+      !this.#abstractPropertiesAndMethods.every(
+        abstractPropertyOrMethod => this.hasOwnProperty(abstractPropertyOrMethod) ||
+        Object.getPrototypeOf(this).hasOwnProperty(abstractPropertyOrMethod) ||
+        this.constructor.hasOwnProperty(abstractPropertyOrMethod)
+      )
+    )
     throw new Error('All abstract properties and methods in abstract base class must be defined in child class');
   }
 
   repr() {
-    return `${this.param}=${this.value}`;
+    return `${this.constructor.param}=${this.value}`;
   }
 
   constructor() {
@@ -40,7 +46,7 @@ class AbstractBaseParameter {
 
 // Parameters
 class LanguageParameter extends AbstractBaseParameter {
-  param = 'LANGUAGE';
+  static param = 'LANGUAGE';
 
   #langTag;
 
@@ -67,12 +73,13 @@ class LanguageParameter extends AbstractBaseParameter {
 }
 
 class ValueParameter extends AbstractBaseParameter {
-  param = 'VALUE';
+  static param = 'VALUE';
 
   #valueType;
 
   get value() {
-    return this.#valueType.type.toLowerCase();
+    let type = this.#valueType.type || this.#valueType.constructor.type;
+    return type.toLowerCase();
   }
 
   #validate(valType) {
@@ -105,7 +112,7 @@ class ValueParameter extends AbstractBaseParameter {
 }
 
 class PrefParameter extends AbstractBaseParameter {
-  param = 'PREF';
+  static param = 'PREF';
 
   #validate(prefValue) {
     if (typeof prefValue === 'undefined')
@@ -126,7 +133,7 @@ class PrefParameter extends AbstractBaseParameter {
 }
 
 class AltidParameter extends AbstractBaseParameter {
-  param = 'ALTID';
+  static param = 'ALTID';
 
   #validate(altidValue) {
     if (typeof altidValue === 'undefined')
@@ -145,7 +152,7 @@ class AltidParameter extends AbstractBaseParameter {
 }
 
 class PIDParameter extends AbstractBaseParameter {
-  param = 'PID';
+  static param = 'PID';
 
   #pidRegExp = /^\d+(?:\.\d+)?$/;
 
@@ -173,7 +180,7 @@ class PIDParameter extends AbstractBaseParameter {
 }
 
 class TypeParameter extends AbstractBaseParameter {
-  param = 'TYPE';
+  static param = 'TYPE';
 
   #typeRegExp = /^(?:work|home|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)$/i;
 
@@ -228,7 +235,7 @@ class TypeParameter extends AbstractBaseParameter {
 }
 
 class MediatypeParameter extends AbstractBaseParameter {
-  param = 'MEDIATYPE';
+  static param = 'MEDIATYPE';
 
   #mediaTypeRegExp = /^(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}\/(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}$/;
   #attributeRegExp = /^.+=.+$/;
@@ -263,7 +270,7 @@ class MediatypeParameter extends AbstractBaseParameter {
 }
 
 class CalscaleParameter extends AbstractBaseParameter {
-  param = 'CALSCALE';
+  static param = 'CALSCALE';
 
   #calscaleRegExp = /^(?:gregorian|x-[A-Za-z0-9]+)$/;
 
@@ -286,7 +293,7 @@ class CalscaleParameter extends AbstractBaseParameter {
 }
 
 class SortAsParameter extends AbstractBaseParameter {
-  param = 'SORT-AS';
+  static param = 'SORT-AS';
 
   #validate(sortValue) {
     if (typeof sortValue === 'undefined')
@@ -305,7 +312,7 @@ class SortAsParameter extends AbstractBaseParameter {
 }
 
 class GeoParameter extends AbstractBaseParameter {
-  param = 'GEO';
+  static param = 'GEO';
 
   #validate(geoValue) {
     if (typeof geoValue === 'undefined')
@@ -326,7 +333,7 @@ class GeoParameter extends AbstractBaseParameter {
 }
 
 class TzParameter extends AbstractBaseParameter {
-  param = 'TZ';
+  static param = 'TZ';
 
   #validate(tzValue) {
     if (typeof tzValue === 'undefined')
@@ -369,7 +376,7 @@ class AnyParameter extends AbstractBaseParameter {
 }
 
 class LabelParameter extends AbstractBaseParameter {
-  param = 'LABEL';
+  static param = 'LABEL';
 
   #validate(value) {
     if (typeof value === 'undefined')

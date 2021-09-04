@@ -11,7 +11,13 @@ class AbstractBaseValue {
   ];
 
   checkAbstractPropertiesAndMethods() {
-    if (!this.#abstractPropertiesAndMethods.every(abstractPropertyOrMethod => this.hasOwnProperty(abstractPropertyOrMethod) || Object.getPrototypeOf(this).hasOwnProperty(abstractPropertyOrMethod)))
+    if (
+      !this.#abstractPropertiesAndMethods.every(
+        abstractPropertyOrMethod => this.hasOwnProperty(abstractPropertyOrMethod) ||
+        Object.getPrototypeOf(this).hasOwnProperty(abstractPropertyOrMethod) ||
+        this.constructor.hasOwnProperty(abstractPropertyOrMethod)
+      )
+    )
     throw new Error('All abstract properties and methods in abstract base class must be defined in child class');
   }
 
@@ -27,7 +33,7 @@ class AbstractBaseValue {
 
 // Values
 class TextType extends AbstractBaseValue {
-  type = 'TEXT';
+  static type = 'TEXT';
 
   #validate(textValue) {
     if (typeof textValue === 'undefined')
@@ -51,7 +57,7 @@ class TextType extends AbstractBaseValue {
 }
 
 class TextListType extends AbstractBaseValue {
-  type = 'TEXT';
+  static type = 'TEXT';
 
   #validate(textlist) {
     if (typeof textlist === 'undefined')
@@ -77,7 +83,7 @@ class TextListType extends AbstractBaseValue {
 }
 
 class BooleanType extends AbstractBaseValue {
-  type = 'BOOLEAN';
+  static type = 'BOOLEAN';
 
   #validate(boolValue) {
     if (typeof boolValue === 'undefined')
@@ -174,7 +180,7 @@ class DateTimeType extends AbstractBaseValue {
 }
 
 class IntegerType extends AbstractBaseValue {
-  type = 'INTEGER';
+  static type = 'INTEGER';
 
   #validate(intValue) {
     if (typeof intValue === 'undefined')
@@ -199,7 +205,7 @@ class IntegerType extends AbstractBaseValue {
 }
 
 class FloatType extends AbstractBaseValue {
-  type = 'FLOAT';
+  static type = 'FLOAT';
 
   #validate(floatValue) {
     if (typeof floatValue === 'undefined')
@@ -220,7 +226,7 @@ class FloatType extends AbstractBaseValue {
 }
 
 class LanguageTagType extends AbstractBaseValue {
-  type = 'LANGUAGE-TAG';
+  static type = 'LANGUAGE-TAG';
 
   #validate(langTagValue) {
     if (typeof langTagValue === 'undefined')
@@ -245,7 +251,7 @@ class LanguageTagType extends AbstractBaseValue {
 }
 
 class URIType extends AbstractBaseValue {
-  type = 'URI';
+  static type = 'URI';
 
   //Credit for the following regex goes to Jonas Hermsmeier, who got it from Jeff Roberson and added capture groups
   #uriRegExp = new RegExp("([A-Za-z][A-Za-z0-9+\\-.]*):(?:(//)(?:((?:[A-Za-z0-9\\-._~!$&'()*+,;=:]|%[0-9A-Fa-f]{2})*)@)?((?:\\[(?:(?:(?:(?:[0-9A-Fa-f]{1,4}:){6}|::(?:[0-9A-Fa-f]{1,4}:){5}|(?:[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,1}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){3}|(?:(?:[0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){2}|(?:(?:[0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}:|(?:(?:[0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})?::)(?:[0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{1,4}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|(?:(?:[0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})?::)|[Vv][0-9A-Fa-f]+\\.[A-Za-z0-9\\-._~!$&'()*+,;=:]+)\\]|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|(?:[A-Za-z0-9\\-._~!$&'()*+,;=]|%[0-9A-Fa-f]{2})*))(?::([0-9]*))?((?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)|/((?:(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)?)|((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)|)(?:\\?((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@/?]|%[0-9A-Fa-f]{2})*))?(?:\\#((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@/?]|%[0-9A-Fa-f]{2})*))?");
@@ -271,7 +277,7 @@ class URIType extends AbstractBaseValue {
 }
 
 class SexType extends AbstractBaseValue {
-  type = 'TEXT';
+  static type = 'TEXT';
 
   #sexRegExp = /^[MFONU]$/;
 
