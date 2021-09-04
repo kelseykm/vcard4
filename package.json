@@ -25,5 +25,9 @@
   "bugs": {
     "url": "https://github.com/kelseykm/vcard4/issues"
   },
-  "homepage": "https://github.com/kelseykm/vcard4#readme"
+  "homepage": "https://github.com/kelseykm/vcard4#readme",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.1"
+  }
 }
