@@ -41,7 +41,7 @@ let nameArr = new Array(5);
 nameArr[0] = new values.TextType('Doe');
 nameArr[1] = new values.TextType('John');
 
-let nPropValue = new values.SpecialValueType('TEXT', nameArr, 'NProperty');
+let nPropValue = new values.SpecialValueType(nameArr, 'NProperty');
 
 let nProp = new properties.NProperty([], nPropValue);
 
@@ -56,7 +56,7 @@ let orgArr = [
   new values.TextType('Marketing')
 ];
 
-let orgPropValue = new values.SpecialValueType('TEXT', orgArr, 'OrgProperty');
+let orgPropValue = new values.SpecialValueType(orgArr, 'OrgProperty');
 
 let orgProp = new properties.OrgProperty([], orgPropValue);
 
@@ -143,35 +143,47 @@ console.log(vc.repr());
 
 * The vCards made with this library are strictly version 4.0 vCards.
 
+_NB: Functional parameters are referred to as arguments in the documentation_
+
 ## Property Value Data Types
 
 * According to the RFC, the standard value data types are:
     1. text
     2. text-list
     3. date
-    4. time
-    5. date-time
-    6. date-and-or-time
-    7. timestamp
-    8. boolean
-    9. integer
-    10. float
-    11. URI
-    12. utc-offset
-    13. Language-Tag
-    14. iana-valuespec
+    4. date-list
+    5. time
+    6. time-list
+    7. date-time
+    8. date-time-list
+    9. date-and-or-time
+    10. date-and-or-time-list
+    11. timestamp
+    12. timestamp-list
+    13. boolean
+    14. integer
+    15. integer-list
+    16. float
+    17. float-list
+    18. URI
+    19. utc-offset
+    20. Language-Tag
+    21. iana-valuespec
 
 * In the library, these are represented by the following classes:
     1. TextType
     2. TextListType
-    4. DateTimeType
-    3. BooleanType
-    5. IntegerType
-    6. FloatType
-    7. LanguageTagType
-    8. URIType
-    9. SexType
-    10. SpecialValueType
+    3. DateTimeType
+    4. DateTimeListType
+    5. BooleanType
+    6. IntegerType
+    7. IntegerListType
+    8. FloatType
+    9. FloatListType
+    10. LanguageTagType
+    11. URIType
+    12. SexType
+    13. SpecialValueType
 
 * The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard. For example,
 
@@ -210,9 +222,9 @@ let people = new TextListType([ person1, person2 ]);
 * ```URIType``` should be called with a single argument of type string, that is formatted as URI as defined in Section 3 of RFC 3986
 
 ```js
-let myPic = new URIType('http://www.example.com/my/picture.jpg');
+new URIType('http://www.example.com/my/picture.jpg');
 
-let babsJensen = new URIType('ldap://ldap.example.com/cn=babs%20jensen');
+new URIType('ldap://ldap.example.com/cn=babs%20jensen');
 ```
 
 ### DateTimeType
@@ -381,6 +393,8 @@ Examples:
 
 ```js
 new DateTimeType('19961022T140000-0500', 'timestamp');
+
+new DateTimeType('19961022T140000+01', 'timestamp');
 ```
 
 * Where ```"utcoffset"``` is the second argument, the value of the first argument should be of the format:
@@ -393,4 +407,233 @@ sign hour [minute]
 
 ```js
 new DateTimeType('-0500', 'utcoffset');
+
+new DateTimeType('+03', 'utcoffset');
+```
+
+### DateTimeListType
+
+* This class represents the "date-list", "time-list", "date-time-list", "date-and-or-time-list" and "timestamp-list" data types
+
+* ```DateTimeListType``` should be called with a single argument that is an array of ```DateTimeType```s of the same type
+
+```js
+new DateTimeListType([
+  new DateTimeType('1985-04', 'date'),
+  new DateTimeType('---12', 'date')
+]);
+
+new DateTimeListType([
+  new DateTimeType('19961022T140000-0500', 'timestamp'),
+  new DateTimeType('19961022T140000+01', 'timestamp')
+]);
+```
+
+* The following will throw an error, since the ```DateTimeType```s in the array are not of the same type
+
+```js
+new DateTimeListType([
+  new DateTimeType('---22T14', 'datetime'),
+  new DateTimeType('---12', 'dateandortime')
+]);
+
+// TypeError: Invalid type for value of DateTimeListType. It should be an array of DateTimeTypes of the same type
+//     at DateTimeListType.#validate (file:///.../vcard4/lib/values.js:213:11)
+//     at new DateTimeListType (file:///.../vcard4/lib/values.js:226:19)
+//     at file:///.../vcard4/lib/values.js:592:1
+//     at ModuleJob.run (node:internal/modules/esm/module_job:183:25)
+//     at async Loader.import (node:internal/modules/esm/loader:178:24)
+//     at async Object.loadESM (node:internal/process/esm_loader:68:5)
+//     at async handleMainPromise (node:internal/modules/run_main:63:12)
+
+```
+
+### BooleanType
+
+* This class represents the "boolean" data type
+
+* ```BooleanType``` should be called with a single argument of type boolean
+
+```js
+new BooleanType(false);
+
+new BooleanType(true);
+```
+
+### IntegerType and IntegerListType
+
+* These classes represent the "integer" and "integer-list" data types respectively
+
+* ```IntegerType``` should be called with a single argument of type number or bigint. The value may have a sign ("-" or "+")
+
+```js
+new IntegerType(1n);
+
+new IntegerType(-30);
+
+new IntegerType(5);
+
+new IntegerType(-45n);
+```
+
+* The maximum value is ```9223372036854775807n```, and the minimum value is ```-9223372036854775808n``` when using bigint values, but when using values of type number, the maximum number is ```Number.MAX_SAFE_INTEGER``` and the minimum is ```Number.MIN_SAFE_INTEGER```
+
+* ```IntegerListType``` should be called with a single argument that is an array of ```IntegerType```s
+
+```js
+new IntegerListType([
+  new IntegerType(1),
+  new IntegerType(4e2),
+  new IntegerType(33n)
+]);
+```
+
+### FloatType and IntegerListType
+
+* These classes represent the "float" and "float-list" data types respectively
+
+* ```FloatType``` should be called with a single argument of type number or string. The value may have a sign ("-" or "+")
+
+* The value must have a decimal point.
+
+```js
+new FloatType('-35.00');
+
+new FloatType(90.234);
+```
+
+* ```IntegerListType``` should be called with a single argument that is an array of ```IntegerType```s
+
+```js
+new FloatListType([
+  new FloatType(1.455),
+  new FloatType(-345),
+  new FloatType('33.000')
+]);
+```
+
+### LanguageTagType
+
+* This class represents the "language-tag" data type
+
+* ```LanguageTagType``` should be called with a single argument of type string that is formatted as a language tag as defined in RFC 5646
+
+* Note that the value submitted will not be checked to make sure it is an actual language tag that  conforms to RFC 5646, so ensure that whatever value you pass is a valid language tag
+
+```js
+new LanguageTagType('en-us');
+```
+
+### SexType
+
+* This class is for use with the ```GenderProperty```
+
+* ```SexType``` should be called with a single argument of type strict
+
+* The accepted values for the argument include: ```M```, ```F```, ```O```, ```N``` and ```U```
+
+```js
+new SexType('F');
+```
+
+### SpecialValueType
+
+* This class is for use with properties which do not have values of the types already described. Those properties include:
+    1. ```BeginProperty```
+    2. ```EndProperty```
+    3. ```KindProperty```
+    4. ```NProperty```
+    5. ```GenderProperty```
+    6. ```AdrProperty```
+    7. ```OrgProperty```
+    8. ```ClientpidmapProperty```
+
+* ```SpecialValueType``` should be called with two arguments, both of type string. The first should be the value and the second should be the target property
+
+* The second argument that specifies the target property should have as a value a string with the name of one the eight classes listed above (case insensitive)
+
+* The value first argument depends on the value of the second argument
+
+* Where the second argument is either ```BeginProperty``` or ```EndProperty```, the only accepted value for the first argument is ```VCARD```.
+
+```js
+new SpecialValueType('VCARD', 'endproperty');
+```
+
+* Where the second argument is ```KindProperty```, the only accepted values for the first argument are ```individual```, ```group```, ```org```, ```location``` or a publicly defined valuetype format, registered with IANA, e.g. ```hybridCellSector_AGPS```, "```802.11```", e.t.c.
+
+```js
+SpecialValueType('org', 'KindProperty')
+```
+
+* Where the second argument is ```NProperty```, the only accepted value for the first argument is an array of length 5. The items in the array, if present, must be of type ```TextType``` (documented above), otherwise, __they must be left empty__ as demonstrated in the example below
+
+* The 5 items in the array correspond to the following respectively:
+    1. Family Names (also known as surnames),
+    2. Given Names,
+    3. Additional Names,
+    4. Honorific Prefixes
+    5. Honorific Suffixes.
+
+```js
+let nameArr = new Array(5);
+nameArr[0] = new TextType('Doe');
+nameArr[1] = new TextType('John');
+nameArr[3] = new TextType('Mr.');
+
+new SpecialValueType(nameArr, 'NProperty');
+```
+
+* Where the second argument is ```GenderProperty```, the only accepted value for the first argument is an array of length 2. The first item in the array, if present, must be of type ```SexType``` (documented above), while the second, if present, must be of the type ```TextType``` (documented above), otherwise, __they must be left empty__.__Only one__ can be left empty, so if one is left empty, the other must be present
+
+```js
+new SpecialValueType(
+  [
+    new SexType('O'),
+    new TextType("intersex")
+  ],
+  'GenderProperty'
+);
+```
+
+* Where the second argument is ```AdrProperty```, the only accepted value for the first argument is an array of length 7. The items in the array, if present, must be of type ```TextType``` (documented above), otherwise, __they must be left empty__
+
+* The 7 items in the array correspond to the following respectively:
+    1. the post office box
+    2. the extended address (e.g., apartment or suite number)
+    3. the street address
+    4. the locality (e.g., city)
+    5. the region (e.g., state or province)
+    6. the postal code
+    7. the country name (full name)
+
+```js
+let adrArr = new Array(7);
+adrArr[3] = new TextType('Main street');
+
+new SpecialValueType(adrArr, 'AdrProperty');
+```
+
+* Where the second argument is ```OrgProperty```, the only accepted value for the first argument is an array, with no length limit. The items in the array must be of type ```TextType``` (documented above)
+
+```js
+new SpecialValueType(
+  [
+    new TextType('Example.com Inc.'),
+    new TextType('Marketing')
+  ],
+  'orgproperty'
+)
+```
+
+* Where the second argument is ```ClientpidmapProperty```, the only accepted value for the first argument is an array of length 2. The first item in the array must be of type ```IntegerType``` (documented above), while the second, must be of the type ```URIType```. __None of the items can be left empty__
+
+```js
+new SpecialValueType(
+  [
+    new IntegerType(1),
+    new URIType('uuid:123-asmm-aams')
+  ],
+  'clientpidmapProperty'
+);
 ```
