@@ -150,6 +150,12 @@ describe('Property value data types tests', () => {
           new DateTimeType('19961022T140000-05', 'timestamp')
         ]);
       });
+      assert.throws(() => {
+        new DateTimeListType([
+          new DateTimeType('-0500', 'utcoffset'),
+          new DateTimeType('+03', 'utcoffset')
+        ]);
+      });
       assert.throws(() => new DateTimeType({}));
     });
 
