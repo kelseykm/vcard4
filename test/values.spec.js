@@ -181,6 +181,9 @@ describe('Property value data types tests', () => {
     it('Rejects invalid input', () => {
       assert.throws(() => new IntegerType);
       assert.throws(() => new IntegerType(Number.MAX_SAFE_INTEGER + 1));
+      assert.throws(() => new IntegerType(Number.MIN_SAFE_INTEGER - 1));
+      assert.throws(() => new IntegerType(9223372036854775807n + 1n));
+      assert.throws(() => new IntegerType(-9223372036854775808n - 1n));
       assert.throws(() => new IntegerType('55'));
       assert.throws(() => new IntegerType(5.5));
       assert.throws(() => new IntegerType([5, 6, 7]));
@@ -229,21 +232,23 @@ describe('Property value data types tests', () => {
 
   describe('FloatType tests', () => {
     it('Accepts valid input', () => {
-      assert.doesNotThrow(() => new FloatType(35));
+      assert.doesNotThrow(() => new FloatType(-35.74));
       assert.doesNotThrow(() => new FloatType(90.234));
+      assert.doesNotThrow(() => new FloatType('10.400'));
     });
 
     it('Rejects invalid input', () => {
       assert.throws(() => new FloatType);
       assert.throws(() => new FloatType('55'));
+      assert.throws(() => new FloatType(55));
       assert.throws(() => new FloatType(5n));
       assert.throws(() => new FloatType({}));
     });
 
     it('Formats value properly', () => {
       assert.strictEqual(
-        new FloatType(30).repr(),
-        "30"
+        new FloatType(30.45).repr(),
+        "30.45"
       );
     });
   });
@@ -253,7 +258,7 @@ describe('Property value data types tests', () => {
       assert.doesNotThrow(() => {
         new FloatListType([
           new FloatType(1.45),
-          new FloatType(4e2),
+          new FloatType('434.1212100000'),
           new FloatType(3.3)
         ]);
       });
@@ -272,10 +277,10 @@ describe('Property value data types tests', () => {
       assert.strictEqual(
         new FloatListType([
           new FloatType(1.45),
-          new FloatType(4e2),
+          new FloatType('4.00'),
           new FloatType(3.3)
         ]).repr(),
-        "1.45,400,3.3"
+        "1.45,4.00,3.3"
       );
     });
   });
@@ -346,9 +351,8 @@ describe('Property value data types tests', () => {
 
   describe('SpecialValueType tests', () => {
     it('Accepts valid input', () => {
-      assert.doesNotThrow(() => new SpecialValueType('text', 'VCARD', 'endproperty'));
+      assert.doesNotThrow(() => new SpecialValueType('VCARD', 'endproperty'));
       assert.doesNotThrow(() => new SpecialValueType(
-        null,
         [
           new IntegerType(1),
           new URIType('uuid:123-asmm-aams')
@@ -359,14 +363,13 @@ describe('Property value data types tests', () => {
 
     it('Rejects invalid input', () => {
       assert.throws(() => new SpecialValueType);
-      assert.throws(() => new SpecialValueType('text', 'something', 'FNProperty'));
+      assert.throws(() => new SpecialValueType('something', 'FNProperty'));
       assert.throws(() => new SpecialValueType({}));
     });
 
     it('Formats value properly', () => {
       assert.strictEqual(
         new SpecialValueType(
-          null,
           [
             new IntegerType(1),
             new URIType('uuid:123-asmm-aams')
