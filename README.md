@@ -171,19 +171,19 @@ _NB: Functional parameters are referred to as arguments in the documentation_
     21. iana-valuespec
 
 * In the library, these are represented by the following classes:
-    1. TextType
-    2. TextListType
-    3. DateTimeType
-    4. DateTimeListType
-    5. BooleanType
-    6. IntegerType
-    7. IntegerListType
-    8. FloatType
-    9. FloatListType
-    10. LanguageTagType
-    11. URIType
-    12. SexType
-    13. SpecialValueType
+    1. [`TextType`](#TextType)
+    2. [`TextListType`](#TextListType)
+    3. [`DateTimeType`](#DateTimeType)
+    4. [`DateTimeListType`](#DateTimeListType)
+    5. [`BooleanType`](#BooleanType)
+    6. [`IntegerType`](#IntegerType)
+    7. [`IntegerListType`](#IntegerListType)
+    8. [`FloatType`](#FloatType)
+    9. [`FloatListType`](#FloatListType)
+    10.[` LanguageTagType`](#LanguageTagType)
+    11.[` URIType`](#URIType)
+    12.[` SexType`](#SexType)
+    13.[` SpecialValueType`](#SpecialValueType)
 
 * The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard. For example,
 
@@ -526,9 +526,9 @@ new LanguageTagType('en-us');
 
 ### SexType
 
-* This class is for use with the ```GenderProperty```
+* This class is for use with the [`GenderProperty`](#GenderProperty)
 
-* ```SexType``` should be called with a single argument of type strict
+* ```SexType``` should be called with a single argument of type string
 
 * The accepted values for the argument include: ```M```, ```F```, ```O```, ```N``` and ```U```
 
@@ -539,14 +539,14 @@ new SexType('F');
 ### SpecialValueType
 
 * This class is for use with properties which do not have values of the types already described. Those properties include:
-    1. ```BeginProperty```
-    2. ```EndProperty```
-    3. ```KindProperty```
-    4. ```NProperty```
-    5. ```GenderProperty```
-    6. ```AdrProperty```
-    7. ```OrgProperty```
-    8. ```ClientpidmapProperty```
+    1. [`BeginProperty`](#BeginProperty)
+    2. [`EndProperty`](#EndProperty)
+    3. [`KindProperty`](#KindProperty)
+    4. [`NProperty`](#NProperty)
+    5. [`GenderProperty`](#GenderPropertyder)
+    6. [`AdrProperty`](#AdrProperty)
+    7. [`OrgProperty`](#OrgProperty)
+    8. [`ClientpidmapProperty`](#ClientpidmapProperty)
 
 * ```SpecialValueType``` should be called with two arguments, both of type string. The first should be the value and the second should be the target property
 
@@ -554,19 +554,19 @@ new SexType('F');
 
 * The value first argument depends on the value of the second argument
 
-* Where the second argument is either ```BeginProperty``` or ```EndProperty```, the only accepted value for the first argument is ```VCARD```.
+* Where the second argument is either [`BeginProperty`](#BeginProperty) or [`EndProperty`](#EndProperty), the only accepted value for the first argument is ```VCARD```.
 
 ```js
 new SpecialValueType('VCARD', 'endproperty');
 ```
 
-* Where the second argument is ```KindProperty```, the only accepted values for the first argument are ```individual```, ```group```, ```org```, ```location``` or a publicly defined valuetype format, registered with IANA, e.g. ```hybridCellSector_AGPS```, "```802.11```", e.t.c.
+* Where the second argument is [`KindProperty`](#KindProperty), the only accepted values for the first argument are ```individual```, ```group```, ```org```, ```location``` or a publicly defined valuetype format, registered with IANA, e.g. ```hybridCellSector_AGPS```, "```802.11```", e.t.c.
 
 ```js
 SpecialValueType('org', 'KindProperty')
 ```
 
-* Where the second argument is ```NProperty```, the only accepted value for the first argument is an array of length 5. The items in the array, if present, must be of type ```TextType``` (documented above), otherwise, __they must be left empty__ as demonstrated in the example below
+* Where the second argument is [`NProperty`](#NProperty), the only accepted value for the first argument is an array of length 5. The items in the array, if present, must be of type [`TextType`](#TextType), otherwise, __they must be left empty__ as demonstrated in the example below
 
 * The 5 items in the array correspond to the following respectively:
     1. Family Names (also known as surnames),
@@ -584,7 +584,7 @@ nameArr[3] = new TextType('Mr.');
 new SpecialValueType(nameArr, 'NProperty');
 ```
 
-* Where the second argument is ```GenderProperty```, the only accepted value for the first argument is an array of length 2. The first item in the array, if present, must be of type ```SexType``` (documented above), while the second, if present, must be of the type ```TextType``` (documented above), otherwise, __they must be left empty__.__Only one__ can be left empty, so if one is left empty, the other must be present
+* Where the second argument is [`GenderProperty`](#GenderProperty), the only accepted value for the first argument is an array of length 2. The first item in the array, if present, must be of type [SexType` ](#SexType), while the second, if present, must be of the type [`TextType`](#TextType), otherwise, __they must be left empty__. Note that __only one__ can be left empty, so if one is left empty, the other must be present
 
 ```js
 new SpecialValueType(
@@ -596,7 +596,7 @@ new SpecialValueType(
 );
 ```
 
-* Where the second argument is ```AdrProperty```, the only accepted value for the first argument is an array of length 7. The items in the array, if present, must be of type ```TextType``` (documented above), otherwise, __they must be left empty__
+* Where the second argument is [`AdrProperty`](#AdrProperty), the only accepted value for the first argument is an array of length 7. The items in the array, if present, must be of type [`TextType`](#TextType), otherwise, __they must be left empty__
 
 * The 7 items in the array correspond to the following respectively:
     1. the post office box
@@ -614,7 +614,7 @@ adrArr[3] = new TextType('Main street');
 new SpecialValueType(adrArr, 'AdrProperty');
 ```
 
-* Where the second argument is ```OrgProperty```, the only accepted value for the first argument is an array, with no length limit. The items in the array must be of type ```TextType``` (documented above)
+* Where the second argument is [`OrgProperty`](#OrgProperty), the only accepted value for the first argument is an array, with at least one item but with no length limit. The items in the array must be of type [`TextType`](#TextType)
 
 ```js
 new SpecialValueType(
@@ -626,7 +626,7 @@ new SpecialValueType(
 )
 ```
 
-* Where the second argument is ```ClientpidmapProperty```, the only accepted value for the first argument is an array of length 2. The first item in the array must be of type ```IntegerType``` (documented above), while the second, must be of the type ```URIType```. __None of the items can be left empty__
+* Where the second argument is [`ClientpidmapProperty`](#ClientpidmapProperty), the only accepted value for the first argument is an array of length 2. The first item in the array must be of type [`IntegerType`](#IntegerType), while the second, must be of the type [`URIType`](#URIType). __None of the items can be left empty__
 
 ```js
 new SpecialValueType(
