@@ -3,8 +3,11 @@ import {
   TextListType,
   BooleanType,
   DateTimeType,
+  DateTimeListType,
   IntegerType,
+  IntegerListType,
   FloatType,
+  FloatListType,
   LanguageTagType,
   URIType,
   SexType,
@@ -121,6 +124,46 @@ describe('Property value data types tests', () => {
     });
   });
 
+  describe('DateTimeListType tests', () => {
+    it('Accepts valid input', () => {
+      assert.doesNotThrow(() => {
+        new DateTimeListType([
+          new DateTimeType('1985-04', 'date'),
+          new DateTimeType('---12', 'date')
+        ]);
+      });
+
+      assert.doesNotThrow(() => {
+        new DateTimeListType([
+          new DateTimeType(1400, 'time'),
+          new DateTimeType('102200Z', 'time')
+        ]);
+      });
+    });
+
+    it('Rejects invalid input', () => {
+      assert.throws(() => new DateTimeType);
+      assert.throws(() => new DateTimeType('19961022T14', 'timestamp'));
+      assert.throws(() => {
+        new DateTimeListType([
+          new DateTimeType(1400, 'time'),
+          new DateTimeType('19961022T140000-05', 'timestamp')
+        ]);
+      });
+      assert.throws(() => new DateTimeType({}));
+    });
+
+    it('Formats value properly', () => {
+      assert.strictEqual(
+        new DateTimeListType([
+          new DateTimeType('1985-04', 'date'),
+          new DateTimeType('---12', 'date')
+        ]).repr(),
+        "1985-04,---12"
+      );
+    });
+  })
+
   describe('IntegerType tests', () => {
     it('Accepts valid input', () => {
       assert.doesNotThrow(() => new IntegerType(1212));
@@ -134,7 +177,7 @@ describe('Property value data types tests', () => {
       assert.throws(() => new IntegerType(Number.MAX_SAFE_INTEGER + 1));
       assert.throws(() => new IntegerType('55'));
       assert.throws(() => new IntegerType(5.5));
-      assert.throws(() => new IntegerType([5]));
+      assert.throws(() => new IntegerType([5, 6, 7]));
       assert.throws(() => new IntegerType({}));
     });
 
@@ -142,6 +185,38 @@ describe('Property value data types tests', () => {
       assert.strictEqual(
         new IntegerType(30).repr(),
         "30"
+      );
+    });
+  });
+
+  describe('IntegerListType tests', () => {
+    it('Accepts valid input', () => {
+      assert.doesNotThrow(() => {
+        new IntegerListType([
+          new IntegerType(1),
+          new IntegerType(4e2),
+          new IntegerType(33n)
+        ]);
+      });
+    });
+
+    it('Rejects invalid input', () => {
+      assert.throws(() => new IntegerListType(1));
+      assert.throws(() => new IntegerListType);
+      assert.throws(() => new IntegerListType([
+        new TextType("Greeting: Hello, world!")
+      ]));
+      assert.throws(() => new IntegerListType({}));
+    });
+
+    it('Formats value properly', () => {
+      assert.strictEqual(
+        new IntegerListType([
+          new IntegerType(1),
+          new IntegerType(4e2),
+          new IntegerType(33n)
+        ]).repr(),
+        "1,400,33"
       );
     });
   });
@@ -155,7 +230,7 @@ describe('Property value data types tests', () => {
     it('Rejects invalid input', () => {
       assert.throws(() => new FloatType);
       assert.throws(() => new FloatType('55'));
-      assert.throws(() => new FloatType([5]));
+      assert.throws(() => new FloatType(5n));
       assert.throws(() => new FloatType({}));
     });
 
@@ -163,6 +238,38 @@ describe('Property value data types tests', () => {
       assert.strictEqual(
         new FloatType(30).repr(),
         "30"
+      );
+    });
+  });
+
+  describe('FloatListType tests', () => {
+    it('Accepts valid input', () => {
+      assert.doesNotThrow(() => {
+        new FloatListType([
+          new FloatType(1.45),
+          new FloatType(4e2),
+          new FloatType(3.3)
+        ]);
+      });
+    });
+
+    it('Rejects invalid input', () => {
+      assert.throws(() => new FloatListType(1));
+      assert.throws(() => new FloatListType);
+      assert.throws(() => new FloatListType([
+        new IntegerType(5n)
+      ]));
+      assert.throws(() => new FloatListType({}));
+    });
+
+    it('Formats value properly', () => {
+      assert.strictEqual(
+        new FloatListType([
+          new FloatType(1.45),
+          new FloatType(4e2),
+          new FloatType(3.3)
+        ]).repr(),
+        "1.45,400,3.3"
       );
     });
   });
