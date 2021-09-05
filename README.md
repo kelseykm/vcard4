@@ -177,7 +177,7 @@ console.log(vc.repr());
 
 ```js
 new TextType('Hello, world!').repr()
-//Hello\, world
+//Hello\, world!
 ```
 
 * The instance object is frozen and therefore its properties and methods cannot be modified after construction, neither can new ones be added.
@@ -250,13 +250,13 @@ Examples:
           ---12
 ```
 
+* Note the use of YYYY-MM in the second example above. YYYYMM is disallowed to prevent confusion with YYMMDD. Note also that YYYY-MM-DD is disallowed.
+
 * Example for ```"date"```:
 
 ```js
 new DateTimeType('19850412', 'date');
 ```
-
-* Note the use of YYYY-MM in the second example above. YYYYMM is disallowed to prevent confusion with YYMMDD. Note also that YYYY-MM-DD is disallowed.
 
 * Where ```"time"``` is the second argument, the value of the first argument should be of the format:
 
