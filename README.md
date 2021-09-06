@@ -1,8 +1,10 @@
 # vcard4
 
-__A strict vCard version 4.0 javascript library with full implementation of RFC 6350.__
+__vCard version 4.0 javascript library with full implementation of RFC 6350.__
 
-It may be used in node or in the browser
+For use in node or in the browser
+
+_See [documentation](#documentation)_
 
 ### Installation
 * Install from npm
@@ -158,11 +160,13 @@ console.log(vc.repr());
 
 ## Introduction
 
-* This is a vCard JavaScript library that implements RFC 6350 fully.
+* This is a vCard JavaScript library, written in ES6, that implements RFC 6350 fully
 
-* That RFC defines the vCard data format for representing and exchanging a variety of information about individuals and other entities (e.g., formatted and structured name and delivery addresses, email address, multiple telephone numbers, photograph, logo, audio clips, etc.).
+* That RFC defines the vCard data format for representing and exchanging a variety of information about individuals and other entities (e.g., formatted and structured name and delivery addresses, email address, multiple telephone numbers, photograph, logo, audio clips, etc.)
 
-* The vCards made with this library are strictly version 4.0 vCards.
+* The vCards made with this library are strictly version 4.0 vCards
+
+* This library may be used in node or in the browser. It supports the latest versions of both out of the box. For use in old browsers or old node versions, you should transpile it with ___Babel___
 
 _NB: Functional parameters are referred to as arguments in the documentation_
 
