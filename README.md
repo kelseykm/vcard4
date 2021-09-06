@@ -1,3 +1,5 @@
+![vcard4](./pics/vcard4-social-prev.png)
+
 # vcard4
 
 __vCard version 4.0 javascript library with full implementation of RFC 6350.__
