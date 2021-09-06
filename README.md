@@ -180,10 +180,10 @@ _NB: Functional parameters are referred to as arguments in the documentation_
     7. [`IntegerListType`](#IntegerType-and-IntegerListType)
     8. [`FloatType`](#FloatType-and-FloatListType)
     9. [`FloatListType`](#FloatType-and-FloatListType)
-    10.[` LanguageTagType`](#LanguageTagType)
-    11.[` URIType`](#URIType)
-    12.[` SexType`](#SexType)
-    13.[` SpecialValueType`](#SpecialValueType)
+    10. [` LanguageTagType`](#LanguageTagType)
+    11. [` URIType`](#URIType)
+    12. [` SexType`](#SexType)
+    13. [` SpecialValueType`](#SpecialValueType)
 
 * The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard. For example,
 
