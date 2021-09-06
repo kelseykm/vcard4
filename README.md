@@ -36,6 +36,9 @@ END:VCARD
 ```js
 import { values, parameters, properties, VCARD } from './index.js';
 
+//or if installed from npm
+// import { values, parameters, properties, VCARD } from 'vcard4';
+
 // N property
 let nameArr = new Array(5);
 nameArr[0] = new values.TextType('Doe');
