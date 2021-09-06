@@ -1,4 +1,5 @@
-export * as values from './lib/values.js';
-export * as parameters from './lib/parameters.js';
-export * as properties from './lib/properties.js';
-export { default as VCARD } from './lib/card.js';
+export * as errors from './src/esm/errors.js';
+export * as values from './src/esm/values.js';
+export * as parameters from './src/esm/parameters.js';
+export * as properties from './src/esm/properties.js';
+export { default as VCARD } from './src/esm/card.js';

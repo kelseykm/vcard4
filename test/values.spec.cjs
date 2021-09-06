@@ -1,4 +1,4 @@
-import {
+const {
   TextType,
   TextListType,
   BooleanType,
@@ -12,11 +12,11 @@ import {
   URIType,
   SexType,
   SpecialValueType
-} from '../src/esm/values.js';
+} = require('../src/cjs/values');
 
-import { assert } from 'chai';
+const { assert } = require('chai');
 
-describe('ESM property value data types tests', () => {
+describe('CJS property value data types tests', () => {
 
   describe('TextType tests', () => {
     it('Accepts valid input', () => {
