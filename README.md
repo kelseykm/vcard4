@@ -171,15 +171,15 @@ _NB: Functional parameters are referred to as arguments in the documentation_
     21. iana-valuespec
 
 * In the library, these are represented by the following classes:
-    1. [`TextType`](#TextType and TextListType)
-    2. [`TextListType`](#TextType and TextListType)
+    1. [`TextType`](#TextType-and-TextListType)
+    2. [`TextListType`](#TextType-and-TextListType)
     3. [`DateTimeType`](#DateTimeType)
     4. [`DateTimeListType`](#DateTimeListType)
     5. [`BooleanType`](#BooleanType)
-    6. [`IntegerType`](#IntegerType and IntegerListType)
-    7. [`IntegerListType`](#IntegerType and IntegerListType)
-    8. [`FloatType`](#FloatType and FloatListType)
-    9. [`FloatListType`](#FloatType and FloatListType)
+    6. [`IntegerType`](#IntegerType-and-IntegerListType)
+    7. [`IntegerListType`](#IntegerType-and-IntegerListType)
+    8. [`FloatType`](#FloatType-and-FloatListType)
+    9. [`FloatListType`](#FloatType-and-FloatListType)
     10.[` LanguageTagType`](#LanguageTagType)
     11.[` URIType`](#URIType)
     12.[` SexType`](#SexType)
@@ -488,7 +488,7 @@ new IntegerListType([
 ]);
 ```
 
-### FloatType and IntegerListType
+### FloatType and FloatListType
 
 * These classes represent the "float" and "float-list" data types respectively
 
@@ -502,7 +502,7 @@ new FloatType('-35.00');
 new FloatType(90.234);
 ```
 
-* ```IntegerListType``` should be called with a single argument that is an array of ```IntegerType```s
+* ```FloatListType``` should be called with a single argument that is an array of ```FloatType```s
 
 ```js
 new FloatListType([
@@ -566,7 +566,7 @@ new SpecialValueType('VCARD', 'endproperty');
 SpecialValueType('org', 'KindProperty')
 ```
 
-* Where the second argument is [`NProperty`](#NProperty), the only accepted value for the first argument is an array of length 5. The items in the array, if present, must be of type [`TextType`](#TextType and TextListType), otherwise, __they must be left empty__ as demonstrated in the example below
+* Where the second argument is [`NProperty`](#NProperty), the only accepted value for the first argument is an array of length 5. The items in the array, if present, must be of type [`TextType`](#TextType-and-TextListType), otherwise, __they must be left empty__ as demonstrated in the example below
 
 * The 5 items in the array correspond to the following respectively:
     1. Family Names (also known as surnames),
@@ -584,7 +584,7 @@ nameArr[3] = new TextType('Mr.');
 new SpecialValueType(nameArr, 'NProperty');
 ```
 
-* Where the second argument is [`GenderProperty`](#GenderProperty), the only accepted value for the first argument is an array of length 2. The first item in the array, if present, must be of type [SexType` ](#SexType), while the second, if present, must be of the type [`TextType`](#TextType and TextListType), otherwise, __they must be left empty__. Note that __only one__ can be left empty, so if one is left empty, the other must be present
+* Where the second argument is [`GenderProperty`](#GenderProperty), the only accepted value for the first argument is an array of length 2. The first item in the array, if present, must be of type [SexType` ](#SexType), while the second, if present, must be of the type [`TextType`](#TextType-and-TextListType), otherwise, __they must be left empty__. Note that __only one__ can be left empty, so if one is left empty, the other must be present
 
 ```js
 new SpecialValueType(
@@ -596,7 +596,7 @@ new SpecialValueType(
 );
 ```
 
-* Where the second argument is [`AdrProperty`](#AdrProperty), the only accepted value for the first argument is an array of length 7. The items in the array, if present, must be of type [`TextType`](#TextType and TextListType), otherwise, __they must be left empty__
+* Where the second argument is [`AdrProperty`](#AdrProperty), the only accepted value for the first argument is an array of length 7. The items in the array, if present, must be of type [`TextType`](#TextType-and-TextListType), otherwise, __they must be left empty__
 
 * The 7 items in the array correspond to the following respectively:
     1. the post office box
@@ -614,7 +614,7 @@ adrArr[3] = new TextType('Main street');
 new SpecialValueType(adrArr, 'AdrProperty');
 ```
 
-* Where the second argument is [`OrgProperty`](#OrgProperty), the only accepted value for the first argument is an array, with at least one item but with no length limit. The items in the array must be of type [`TextType`](#TextType and TextListType)
+* Where the second argument is [`OrgProperty`](#OrgProperty), the only accepted value for the first argument is an array, with at least one item but with no length limit. The items in the array must be of type [`TextType`](#TextType-and-TextListType)
 
 ```js
 new SpecialValueType(
@@ -626,7 +626,7 @@ new SpecialValueType(
 )
 ```
 
-* Where the second argument is [`ClientpidmapProperty`](#ClientpidmapProperty), the only accepted value for the first argument is an array of length 2. The first item in the array must be of type [`IntegerType`](#IntegerType and IntegerListType), while the second, must be of the type [`URIType`](#URIType). __None of the items can be left empty__
+* Where the second argument is [`ClientpidmapProperty`](#ClientpidmapProperty), the only accepted value for the first argument is an array of length 2. The first item in the array must be of type [`IntegerType`](#IntegerType-and-IntegerListType), while the second, must be of the type [`URIType`](#URIType). __None of the items can be left empty__
 
 ```js
 new SpecialValueType(
