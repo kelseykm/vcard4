@@ -139,7 +139,6 @@ console.log(vc.repr());
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
 - [Property Value Data Types](#property-value-data-types)
     * [TextType and TextListType](#texttype-and-textlisttype)
