@@ -137,6 +137,25 @@ console.log(vc.repr());
 
 # DOCUMENTATION
 
+## Table of Contents
+
+- [Table of Contents](#table-of-contents)
+- [Introduction](#introduction)
+- [Property Value Data Types](#property-value-data-types)
+    * [TextType and TextListType](#texttype-and-textlisttype)
+    * [URIType](#uritype)
+    * [DateTimeType](#datetimetype)
+    * [DateTimeListType](#datetimelisttype)
+    * [BooleanType](#booleantype)
+    * [IntegerType and IntegerListType](#integertype-and-integerlisttype)
+    * [FloatType and FloatListType](#floattype-and-floatlisttype)
+    * [LanguageTagType](#languagetagtype)
+    * [SexType](#sextype)
+    * [SpecialValueType](#specialvaluetype)
+
+
+## Introduction
+
 * This is a vCard JavaScript library that implements RFC 6350 fully.
 
 * That RFC defines the vCard data format for representing and exchanging a variety of information about individuals and other entities (e.g., formatted and structured name and delivery addresses, email address, multiple telephone numbers, photograph, logo, audio clips, etc.).
