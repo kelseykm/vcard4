@@ -38,10 +38,10 @@ END:VCARD
 * To create a vCard like the one above, you would do the following:
 
 ```js
-import { values, parameters, properties, VCARD } from './index.js';
+import { values, parameters, properties, VCARD } from 'vcard4';
 
-//or if installed from npm
-// import { values, parameters, properties, VCARD } from 'vcard4';
+// or if using commonjs
+// const { values, parameters, properties, VCARD } = require('vcard4');
 
 // N property
 let nameArr = new Array(5);
@@ -162,13 +162,15 @@ console.log(vc.repr());
 
 ## Introduction
 
-* This is a vCard JavaScript library, written in ES6, that implements RFC 6350 fully
+* This is a vCard JavaScript library that implements RFC 6350 fully
 
 * That RFC defines the vCard data format for representing and exchanging a variety of information about individuals and other entities (e.g., formatted and structured name and delivery addresses, email address, multiple telephone numbers, photograph, logo, audio clips, etc.)
 
 * The vCards made with this library are strictly version 4.0 vCards
 
-* This library may be used in node or in the browser. It supports the latest versions of both out of the box. For use in old browsers or old node versions, you should transpile it with ___Babel___
+* This library may be used in node or in the browser. It supports the latest versions of both out of the box. For use in old browsers or old node versions, you should transpile the code with ___Babel___
+
+* __vcard4__ supports both ES6 module import/export and commonjs require 
 
 _NB: Functional parameters are referred to as arguments in the documentation_
 
@@ -611,7 +613,7 @@ nameArr[3] = new TextType('Mr.');
 new SpecialValueType(nameArr, 'NProperty');
 ```
 
-* Where the second argument is [`GenderProperty`](#GenderProperty), the only accepted value for the first argument is an array of length 2. The first item in the array, if present, must be of type [SexType` ](#SexType), while the second, if present, must be of the type [`TextType`](#TextType-and-TextListType), otherwise, __they must be left empty__. Note that __only one__ can be left empty, so if one is left empty, the other must be present
+* Where the second argument is [`GenderProperty`](#GenderProperty), the only accepted value for the first argument is an array of length 2. The first item in the array, if present, must be of type [`SexType`](#SexType), while the second, if present, must be of the type [`TextType`](#TextType-and-TextListType), otherwise, __they must be left empty__. Note that __only one__ can be left empty, so if one is left empty, the other must be present
 
 ```js
 new SpecialValueType(
