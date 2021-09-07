@@ -170,7 +170,7 @@ console.log(vc.repr());
 
 * This library may be used in node or in the browser. It supports the latest versions of both out of the box. For use in old browsers or old node versions, you should transpile the code with ___Babel___
 
-* __vcard4__ supports both ES6 module import/export and commonjs require 
+* __vcard4__ supports both ES6 module import/export and commonjs require
 
 _NB: Functional parameters are referred to as arguments in the documentation_
 
@@ -665,4 +665,300 @@ new SpecialValueType(
   ],
   'clientpidmapProperty'
 );
+```
+
+## Property Parameters
+
+* These "property parameters" contain meta-information about the property or the property value
+
+* According to the RFC, the property parameters include:
+    1. LANGUAGE
+    2. VALUE
+    3. PREF
+    4. ALTID
+    5. PID
+    6. TYPE
+    7. MEDIATYPE
+    8. CALSCALE
+    9. SORT-AS
+    10. GEO
+    11. TZ
+
+* In the library, these are represented by:
+    1. [`LanguageParameter`](#LanguageParameter)
+    2. [`ValueParameter`](#ValueParameter)
+    3. [`PrefParameter`](#PrefParameter)
+    4. [`AltidParameter`](#AltidParameter)
+    5. [`PIDParameter`](#PIDParameter)
+    6. [`TypeParameter`](#TypeParameter)
+    7. [`MediatypeParameter`](#MediatypeParameter)
+    8. [`CalscaleParameter`](#CalscaleParameter)
+    9. [`SortAsParameter`](#SortAsParameter)
+    10. [`GeoParameter`](#GeoParameter)
+    11. [`TzParameter`](#TzParameter)
+    12. [`AnyParameter`](#AnyParameter)
+    13. [`LabelParameter`](#LabelParameter)
+
+* The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard. For example,
+
+```js
+new LanguageParameter(
+  new LanguageTagType('en-us')
+);
+//LANGUAGE=en-us
+```
+
+* The instance object is frozen and therefore its properties and methods cannot be modified after construction, neither can new ones be added.
+
+### LanguageParameter
+
+* This class represents the "LANGUAGE" parameter
+
+* ```LanguageParameter``` should be called with a single argument of type [`LanguageTagType`](#LanguageTagType)
+
+```js
+new LanguageParameter(
+  new LanguageTagType('tr')
+);
+```
+
+### ValueParameter
+
+* This class represents the "VALUE" parameter
+
+* It is used to identify the data type of the value of a property
+
+* ```ValueParameter``` should be called with a single argument of either one of the following types:
+[`TextType`](#TextType), [`BooleanType`](#BooleanType), [`DateTimeType`](#DateTimeType), [`IntegerType`](#IntegerType-and-IntegerListType), [`FloatType`](#FloatType-and-FloatListType), [`LanguageTagType`](#LanguageTagType), [`URIType`](#URIType) and [`SpecialValueType`](#SpecialValueType)
+
+```js
+let propertyValue = new TextType('ahoy');
+
+let vp = new ValueParameter(propertyValue);
+
+//calling repr on vp
+vp.repr();
+//VALUE=text
+```
+
+### PrefParameter
+
+* This class represents the "PREF" parameter
+
+* ```PrefParameter``` should be called with a single argument of type [`IntegerType`](#IntegerType), whose value should be between 1 and 100
+
+```js
+new PrefParameter(
+  new IntegerType(1)
+);
+```
+
+### AltidParameter
+
+* This class represents the "ALTID" parameter
+
+* ```AltidParameter``` should be called with a single argument of either [`IntegerType`](#IntegerType) or [`TextType`](#TextType)
+
+```js
+new AltidParameter(
+  new IntegerType(23)
+);
+
+new AltidParameter(
+  new TextType('blah')
+);
+```
+
+### PIDParameter
+
+* This class represents the "PID" parameter
+
+* According to the RFC, its value is either a single small positive integer or a pair of small positive integers separated by a dot. Multiple values may be encoded in a single PID parameter by separating the values with a comma ","
+
+* Therefore, ```PIDParameter``` should be called with a single argument of either:
+
+    1. [`IntegerType`](#IntegerType)
+
+        - If you intend the value to be a single small positive integer
+
+            ```js
+            let pid = new PIDParameter(
+              new IntegerType(3)
+            );
+
+            // calling repr
+            pid.repr();
+            // PID=3
+            ```
+
+    2. an array of [`IntegerType`](#IntegerType)s
+
+        - If you intend to have multiple values encoded in the parameter and separated by a comma
+
+        ```js
+        let pid = new PIDParameter([
+          new IntegerType(3),
+          new IntegerType(7),
+        ]);
+
+        // calling repr
+        pid.repr();
+        // PID=3,7
+        ```
+
+    3. a nested array of [`IntegerType`](#IntegerType)s
+
+        - If you intend to have the value be a pair of small positive integers separated by a dot
+
+        ```js
+        let pid = new PIDParameter([
+          [
+            new IntegerType(1),
+            new IntegerType(5)
+          ]
+        ]);
+
+        // calling repr
+        pid.repr();
+        // PID=1.5
+        ```
+* You may also combine all three, as below
+
+```js
+let pid = new PIDParameter([
+  [
+    new IntegerType(1),
+    new IntegerType(7),
+  ],
+  new IntegerType(23),
+  new IntegerType(24)
+]);
+
+// calling repr
+pid.repr();
+// PID=1.7,23,24
+```
+
+### TypeParameter
+
+* This class represents the "TYPE" parameter
+
+* ```TypeParameter``` should be called with a two arguments, the first being the value and the second being the target property. The value of the first argument depends on the value of the second
+
+* The value of the second argument should be a string with the name of the target property as already mentioned
+
+* For all target properties, the value of the first argument should be a string, whose value is either ```"work"```, ```"home"```, an IANA token or an x-name (names that begin with "x-" or "X-" and are reserved for experimental use, not intended for released products, or for use in bilateral agreements)
+
+* Where the value of the second argument is ```"TelProperty"``` (case insensitive), the value of the first argument may be ```"text"```, ```"voice"```, ```"fax"```, ```"cell"```, ```"video"```, ```"pager"``` or ```"textphone"```, in addition to the values specified above for all target properties
+
+* Where the value of the second argument is ```"RelatedProperty"``` (case insensitive), the value of the first argument may be ```"contact"```, ```"acquaintance"```, ```"friend"```, ```"met"```, ```"co-worker"```, ```"colleague"```, ```"co-resident"```, ```"neighbor"```, ```"child"```, ```"parent"```, ```"sibling"```, ```"spouse"```, ```"kin"```, ```"muse"```, ```"crush"```, ```"date"```, ```"sweetheart"```, ```"me"```, ```"agent"```, ```"emergency"```, in addition to the values specified above for all target properties
+
+* If you wish to have multiple values for the same TYPE parameter, the value of the first argument may be an array whose items are those specified above, according to the rules specified above
+
+```js
+new TypeParameter('work', 'emailproperty');
+
+new TypeParameter(
+  ['voice', 'home'],
+  'telproperty'
+);
+
+new TypeParameter('sweetheart', 'relatedproperty');
+```
+
+### MediatypeParameter
+
+* This class represents the "MEDIATYPE" parameter
+
+* ```MediatypeParameter``` should be called with a single argument that is either a string specifying the media type and subtype or an array of length 2, whose first item is a string specifying the media type and subtype, and whose second item is a string specifying the media atribute and values
+
+* The media type and subtype string should be of the format ```type-name "/" subtype-name```, while the attribute and value string should be of the format ```attribute "=" value```
+
+```js
+new MediatypeParameter('audio/mp3');
+
+new MediatypeParameter([
+  'video/jpeg',
+  'someattribute=somevalue'
+]);
+```
+
+### CalscaleParameter
+
+* This class represents the "CALSCALE" parameter
+
+* ```CalscaleParameter``` should be called with a single argument of type string, whose value is either ```gregorian``` or an x-name
+
+```js
+new CalscaleParameter('gregorian');
+
+new CalscaleParameter('x-mything');
+```
+
+### SortAsParameter
+
+* This class represents the "SORT-AS" parameter
+
+* ```SortAsParameter``` should be called with a single argument of type string or if you wish to specify multiple values, an array of string items
+
+```js
+new SortAsParameter([ 'Harten', 'Rene' ]);
+
+new SortAsParameter('Pau Shou Chang');
+```
+
+### GeoParameter
+
+* This class represents the "GEO" parameter
+
+* ```GeoParameter``` should be called with a single argument of type [`URIType`](#URIType)
+
+```js
+new GeoParameter(
+  new URIType('geo:37.386013,-122.082932')
+);
+```
+
+### TzParameter
+
+* This class represents the "TZ" parameter
+
+* ```TzParameter``` should be called with a single argument of type [`URIType`](#URIType) or [`TextType`](#TextType) or [`DateTimeType`](#DateTimeType) with the type ```UTC-OFFSET```
+
+```js
+new TzParameter(
+  new TextType('Raleigh/North America')
+);
+
+new TzParameter(
+  new DateTimeType('-0500', 'utcoffset')
+);
+```
+
+### AnyParameter
+
+* This class is for creating extended parameters
+
+* ```AnyParameter``` should be called with two arguments of type string. The first argument is the name of the extended parameter, which should be either an identifier registered with IANA or an x-name. The second argument is the value
+
+```js
+new AnyParameter('X-CAR', 'Volvo');
+
+new AnyParameter('networkTDOA', 'strong');
+```
+
+### LabelParameter
+
+* This class represents the 'LABEL' parameter for use with the ```ADR``` property
+
+* It is used to present a delivery address label for the address
+
+* ```LabelParameter``` should be called with a single argument of type string
+
+```js
+new LabelParameter(`Mr. John Q. Public, Esq.
+Mail Drop: TNE QB
+123 Main Street
+Any Town, CA 91921-1234
+U.S.A.`);
 ```
