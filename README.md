@@ -9,16 +9,28 @@ For use in node or in the browser
 _See [documentation](#documentation)_
 
 ### Installation
+
 * Install from npm
+
 ```
 npm install vcard4
 ```
+
 * Install from github
+
 ```
 git clone https://github.com/kelseykm/vcard4.git
 ```
 
+#### Tests
+* To run the tests
+
+```
+npm test
+```
+
 ### Example use
+
 ```
 BEGIN:VCARD
 VERSION:4.0
