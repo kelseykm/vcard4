@@ -148,17 +148,30 @@ console.log(vc.repr());
 
 - [Introduction](#introduction)
 - [Property Value Data Types](#property-value-data-types)
-    * [TextType and TextListType](#texttype-and-textlisttype)
-    * [URIType](#uritype)
-    * [DateTimeType](#datetimetype)
-    * [DateTimeListType](#datetimelisttype)
-    * [BooleanType](#booleantype)
-    * [IntegerType and IntegerListType](#integertype-and-integerlisttype)
-    * [FloatType and FloatListType](#floattype-and-floatlisttype)
-    * [LanguageTagType](#languagetagtype)
-    * [SexType](#sextype)
-    * [SpecialValueType](#specialvaluetype)
-
+  * [TextType and TextListType](#texttype-and-textlisttype)
+  * [URIType](#uritype)
+  * [DateTimeType](#datetimetype)
+  * [DateTimeListType](#datetimelisttype)
+  * [BooleanType](#booleantype)
+  * [IntegerType and IntegerListType](#integertype-and-integerlisttype)
+  * [FloatType and FloatListType](#floattype-and-floatlisttype)
+  * [LanguageTagType](#languagetagtype)
+  * [SexType](#sextype)
+  * [SpecialValueType](#specialvaluetype)
+- [Property Parameters](#property-parameters)
+  * [LanguageParameter](#languageparameter)
+  * [ValueParameter](#valueparameter)
+  * [PrefParameter](#prefparameter)
+  * [AltidParameter](#altidparameter)
+  * [PIDParameter](#pidparameter)
+  * [TypeParameter](#typeparameter)
+  * [MediatypeParameter](#mediatypeparameter)
+  * [CalscaleParameter](#calscaleparameter)
+  * [SortAsParameter](#sortasparameter)
+  * [GeoParameter](#geoparameter)
+  * [TzParameter](#tzparameter)
+  * [AnyParameter](#anyparameter)
+  * [LabelParameter](#labelparameter)
 
 ## Introduction
 
@@ -729,7 +742,7 @@ new LanguageParameter(
 * It is used to identify the data type of the value of a property
 
 * ```ValueParameter``` should be called with a single argument of either one of the following types:
-[`TextType`](#TextType), [`BooleanType`](#BooleanType), [`DateTimeType`](#DateTimeType), [`IntegerType`](#IntegerType-and-IntegerListType), [`FloatType`](#FloatType-and-FloatListType), [`LanguageTagType`](#LanguageTagType), [`URIType`](#URIType) and [`SpecialValueType`](#SpecialValueType)
+[`TextType`](#texttype-and-textlisttype), [`BooleanType`](#BooleanType), [`DateTimeType`](#DateTimeType), [`IntegerType`](#IntegerType-and-IntegerListType), [`FloatType`](#FloatType-and-FloatListType), [`LanguageTagType`](#LanguageTagType), [`URIType`](#URIType) and [`SpecialValueType`](#SpecialValueType)
 
 ```js
 let propertyValue = new TextType('ahoy');
@@ -745,7 +758,7 @@ vp.repr();
 
 * This class represents the "PREF" parameter
 
-* ```PrefParameter``` should be called with a single argument of type [`IntegerType`](#IntegerType), whose value should be between 1 and 100
+* ```PrefParameter``` should be called with a single argument of type [`IntegerType`](#integertype-and-integerlisttype), whose value should be between 1 and 100
 
 ```js
 new PrefParameter(
@@ -757,7 +770,7 @@ new PrefParameter(
 
 * This class represents the "ALTID" parameter
 
-* ```AltidParameter``` should be called with a single argument of either [`IntegerType`](#IntegerType) or [`TextType`](#TextType)
+* ```AltidParameter``` should be called with a single argument of either [`IntegerType`](#integertype-and-integerlisttype) or [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new AltidParameter(
@@ -777,7 +790,7 @@ new AltidParameter(
 
 * Therefore, ```PIDParameter``` should be called with a single argument of either:
 
-    1. [`IntegerType`](#IntegerType)
+    1. [`IntegerType`](#integertype-and-integerlisttype)
 
         - If you intend the value to be a single small positive integer
 
@@ -791,7 +804,7 @@ new AltidParameter(
             // PID=3
             ```
 
-    2. an array of [`IntegerType`](#IntegerType)s
+    2. an array of [`IntegerType`](#integertype-and-integerlisttype)s
 
         - If you intend to have multiple values encoded in the parameter and separated by a comma
 
@@ -806,7 +819,7 @@ new AltidParameter(
         // PID=3,7
         ```
 
-    3. a nested array of [`IntegerType`](#IntegerType)s
+    3. a nested array of [`IntegerType`](#integertype-and-integerlisttype)s
 
         - If you intend to have the value be a pair of small positive integers separated by a dot
 
@@ -923,7 +936,7 @@ new GeoParameter(
 
 * This class represents the "TZ" parameter
 
-* ```TzParameter``` should be called with a single argument of type [`URIType`](#URIType) or [`TextType`](#TextType) or [`DateTimeType`](#DateTimeType) with the type ```UTC-OFFSET```
+* ```TzParameter``` should be called with a single argument of type [`URIType`](#URIType) or [`TextType`](#texttype-and-textlisttype) or [`DateTimeType`](#DateTimeType) with the type ```UTC-OFFSET```
 
 ```js
 new TzParameter(
