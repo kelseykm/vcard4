@@ -38,7 +38,7 @@ class AbstractBaseParameter {
   }
 
   repr() {
-    return `${this.constructor.param}=${this.value}`;
+    return `${this.constructor.param || this.param}=${this.value}`;
   }
 
   constructor() {
@@ -122,15 +122,21 @@ class PrefParameter extends AbstractBaseParameter {
     if (typeof prefValue === 'undefined')
     throw new MissingArgument('Value for PrefParameter must be supplied');
 
-    else if (typeof prefValue !== 'number' || !(prefValue >= 1 && prefValue <= 100))
-    throw new InvalidArgument('Value for PrefParameter must be an integer between 1 and 100');
+    else if (!(prefValue instanceof IntegerType))
+    throw new TypeError('Value for PrefParameter should be of type IntegerType');
+
+    else if (
+      (Number(prefValue.repr()) < 1) ||
+      (Number(prefValue.repr()) > 100)
+    )
+    throw new InvalidArgument('Value for PrefParameter must be between 1 and 100');
   }
 
   constructor(prefValue) {
     super();
 
     this.#validate(prefValue);
-    this.value = prefValue.toString();
+    this.value = prefValue.repr();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
@@ -143,13 +149,19 @@ class AltidParameter extends AbstractBaseParameter {
   #validate(altidValue) {
     if (typeof altidValue === 'undefined')
     throw new MissingArgument('Value for AltidParameter must be supplied');
+
+    else if (
+      !(altidValue instanceof IntegerType) &&
+      !(altidValue instanceof TextType)
+    )
+    throw new InvalidArgument('Value for AltidParameter must be of type number or string');
   }
 
   constructor(altidValue) {
     super();
 
     this.#validate(altidValue);
-    this.value = altidValue.toString();
+    this.value = altidValue.repr();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
@@ -165,10 +177,22 @@ class PIDParameter extends AbstractBaseParameter {
     if (typeof pidValue === 'undefined')
     throw new MissingArgument('Value for PIDParameter must be supplied');
 
-    else if (!Array.isArray(pidValue) && !this.#pidRegExp.test(pidValue))
+    else if (
+      !Array.isArray(pidValue) &&
+      !(pidValue instanceof IntegerType)
+    )
     throw new InvalidArgument('Invalid value for PIDParameter');
 
-    else if (Array.isArray(pidValue) && !pidValue.every(val => this.#pidRegExp.test(val)))
+    else if (
+      Array.isArray(pidValue) &&
+      !pidValue.every(val1 => {
+        if (Array.isArray(val1))
+        return val1.every(
+          val2 => val2 instanceof IntegerType
+        );
+        return val1 instanceof IntegerType;
+      })
+    )
     throw new InvalidArgument('Invalid value for PIDParameter');
   }
 
@@ -176,10 +200,23 @@ class PIDParameter extends AbstractBaseParameter {
     super();
 
     this.#validate(pidValue);
-    this.value = Array.isArray(pidValue) ? `${pidValue.reduce((accumulatedTypes, currentType) => {
-      accumulatedTypes.push(currentType.toString());
+    this.value = Array.isArray(pidValue) ?
+
+    `${pidValue.reduce((accumulatedTypes, currentType) => {
+      if (Array.isArray(currentType)) {
+        accumulatedTypes.push(
+          currentType.reduce((accumType, currType) => {
+            accumType.push(currType.repr());
+            return accumType;
+          }, []).join('.')
+        );
+      }
+      else accumulatedTypes.push(currentType.repr());
+
       return accumulatedTypes;
-    }, []).join(',')}` : pidValue.toString();
+    }, []).join(',')}` :
+
+    pidValue.repr();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
@@ -196,7 +233,10 @@ class TypeParameter extends AbstractBaseParameter {
   #relatedTypeRegExp = /(?:contact|acquaintance|friend|met|co-worker|colleague|co-resident|neighbor|child|parent|sibling|spouse|kin|muse|crush|date|sweetheart|me|agent|emergency)/i;
 
   #validate(typeValue, targetProp) {
-    if (typeof typeValue === 'undefined' || typeof targetProp === 'undefined')
+    if (
+      (typeof typeValue === 'undefined') ||
+      (typeof targetProp === 'undefined')
+    )
     throw new MissingArgument('Value and target property for TypeParameter must be supplied');
 
     switch (true) {
@@ -224,7 +264,12 @@ class TypeParameter extends AbstractBaseParameter {
         if (!Array.isArray(typeValue) && !this.#typeRegExp.test(typeValue))
         throw new InvalidArgument('Invalid value for TypeParameter');
 
-        else if (Array.isArray(typeValue) && !typeValue.every(type => this.#typeRegExp.test(type)))
+        else if (
+          Array.isArray(typeValue) &&
+          !typeValue.every(
+            type => this.#typeRegExp.test(type)
+          )
+        )
         throw new InvalidArgument('Invalid value for TypeParameter');
     }
   }
@@ -258,7 +303,10 @@ class MediatypeParameter extends AbstractBaseParameter {
     if (typeof mediaValue === 'undefined')
     throw new MissingArgument('Value for MediatypeParameter must be supplied');
 
-    else if (!Array.isArray(mediaValue) && !this.#mediaTypeRegExp.test(mediaValue))
+    else if (
+      !Array.isArray(mediaValue) &&
+      !this.#mediaTypeRegExp.test(mediaValue)
+    )
     throw new InvalidArgument('Invalid media type');
 
     else if (Array.isArray(mediaValue)) {
@@ -325,7 +373,12 @@ class SortAsParameter extends AbstractBaseParameter {
     super();
 
     this.#validate(sortValue);
-    this.value = sortValue.toString();
+    this.value = Array.isArray(sortValue) ?
+    `"${sortValue.reduce((accumulatedTypes, currentType) => {
+      accumulatedTypes.push(currentType.toString());
+      return accumulatedTypes;
+    }, []).join(',')}"` :
+    sortValue.toString();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
@@ -361,8 +414,23 @@ class TzParameter extends AbstractBaseParameter {
     if (typeof tzValue === 'undefined')
     throw new MissingArgument('Value for TzParameter must be supplied');
 
-    else if (!(tzValue instanceof URIType))
-    throw new InvalidArgument('Value for TzParameter must be of type URIType');
+    let types = [
+      TextType,
+      URIType,
+      DateTimeType
+    ];
+    if (
+      !types.some(type => {
+        if (type === DateTimeType)
+        return (
+          (tzValue instanceof type) &&
+          (tzValue.type === 'UTC-OFFSET')
+        );
+
+        return tzValue instanceof type;
+      })
+    )
+    throw new TypeError('Invalid type for value for TzParameter');
   }
 
   constructor(tzValue) {
