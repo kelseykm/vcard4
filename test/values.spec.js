@@ -31,8 +31,10 @@ describe('ESM property value data types tests', () => {
     });
 
     it('Formats value properly', () => {
-      let text = new TextType("Greeting: Hello, world!");
-      assert.strictEqual(text.repr(), "Greeting\\: Hello\\, world!")
+      assert.strictEqual(
+        new TextType("Greeting: Hello, world!").repr(),
+        "Greeting\\: Hello\\, world!"
+      )
     });
   });
 
