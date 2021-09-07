@@ -717,7 +717,7 @@ new SpecialValueType(
 ```js
 new LanguageParameter(
   new LanguageTagType('en-us')
-);
+).repr();
 //LANGUAGE=en-us
 ```
 
@@ -808,33 +808,34 @@ new AltidParameter(
 
         - If you intend to have multiple values encoded in the parameter and separated by a comma
 
-        ```js
-        let pid = new PIDParameter([
-          new IntegerType(3),
-          new IntegerType(7),
-        ]);
+            ```js
+            let pid = new PIDParameter([
+              new IntegerType(3),
+              new IntegerType(7),
+            ]);
 
-        // calling repr
-        pid.repr();
-        // PID=3,7
-        ```
+            // calling repr
+            pid.repr();
+            // PID=3,7
+            ```
 
     3. a nested array of [`IntegerType`](#integertype-and-integerlisttype)s
 
         - If you intend to have the value be a pair of small positive integers separated by a dot
 
-        ```js
-        let pid = new PIDParameter([
-          [
-            new IntegerType(1),
-            new IntegerType(5)
-          ]
-        ]);
+            ```js
+            let pid = new PIDParameter([
+              [
+                new IntegerType(1),
+                new IntegerType(5)
+              ]
+            ]);
 
-        // calling repr
-        pid.repr();
-        // PID=1.5
-        ```
+            // calling repr
+            pid.repr();
+            // PID=1.5
+            ```
+
 * You may also combine all three, as below
 
 ```js
@@ -864,9 +865,9 @@ pid.repr();
 
 * Where the value of the second argument is ```"TelProperty"``` (case insensitive), the value of the first argument may be ```"text"```, ```"voice"```, ```"fax"```, ```"cell"```, ```"video"```, ```"pager"``` or ```"textphone"```, in addition to the values specified above for all target properties
 
-* Where the value of the second argument is ```"RelatedProperty"``` (case insensitive), the value of the first argument may be ```"contact"```, ```"acquaintance"```, ```"friend"```, ```"met"```, ```"co-worker"```, ```"colleague"```, ```"co-resident"```, ```"neighbor"```, ```"child"```, ```"parent"```, ```"sibling"```, ```"spouse"```, ```"kin"```, ```"muse"```, ```"crush"```, ```"date"```, ```"sweetheart"```, ```"me"```, ```"agent"```, ```"emergency"```, in addition to the values specified above for all target properties
+* Where the value of the second argument is ```"RelatedProperty"``` (case insensitive), the value of the first argument may be ```"contact"```, ```"acquaintance"```, ```"friend"```, ```"met"```, ```"co-worker"```, ```"colleague"```, ```"co-resident"```, ```"neighbor"```, ```"child"```, ```"parent"```, ```"sibling"```, ```"spouse"```, ```"kin"```, ```"muse"```, ```"crush"```, ```"date"```, ```"sweetheart"```, ```"me"```, ```"agent"``` or  ```"emergency"```, in addition to the values specified above for all target properties
 
-* If you wish to have multiple values for the same TYPE parameter, the value of the first argument may be an array whose items are those specified above, according to the rules specified above
+* If you wish to have multiple values for the same TYPE parameter, the value of the first argument may be an array, whose items are those specified above, according to the rules specified above
 
 ```js
 new TypeParameter('work', 'emailproperty');
@@ -883,7 +884,7 @@ new TypeParameter('sweetheart', 'relatedproperty');
 
 * This class represents the "MEDIATYPE" parameter
 
-* ```MediatypeParameter``` should be called with a single argument that is either a string specifying the media type and subtype or an array of length 2, whose first item is a string specifying the media type and subtype, and whose second item is a string specifying the media atribute and values
+* ```MediatypeParameter``` should be called with a single argument that is either a string specifying the media type and subtype, or an array of length 2, whose first item is a string specifying the media type and subtype, and whose second item is a string specifying the media attribute and values
 
 * The media type and subtype string should be of the format ```type-name "/" subtype-name```, while the attribute and value string should be of the format ```attribute "=" value```
 
@@ -912,7 +913,7 @@ new CalscaleParameter('x-mything');
 
 * This class represents the "SORT-AS" parameter
 
-* ```SortAsParameter``` should be called with a single argument of type string or if you wish to specify multiple values, an array of string items
+* ```SortAsParameter``` should be called with a single argument of type string, or if you wish to specify multiple values, an array of string items
 
 ```js
 new SortAsParameter([ 'Harten', 'Rene' ]);
@@ -936,7 +937,7 @@ new GeoParameter(
 
 * This class represents the "TZ" parameter
 
-* ```TzParameter``` should be called with a single argument of type [`URIType`](#URIType) or [`TextType`](#texttype-and-textlisttype) or [`DateTimeType`](#DateTimeType) with the type ```UTC-OFFSET```
+* ```TzParameter``` should be called with a single argument of type [`URIType`](#URIType), or [`TextType`](#texttype-and-textlisttype), or [`DateTimeType`](#DateTimeType) with the type ```utc-offset```
 
 ```js
 new TzParameter(
@@ -962,16 +963,18 @@ new AnyParameter('networkTDOA', 'strong');
 
 ### LabelParameter
 
-* This class represents the 'LABEL' parameter for use with the ```ADR``` property
+* This class represents the "LABEL" parameter for use with the ```ADR``` property
 
 * It is used to present a delivery address label for the address
 
 * ```LabelParameter``` should be called with a single argument of type string
 
 ```js
-new LabelParameter(`Mr. John Q. Public, Esq.
+let deliveryAddress = `Mr. John Q. Public, Esq.
 Mail Drop: TNE QB
 123 Main Street
 Any Town, CA 91921-1234
-U.S.A.`);
+U.S.A.`;
+
+new LabelParameter(deliveryAddress);
 ```
