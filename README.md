@@ -75,7 +75,9 @@ let titleProp = new properties.TitleProperty([], titlePropValue);
 let emailPropValue = new values.TextType('johnDoe@example.org');
 
 let emailPropTypeParam = new parameters.TypeParameter('work', 'EmailProperty');
-let emailPropPrefParam = new parameters.PrefParameter(1);
+let emailPropPrefParam = new parameters.PrefParameter(
+  new values.IntegerType(1)
+);
 
 let emailProp = new properties.EmailProperty(
   [
@@ -89,18 +91,14 @@ let emailProp = new properties.EmailProperty(
 let telProp1Value = new values.URIType('tel:+1 781 555 1212');
 let telProp1TypeParam = new parameters.TypeParameter('cell', 'TelProperty');
 let telProp1 = new properties.TelProperty(
-  [
-    telProp1TypeParam
-  ],
+  [ telProp1TypeParam  ],
   telProp1Value
 );
 
 let telProp2Value = new values.URIType('tel:+1 202 555 1212');
 let telProp2TypeParam = new parameters.TypeParameter('home', 'TelProperty');
 let telProp2 = new properties.TelProperty(
-  [
-    telProp2TypeParam
-  ],
+  [ telProp2TypeParam ],
   telProp2Value
 );
 
