@@ -22,13 +22,6 @@ npm install vcard4
 git clone https://github.com/kelseykm/vcard4.git
 ```
 
-#### Tests
-* To run the tests
-
-```
-npm test
-```
-
 ### Example use
 
 ```
