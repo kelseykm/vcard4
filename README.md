@@ -244,7 +244,7 @@ new TextType('Hello, world!').repr()
 //Hello\, world!
 ```
 
-* The instance object is frozen and therefore its properties and methods cannot be modified after construction, neither can new ones be added.
+* The instance object is frozen and therefore its properties and methods cannot be modified after construction, neither can new ones be added
 
 _NB_: _The actual value type depends on property name and VALUE parameter. For example, the ```FN``` property only accepts ```text``` values._
 
@@ -731,7 +731,7 @@ new LanguageParameter(
 //LANGUAGE=en-us
 ```
 
-* The instance object is frozen and therefore its properties and methods cannot be modified after construction, neither can new ones be added.
+* The instance object is frozen and therefore its properties and methods cannot be modified after construction, neither can new ones be added
 
 ### LanguageParameter
 
@@ -988,3 +988,146 @@ U.S.A.`;
 
 new LabelParameter(deliveryAddress);
 ```
+
+## Properties
+
+* After documenting the property value data types and the property parameters, what follows now is the documentation of the properties themselves
+
+* According to the RFC, the following are the properties:
+
+    - General Properties
+
+        1. BEGIN
+        2. END
+        3. SOURCE
+        4. KIND
+        5. XML
+
+    - Identification Properties
+
+        1. FN
+        2. N
+        3. NICKNAME
+        4. PHOTO
+        5. BDAY
+        6. ANNIVERSARY
+        7. GENDER
+
+    - Delivery Addressing Properties
+
+        1. ADR
+
+    - Communications Properties
+
+        1. TEL
+        2. EMAIL
+        3. IMPP
+        4. LANG
+
+    - Geographical Properties
+
+        1. TZ
+        2. GEO
+
+    - Organizational Properties
+
+        1. TITLE
+        2. ROLE
+        3. LOGO
+        4. ORG
+        5. MEMBER
+        6. RELATED
+
+    - Explanatory Properties
+
+        1. CATEGORIES
+        2. NOTE
+        3. PRODID
+        4. REV
+        5. SOUND
+        6. UID
+        7. CLIENTPIDMAP
+        8. URL
+        9. VERSION
+
+    - Security Properties
+
+        1. KEY
+
+    - Calendar Properties
+
+        1. FBURL
+        2. CALADRURI
+        3. CALURI
+
+    - Extended Properties
+
+* In the library, they are represented by the following classes:
+
+    1. [`BeginProperty`](#BeginProperty)
+    2. [`EndProperty`](#EndProperty)
+    3. [`SourceProperty`](#SourceProperty)
+    4. [`KindProperty`](#KindProperty)
+    5. [`XMLProperty`](#XMLProperty)
+    6. [`FNProperty`](#FNProperty)
+    7. [`NProperty`](#NProperty)
+    8. [`NicknameProperty`](#NicknameProperty)
+    9. [`PhotoProperty`](#PhotoProperty)
+    10. [`BdayProperty`](#BdayProperty)
+    11. [`AnniversaryProperty`](#AnniversaryProperty)
+    12. [`GenderProperty`](#GenderProperty)
+    13. [`AdrProperty`](#AdrProperty)
+    14. [`TelProperty`](#TelProperty)
+    15. [`EmailProperty`](#EmailProperty)
+    16. [`IMPPProperty`](#IMPPProperty)
+    17. [`LangProperty`](#LangProperty)
+    18. [`TzProperty`](#TzProperty)
+    19. [`GeoProperty`](#GeoProperty)
+    20. [`TitleProperty`](#TitleProperty)
+    21. [`RoleProperty`](#RoleProperty)
+    22. [`LogoProperty`](#LogoProperty)
+    23. [`OrgProperty`](#OrgProperty)
+    24. [`MemberProperty`](#MemberProperty)
+    25. [`RelatedProperty`](#RelatedProperty)
+    26. [`CategoriesProperty`](#CategoriesProperty)
+    27. [`NoteProperty`](#NoteProperty)
+    28. [`ProdidProperty`](#ProdidProperty)
+    29. [`RevProperty`](#RevProperty)
+    30. [`SoundProperty`](#SoundProperty)
+    31. [`UIDProperty`](#UIDProperty)
+    32. [`ClientpidmapProperty`](#ClientpidmapProperty)
+    33. [`URLProperty`](#URLProperty)
+    34. [`VersionProperty`](#VersionProperty)
+    35. [`KeyProperty`](#KeyProperty)
+    36. [`FburlProperty`](#FburlProperty)
+    37. [`CaladruriProperty`](#CaladruriProperty)
+    38. [`CaluriProperty`](#CaluriProperty)
+    39. [`ExtendedProperty`](#ExtendedProperty)
+
+* The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard. For example,
+
+```js
+let genderPropValue = new SpecialValueType(
+  [
+    new SexType('M'),
+    new TextType('Male')
+  ],
+  'GenderProperty'
+);
+
+let genderPropValueParam = new ValueParameter(genderPropValue);
+
+new GenderProperty(
+  [ genderPropValueParam ],
+  genderPropValue
+).repr();
+//GENDER;VALUE=text:M;Male
+```
+
+* The instance object is frozen and therefore its properties and methods cannot be modified after construction, neither can new ones be added
+
+* All of the classes, with the exception of a few, should generally be called with two arguments, the first being an array whose items are the [parameters](#property-parameters) of the property and the second argument being the property's [value](#property-value-data-types). This can be seen in the example above
+
+### General Properties
+
+#### BeginProperty
