@@ -182,6 +182,13 @@ console.log(vc.repr());
   * [TzParameter](#tzparameter)
   * [AnyParameter](#anyparameter)
   * [LabelParameter](#labelparameter)
+- [Properties](#properties)
+  * [General Properties](#general-properties)
+    + [BeginProperty](#beginproperty)
+    + [EndProperty](#endproperty)
+    + [SourceProperty](#sourceproperty)
+    + [KindProperty](#kindproperty)
+    + [XMLProperty](#xmlproperty)
 
 ## Introduction
 
@@ -591,6 +598,7 @@ new SexType('F');
 ### SpecialValueType
 
 * This class is for use with properties which do not have values of the types already described. Those properties include:
+
     1. [`BeginProperty`](#BeginProperty)
     2. [`EndProperty`](#EndProperty)
     3. [`KindProperty`](#KindProperty)
@@ -615,7 +623,7 @@ new SpecialValueType('VCARD', 'endproperty');
 * Where the second argument is [`KindProperty`](#KindProperty), the only accepted values for the first argument are ```individual```, ```group```, ```org```, ```location``` or a publicly defined valuetype format, registered with IANA, e.g. ```hybridCellSector_AGPS```, "```802.11```", e.t.c.
 
 ```js
-SpecialValueType('org', 'KindProperty')
+new SpecialValueType('org', 'KindProperty');
 ```
 
 * Where the second argument is [`NProperty`](#NProperty), the only accepted value for the first argument is an array of length 5. The items in the array, if present, must be of type [`TextType`](#TextType-and-TextListType), otherwise, __they must be left empty__ as demonstrated in the example below
@@ -1131,3 +1139,91 @@ new GenderProperty(
 ### General Properties
 
 #### BeginProperty
+
+* This class represents the "BEGIN" property
+
+* There should be no need of creating an instance of this class, as it is done automatically
+
+* ```BeginProperty``` takes no arguments
+
+* It's value is of type [`SpecialValueType`](#SpecialValueType)
+
+```js
+new BeginProperty;
+```
+
+#### EndProperty
+
+* This class represents the "END" property
+
+* There should be no need of creating an instance of this class, as it is done automatically
+
+* ```EndProperty``` takes no arguments
+
+* It's value is of type [`SpecialValueType`](#SpecialValueType)
+
+```js
+new EndProperty;
+```
+
+#### SourceProperty
+
+* This class represents the "SOURCE" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```SourceProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter), [`MediatypeParameter`](#MediatypeParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, the first argument array will be left empty
+
+* The value of ```SourceProperty``` should be of type [`URIType`](#URIType)
+
+```js
+new SourceProperty(
+  [],
+  new URIType('ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US')
+);
+```
+
+#### KindProperty
+
+* This class represents the "KIND" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```KindProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, the first argument array will be left empty
+
+* The value of ```KindProperty``` should be of type [`SpecialValueType`](#SpecialValueType)
+
+```js
+new KindProperty(
+  [],
+  new SpecialValueType('individual', 'kindproperty')
+);
+```
+
+#### XMLProperty
+
+* This class represents the "XML" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```XMLProperty``` are [`ValueParameter`](#ValueParameter) and [`AltidParameter`](#AltidParameter)
+
+* If you do not wish that the property have any parameters, the first argument array will be left empty
+
+* The value of ```XMLProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+
+```js
+let xmlPropValue = `<?xml version="1.0" encoding="ISO-8859-1"?>  
+<note>  
+  <to>Tove</to>  
+  <from>Jani</from>  
+  <heading>Reminder</heading>  
+  <body>Don't forget me this weekend!</body>  
+</note>`;
+
+new XMLProperty([], xmlPropValue );
+```
