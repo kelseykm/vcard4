@@ -248,4 +248,311 @@ describe('CJS properties tests', () => {
         });
       });
   });
+
+  describe('Identification properties tests', () => {
+    describe('FNProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new FNProperty(
+          [],
+          new TextType('James Bond')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new FNProperty(
+          [],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new FNProperty(
+          [
+            new GeoParameter('geo:123,456')
+          ],
+          new TextType('James Bond')
+        ));
+        assert.throws(() => new FNProperty);
+        assert.throws(() => new FNProperty(1));
+        assert.throws(() => new FNProperty({}));
+        assert.throws(() => new FNProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new FNProperty(
+            [],
+            new TextType('James Bond')
+          ).repr(),
+          "FN:James Bond"
+        );
+      });
+    });
+
+    describe('NProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new NProperty(
+          [],
+          new SpecialValueType(
+            [
+              new TextType('Stevenson'),
+              new TextType('John'),
+              new TextListType([
+                new TextType('Phillip'),
+                new TextType('Paul')
+              ]),
+              new TextType('Dr.'),
+              new TextListType([
+                new TextType('Jr.'),
+                new TextType('M.D.'),
+                new TextType('A.C.P.')
+              ])
+            ],
+            'nproperty'
+          )
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new NProperty(
+          [],
+          new TextType('Bond;James')
+        ));
+        assert.throws(() => new NProperty(
+          [
+            new PrefParameter(
+              new IntegerType(1)
+            )
+          ],
+          new TextType('James Bond')
+        ));
+        assert.throws(() => new NProperty);
+        assert.throws(() => new NProperty(1));
+        assert.throws(() => new NProperty({}));
+        assert.throws(() => new NProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new NProperty(
+            [],
+            new SpecialValueType(
+              [
+                new TextType('Stevenson'),
+                new TextType('John'),
+                new TextListType([
+                  new TextType('Phillip'),
+                  new TextType('Paul')
+                ]),
+                new TextType('Dr.'),
+                new TextListType([
+                  new TextType('Jr.'),
+                  new TextType('M.D.'),
+                  new TextType('A.C.P.')
+                ])
+              ],
+              'nproperty'
+            )
+          ).repr(),
+          "N:Stevenson;John;Phillip,Paul;Dr.;Jr.,M.D.,A.C.P."
+        );
+      });
+    });
+
+    describe('NicknameProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new NicknameProperty(
+          [],
+          new TextType('Robbie')
+        ));
+
+        assert.doesNotThrow(() => new NicknameProperty(
+          [],
+          new TextListType([
+            new TextType('Jim'),
+            new TextType('Jimmie')
+          ])
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new NicknameProperty(
+          [
+            new TextType('Bond;James')
+          ],
+          new TextType('Bond;James')
+        ));
+        assert.throws(() => new NicknameProperty(
+          [
+            new PrefParameter(
+              new IntegerType(1)
+            )
+          ],
+          new IntegerType(1)
+        ));
+        assert.throws(() => new NicknameProperty);
+        assert.throws(() => new NicknameProperty(1));
+        assert.throws(() => new NicknameProperty({}));
+        assert.throws(() => new NicknameProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new NicknameProperty(
+            [
+              new TypeParameter(
+                'work',
+                'nicknameproperty'
+              )
+            ],
+            new TextType('Boss')
+          ).repr(),
+          "NICKNAME;TYPE=work:Boss"
+        );
+      });
+    });
+
+    describe('PhotoProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new PhotoProperty(
+          [],
+          new URIType('http://www.example.com/pub/photos/jqpublic.gif')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new PhotoProperty(
+          [],
+          new TextType('http://www.example.com/pub/photos/jqpublic.gif')
+        ));
+        assert.throws(() => new PhotoProperty(
+          [
+            new LanguageParameter(
+              new LanguageTagType('en')
+            )
+          ],
+          new URIType('http://www.example.com/pub/photos/jqpublic.gif')
+        ));
+        assert.throws(() => new PhotoProperty);
+        assert.throws(() => new PhotoProperty(1));
+        assert.throws(() => new PhotoProperty({}));
+        assert.throws(() => new PhotoProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new PhotoProperty(
+            [],
+            new URIType('http://www.example.com/pub/photos/jqpublic.gif')
+          ).repr(),
+          "PHOTO:http://www.example.com/pub/photos/jqpublic.gif"
+        );
+      });
+    });
+
+    describe('BdayProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new BdayProperty(
+          [],
+          new DateTimeType('19960415', 'dateandortime')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new BdayProperty(
+          [],
+          new DateTimeType('19960415', 'date')
+        ));
+        assert.throws(() => new BdayProperty);
+        assert.throws(() => new BdayProperty(1));
+        assert.throws(() => new BdayProperty({}));
+        assert.throws(() => new BdayProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new BdayProperty(
+            [
+              new ValueParameter(
+                new TextType('circa 1800')
+              )
+            ],
+            new TextType('circa 1800')
+          ).repr(),
+          "BDAY;VALUE=text:circa 1800"
+        );
+      });
+    });
+
+    describe('AnniversaryProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new AnniversaryProperty(
+          [],
+          new DateTimeType('19960415', 'dateandortime')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new AnniversaryProperty(
+          [],
+          new DateTimeType('19960415', 'date')
+        ));
+        assert.throws(() => new AnniversaryProperty(1));
+        assert.throws(() => new AnniversaryProperty({}));
+        assert.throws(() => new AnniversaryProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new AnniversaryProperty(
+            [
+              new ValueParameter(
+                new TextType('circa 1800')
+              )
+            ],
+            new TextType('circa 1800')
+          ).repr(),
+          "ANNIVERSARY;VALUE=text:circa 1800"
+        );
+      });
+    });
+
+    describe('GenderProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new GenderProperty(
+          [],
+          new SpecialValueType(
+            [
+              new SexType('O'),
+              new TextType('intersex')
+            ],
+            'genderproperty'
+          )
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new GenderProperty(
+          [],
+          new DateTimeType('19960415', 'date')
+        ));
+        assert.throws(() => new GenderProperty(1));
+        assert.throws(() => new GenderProperty({}));
+        assert.throws(() => new GenderProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new GenderProperty(
+            [],
+            new SpecialValueType(
+              [
+                new SexType('O'),
+                new TextType('intersex')
+              ],
+              'genderproperty'
+            )
+          ).repr(),
+          "GENDER:O;intersex"
+        );
+      });
+    });
+  });
 });
