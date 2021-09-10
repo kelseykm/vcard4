@@ -477,8 +477,11 @@ class SpecialValueType extends AbstractBaseValue {
 
         for (let index = 0; index < value.length; index++)
         if (value[index])
-        if (!(value[index] instanceof TextType))
-        throw new TypeError('Invalid value for SpecialValueType for NProperty. The items in the array, if present, should be of type TextType');
+        if (
+          !(value[index] instanceof TextType) &&
+          !(value[index] instanceof TextListType)
+        )
+        throw new TypeError('Invalid value for SpecialValueType for NProperty. The items in the array, if present, should be of type TextType or TextListType');
 
         break;
       case /^GenderProperty$/i.test(targetProp):
