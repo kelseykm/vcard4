@@ -182,6 +182,14 @@ console.log(vc.repr());
     + [SourceProperty](#sourceproperty)
     + [KindProperty](#kindproperty)
     + [XMLProperty](#xmlproperty)
+  * [Identification properties](#identification-properties)
+    + [FNProperty](#fnproperty)
+    + [NProperty](#nproperty)
+    + [NicknameProperty](#nicknameproperty)
+    + [PhotoProperty](#photoproperty)
+    + [BdayProperty](#bdayproperty)
+    + [AnniversaryProperty](#anniversaryproperty)
+    + [GenderProperty](#genderproperty)
 
 ## Introduction
 
@@ -619,20 +627,25 @@ new SpecialValueType('VCARD', 'endproperty');
 new SpecialValueType('org', 'KindProperty');
 ```
 
-* Where the second argument is [`NProperty`](#NProperty), the only accepted value for the first argument is an array of length 5. The items in the array, if present, must be of type [`TextType`](#TextType-and-TextListType), otherwise, __they must be left empty__ as demonstrated in the example below
+* Where the second argument is [`NProperty`](#NProperty), the only accepted value for the first argument is an array of length 5. The items in the array, if present, must be of type [`TextType`](#TextType-and-TextListType) or [`TextListType`](#TextType-and-TextListType), otherwise, __they must be left empty__ as demonstrated in the example below
 
 * The 5 items in the array correspond to the following respectively:
-    1. Family Names (also known as surnames),
-    2. Given Names,
-    3. Additional Names,
+    1. Family Names (also known as surnames)
+    2. Given Names
+    3. Additional Names
     4. Honorific Prefixes
-    5. Honorific Suffixes.
+    5. Honorific Suffixes
+
+* Individual text components can include multiple text values (hence the use of [`TextListType`](#TextType-and-TextListType)). In the example below, the person has multiple honorific prefixes
 
 ```js
 let nameArr = new Array(5);
 nameArr[0] = new TextType('Doe');
 nameArr[1] = new TextType('John');
-nameArr[3] = new TextType('Mr.');
+nameArr[3] = new TextListType([
+  new TextType('Mr.'),
+  new TextType('Dr.')
+]);
 
 new SpecialValueType(nameArr, 'NProperty');
 ```
@@ -1219,4 +1232,210 @@ let xmlPropValue = `<?xml version="1.0" encoding="ISO-8859-1"?>
 </note>`;
 
 new XMLProperty([], xmlPropValue );
+```
+
+### Identification properties
+
+#### FNProperty
+
+* This class represents the "FN" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```FNProperty``` are [`ValueParameter`](#ValueParameter), [`TypeParameter`](#TypeParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, the first argument array will be left empty
+
+* The value of ```FNProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+
+```js
+new FNProperty(
+  [],
+  new TextType('James Bond')
+);
+```
+
+#### NProperty
+
+* This class represents the "N" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```NProperty``` are [`ValueParameter`](#ValueParameter), [`SortAsParameter`](#SortAsParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, the first argument array will be left empty
+
+* The value of ```NProperty``` should be of type [`SpecialValueType`](#SpecialValueType)
+
+```js
+new NProperty(
+  [],
+  new SpecialValueType(
+    [
+      new TextType('Stevenson'),
+      new TextType('John'),
+      new TextListType([
+        new TextType('Phillip'),
+        new TextType('Paul')
+      ]),
+      new TextType('Dr.'),
+      new TextListType([
+        new TextType('Jr.'),
+        new TextType('M.D.'),
+        new TextType('A.C.P.')
+      ])
+    ],
+    'nproperty'
+  )
+);
+```
+
+#### NicknameProperty
+
+* This class represents the "NICKNAME" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```NicknameProperty``` are
+[`ValueParameter`](#ValueParameter), [`TypeParameter`](#TypeParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, the first argument array will be left empty
+
+* The value of ```NicknameProperty``` should be of type [`TextType`](#TextType-and-TextListType) or [`TextListType`](#TextType-and-TextListType)
+
+```js
+new NicknameProperty(
+  [],
+  new TextType('Robbie')
+);
+
+new NicknameProperty(
+  [],
+  new TextListType([
+    new TextType('Jim'),
+    new TextType('Jimmie')
+  ])
+);
+
+new NicknameProperty(
+  [
+    new TypeParameter(
+      'work',
+      'nicknameproperty'
+    )
+  ],
+  new TextType('Boss')
+);
+```
+
+#### PhotoProperty
+
+* This class represents the "PHOTO" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```PhotoProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#AltidParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`PrefParameter`](#PrefParameter), [`PIDParameter`](#PIDParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, the first argument array will be left empty
+
+* The value of ```PhotoProperty``` should be of type [`URIType`](#URIType)
+
+```js
+new PhotoProperty(
+  [],
+  new URIType('data:image/jpeg;base64,MIICajCCAdOgAwIBAgICBEUwDQYJKoZIhvAQEEBQAwdzELMAkGA1UEBhMCVVMxLDAqBgNVBAoTI05ldHNjYXBlIENvbW11bmljYXRpb25zIENvcnBvcmF0aW9uMRwwGgYDVQQLExNJbmZvcm1hdGlvbiBTeXN0')
+);
+
+new PhotoProperty(
+  [],
+  new URIType('http://www.example.com/pub/photos/jqpublic.gif')
+);
+```
+
+#### BdayProperty
+
+* This class represents the "BDAY" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```BdayProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter), [`CalscaleParameter`](#CalscaleParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, the first argument array will be left empty
+
+* The value of ```BdayProperty``` should be of type [`DateTimeType`](#DateTimeType) of the type ```dateandortime``` or [`TextType`](#TextType)
+
+```js
+new BdayProperty(
+  [],
+  new DateTimeType('19960415', 'dateandortime')
+);
+
+let bday2val = new TextType('circa 1800');
+
+new BdayProperty(
+  [
+    new ValueParameter(bday2val)
+  ],
+  bday2val
+);
+```
+
+#### AnniversaryProperty
+
+* This class represents the "ANNIVERSARY" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```AnniversaryProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#AltidParameter), [`CalscaleParameter`](#CalscaleParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, the first argument array will be left empty
+
+* The value of ```AnniversaryProperty``` should be of type [`DateTimeType`](#DateTimeType) of the type ```dateandortime``` or [`TextType`](#TextType)
+
+```js
+new AnniversaryProperty(
+  [],
+  new DateTimeType('19960415', 'dateandortime')
+);
+```
+
+#### GenderProperty
+
+* This class represents the "GENDER" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```GenderProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, the first argument array will be left empty
+
+* The value of ```GenderProperty``` should be of type [`SexType`](#SexType) or [`SpecialValueType`](#SpecialValueType)
+
+```js
+new GenderProperty(
+  [],
+  new SexType('M')
+);
+
+new GenderProperty(
+  [],
+  new SpecialValueType(
+    [
+      new SexType('O'),
+      new TextType('intersex')
+    ],
+    'genderproperty'
+  )
+);
+
+let gpArr = new Array(2)
+gpArr[1] = new TextType("it's complicated")
+
+new GenderProperty(
+  [],
+  new SpecialValueType(
+    gpArr,
+    'genderproperty'
+  )
+);
 ```
