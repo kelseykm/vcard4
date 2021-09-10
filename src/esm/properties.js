@@ -502,7 +502,14 @@ class BdayProperty extends AbstractBaseProperty {
 
     else if (
       !this.constructor.acceptableValTypes.some(
-        valType => value instanceof valType
+        valType => {
+          if (valType === DateTimeType)
+          return (
+            (value instanceof valType) &&
+            (value.type === 'DATE-AND-OR-TIME')
+          );
+          return value instanceof valType;
+        }
       )
     )
     throw new TypeError('Invalid type for value of BdayProperty');
@@ -555,7 +562,14 @@ class AnniversaryProperty extends AbstractBaseProperty {
 
     else if (
       !this.constructor.acceptableValTypes.some(
-        valType => value instanceof valType
+        valType => {
+          if (valType === DateTimeType)
+          return (
+            (value instanceof valType) &&
+            (value.type === 'DATE-AND-OR-TIME')
+          );
+          return value instanceof valType;
+        }
       )
     )
     throw new TypeError('Invalid type for value of AnniversaryProperty');
