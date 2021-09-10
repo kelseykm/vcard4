@@ -604,7 +604,7 @@ new SexType('F');
     2. [`EndProperty`](#EndProperty)
     3. [`KindProperty`](#KindProperty)
     4. [`NProperty`](#NProperty)
-    5. [`GenderProperty`](#GenderPropertyder)
+    5. [`GenderProperty`](#GenderProperty)
     6. [`AdrProperty`](#AdrProperty)
     7. [`OrgProperty`](#OrgProperty)
     8. [`ClientpidmapProperty`](#ClientpidmapProperty)
@@ -1180,7 +1180,7 @@ new EndProperty;
 
 * The only acceptable parameters of ```SourceProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter), [`MediatypeParameter`](#MediatypeParameter) and [`AnyParameter`](#AnyParameter)
 
-* If you do not wish that the property have any parameters, the first argument array will be left empty
+* If you do not wish that the property have any parameters, leave the first argument array empty
 
 * The value of ```SourceProperty``` should be of type [`URIType`](#URIType)
 
@@ -1199,7 +1199,7 @@ new SourceProperty(
 
 * The only acceptable parameters of ```KindProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#AnyParameter)
 
-* If you do not wish that the property have any parameters, the first argument array will be left empty
+* If you do not wish that the property have any parameters, leave the first argument array empty
 
 * The value of ```KindProperty``` should be of type [`SpecialValueType`](#SpecialValueType)
 
@@ -1218,7 +1218,7 @@ new KindProperty(
 
 * The only acceptable parameters of ```XMLProperty``` are [`ValueParameter`](#ValueParameter) and [`AltidParameter`](#AltidParameter)
 
-* If you do not wish that the property have any parameters, the first argument array will be left empty
+* If you do not wish that the property have any parameters, leave the first argument array empty
 
 * The value of ```XMLProperty``` should be of type [`TextType`](#TextType-and-TextListType)
 
@@ -1244,7 +1244,7 @@ new XMLProperty([], xmlPropValue );
 
 * The only acceptable parameters of ```FNProperty``` are [`ValueParameter`](#ValueParameter), [`TypeParameter`](#TypeParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter) and [`AnyParameter`](#AnyParameter)
 
-* If you do not wish that the property have any parameters, the first argument array will be left empty
+* If you do not wish that the property have any parameters, leave the first argument array empty
 
 * The value of ```FNProperty``` should be of type [`TextType`](#TextType-and-TextListType)
 
@@ -1263,30 +1263,34 @@ new FNProperty(
 
 * The only acceptable parameters of ```NProperty``` are [`ValueParameter`](#ValueParameter), [`SortAsParameter`](#SortAsParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
 
-* If you do not wish that the property have any parameters, the first argument array will be left empty
+* If you do not wish that the property have any parameters, leave the first argument array empty
 
 * The value of ```NProperty``` should be of type [`SpecialValueType`](#SpecialValueType)
 
 ```js
+let nArr = [
+  new TextType('Stevenson'),
+  new TextType('John'),
+  new TextListType([
+    new TextType('Phillip'),
+    new TextType('Paul')
+  ]),
+  new TextType('Dr.'),
+  new TextListType([
+    new TextType('Jr.'),
+    new TextType('M.D.'),
+    new TextType('A.C.P.')
+  ])
+];
+
+let nPropVal = new SpecialValueType(
+  nArr,
+  'nproperty'
+);
+
 new NProperty(
   [],
-  new SpecialValueType(
-    [
-      new TextType('Stevenson'),
-      new TextType('John'),
-      new TextListType([
-        new TextType('Phillip'),
-        new TextType('Paul')
-      ]),
-      new TextType('Dr.'),
-      new TextListType([
-        new TextType('Jr.'),
-        new TextType('M.D.'),
-        new TextType('A.C.P.')
-      ])
-    ],
-    'nproperty'
-  )
+  nPropVal
 );
 ```
 
@@ -1299,7 +1303,7 @@ new NProperty(
 * The only acceptable parameters of ```NicknameProperty``` are
 [`ValueParameter`](#ValueParameter), [`TypeParameter`](#TypeParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter) and [`AnyParameter`](#AnyParameter)
 
-* If you do not wish that the property have any parameters, the first argument array will be left empty
+* If you do not wish that the property have any parameters, leave the first argument array empty
 
 * The value of ```NicknameProperty``` should be of type [`TextType`](#TextType-and-TextListType) or [`TextListType`](#TextType-and-TextListType)
 
@@ -1336,7 +1340,7 @@ new NicknameProperty(
 
 * The only acceptable parameters of ```PhotoProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#AltidParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`PrefParameter`](#PrefParameter), [`PIDParameter`](#PIDParameter) and [`AnyParameter`](#AnyParameter)
 
-* If you do not wish that the property have any parameters, the first argument array will be left empty
+* If you do not wish that the property have any parameters, leave the first argument array empty
 
 * The value of ```PhotoProperty``` should be of type [`URIType`](#URIType)
 
@@ -1360,7 +1364,7 @@ new PhotoProperty(
 
 * The only acceptable parameters of ```BdayProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter), [`CalscaleParameter`](#CalscaleParameter) and [`AnyParameter`](#AnyParameter)
 
-* If you do not wish that the property have any parameters, the first argument array will be left empty
+* If you do not wish that the property have any parameters, leave the first argument array empty
 
 * The value of ```BdayProperty``` should be of type [`DateTimeType`](#DateTimeType) of the type ```dateandortime``` or [`TextType`](#TextType)
 
@@ -1388,7 +1392,7 @@ new BdayProperty(
 
 * The only acceptable parameters of ```AnniversaryProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#AltidParameter), [`CalscaleParameter`](#CalscaleParameter) and [`AnyParameter`](#AnyParameter)
 
-* If you do not wish that the property have any parameters, the first argument array will be left empty
+* If you do not wish that the property have any parameters, leave the first argument array empty
 
 * The value of ```AnniversaryProperty``` should be of type [`DateTimeType`](#DateTimeType) of the type ```dateandortime``` or [`TextType`](#TextType)
 
@@ -1407,7 +1411,7 @@ new AnniversaryProperty(
 
 * The only acceptable parameters of ```GenderProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#AnyParameter)
 
-* If you do not wish that the property have any parameters, the first argument array will be left empty
+* If you do not wish that the property have any parameters, leave the first argument array empty
 
 * The value of ```GenderProperty``` should be of type [`SexType`](#SexType) or [`SpecialValueType`](#SpecialValueType)
 
