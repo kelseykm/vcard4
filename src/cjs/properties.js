@@ -58,9 +58,27 @@ class AbstractBaseProperty {
   }
 
   repr() {
-    if (this.params === '')
-    return `${this.constructor.prop || this.prop }:${this.value}`;
-    return `${this.constructor.prop || this.prop };${this.params}:${this.value}`;
+    let contentLine = this.params === '' ?
+    `${this.constructor.prop || this.prop }:${this.value}` :
+    `${this.constructor.prop || this.prop };${this.params}:${this.value}`;
+
+    if (contentLine.length <= 75)
+    return contentLine;
+
+    const LINEBREAK = '\r\n' + ' ';
+    const MAXWIDTH = 75;
+
+    let foldedContentLine = '';
+
+    for (let index = 0; index < contentLine.length; index++) {
+      if (
+        (index > 0) &&
+        (index % MAXWIDTH === 0)
+      )
+      foldedContentLine += (LINEBREAK + contentLine[index]);
+      else foldedContentLine += contentLine[index];
+    }
+    return foldedContentLine;
   }
 
   constructor() {
