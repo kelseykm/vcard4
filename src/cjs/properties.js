@@ -144,8 +144,16 @@ class SourceProperty extends AbstractBaseProperty {
 
     else if (
       !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => param instanceof acceptableParamType
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => {
+            if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'uri')
+            );
+            return param instanceof acceptableParamType;
+          }
         )
       )
     )
@@ -188,8 +196,16 @@ class KindProperty extends AbstractBaseProperty {
 
     else if (
       !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => param instanceof acceptableParamType
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => {
+            if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'text')
+            );
+            return param instanceof acceptableParamType;
+          }
         )
       )
     )
@@ -235,8 +251,16 @@ class XMLProperty extends AbstractBaseProperty {
 
     else if (
       !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => param instanceof acceptableParamType
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => {
+            if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'text')
+            );
+            return param instanceof acceptableParamType;
+          }
         )
       )
     )
@@ -292,6 +316,11 @@ class FNProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'text')
+            );
             return param instanceof acceptableParamType;
           }
         )
@@ -339,8 +368,16 @@ class NProperty extends AbstractBaseProperty {
 
     else if (
       !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => param instanceof acceptableParamType
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => {
+            if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'text')
+            );
+            return param instanceof acceptableParamType;
+          }
         )
       )
     )
@@ -400,6 +437,11 @@ class NicknameProperty extends AbstractBaseProperty {
             return (
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
+            );
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'text')
             );
             return param instanceof acceptableParamType;
           }
@@ -461,6 +503,11 @@ class PhotoProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'uri')
+            );
             return param instanceof acceptableParamType;
           }
         )
@@ -511,8 +558,32 @@ class BdayProperty extends AbstractBaseProperty {
 
     else if (
       !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => param instanceof acceptableParamType
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => {
+            if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (
+                ((param.value === 'date-and-or-time') && (value instanceof DateTimeType)) ||
+                ((param.value === 'text') && (value instanceof TextType))
+              )
+            );
+
+            else if (acceptableParamType === LanguageParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (value instanceof TextType)
+            );
+
+            else if (acceptableParamType === CalscaleParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (value instanceof DateTimeType)
+            );
+
+            return param instanceof acceptableParamType;
+          }
         )
       )
     )
@@ -571,8 +642,32 @@ class AnniversaryProperty extends AbstractBaseProperty {
 
     else if (
       !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => param instanceof acceptableParamType
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => {
+            if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (
+                ((param.value === 'date-and-or-time') && (value instanceof DateTimeType)) ||
+                ((param.value === 'text') && (value instanceof TextType))
+              )
+            );
+
+            else if (acceptableParamType === LanguageParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (value instanceof TextType)
+            );
+
+            else if (acceptableParamType === CalscaleParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (value instanceof DateTimeType)
+            );
+
+            return param instanceof acceptableParamType;
+          }
         )
       )
     )
@@ -629,8 +724,16 @@ class GenderProperty extends AbstractBaseProperty {
 
     else if (
       !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => param instanceof acceptableParamType
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => {
+            if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'text')
+            );
+            return param instanceof acceptableParamType;
+          }
         )
       )
     )
@@ -700,6 +803,12 @@ class AdrProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
+
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'text')
+            );
             return param instanceof acceptableParamType;
           }
         )
@@ -735,13 +844,17 @@ class TelProperty extends AbstractBaseProperty {
   static cardinality = '*';
   static acceptableParamTypes = [
     ValueParameter,
+    MediatypeParameter,
     TypeParameter,
     PIDParameter,
     PrefParameter,
     AltidParameter,
     AnyParameter
   ];
-  static acceptableValTypes = URIType;
+  static acceptableValTypes = [
+    URIType,
+    TextType
+  ];
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -759,6 +872,22 @@ class TelProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               /^TelProperty$/i.test(param.targetProp)
             );
+
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (
+                ((param.value === 'uri') && (value instanceof URIType)) ||
+                ((param.value === 'text') && (value instanceof TextType))
+              )
+            );
+
+            else if (acceptableParamType === MediatypeParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (value instanceof URIType)
+            );
+
             return param instanceof acceptableParamType;
           }
         )
@@ -766,7 +895,11 @@ class TelProperty extends AbstractBaseProperty {
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for TelProperty');
 
-    else if (!(value instanceof this.constructor.acceptableValTypes))
+    else if (
+      !this.constructor.acceptableValTypes.some(
+        valType => value instanceof valType
+      )
+    )
     throw new TypeError('Invalid type for value of TelProperty');
   }
 
@@ -805,6 +938,7 @@ class EmailProperty extends AbstractBaseProperty {
     else if (!Array.isArray(params))
     throw new InvalidArgument('Parameters for EmailProperty must be passed in an array');
 
+
     else if (
       !params.every(
         param => this.constructor.acceptableParamTypes.some(
@@ -814,6 +948,13 @@ class EmailProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
+
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'text')
+            );
+
             return param instanceof acceptableParamType;
           }
         )
@@ -870,6 +1011,13 @@ class IMPPProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
+
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'uri')
+            );
+
             return param instanceof acceptableParamType;
           }
         )
@@ -925,6 +1073,13 @@ class LangProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
+
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'language-tag')
+            );
+
             return param instanceof acceptableParamType;
           }
         )
@@ -986,6 +1141,17 @@ class TzProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
+
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (
+                ((param.value === 'text') && (value instanceof TextType)) ||
+                ((param.value === 'uri') && (value instanceof URIType)) ||
+                ((param.value === 'utc-offset') && (value instanceof DateTimeType))
+              )
+            );
+
             return param instanceof acceptableParamType;
           }
         )
@@ -1053,6 +1219,13 @@ class GeoProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
+
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'uri')
+            );
+
             return param instanceof acceptableParamType;
           }
         )
