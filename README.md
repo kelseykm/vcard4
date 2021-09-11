@@ -2,7 +2,7 @@
 
 # vcard4
 
-__vCard version 4.0 javascript library with full implementation of RFC 6350.__
+__vCard version 4.0 javascript library with full implementation of RFC 6350__
 
 For use in node or in the browser
 
@@ -202,6 +202,13 @@ console.log(vc.repr());
   * [Geographical Properties](#geographical-properties)
     + [TzProperty](#tzproperty)
     + [GeoProperty](#geoproperty)
+  * [Organizational Properties](#organizational-properties)
+    + [TitleProperty](#titleproperty)
+    + [RoleProperty](#roleproperty)
+    + [LogoProperty](#logoproperty)
+    + [OrgProperty](#orgproperty)
+    + [MemberProperty](#memberproperty)
+    + [RelatedProperty](#relatedproperty)
 
 ## Introduction
 
@@ -1622,5 +1629,149 @@ new TzProperty(
 new GeoProperty(
   [],
   new URIType('geo:37.386013,-122.082932')
+);
+```
+
+### Organizational Properties
+
+#### TitleProperty
+
+* This class represents the "TITLE" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```TitleProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter), [`TypeParameter`](#TypeParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```TitleProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+
+```js
+new TitleProperty(
+  [],
+  new TextType('Research Scientist')
+);
+```
+
+#### RoleProperty
+
+* This class represents the "ROLE" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```RoleProperty``` are [`ValueParameter`](ValueParameter), [`LanguageParameter`](LanguageParameter), [`PIDParameter`](PIDParameter), [`PrefParameter`](PrefParameter), [`TypeParameter`](TypeParameter), [`AltidParameter`](AltidParameter) and [`AnyParameter`](AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```RoleProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+
+```js
+new RoleProperty(
+  [],
+  new TextType('Project Leader')
+);
+```
+
+#### LogoProperty
+
+* This class represents the "LOGO" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```LogoProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`PIDParameter`](#PIDParameter), PrefParameter, [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```LogoProperty``` should be of type [`URIType`](#URIType)
+
+```js
+new LogoProperty(
+  [],
+  new URIType('http://www.example.com/pub/logos/abccorp.jpg')
+);
+
+new LogoProperty(
+  [],
+  new URIType('data:image/jpeg;base64,MIICajCCAdOgAwIBAgICBEUwDQYJKoZIhvcAQEEBQAwdzELMAkGA1UEBhMCVVMxLDAqBgNVBAoTI05ldHNjYXBlIENvbW11bmljYXRpb25zIENvcnBvcmF0aW9uMRwwGgYDVQQLExNJbmZvcm1hdGlvbiBTeXN0')
+);
+```
+
+#### OrgProperty
+
+* This class represents the "ORG" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```OrgProperty``` are [`ValueParameter`](#ValueParameter), [`SortAsParameter`](#SortAsParameter), [`LanguageParameter`](#LanguageParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter), [`TypeParameter`](#TypeParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```OrgProperty``` should be of type [`SpecialValueType`](#SpecialValueType)
+
+```js
+new OrgProperty(
+  [],
+  new SpecialValueType(
+    [
+      new TextType('ABC, Inc.'),
+      new TextType('North American Division'),
+      new TextType('Marketing')
+    ],
+    'orgproperty'
+  )
+);
+```
+
+#### MemberProperty
+
+* This class represents the "MEMBER" property
+
+> This property should only be used if the value of the "KIND" ([`KindProperty`](#KindProperty)) property is "group"
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```MemberProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter), [`MediatypeParameter`](#MediatypeParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```MemberProperty``` should be of type [`URIType`](#URIType)
+
+```js
+new MemberProperty(
+  [],
+  new URIType('urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af')
+);
+```
+
+#### RelatedProperty
+
+* This class represents the "RELATED" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```RelatedProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`MediatypeParameter`](#MediatypeParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter), [`TypeParameter`](#TypeParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```RelatedProperty``` should be of type [`URIType`](#URIType) or [`TextType`](#TextType-and-TextListType)
+
+```js
+new RelatedProperty(
+  [
+    new TypeParameter(
+      'friend',
+      'relatedproperty'
+    )
+  ],
+  new URIType('uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6')
+);
+
+let relPropVal = new TextType('Please contact my assistant Jane Doe for any inquiries.');
+new RelatedProperty(
+  [
+    new TypeParameter('co-worker', 'relatedproperty'),
+    new ValueParameter(relPropVal)
+  ],
+  relPropVal
 );
 ```
