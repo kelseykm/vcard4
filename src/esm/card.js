@@ -129,7 +129,7 @@ class VCARD {
   }
 
   #assemble() {
-    let CRLF = '\r\n';
+    const CRLF = '\r\n';
 
     this.value = '';
     this.value += new BeginProperty().repr() + CRLF;
