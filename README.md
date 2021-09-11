@@ -34,10 +34,12 @@ TITLE:Imaginary test person
 EMAIL;TYPE=work;PREF=1:johnDoe@example.org
 TEL;TYPE=cell:tel:+1 781 555 1212
 TEL;TYPE=home:tel:+1 202 555 1212
-NOTE:John Doe has a long and varied history\, being documented on more police files than anyone else. Reports of his death are alas numerous.
+NOTE:John Doe has a long and varied history\, being documented on more poli
+ ce files than anyone else. Reports of his death are alas numerous.
 CATEGORIES:Work,Test group
 X-ABUID:5AD380FD-B2DE-4261-BA99-DE1D1DB52FBE\:ABPerson
 END:VCARD
+
 ```
 
 * To create a vCard like the one above, you would do the following:
@@ -190,6 +192,16 @@ console.log(vc.repr());
     + [BdayProperty](#bdayproperty)
     + [AnniversaryProperty](#anniversaryproperty)
     + [GenderProperty](#genderproperty)
+  * [Delivery Addressing Properties](#delivery-addressing-properties)
+    + [AdrProperty](#adrproperty)
+  * [Communications Properties](#communications-properties)
+    + [TelProperty](#telproperty)
+    + [EmailProperty](#emailproperty)
+    + [IMPPProperty](#imppproperty)
+    + [LangProperty](#langproperty)
+  * [Geographical Properties](#geographical-properties)
+    + [TzProperty](#tzproperty)
+    + [GeoProperty](#geoproperty)
 
 ## Introduction
 
@@ -767,6 +779,8 @@ new LanguageParameter(
 
 * ```ValueParameter``` should be called with a single argument of either one of the following types:
 [`TextType`](#texttype-and-textlisttype), [`BooleanType`](#BooleanType), [`DateTimeType`](#DateTimeType), [`IntegerType`](#IntegerType-and-IntegerListType), [`FloatType`](#FloatType-and-FloatListType), [`LanguageTagType`](#LanguageTagType), [`URIType`](#URIType) and [`SpecialValueType`](#SpecialValueType)
+
+* Note that the data type specified by the ```ValueParameter``` must correspond to the value of the property
 
 ```js
 let propertyValue = new TextType('ahoy');
@@ -1364,9 +1378,13 @@ new PhotoProperty(
 
 * The only acceptable parameters of ```BdayProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter), [`CalscaleParameter`](#CalscaleParameter) and [`AnyParameter`](#AnyParameter)
 
+* [`CalscaleParameter`](#CalscaleParameter) may only be used when the value is of type [`DateTimeType`](#DateTimeType)
+
+* [`LanguageParameter`](#LanguageParameter) may only be used when the value is of type [`TextType`](#TextType-and-TextListType)
+
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```BdayProperty``` should be of type [`DateTimeType`](#DateTimeType) of the type ```dateandortime``` or [`TextType`](#TextType)
+* The value of ```BdayProperty``` should be of type [`DateTimeType`](#DateTimeType) of the type ```dateandortime``` or [`TextType`](#TextType-and-TextListType)
 
 ```js
 new BdayProperty(
@@ -1392,9 +1410,11 @@ new BdayProperty(
 
 * The only acceptable parameters of ```AnniversaryProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#AltidParameter), [`CalscaleParameter`](#CalscaleParameter) and [`AnyParameter`](#AnyParameter)
 
+* [`CalscaleParameter`](#CalscaleParameter) may only be used when the value is of type [`DateTimeType`](#DateTimeType)
+
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```AnniversaryProperty``` should be of type [`DateTimeType`](#DateTimeType) of the type ```dateandortime``` or [`TextType`](#TextType)
+* The value of ```AnniversaryProperty``` should be of type [`DateTimeType`](#DateTimeType) of the type ```dateandortime``` or [`TextType`](#TextType-and-TextListType)
 
 ```js
 new AnniversaryProperty(
@@ -1441,5 +1461,166 @@ new GenderProperty(
     gpArr,
     'genderproperty'
   )
+);
+```
+
+### Delivery Addressing Properties
+
+#### AdrProperty
+
+* This class represents the "ADR" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```AdrProperty``` are [`LabelParameter`](#LabelParameter), [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`GeoParameter`](#GeoParameter), [`TzParameter`](#TzParameter), [`AltidParameter`](#AltidParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```AdrProperty``` should be of type [`SpecialValueType`](#SpecialValueType)
+
+```js
+let addrArr = new Array(7);
+addrArr[2] = new TextType('123 Main Street');
+addrArr[3] = new TextType('Any Town');
+addrArr[4] = new TextType('CA');
+addrArr[5] = new TextType('91921-1234');
+addrArr[6] = new TextType('U.S.A.');
+
+new AdrProperty(
+  [
+    new GeoParameter(
+      new URIType('geo:12.3457,78.910')
+    )
+  ],
+  new SpecialValueType(addrArr, 'AdrProperty')
+);
+```
+
+### Communications Properties
+
+#### TelProperty
+
+* This class represents the "TEL" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```TelProperty``` are [`ValueParameter`](#ValueParameter), [`MediatypeParameter`](#MediatypeParameter), [`TypeParameter`](#TypeParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* The [`MediatypeParameter`](#MediatypeParameter) may only be used if the value is of type [`URIType`](#URIType)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```TelProperty``` should be of type [`URIType`](#URIType) or [`TextType`](#TextType-and-TextListType)
+
+```js
+new TelProperty(
+  [],
+  new URIType('tel:+33-01-23-45-67')
+);
+```
+
+#### EmailProperty
+
+* This class represents the "EMAIL" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```EmailProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```EmailProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+
+```js
+new EmailProperty(
+  [
+    new PrefParameter(
+      new IntegerType(1)
+    )
+  ],
+  new TextType('jane_doe@example.com')
+);
+```
+
+#### IMPPProperty
+
+* This class represents the "IMPP" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```IMPPProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```IMPPProperty``` should be of type [`URIType`](#URIType)
+
+```js
+new IMPPProperty(
+  [],
+  new URIType('xmpp:alice@example.com')
+);
+```
+
+#### LangProperty
+
+* This class represents the "LANG" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```LangProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```LangProperty``` should be of type [`LanguageTagType`](#LanguageTagType)
+
+```js
+new LangProperty(
+  [],
+  new LanguageTagType('fr')
+);
+```
+
+### Geographical Properties
+
+#### TzProperty
+
+* This class represents the "TZ" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```TzProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#AltidParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```TzProperty``` should be of type [`TextType`](#TextType-and-TextListType), [`URIType`](#URIType) or [`DateTimeType`](#DateTimeType)
+
+```js
+new TzProperty(
+  [],
+  new TextType('Raleigh/North America')
+);
+
+new TzProperty(
+  [],
+  new DateTimeType('-0500', 'utcoffset')
+);
+```
+
+#### GeoProperty
+
+* This class represents the "GEO" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```GeoProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```GeoProperty``` should be of type [`URIType`](#URIType)
+
+```js
+new GeoProperty(
+  [],
+  new URIType('geo:37.386013,-122.082932')
 );
 ```
