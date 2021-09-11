@@ -1283,6 +1283,13 @@ class TitleProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
+
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'text')
+            );
+
             return param instanceof acceptableParamType;
           }
         )
@@ -1339,6 +1346,13 @@ class RoleProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
+
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'text')
+            );
+
             return param instanceof acceptableParamType;
           }
         )
@@ -1396,6 +1410,13 @@ class LogoProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
+
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'uri')
+            );
+
             return param instanceof acceptableParamType;
           }
         )
@@ -1453,6 +1474,13 @@ class OrgProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
+
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'text')
+            );
+
             return param instanceof acceptableParamType;
           }
         )
@@ -1504,8 +1532,16 @@ class MemberProperty extends AbstractBaseProperty {
 
     else if (
       !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => param instanceof acceptableParamType
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => {
+            if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (param.value === 'uri')
+            );
+            return param instanceof acceptableParamType;
+          }
         )
       )
     )
@@ -1564,6 +1600,16 @@ class RelatedProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               /^RelatedProperty$/i.test(param.targetProp)
             );
+
+            else if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (
+                ((param.value === 'uri') && (value instanceof URIType)) ||
+                ((param.value === 'text') && (value instanceof TextType))
+              )
+            );
+            
             return param instanceof acceptableParamType;
           }
         )

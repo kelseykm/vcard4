@@ -152,13 +152,13 @@ class VCARD {
 
     else if (
       this.constructor.cardinalityOneProps.every(
-        cardOneProp => props.some(prop => prop.constructor === cardOneProp)
+        cardOneProp => props.some(prop => prop instanceof cardOneProp)
       )
     )
     throw new InvalidArgument('BeginProperty, VersionProperty and EndProperty instances must not be supplied');
 
     else if (
-      !props.some(prop => prop.constructor === this.constructor.cardinalityOneOrMoreProps)
+      !props.some(prop => prop instanceof this.constructor.cardinalityOneOrMoreProps)
     )
     throw new MissingArgument('One or more FNProperty instances must be supplied');
 
@@ -166,12 +166,32 @@ class VCARD {
       !this.constructor.cardinalityNoneOrOneProps.every(cardNoneOrOneProp => {
         let count = 0;
         for (let index = 0; index < props.length; index++)
-        if (props[index].constructor === cardNoneOrOneProp)
+        if (props[index] instanceof cardNoneOrOneProp)
         count++;
         return count <= 1;
       })
     )
     throw new InvalidArgument('AnniversaryProperty, BdayProperty, GenderProperty, KindProperty, NProperty, ProdidProperty, RevProperty and UIDProperty must not have more than one instance supplied');
+
+    else if (
+      !(() => {
+        let hasMemberProperty = false;
+        let kindPropertyIsGroup = false;
+
+        for (let index = 0; index < props.length; index++) {
+          if (props[index] instanceof MemberProperty)
+          hasMemberProperty = true;
+
+          else if (props[index] instanceof KindProperty) {
+            if (/^group$/i.test(props[index].value))
+            kindPropertyIsGroup = true;
+            break;
+          }
+        }
+        return hasMemberProperty && kindPropertyIsGroup;
+      })()
+    )
+    throw new InvalidArgument('MemberProperty should only be used if the value of the KindProperty is "group"')
   }
 
   constructor(props) {
