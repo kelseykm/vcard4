@@ -236,17 +236,12 @@ describe('CJS properties tests', () => {
         assert.strictEqual(
           new XMLProperty(
             [],
-            new TextType(`<?xml version="1.0" encoding="ISO-8859-1"?>
-<note>
-  <to>Tove</to>
-  <from>Jani</from>
-  <heading>Reminder</heading>
-  <body>Don't forget me this weekend!</body>
-</note>`)).repr(),
-            `XML:<?xml version="1.0" encoding="ISO-8859-1"?>\\n<note>\\n  <to>Tove</to>\\n  <from>Jani</from>\\n  <heading>Reminder</heading>\\n  <body>Don\'t forget me this weekend!</body>\\n</note>`
-          );
-        });
-      });
+            new TextType(`<?xml version="1.0" encoding="ISO-8859-1"?><note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Don't forget me this weekend!</body></note>`)
+          ).repr(),
+          `XML:<?xml version="1.0" encoding="ISO-8859-1"?><note><to>Tove</to><from>Jan\r\n i</from><heading>Reminder</heading><body>Don't forget me this weekend!</bod\r\n y></note>`
+        );
+      });;
+    });
   });
 
   describe('Identification properties tests', () => {
