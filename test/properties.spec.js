@@ -839,4 +839,232 @@ describe('ESM properties tests', () => {
       });
     });
   });
+
+  describe('Organizational properties tests', () => {
+    describe('TitleProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new TitleProperty(
+          [],
+          new TextType('Research Scientist')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new TitleProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new TitleProperty);
+        assert.throws(() => new TitleProperty(1));
+        assert.throws(() => new TitleProperty({}));
+        assert.throws(() => new TitleProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new TitleProperty(
+            [],
+            new TextType('Research Scientist')
+          ).repr(),
+          "TITLE:Research Scientist"
+        );
+      });
+    });
+
+    describe('RoleProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new RoleProperty(
+          [],
+          new TextType('Project Leader')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new RoleProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new RoleProperty);
+        assert.throws(() => new RoleProperty(1));
+        assert.throws(() => new RoleProperty({}));
+        assert.throws(() => new RoleProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new RoleProperty(
+            [],
+            new TextType('Project Leader')
+          ).repr(),
+          "ROLE:Project Leader"
+        );
+      });
+    });
+
+    describe('LogoProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new LogoProperty(
+          [],
+          new URIType('http://www.example.com/pub/logos/abccorp.jpg')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new LogoProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new LogoProperty);
+        assert.throws(() => new LogoProperty(1));
+        assert.throws(() => new LogoProperty({}));
+        assert.throws(() => new LogoProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new LogoProperty(
+            [],
+            new URIType('http://www.example.com/pub/logos/abccorp.jpg')
+          ).repr(),
+          "LOGO:http://www.example.com/pub/logos/abccorp.jpg"
+        );
+      });
+    });
+
+    describe('OrgProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new OrgProperty(
+          [],
+          new SpecialValueType(
+            [
+              new TextType('ABC, Inc.'),
+              new TextType('North American Division'),
+              new TextType('Marketing')
+            ],
+            'orgproperty'
+          )
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new OrgProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new OrgProperty);
+        assert.throws(() => new OrgProperty(1));
+        assert.throws(() => new OrgProperty({}));
+        assert.throws(() => new OrgProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new OrgProperty(
+            [],
+            new SpecialValueType(
+              [
+                new TextType('ABC, Inc.'),
+                new TextType('North American Division'),
+                new TextType('Marketing')
+              ],
+              'orgproperty'
+            )
+          ).repr(),
+          "ORG:ABC\\, Inc.;North American Division;Marketing"
+        );
+      });
+    });
+
+    describe('MemberProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new MemberProperty(
+          [],
+          new URIType('urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new MemberProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new MemberProperty);
+        assert.throws(() => new MemberProperty(1));
+        assert.throws(() => new MemberProperty({}));
+        assert.throws(() => new MemberProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new MemberProperty(
+            [],
+            new URIType('urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af')
+          ).repr(),
+          "MEMBER:urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af"
+        );
+      });
+    });
+
+    describe('RelatedProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new RelatedProperty(
+          [
+            new TypeParameter(
+              'friend',
+              'relatedproperty'
+            )
+          ],
+          new URIType('uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6')
+        ));
+
+        assert.doesNotThrow(() => new RelatedProperty(
+          [
+            new TypeParameter('co-worker', 'relatedproperty'),
+            new ValueParameter(
+              new TextType('Please contact my assistant Jane Doe for any inquiries.')
+            )
+          ],
+          new TextType('Please contact my assistant Jane Doe for any inquiries.')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new RelatedProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new RelatedProperty);
+        assert.throws(() => new RelatedProperty(1));
+        assert.throws(() => new RelatedProperty({}));
+        assert.throws(() => new RelatedProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new RelatedProperty(
+            [
+              new TypeParameter('co-worker', 'relatedproperty'),
+              new ValueParameter(
+                new TextType('Please contact my assistant Jane Doe for any inquiries.')
+              )
+            ],
+            new TextType('Please contact my assistant Jane Doe for any inquiries.')
+          ).repr(),
+          "RELATED;TYPE=co-worker;VALUE=text:Please contact my assistant Jane Doe for \r\n any inquiries."
+        );
+      });
+    });
+  });
 });
