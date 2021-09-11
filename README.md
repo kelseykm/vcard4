@@ -222,8 +222,6 @@ console.log(vc.repr());
 
 * __vcard4__ supports both ES6 module import/export and commonjs require
 
-_NB: Functional parameters are referred to as arguments in the documentation_
-
 ## Property Value Data Types
 
 * According to the RFC, the standard value data types are:
@@ -296,7 +294,7 @@ let people = new TextListType([ person1, person2 ]);
 
 ### URIType
 
-* This class represents the "uri" data type
+* This class represents the "URI" data type
 
 * ```URIType``` should be called with a single argument of type string, that is formatted as URI as defined in Section 3 of RFC 3986
 
