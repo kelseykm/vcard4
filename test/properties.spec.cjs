@@ -240,7 +240,7 @@ describe('CJS properties tests', () => {
           ).repr(),
           `XML:<?xml version="1.0" encoding="ISO-8859-1"?><note><to>Tove</to><from>Jan\r\n i</from><heading>Reminder</heading><body>Don't forget me this weekend!</bod\r\n y></note>`
         );
-      });;
+      });
     });
   });
 
@@ -546,6 +546,295 @@ describe('CJS properties tests', () => {
             )
           ).repr(),
           "GENDER:O;intersex"
+        );
+      });
+    });
+  });
+
+  describe('Addressing properties tests', () => {
+    describe('AdrProperty tests', () => {
+      let addrArr = new Array(7);
+      addrArr[2] = new TextType('123 Main Street');
+      addrArr[3] = new TextType('Any Town');
+      addrArr[4] = new TextType('CA');
+      addrArr[5] = new TextType('91921-1234');
+      addrArr[6] = new TextType('U.S.A.');
+
+      let addrArr2 = [...addrArr];
+
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new AdrProperty(
+          [
+            new GeoParameter(
+              new URIType('geo:12.3457,78.910')
+            )
+          ],
+          new SpecialValueType(addrArr, 'AdrProperty')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new AdrProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new AdrProperty);
+        assert.throws(() => new AdrProperty(1));
+        assert.throws(() => new AdrProperty({}));
+        assert.throws(() => new AdrProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new AdrProperty(
+            [
+              new GeoParameter(
+                new URIType('geo:12.3457,78.910')
+              )
+            ],
+            new SpecialValueType(addrArr2, 'AdrProperty')
+          ).repr(),
+          'ADR;GEO="geo:12.3457,78.910":;;123 Main Street;Any Town;CA;91921-1234;U.S.A\r\n .'
+        );
+      });
+    });
+  });
+
+  describe('Communications properties tests', () => {
+    describe('TelProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new TelProperty(
+          [],
+          new URIType('tel:+33-01-23-45-67')
+        ));
+
+        assert.doesNotThrow(() => new TelProperty(
+          [],
+          new TextType('+33-01-23-45-67')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new TelProperty(
+          [],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new TelProperty(
+          [
+            new LabelParameter('Hello world')
+          ],
+          new TextType('+33-01-23-45-67')
+        ));
+        assert.throws(() => new TelProperty);
+        assert.throws(() => new TelProperty(1));
+        assert.throws(() => new TelProperty({}));
+        assert.throws(() => new TelProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new TelProperty(
+            [],
+            new URIType('tel:+33-01-23-45-67')
+          ).repr(),
+          "TEL:tel:+33-01-23-45-67"
+        );
+      });
+    });
+
+    describe('EmailProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new EmailProperty(
+          [
+            new PrefParameter(
+              new IntegerType(1)
+            )
+          ],
+          new TextType('jane_doe@example.com')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new EmailProperty(
+          [],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new EmailProperty(
+          [
+            new LabelParameter('Hello world')
+          ],
+          new TextType('jane_doe@example.com')
+        ));
+        assert.throws(() => new EmailProperty);
+        assert.throws(() => new EmailProperty(1));
+        assert.throws(() => new EmailProperty({}));
+        assert.throws(() => new EmailProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new EmailProperty(
+            [
+              new PrefParameter(
+                new IntegerType(1)
+              )
+            ],
+            new TextType('jane_doe@example.com')
+          ).repr(),
+          "EMAIL;PREF=1:jane_doe@example.com"
+        );
+      });
+    });
+
+    describe('IMPPProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new IMPPProperty(
+          [],
+          new URIType('xmpp:alice@example.com')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new IMPPProperty(
+          [],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new IMPPProperty(
+          [
+            new LabelParameter('Hello world')
+          ],
+          new URIType('xmpp:alice@example.com')
+        ));
+        assert.throws(() => new IMPPProperty);
+        assert.throws(() => new IMPPProperty(1));
+        assert.throws(() => new IMPPProperty({}));
+        assert.throws(() => new IMPPProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new IMPPProperty(
+            [],
+            new URIType('xmpp:alice@example.com')
+          ).repr(),
+          "IMPP:xmpp:alice@example.com"
+        );
+      });
+    });
+
+    describe('LangProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new LangProperty(
+          [],
+          new LanguageTagType('fr')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new LangProperty(
+          [],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new LangProperty(
+          [
+            new LabelParameter('Hello world')
+          ],
+          new LanguageTagType('fr')
+        ));
+        assert.throws(() => new LangProperty);
+        assert.throws(() => new LangProperty(1));
+        assert.throws(() => new LangProperty({}));
+        assert.throws(() => new LangProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new LangProperty(
+            [],
+            new LanguageTagType('fr')
+          ).repr(),
+          "LANG:fr"
+        );
+      });
+    });
+  });
+
+  describe('Geographical properties tests', () => {
+    describe('TzProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new TzProperty(
+          [],
+          new TextType('Raleigh/North America')
+        ));
+
+        assert.doesNotThrow(() => new TzProperty(
+          [],
+          new DateTimeType('-0500', 'utcoffset')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new TzProperty(
+          [],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new TzProperty(
+          [
+            new LabelParameter('Hello world')
+          ],
+          new TextType('Raleigh/North America')
+        ));
+        assert.throws(() => new TzProperty);
+        assert.throws(() => new TzProperty(1));
+        assert.throws(() => new TzProperty({}));
+        assert.throws(() => new TzProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new TzProperty(
+            [],
+            new TextType('Raleigh/North America')
+          ).repr(),
+          "TZ:Raleigh/North America"
+        );
+      });
+    });
+
+    describe('GeoProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new GeoProperty(
+          [],
+          new URIType('geo:37.386013,-122.082932')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new GeoProperty(
+          [],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new GeoProperty(
+          [
+            new LabelParameter('Hello world')
+          ],
+          new URIType('geo:37.386013,-122.082932')
+        ));
+        assert.throws(() => new GeoProperty);
+        assert.throws(() => new GeoProperty(1));
+        assert.throws(() => new GeoProperty({}));
+        assert.throws(() => new GeoProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new GeoProperty(
+            [],
+            new URIType('geo:37.386013,-122.082932')
+          ).repr(),
+          "GEO:geo:37.386013,-122.082932"
         );
       });
     });
