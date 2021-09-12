@@ -1067,4 +1067,479 @@ describe('CJS properties tests', () => {
       });
     });
   });
+  describe('Explanatory properties tests', () => {
+    describe('CategoriesProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new CategoriesProperty(
+          [],
+          new TextType('TRAVEL AGENT')
+        ));
+
+        assert.doesNotThrow(() => new CategoriesProperty(
+          [],
+          new TextListType([
+            new TextType('INTERNET'),
+            new TextType('IETF'),
+            new TextType('INDUSTRY')
+          ])
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new CategoriesProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new CategoriesProperty);
+        assert.throws(() => new CategoriesProperty(1));
+        assert.throws(() => new CategoriesProperty({}));
+        assert.throws(() => new CategoriesProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new CategoriesProperty(
+            [],
+            new TextListType([
+              new TextType('INTERNET'),
+              new TextType('IETF'),
+              new TextType('INDUSTRY')
+            ])
+          ).repr(),
+          "CATEGORIES:INTERNET,IETF,INDUSTRY"
+        );
+      });
+    });
+
+    describe('NoteProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new NoteProperty(
+          [],
+          new TextType('This fax number is operational 0800 to 1715 EST, Mon-Fri.')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new NoteProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new NoteProperty);
+        assert.throws(() => new NoteProperty(1));
+        assert.throws(() => new NoteProperty({}));
+        assert.throws(() => new NoteProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new NoteProperty(
+            [],
+            new TextType('This fax number is operational 0800 to 1715 EST, Mon-Fri.')
+          ).repr(),
+          "NOTE:This fax number is operational 0800 to 1715 EST\\, Mon-Fri."
+        );
+      });
+    });
+
+    describe('ProdidProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new ProdidProperty(
+          [],
+          new TextType('-//ONLINE DIRECTORY//NONSGML Version 1//EN')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new ProdidProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new ProdidProperty);
+        assert.throws(() => new ProdidProperty(1));
+        assert.throws(() => new ProdidProperty({}));
+        assert.throws(() => new ProdidProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new ProdidProperty(
+            [],
+            new TextType('-//ONLINE DIRECTORY//NONSGML Version 1//EN')
+          ).repr(),
+          "PRODID:-//ONLINE DIRECTORY//NONSGML Version 1//EN"
+        );
+      });
+    });
+
+    describe('RevProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new RevProperty(
+          [],
+          new DateTimeType('19951031T222710Z', 'timestamp')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new RevProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new RevProperty);
+        assert.throws(() => new RevProperty(1));
+        assert.throws(() => new RevProperty({}));
+        assert.throws(() => new RevProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new RevProperty(
+            [],
+            new DateTimeType('19951031T222710Z', 'timestamp')
+          ).repr(),
+          "REV:19951031T222710Z"
+        );
+      });
+    });
+
+    describe('SoundProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new SoundProperty(
+          [],
+          new URIType('CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new SoundProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new SoundProperty);
+        assert.throws(() => new SoundProperty(1));
+        assert.throws(() => new SoundProperty({}));
+        assert.throws(() => new SoundProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new SoundProperty(
+            [],
+            new URIType('CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com')
+          ).repr(),
+          "SOUND:CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
+        );
+      });
+    });
+
+    describe('UIDProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new UIDProperty(
+          [],
+          new URIType('urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new UIDProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new UIDProperty);
+        assert.throws(() => new UIDProperty(1));
+        assert.throws(() => new UIDProperty({}));
+        assert.throws(() => new UIDProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new UIDProperty(
+            [],
+            new URIType('urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6')
+          ).repr(),
+          "UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
+        );
+      });
+    });
+
+    describe('ClientpidmapProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new ClientpidmapProperty(
+          [],
+          new SpecialValueType(
+            [
+              new IntegerType(1),
+              new URIType('urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b')
+            ],
+            'clientpidmapproperty'
+          )
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new ClientpidmapProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new ClientpidmapProperty);
+        assert.throws(() => new ClientpidmapProperty(1));
+        assert.throws(() => new ClientpidmapProperty({}));
+        assert.throws(() => new ClientpidmapProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new ClientpidmapProperty(
+            [],
+            new SpecialValueType(
+              [
+                new IntegerType(1),
+                new URIType('urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b')
+              ],
+              'clientpidmapproperty'
+            )
+          ).repr(),
+          "CLIENTPIDMAP:1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"
+        );
+      });
+    });
+
+    describe('URLProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new URLProperty(
+          [],
+          new URIType('http://example.org/restaurant.french/chezchic.html')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new URLProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new URLProperty);
+        assert.throws(() => new URLProperty(1));
+        assert.throws(() => new URLProperty({}));
+        assert.throws(() => new URLProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new URLProperty(
+            [],
+            new URIType('http://example.org/restaurant.french/chezchic.html')
+          ).repr(),
+          "URL:http://example.org/restaurant.french/chezchic.html"
+        );
+      });
+    });
+
+    describe('VersionProperty tests', () => {
+      it('Instances can be created', () => {
+        assert.doesNotThrow(() => new VersionProperty);
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new VersionProperty().repr(),
+          "VERSION:4.0"
+        );
+      });
+    });
+  });
+
+  describe('Security properties tests', () => {
+    describe('KeyProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new KeyProperty(
+          [
+            new MediatypeParameter('application/pgp-keys')
+          ],
+          new URIType('ftp://example.com/keys/jdoe')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new KeyProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new KeyProperty);
+        assert.throws(() => new KeyProperty(1));
+        assert.throws(() => new KeyProperty({}));
+        assert.throws(() => new KeyProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new KeyProperty(
+            [
+              new MediatypeParameter('application/pgp-keys')
+            ],
+            new URIType('ftp://example.com/keys/jdoe')
+          ).repr(),
+          "KEY;MEDIATYPE=application/pgp-keys:ftp://example.com/keys/jdoe"
+        );
+      });
+    });
+  });
+
+  describe('Calendar properties tests', () => {
+    describe('FburlProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new FburlProperty(
+          [
+            new MediatypeParameter('text/calendar')
+          ],
+          new URIType('ftp://example.com/busy/project-a.ifb')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new FburlProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new FburlProperty);
+        assert.throws(() => new FburlProperty(1));
+        assert.throws(() => new FburlProperty({}));
+        assert.throws(() => new FburlProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new FburlProperty(
+            [
+              new MediatypeParameter('text/calendar')
+            ],
+            new URIType('ftp://example.com/busy/project-a.ifb')
+          ).repr(),
+          "FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb"
+        );
+      });
+    });
+
+    describe('CaladruriProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new CaladruriProperty(
+          [],
+          new URIType('http://example.com/calendar/jdoe')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new CaladruriProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new CaladruriProperty);
+        assert.throws(() => new CaladruriProperty(1));
+        assert.throws(() => new CaladruriProperty({}));
+        assert.throws(() => new CaladruriProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new CaladruriProperty(
+            [],
+            new URIType('http://example.com/calendar/jdoe')
+          ).repr(),
+          "CALADRURI:http://example.com/calendar/jdoe"
+        );
+      });
+    });
+
+    describe('CaluriProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new CaluriProperty(
+          [
+            new MediatypeParameter('text/calendar')
+          ],
+          new URIType('ftp://ftp.example.com/calA.ics')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new CaluriProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new CaluriProperty);
+        assert.throws(() => new CaluriProperty(1));
+        assert.throws(() => new CaluriProperty({}));
+        assert.throws(() => new CaluriProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new CaluriProperty(
+            [
+              new MediatypeParameter('text/calendar')
+            ],
+            new URIType('ftp://ftp.example.com/calA.ics')
+          ).repr(),
+          "CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics"
+        );
+      });
+    });
+  });
+
+  describe('Extended properties tests', () => {
+    describe('ExtendedProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new ExtendedProperty(
+          'X-CAR',
+          [],
+          new TextType('Volvo')
+         ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new ExtendedProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new ExtendedProperty);
+        assert.throws(() => new ExtendedProperty(1));
+        assert.throws(() => new ExtendedProperty({}));
+        assert.throws(() => new ExtendedProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new ExtendedProperty(
+            'X-CAR',
+            [],
+            new TextType('Volvo')
+           ).repr(),
+          "X-CAR:Volvo"
+        );
+      });
+    });
+  });
 });
