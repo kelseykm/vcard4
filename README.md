@@ -227,7 +227,7 @@ console.log(vc.repr());
     + [CaluriProperty](#caluriproperty)
   * [Extended Properties](#extended-properties)
     + [ExtendedProperty](#extendedproperty)
-- [```VCARD```](#---vcard---)
+- [```VCARD```](#vcard)
 
 ## Introduction
 
@@ -2095,7 +2095,7 @@ new ExtendedProperty(
 
 * ```VCARD``` should be called with a single argument that is an array whose items are the properties you want on the vCard
 
-* [`BeginProperty`](#BeginProperty), [`VersionProperty`](#VersionProperty) and [`EndProperty`](#EndProperty) instances must not be supplied in the array. These will be created automatically
+* [`BeginProperty`](#BeginProperty), [`VersionProperty`](#VersionProperty) and [`EndProperty`](#EndProperty) instances __must not__ be supplied in the array. These will be created automatically
 
 * There __must be at least one__ instance of [`FNProperty`](#FNProperty) supplied
 
