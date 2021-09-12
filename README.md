@@ -2099,9 +2099,9 @@ new ExtendedProperty(
 
 * There __must be at least one__ instance of [`FNProperty`](#FNProperty) supplied
 
-* There __must not be more than one__ instance of the following classes supplied: [`AnniversaryProperty`](#AnniversaryProperty), [`BdayProperty`](#BdayProperty), [`GenderProperty`](#GenderProperty), [`KindProperty`](#KindProperty), [`NProperty`](#NProperty), [`ProdidProperty`](#ProdidProperty), [`RevProperty`](#RevProperty), [`UIDProperty`](#UIDProperty)
+* There __must not be more than one__ instance of the following classes supplied: [`AnniversaryProperty`](#AnniversaryProperty), [`BdayProperty`](#BdayProperty), [`GenderProperty`](#GenderProperty), [`KindProperty`](#KindProperty), [`NProperty`](#NProperty), [`ProdidProperty`](#ProdidProperty), [`RevProperty`](#RevProperty) and [`UIDProperty`](#UIDProperty)
 
-* The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard
+* The only accessible method on an instance of ```VCARD``` is ```repr```, which returns a string containing the properly formatted vCard
 
 ```js
 let vc = new VCARD([
@@ -2111,7 +2111,7 @@ let vc = new VCARD([
   )
 ]);
 
-//calling repr, returns a properly formatted
+//calling repr, returns a properly formatted vCard
 vc.repr();
 // BEGIN:VCARD
 // VERSION:4.0
