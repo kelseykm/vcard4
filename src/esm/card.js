@@ -191,7 +191,7 @@ class VCARD {
 
         return hasMemberProperty ?
         hasMemberProperty && kindPropertyIsGroup :
-        true;
+        !hasMemberProperty;
       })()
     )
     throw new InvalidArgument('MemberProperty should only be used if the value of the KindProperty is "group"')
