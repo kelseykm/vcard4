@@ -209,6 +209,25 @@ console.log(vc.repr());
     + [OrgProperty](#orgproperty)
     + [MemberProperty](#memberproperty)
     + [RelatedProperty](#relatedproperty)
+  * [Explanatory Properties](#explanatory-properties)
+    + [CategoriesProperty](#categoriesproperty)
+    + [NoteProperty](#noteproperty)
+    + [ProdidProperty](#prodidproperty)
+    + [RevProperty](#revproperty)
+    + [SoundProperty](#soundproperty)
+    + [UIDProperty](#uidproperty)
+    + [ClientpidmapProperty](#clientpidmapproperty)
+    + [URLProperty](#urlproperty)
+    + [VersionProperty](#versionproperty)
+  * [Security Properties](#security-properties)
+    + [KeyProperty](#keyproperty)
+  * [Calendar Properties](#calendar-properties)
+    + [FburlProperty](#fburlproperty)
+    + [CaladruriProperty](#caladruriproperty)
+    + [CaluriProperty](#caluriproperty)
+  * [Extended Properties](#extended-properties)
+    + [ExtendedProperty](#extendedproperty)
+- [```VCARD```](#---vcard---)
 
 ## Introduction
 
@@ -638,7 +657,7 @@ new SexType('F');
 new SpecialValueType('VCARD', 'endproperty');
 ```
 
-* Where the second argument is [`KindProperty`](#KindProperty), the only accepted values for the first argument are ```individual```, ```group```, ```org```, ```location``` or a publicly defined valuetype format, registered with IANA, e.g. ```hybridCellSector_AGPS```, "```802.11```", e.t.c.
+* Where the second argument is [`KindProperty`](#KindProperty), the only accepted values for the first argument are ```individual```, ```group```, ```org```, ```location``` or an identifier registered with IANA, e.g. ```hybridCellSector_AGPS```, "```802.11```", e.t.c.
 
 ```js
 new SpecialValueType('org', 'KindProperty');
@@ -904,7 +923,7 @@ pid.repr();
 
 * The value of the second argument should be a string with the name of the target property as already mentioned
 
-* For all target properties, the value of the first argument should be a string, whose value is either ```"work"```, ```"home"```, an IANA token or an x-name (names that begin with "x-" or "X-" and are reserved for experimental use, not intended for released products, or for use in bilateral agreements)
+* For all target properties, the value of the first argument should be a string, whose value is either ```"work"```, ```"home"```, an identifier registered with IANA or an x-name (names that begin with "x-" or "X-" and are reserved for experimental use, not intended for released products, or for use in bilateral agreements)
 
 * Where the value of the second argument is ```"TelProperty"``` (case insensitive), the value of the first argument may be ```"text"```, ```"voice"```, ```"fax"```, ```"cell"```, ```"video"```, ```"pager"``` or ```"textphone"```, in addition to the values specified above for all target properties
 
@@ -944,7 +963,7 @@ new MediatypeParameter([
 
 * This class represents the "CALSCALE" parameter
 
-* ```CalscaleParameter``` should be called with a single argument of type string, whose value is either ```gregorian``` or an x-name
+* ```CalscaleParameter``` should be called with a single argument of type string, whose value is either ```gregorian``` or an x-name (names that begin with "x-" or "X-" and are reserved for experimental use, not intended for released products, or for use in bilateral agreements)
 
 ```js
 new CalscaleParameter('gregorian');
@@ -996,7 +1015,7 @@ new TzParameter(
 
 * This class is for creating extended parameters
 
-* ```AnyParameter``` should be called with two arguments of type string. The first argument is the name of the extended parameter, which should be either an identifier registered with IANA or an x-name. The second argument is the value
+* ```AnyParameter``` should be called with two arguments of type string. The first argument is the name of the extended parameter, which should be either an identifier registered with IANA or an x-name (names that begin with "x-" or "X-" and are reserved for experimental use, not intended for released products, or for use in bilateral agreements). The second argument is the value
 
 ```js
 new AnyParameter('X-CAR', 'Volvo');
@@ -1772,4 +1791,331 @@ new RelatedProperty(
   ],
   relPropVal
 );
+```
+
+### Explanatory Properties
+
+#### CategoriesProperty
+
+* This class represents the "CATEGORIES" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```CategoriesProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```CategoriesProperty``` should be of type [`TextType`](#TextType-and-TextListType) or [`TextListType`](#TextType-and-TextListType)
+
+```js
+new CategoriesProperty(
+  [],
+  new TextType('TRAVEL AGENT')
+);
+
+new CategoriesProperty(
+  [],
+  new TextListType([
+    new TextType('INTERNET'),
+    new TextType('IETF'),
+    new TextType('INDUSTRY')
+  ])
+);
+```
+
+#### NoteProperty
+
+* This class represents the "NOTE" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```NoteProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```NoteProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+
+```js
+new NoteProperty(
+  [],
+  new TextType('This fax number is operational 0800 to 1715 EST, Mon-Fri.')
+);
+```
+
+#### ProdidProperty
+
+* This class represents the "PRODID" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```ProdidProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```ProdidProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+
+```js
+new ProdidProperty(
+  [],
+  new TextType('-//ONLINE DIRECTORY//NONSGML Version 1//EN')
+);
+```
+
+#### RevProperty
+
+* This class represents the "REV" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```RevProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```RevProperty``` should be of type [`DateTimeType`](#DateTimeType) of type ```timestamp```
+
+```js
+new RevProperty(
+  [],
+  new DateTimeType('19951031T222710Z', 'timestamp')
+);
+```
+
+#### SoundProperty
+
+* This class represents the "SOUND" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```SoundProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```SoundProperty``` should be of type [`URIType`](#URIType)
+
+```js
+new SoundProperty(
+  [],
+  new URIType('CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com')
+);
+
+new SoundProperty(
+  [],
+  new URIType('data:audio/basic;base64,MIICajCCAdOgAwIBAgICBEUwDQYJKoZIhAQEEBQAwdzELMAkGA1UEBhMCVVMxLDAqBgNVBAoTI05ldHNjYXBlIENvbW11bmljYXRpb25zIENvcnBvcmF0aW9uMRwwGgYDVQQLExNJbmZvcm1hdGlvbiBTeXN0')
+);
+```
+
+#### UIDProperty
+
+* This class represents the "UID" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```UIDProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```UIDProperty``` should be of type [`URIType`](#URIType) or [`TextType`](#TextType-and-TextListType)
+
+```js
+new UIDProperty(
+  [],
+  new URIType('urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6')
+);
+```
+
+#### ClientpidmapProperty
+
+* This class represents the "CLIENTPIDMAP" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameter of ```ClientpidmapProperty``` is [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```ClientpidmapProperty``` should be of type [`SpecialValueType`](#SpecialValueType)
+
+```js
+new ClientpidmapProperty(
+  [],
+  new SpecialValueType(
+    [
+      new IntegerType(1),
+      new URIType('urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b')
+    ],
+    'clientpidmapproperty'
+  )
+);
+```
+
+#### URLProperty
+
+* This class represents the "URL" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```URLProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```URLProperty``` should be of type [`URIType`](#URIType)
+
+```js
+new URLProperty(
+  [],
+  new URIType('http://example.org/restaurant.french/chezchic.html')
+);
+```
+
+#### VersionProperty
+
+* This class represents the "VERSION" property
+
+* There should be no need of creating an instance of this class, as it is done automatically
+
+* ```VersionProperty``` takes no arguments
+
+* It's value is of type [`TextType`](#TextType-and-TextListType)
+
+```js
+new VersionProperty;
+```
+
+### Security Properties
+
+#### KeyProperty
+
+* This class represents the "KEY" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```KeyProperty``` are [`ValueParameter`](#ValueParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter) and [`AnyParameter`](#AnyParameter)
+
+* The [`MediatypeParameter`](#MediatypeParameter) may only be used if the value is of type [`URIType`](#URIType)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```KeyProperty``` should be of type [`URIType`](#URIType) or [`TextType`](#TextType-and-TextListType)
+
+```js
+new KeyProperty(
+  [
+    new MediatypeParameter('application/pgp-keys')
+  ],
+  new URIType('ftp://example.com/keys/jdoe')
+);
+```
+
+### Calendar Properties
+
+#### FburlProperty
+
+* This class represents the "FBURL" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```FburlProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```FburlProperty``` should be of type [`URIType`](#URIType)
+
+```js
+new FburlProperty(
+  [
+    new MediatypeParameter('text/calendar')
+  ],
+  new URIType('ftp://example.com/busy/project-a.ifb')
+);
+```
+
+#### CaladruriProperty
+
+* This class represents the "CALADRURI" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```CaladruriProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```CaladruriProperty``` should be of type [`URIType`](#URIType)
+
+```js
+new CaladruriProperty(
+  [],
+  new URIType('http://example.com/calendar/jdoe')
+);
+```
+
+#### CaluriProperty
+
+* This class represents the "CALURI" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```CaluriProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```CaluriProperty``` should be of type [`URIType`](#URIType)
+
+```js
+new CaluriProperty(
+  [
+    new MediatypeParameter('text/calendar')
+  ],
+  new URIType('ftp://ftp.example.com/calA.ics')
+);
+```
+
+### Extended Properties
+
+#### ExtendedProperty
+
+* This class is for creating extended properties
+
+* This class should be called with three argument. The first argument, a string, should be the name of the extended parameter and it must be an x-name (names that begin with "x-" or "X-" and are reserved for experimental use, not intended for released products, or for use in bilateral agreements). The second should be an array of the parameters, and the third the value of the property
+
+* All the afore documented [parameters](#property-parameters) and [values](#property-value-data-types) are valid
+
+* If you do not wish that the property have any parameters, leave the second argument array empty
+
+```js
+new ExtendedProperty(
+  'X-CAR',
+  [],
+  new TextType('Volvo')
+ );
+```
+
+## ```VCARD```
+
+* This class is for assembling all the properties into one vCard object
+
+* ```VCARD``` should be called with a single argument that is an array whose items are the properties you want on the vCard
+
+* [`BeginProperty`](#BeginProperty), [`VersionProperty`](#VersionProperty) and [`EndProperty`](#EndProperty) instances must not be supplied in the array. These will be created automatically
+
+* There __must be at least one__ instance of [`FNProperty`](#FNProperty) supplied
+
+* There __must not be more than one__ instance of the following classes supplied: [`AnniversaryProperty`](#AnniversaryProperty), [`BdayProperty`](#BdayProperty), [`GenderProperty`](#GenderProperty), [`KindProperty`](#KindProperty), [`NProperty`](#NProperty), [`ProdidProperty`](#ProdidProperty), [`RevProperty`](#RevProperty), [`UIDProperty`](#UIDProperty)
+
+* The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard
+
+```js
+let vc = new VCARD([
+  new FNProperty(
+    [],
+    new TextType('James Bond')
+  )
+]);
+
+//calling repr, returns a properly formatted
+vc.repr();
+// BEGIN:VCARD
+// VERSION:4.0
+// FN:James Bond
+// END:VCARD
+//
 ```
