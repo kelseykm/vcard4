@@ -22,7 +22,9 @@ npm install vcard4
 git clone https://github.com/kelseykm/vcard4.git
 ```
 
-### Example use
+### Example uses
+
+#### Creating a vCard
 
 ```
 BEGIN:VCARD
@@ -147,6 +149,48 @@ vc.repr();
 console.log(vc.repr());
 ```
 
+#### Parsing a vCard
+
+```js
+import { parse } from 'vcard4';
+import fs from 'fs';
+
+// or if using commonjs
+// const { parse } = require('vcard4');
+
+let vcard = fs.readFileSync('contact.vcf');
+
+let parsedVcard = parse(vcard.toString());
+
+console.log(parsedVcard);
+// {
+//   BEGIN: { parameters: undefined, value: 'VCARD' },
+//   VERSION: { parameters: undefined, value: '4.0' },
+//   N: { parameters: undefined, value: 'Doe;John;;;' },
+//   FN: { parameters: undefined, value: 'John Doe' },
+//   ORG: { parameters: undefined, value: 'Example.com Inc.;Marketing' },
+//   TITLE: { parameters: undefined, value: 'Imaginary test person' },
+//   EMAIL: {
+//     parameters: { TYPE: 'work', PREF: '1' },
+//     value: 'johnDoe@example.org'
+//   },
+//   TEL: [
+//     { parameters: { TYPE: 'cell' }, value: 'tel:+1 781 555 1212' },
+//     { parameters: { TYPE: 'home' }, value: 'tel:+1 202 555 1212' }
+//   ],
+//   NOTE: {
+//     parameters: undefined,
+//     value: 'John Doe has a long and varied history\\, being documented on more police files than anyone else. Reports of his death are alas numerous.'
+//   },
+//   CATEGORIES: { parameters: undefined, value: 'Work,Test group' },
+//   'X-ABUID': {
+//     parameters: undefined,
+//     value: '5AD380FD-B2DE-4261-BA99-DE1D1DB52FBE\\:ABPerson'
+//   },
+//   END: { parameters: undefined, value: 'VCARD' }
+// }
+```
+
 # DOCUMENTATION
 
 ## Table of Contents
@@ -228,6 +272,7 @@ console.log(vc.repr());
   * [Extended Properties](#extended-properties)
     + [ExtendedProperty](#extendedproperty)
 - [```VCARD```](#vcard)
+- [```parse```](#parse)
 
 ## Introduction
 
@@ -236,6 +281,8 @@ console.log(vc.repr());
 * That RFC defines the vCard data format for representing and exchanging a variety of information about individuals and other entities (e.g., formatted and structured name and delivery addresses, email address, multiple telephone numbers, photograph, logo, audio clips, etc.)
 
 * The vCards made with this library are strictly version 4.0 vCards
+
+* Although the library is primarily intended for _creating_ vCards, a simple vCard [parser](#parse) has been provided
 
 * This library may be used in node or in the browser. It supports the latest versions of both out of the box. For use in old browsers or old node versions, you should transpile the code with ___Babel___
 
@@ -2118,4 +2165,52 @@ vc.repr();
 // FN:James Bond
 // END:VCARD
 //
+```
+
+## ```parse```
+
+* This function is for parsing version 4.0 vCards
+
+* It is a simple parser that returns an object containing the parsed vCard
+
+* ```parse``` should be called with a single argument of type string, that is properly formatted version 4.0 vCard
+
+```js
+import { parse } from 'vcard4';
+import fs from 'fs';
+
+// or if using commonjs
+// const { parse } = require('vcard4');
+
+let vcard = fs.readFileSync('contact.vcf');
+
+let parsedVcard = parse(vcard.toString());
+
+console.log(parsedVcard);
+// {
+//   BEGIN: { parameters: undefined, value: 'VCARD' },
+//   VERSION: { parameters: undefined, value: '4.0' },
+//   N: { parameters: undefined, value: 'Doe;John;;;' },
+//   FN: { parameters: undefined, value: 'John Doe' },
+//   ORG: { parameters: undefined, value: 'Example.com Inc.;Marketing' },
+//   TITLE: { parameters: undefined, value: 'Imaginary test person' },
+//   EMAIL: {
+//     parameters: { TYPE: 'work', PREF: '1' },
+//     value: 'johnDoe@example.org'
+//   },
+//   TEL: [
+//     { parameters: { TYPE: 'cell' }, value: 'tel:+1 781 555 1212' },
+//     { parameters: { TYPE: 'home' }, value: 'tel:+1 202 555 1212' }
+//   ],
+//   NOTE: {
+//     parameters: undefined,
+//     value: 'John Doe has a long and varied history\\, being documented on more police files than anyone else. Reports of his death are alas numerous.'
+//   },
+//   CATEGORIES: { parameters: undefined, value: 'Work,Test group' },
+//   'X-ABUID': {
+//     parameters: undefined,
+//     value: '5AD380FD-B2DE-4261-BA99-DE1D1DB52FBE\\:ABPerson'
+//   },
+//   END: { parameters: undefined, value: 'VCARD' }
+// }
 ```
