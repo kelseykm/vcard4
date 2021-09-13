@@ -3,5 +3,6 @@ module.exports = {
   values: require('./src/cjs/values'),
   parameters: require('./src/cjs/parameters'),
   properties: require('./src/cjs/properties'),
-  VCARD: require('./src/cjs/card')
+  VCARD: require('./src/cjs/card'),
+  parse: require('./src/cjs/parse')
 };
