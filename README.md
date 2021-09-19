@@ -284,7 +284,9 @@ console.log(parsedVcard);
 
 * Although the library is primarily intended for _creating_ vCards, a simple vCard [parser](#parse) has been provided
 
-* This library may be used in node or in the browser. It supports the latest versions of both out of the box. For use in old browsers or old node versions, you should transpile the code with ___Babel___
+* This library may be used in node or in the browser. It supports the latest versions of both out of the box. For use in old browsers or old node versions, you should transpile the code with ___Babel___ or any other transpiler of your choice
+
+    * __NB__: __vcard4__ uses private class fields and methods heavily. This poses a problem for Safari users because Safari does not support private class methods. It is advised to transpile the code using ___Babel___ or any other transpiler of your choice
 
 * __vcard4__ supports both ES6 module import/export and commonjs require
 
@@ -314,19 +316,19 @@ console.log(parsedVcard);
     21. iana-valuespec
 
 * In the library, these are represented by the following classes:
-    1. [`TextType`](#TextType-and-TextListType)
-    2. [`TextListType`](#TextType-and-TextListType)
-    3. [`DateTimeType`](#DateTimeType)
-    4. [`DateTimeListType`](#DateTimeListType)
-    5. [`BooleanType`](#BooleanType)
-    6. [`IntegerType`](#IntegerType-and-IntegerListType)
-    7. [`IntegerListType`](#IntegerType-and-IntegerListType)
-    8. [`FloatType`](#FloatType-and-FloatListType)
-    9. [`FloatListType`](#FloatType-and-FloatListType)
-    10. [` LanguageTagType`](#LanguageTagType)
-    11. [` URIType`](#URIType)
-    12. [` SexType`](#SexType)
-    13. [` SpecialValueType`](#SpecialValueType)
+    1. [`TextType`](#texttype-and-textlisttype)
+    2. [`TextListType`](#texttype-and-textlisttype)
+    3. [`DateTimeType`](#datetimetype)
+    4. [`DateTimeListType`](#datetimelisttype)
+    5. [`BooleanType`](#booleantype)
+    6. [`IntegerType`](#integertype-and-integerlisttype)
+    7. [`IntegerListType`](#integertype-and-integerlisttype)
+    8. [`FloatType`](#floattype-and-floatlisttype)
+    9. [`FloatListType`](#floattype-and-floatlisttype)
+    10. [` LanguageTagType`](#languagetagtype)
+    11. [` URIType`](#uritype)
+    12. [` SexType`](#sextype)
+    13. [` SpecialValueType`](#specialvaluetype)
 
 * The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard. For example,
 
@@ -669,7 +671,7 @@ new LanguageTagType('en-us');
 
 ### SexType
 
-* This class is for use with the [`GenderProperty`](#GenderProperty)
+* This class is for use with the [`GenderProperty`](#genderproperty)
 
 * ```SexType``` should be called with a single argument of type string
 
@@ -683,14 +685,14 @@ new SexType('F');
 
 * This class is for use with properties which do not have values of the types already described. Those properties include:
 
-    1. [`BeginProperty`](#BeginProperty)
-    2. [`EndProperty`](#EndProperty)
-    3. [`KindProperty`](#KindProperty)
-    4. [`NProperty`](#NProperty)
-    5. [`GenderProperty`](#GenderProperty)
-    6. [`AdrProperty`](#AdrProperty)
-    7. [`OrgProperty`](#OrgProperty)
-    8. [`ClientpidmapProperty`](#ClientpidmapProperty)
+    1. [`BeginProperty`](#beginproperty)
+    2. [`EndProperty`](#endproperty)
+    3. [`KindProperty`](#kindproperty)
+    4. [`NProperty`](#nproperty)
+    5. [`GenderProperty`](#genderproperty)
+    6. [`AdrProperty`](#adrproperty)
+    7. [`OrgProperty`](#orgproperty)
+    8. [`ClientpidmapProperty`](#clientpidmapproperty)
 
 * ```SpecialValueType``` should be called with two arguments, both of type string. The first should be the value and the second should be the target property
 
@@ -698,19 +700,19 @@ new SexType('F');
 
 * The value first argument depends on the value of the second argument
 
-* Where the second argument is either [`BeginProperty`](#BeginProperty) or [`EndProperty`](#EndProperty), the only accepted value for the first argument is ```VCARD```.
+* Where the second argument is either [`BeginProperty`](#beginproperty) or [`EndProperty`](#endproperty), the only accepted value for the first argument is ```VCARD```.
 
 ```js
 new SpecialValueType('VCARD', 'endproperty');
 ```
 
-* Where the second argument is [`KindProperty`](#KindProperty), the only accepted values for the first argument are ```individual```, ```group```, ```org```, ```location``` or an identifier registered with IANA, e.g. ```hybridCellSector_AGPS```, "```802.11```", e.t.c.
+* Where the second argument is [`KindProperty`](#kindproperty), the only accepted values for the first argument are ```individual```, ```group```, ```org```, ```location``` or an identifier registered with IANA, e.g. ```hybridCellSector_AGPS```, "```802.11```", e.t.c.
 
 ```js
 new SpecialValueType('org', 'KindProperty');
 ```
 
-* Where the second argument is [`NProperty`](#NProperty), the only accepted value for the first argument is an array of length 5. The items in the array, if present, must be of type [`TextType`](#TextType-and-TextListType) or [`TextListType`](#TextType-and-TextListType), otherwise, __they must be left empty__ as demonstrated in the example below
+* Where the second argument is [`NProperty`](#nproperty), the only accepted value for the first argument is an array of length 5. The items in the array, if present, must be of type [`TextType`](#texttype-and-textlisttype) or [`TextListType`](#texttype-and-textlisttype), otherwise, __they must be left empty__ as demonstrated in the example below
 
 * The 5 items in the array correspond to the following respectively:
     1. Family Names (also known as surnames)
@@ -719,7 +721,7 @@ new SpecialValueType('org', 'KindProperty');
     4. Honorific Prefixes
     5. Honorific Suffixes
 
-* Individual text components can include multiple text values (hence the use of [`TextListType`](#TextType-and-TextListType)). In the example below, the person has multiple honorific prefixes
+* Individual text components can include multiple text values (hence the use of [`TextListType`](#texttype-and-textlisttype)). In the example below, the person has multiple honorific prefixes
 
 ```js
 let nameArr = new Array(5);
@@ -733,7 +735,7 @@ nameArr[3] = new TextListType([
 new SpecialValueType(nameArr, 'NProperty');
 ```
 
-* Where the second argument is [`GenderProperty`](#GenderProperty), the only accepted value for the first argument is an array of length 2. The first item in the array, if present, must be of type [`SexType`](#SexType), while the second, if present, must be of the type [`TextType`](#TextType-and-TextListType), otherwise, __they must be left empty__. Note that __only one__ can be left empty, so if one is left empty, the other must be present
+* Where the second argument is [`GenderProperty`](#genderproperty), the only accepted value for the first argument is an array of length 2. The first item in the array, if present, must be of type [`SexType`](#sextype), while the second, if present, must be of the type [`TextType`](#texttype-and-textlisttype), otherwise, __they must be left empty__. Note that __only one__ can be left empty, so if one is left empty, the other must be present
 
 ```js
 new SpecialValueType(
@@ -745,7 +747,7 @@ new SpecialValueType(
 );
 ```
 
-* Where the second argument is [`AdrProperty`](#AdrProperty), the only accepted value for the first argument is an array of length 7. The items in the array, if present, must be of type [`TextType`](#TextType-and-TextListType), otherwise, __they must be left empty__
+* Where the second argument is [`AdrProperty`](#adrproperty), the only accepted value for the first argument is an array of length 7. The items in the array, if present, must be of type [`TextType`](#texttype-and-textlisttype), otherwise, __they must be left empty__
 
 * The 7 items in the array correspond to the following respectively:
     1. the post office box
@@ -763,7 +765,7 @@ adrArr[3] = new TextType('Main street');
 new SpecialValueType(adrArr, 'AdrProperty');
 ```
 
-* Where the second argument is [`OrgProperty`](#OrgProperty), the only accepted value for the first argument is an array, with at least one item but with no length limit. The items in the array must be of type [`TextType`](#TextType-and-TextListType)
+* Where the second argument is [`OrgProperty`](#orgproperty), the only accepted value for the first argument is an array, with at least one item but with no length limit. The items in the array must be of type [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new SpecialValueType(
@@ -775,7 +777,7 @@ new SpecialValueType(
 )
 ```
 
-* Where the second argument is [`ClientpidmapProperty`](#ClientpidmapProperty), the only accepted value for the first argument is an array of length 2. The first item in the array must be of type [`IntegerType`](#IntegerType-and-IntegerListType), while the second, must be of the type [`URIType`](#URIType). __None of the items can be left empty__
+* Where the second argument is [`ClientpidmapProperty`](#clientpidmapproperty), the only accepted value for the first argument is an array of length 2. The first item in the array must be of type [`IntegerType`](#integertype-and-integerlisttype), while the second, must be of the type [`URIType`](#uritype). __None of the items can be left empty__
 
 ```js
 new SpecialValueType(
@@ -805,19 +807,19 @@ new SpecialValueType(
     11. TZ
 
 * In the library, these are represented by:
-    1. [`LanguageParameter`](#LanguageParameter)
+    1. [`LanguageParameter`](#languageparameter)
     2. [`ValueParameter`](#ValueParameter)
-    3. [`PrefParameter`](#PrefParameter)
-    4. [`AltidParameter`](#AltidParameter)
-    5. [`PIDParameter`](#PIDParameter)
-    6. [`TypeParameter`](#TypeParameter)
-    7. [`MediatypeParameter`](#MediatypeParameter)
-    8. [`CalscaleParameter`](#CalscaleParameter)
-    9. [`SortAsParameter`](#SortAsParameter)
-    10. [`GeoParameter`](#GeoParameter)
-    11. [`TzParameter`](#TzParameter)
-    12. [`AnyParameter`](#AnyParameter)
-    13. [`LabelParameter`](#LabelParameter)
+    3. [`PrefParameter`](#prefparameter)
+    4. [`AltidParameter`](#altidparameter)
+    5. [`PIDParameter`](#pidparameter)
+    6. [`TypeParameter`](#typeparameter)
+    7. [`MediatypeParameter`](#mediatypeparameter)
+    8. [`CalscaleParameter`](#calscaleparameter)
+    9. [`SortAsParameter`](#sortasparameter)
+    10. [`GeoParameter`](#geoparameter)
+    11. [`TzParameter`](#tzparameter)
+    12. [`AnyParameter`](#anyparameter)
+    13. [`LabelParameter`](#labelparameter)
 
 * The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard. For example,
 
@@ -834,7 +836,7 @@ new LanguageParameter(
 
 * This class represents the "LANGUAGE" parameter
 
-* ```LanguageParameter``` should be called with a single argument of type [`LanguageTagType`](#LanguageTagType)
+* ```LanguageParameter``` should be called with a single argument of type [`LanguageTagType`](#languagetagtype)
 
 ```js
 new LanguageParameter(
@@ -849,7 +851,7 @@ new LanguageParameter(
 * It is used to identify the data type of the value of a property
 
 * ```ValueParameter``` should be called with a single argument of either one of the following types:
-[`TextType`](#texttype-and-textlisttype), [`BooleanType`](#BooleanType), [`DateTimeType`](#DateTimeType), [`IntegerType`](#IntegerType-and-IntegerListType), [`FloatType`](#FloatType-and-FloatListType), [`LanguageTagType`](#LanguageTagType), [`URIType`](#URIType) and [`SpecialValueType`](#SpecialValueType)
+[`TextType`](#texttype-and-textlisttype), [`BooleanType`](#booleantype), [`DateTimeType`](#datetimetype), [`IntegerType`](#integertype-and-integerlisttype), [`FloatType`](#floattype-and-floatlisttype), [`LanguageTagType`](#languagetagtype), [`URIType`](#uritype) and [`SpecialValueType`](#specialvaluetype)
 
 * Note that the data type specified by the ```ValueParameter``` must correspond to the value of the property
 
@@ -1034,7 +1036,7 @@ new SortAsParameter('Pau Shou Chang');
 
 * This class represents the "GEO" parameter
 
-* ```GeoParameter``` should be called with a single argument of type [`URIType`](#URIType)
+* ```GeoParameter``` should be called with a single argument of type [`URIType`](#uritype)
 
 ```js
 new GeoParameter(
@@ -1046,7 +1048,7 @@ new GeoParameter(
 
 * This class represents the "TZ" parameter
 
-* ```TzParameter``` should be called with a single argument of type [`URIType`](#URIType), or [`TextType`](#texttype-and-textlisttype), or [`DateTimeType`](#DateTimeType) with the type ```utc-offset```
+* ```TzParameter``` should be called with a single argument of type [`URIType`](#uritype), or [`TextType`](#texttype-and-textlisttype), or [`DateTimeType`](#datetimetype) with the type ```utc-offset```
 
 ```js
 new TzParameter(
@@ -1163,45 +1165,45 @@ new LabelParameter(deliveryAddress);
 
 * In the library, they are represented by the following classes:
 
-    1. [`BeginProperty`](#BeginProperty)
-    2. [`EndProperty`](#EndProperty)
-    3. [`SourceProperty`](#SourceProperty)
-    4. [`KindProperty`](#KindProperty)
-    5. [`XMLProperty`](#XMLProperty)
-    6. [`FNProperty`](#FNProperty)
-    7. [`NProperty`](#NProperty)
-    8. [`NicknameProperty`](#NicknameProperty)
-    9. [`PhotoProperty`](#PhotoProperty)
-    10. [`BdayProperty`](#BdayProperty)
-    11. [`AnniversaryProperty`](#AnniversaryProperty)
-    12. [`GenderProperty`](#GenderProperty)
-    13. [`AdrProperty`](#AdrProperty)
-    14. [`TelProperty`](#TelProperty)
-    15. [`EmailProperty`](#EmailProperty)
-    16. [`IMPPProperty`](#IMPPProperty)
-    17. [`LangProperty`](#LangProperty)
-    18. [`TzProperty`](#TzProperty)
-    19. [`GeoProperty`](#GeoProperty)
-    20. [`TitleProperty`](#TitleProperty)
-    21. [`RoleProperty`](#RoleProperty)
-    22. [`LogoProperty`](#LogoProperty)
-    23. [`OrgProperty`](#OrgProperty)
-    24. [`MemberProperty`](#MemberProperty)
-    25. [`RelatedProperty`](#RelatedProperty)
-    26. [`CategoriesProperty`](#CategoriesProperty)
-    27. [`NoteProperty`](#NoteProperty)
-    28. [`ProdidProperty`](#ProdidProperty)
-    29. [`RevProperty`](#RevProperty)
-    30. [`SoundProperty`](#SoundProperty)
-    31. [`UIDProperty`](#UIDProperty)
-    32. [`ClientpidmapProperty`](#ClientpidmapProperty)
-    33. [`URLProperty`](#URLProperty)
-    34. [`VersionProperty`](#VersionProperty)
-    35. [`KeyProperty`](#KeyProperty)
-    36. [`FburlProperty`](#FburlProperty)
-    37. [`CaladruriProperty`](#CaladruriProperty)
-    38. [`CaluriProperty`](#CaluriProperty)
-    39. [`ExtendedProperty`](#ExtendedProperty)
+    1. [`BeginProperty`](#beginproperty)
+    2. [`EndProperty`](#endproperty)
+    3. [`SourceProperty`](#sourceproperty)
+    4. [`KindProperty`](#kindproperty)
+    5. [`XMLProperty`](#xmlproperty)
+    6. [`FNProperty`](#fnproperty)
+    7. [`NProperty`](#nproperty)
+    8. [`NicknameProperty`](#nicknameproperty)
+    9. [`PhotoProperty`](#photoproperty)
+    10. [`BdayProperty`](#bdayproperty)
+    11. [`AnniversaryProperty`](#anniversaryproperty)
+    12. [`GenderProperty`](#genderproperty)
+    13. [`AdrProperty`](#adrproperty)
+    14. [`TelProperty`](#telproperty)
+    15. [`EmailProperty`](#emailproperty)
+    16. [`IMPPProperty`](#imppproperty)
+    17. [`LangProperty`](#langproperty)
+    18. [`TzProperty`](#tzproperty)
+    19. [`GeoProperty`](#geoproperty)
+    20. [`TitleProperty`](#titleproperty)
+    21. [`RoleProperty`](#roleproperty)
+    22. [`LogoProperty`](#logoproperty)
+    23. [`OrgProperty`](#orgproperty)
+    24. [`MemberProperty`](#memberproperty)
+    25. [`RelatedProperty`](#relatedproperty)
+    26. [`CategoriesProperty`](#categoriesproperty)
+    27. [`NoteProperty`](#noteproperty)
+    28. [`ProdidProperty`](#prodidproperty)
+    29. [`RevProperty`](#revproperty)
+    30. [`SoundProperty`](#soundproperty)
+    31. [`UIDProperty`](#uidproperty)
+    32. [`ClientpidmapProperty`](#clientpidmapproperty)
+    33. [`URLProperty`](#urlproperty)
+    34. [`VersionProperty`](#versionproperty)
+    35. [`KeyProperty`](#keyproperty)
+    36. [`FburlProperty`](#fburlproperty)
+    37. [`CaladruriProperty`](#caladruriproperty)
+    38. [`CaluriProperty`](#caluriproperty)
+    39. [`ExtendedProperty`](#extendedproperty)
 
 * The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard. For example,
 
@@ -1237,7 +1239,7 @@ new GenderProperty(
 
 * ```BeginProperty``` takes no arguments
 
-* It's value is of type [`SpecialValueType`](#SpecialValueType)
+* It's value is of type [`SpecialValueType`](#specialvaluetype)
 
 ```js
 new BeginProperty;
@@ -1251,7 +1253,7 @@ new BeginProperty;
 
 * ```EndProperty``` takes no arguments
 
-* It's value is of type [`SpecialValueType`](#SpecialValueType)
+* It's value is of type [`SpecialValueType`](#specialvaluetype)
 
 ```js
 new EndProperty;
@@ -1263,11 +1265,11 @@ new EndProperty;
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```SourceProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter), [`MediatypeParameter`](#MediatypeParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```SourceProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`MediatypeParameter`](#mediatypeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```SourceProperty``` should be of type [`URIType`](#URIType)
+* The value of ```SourceProperty``` should be of type [`URIType`](#uritype)
 
 ```js
 new SourceProperty(
@@ -1282,11 +1284,11 @@ new SourceProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```KindProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```KindProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```KindProperty``` should be of type [`SpecialValueType`](#SpecialValueType)
+* The value of ```KindProperty``` should be of type [`SpecialValueType`](#specialvaluetype)
 
 ```js
 new KindProperty(
@@ -1301,11 +1303,11 @@ new KindProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```XMLProperty``` are [`ValueParameter`](#ValueParameter) and [`AltidParameter`](#AltidParameter)
+* The only acceptable parameters of ```XMLProperty``` are [`ValueParameter`](#ValueParameter) and [`AltidParameter`](#altidparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```XMLProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+* The value of ```XMLProperty``` should be of type [`TextType`](#texttype-and-textlisttype)
 
 ```js
 let xmlPropValue = `<?xml version="1.0" encoding="ISO-8859-1"?>  
@@ -1327,11 +1329,11 @@ new XMLProperty([], xmlPropValue );
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```FNProperty``` are [`ValueParameter`](#ValueParameter), [`TypeParameter`](#TypeParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```FNProperty``` are [`ValueParameter`](#ValueParameter), [`TypeParameter`](#typeparameter), [`LanguageParameter`](#languageparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```FNProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+* The value of ```FNProperty``` should be of type [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new FNProperty(
@@ -1346,11 +1348,11 @@ new FNProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```NProperty``` are [`ValueParameter`](#ValueParameter), [`SortAsParameter`](#SortAsParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```NProperty``` are [`ValueParameter`](#ValueParameter), [`SortAsParameter`](#sortasparameter), [`LanguageParameter`](#languageparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```NProperty``` should be of type [`SpecialValueType`](#SpecialValueType)
+* The value of ```NProperty``` should be of type [`SpecialValueType`](#specialvaluetype)
 
 ```js
 let nArr = [
@@ -1386,11 +1388,11 @@ new NProperty(
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
 * The only acceptable parameters of ```NicknameProperty``` are
-[`ValueParameter`](#ValueParameter), [`TypeParameter`](#TypeParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter) and [`AnyParameter`](#AnyParameter)
+[`ValueParameter`](#ValueParameter), [`TypeParameter`](#typeparameter), [`LanguageParameter`](#languageparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```NicknameProperty``` should be of type [`TextType`](#TextType-and-TextListType) or [`TextListType`](#TextType-and-TextListType)
+* The value of ```NicknameProperty``` should be of type [`TextType`](#texttype-and-textlisttype) or [`TextListType`](#texttype-and-textlisttype)
 
 ```js
 new NicknameProperty(
@@ -1423,11 +1425,11 @@ new NicknameProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```PhotoProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#AltidParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`PrefParameter`](#PrefParameter), [`PIDParameter`](#PIDParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```PhotoProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`PrefParameter`](#prefparameter), [`PIDParameter`](#pidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```PhotoProperty``` should be of type [`URIType`](#URIType)
+* The value of ```PhotoProperty``` should be of type [`URIType`](#uritype)
 
 ```js
 new PhotoProperty(
@@ -1447,15 +1449,15 @@ new PhotoProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```BdayProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`AltidParameter`](#AltidParameter), [`CalscaleParameter`](#CalscaleParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```BdayProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`AltidParameter`](#altidparameter), [`CalscaleParameter`](#calscaleparameter) and [`AnyParameter`](#anyparameter)
 
-* [`CalscaleParameter`](#CalscaleParameter) may only be used when the value is of type [`DateTimeType`](#DateTimeType)
+* [`CalscaleParameter`](#calscaleparameter) may only be used when the value is of type [`DateTimeType`](#datetimetype)
 
-* [`LanguageParameter`](#LanguageParameter) may only be used when the value is of type [`TextType`](#TextType-and-TextListType)
+* [`LanguageParameter`](#languageparameter) may only be used when the value is of type [`TextType`](#texttype-and-textlisttype)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```BdayProperty``` should be of type [`DateTimeType`](#DateTimeType) of the type ```dateandortime``` or [`TextType`](#TextType-and-TextListType)
+* The value of ```BdayProperty``` should be of type [`DateTimeType`](#datetimetype) of the type ```dateandortime``` or [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new BdayProperty(
@@ -1479,13 +1481,13 @@ new BdayProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```AnniversaryProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#AltidParameter), [`CalscaleParameter`](#CalscaleParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```AnniversaryProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#altidparameter), [`CalscaleParameter`](#calscaleparameter) and [`AnyParameter`](#anyparameter)
 
-* [`CalscaleParameter`](#CalscaleParameter) may only be used when the value is of type [`DateTimeType`](#DateTimeType)
+* [`CalscaleParameter`](#calscaleparameter) may only be used when the value is of type [`DateTimeType`](#datetimetype)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```AnniversaryProperty``` should be of type [`DateTimeType`](#DateTimeType) of the type ```dateandortime``` or [`TextType`](#TextType-and-TextListType)
+* The value of ```AnniversaryProperty``` should be of type [`DateTimeType`](#datetimetype) of the type ```dateandortime``` or [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new AnniversaryProperty(
@@ -1500,11 +1502,11 @@ new AnniversaryProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```GenderProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```GenderProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```GenderProperty``` should be of type [`SexType`](#SexType) or [`SpecialValueType`](#SpecialValueType)
+* The value of ```GenderProperty``` should be of type [`SexType`](#sextype) or [`SpecialValueType`](#specialvaluetype)
 
 ```js
 new GenderProperty(
@@ -1543,11 +1545,11 @@ new GenderProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```AdrProperty``` are [`LabelParameter`](#LabelParameter), [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`GeoParameter`](#GeoParameter), [`TzParameter`](#TzParameter), [`AltidParameter`](#AltidParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```AdrProperty``` are [`LabelParameter`](#labelparameter), [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`GeoParameter`](#geoparameter), [`TzParameter`](#tzparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```AdrProperty``` should be of type [`SpecialValueType`](#SpecialValueType)
+* The value of ```AdrProperty``` should be of type [`SpecialValueType`](#specialvaluetype)
 
 ```js
 let addrArr = new Array(7);
@@ -1575,13 +1577,13 @@ new AdrProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```TelProperty``` are [`ValueParameter`](#ValueParameter), [`MediatypeParameter`](#MediatypeParameter), [`TypeParameter`](#TypeParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```TelProperty``` are [`ValueParameter`](#ValueParameter), [`MediatypeParameter`](#mediatypeparameter), [`TypeParameter`](#typeparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
-* The [`MediatypeParameter`](#MediatypeParameter) may only be used if the value is of type [`URIType`](#URIType)
+* The [`MediatypeParameter`](#mediatypeparameter) may only be used if the value is of type [`URIType`](#uritype)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```TelProperty``` should be of type [`URIType`](#URIType) or [`TextType`](#TextType-and-TextListType)
+* The value of ```TelProperty``` should be of type [`URIType`](#uritype) or [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new TelProperty(
@@ -1596,11 +1598,11 @@ new TelProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```EmailProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```EmailProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```EmailProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+* The value of ```EmailProperty``` should be of type [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new EmailProperty(
@@ -1619,11 +1621,11 @@ new EmailProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```IMPPProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```IMPPProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```IMPPProperty``` should be of type [`URIType`](#URIType)
+* The value of ```IMPPProperty``` should be of type [`URIType`](#uritype)
 
 ```js
 new IMPPProperty(
@@ -1638,11 +1640,11 @@ new IMPPProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```LangProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```LangProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```LangProperty``` should be of type [`LanguageTagType`](#LanguageTagType)
+* The value of ```LangProperty``` should be of type [`LanguageTagType`](#languagetagtype)
 
 ```js
 new LangProperty(
@@ -1659,11 +1661,11 @@ new LangProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```TzProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#AltidParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```TzProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```TzProperty``` should be of type [`TextType`](#TextType-and-TextListType), [`URIType`](#URIType) or [`DateTimeType`](#DateTimeType)
+* The value of ```TzProperty``` should be of type [`TextType`](#texttype-and-textlisttype), [`URIType`](#uritype) or [`DateTimeType`](#datetimetype)
 
 ```js
 new TzProperty(
@@ -1683,11 +1685,11 @@ new TzProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```GeoProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```GeoProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```GeoProperty``` should be of type [`URIType`](#URIType)
+* The value of ```GeoProperty``` should be of type [`URIType`](#uritype)
 
 ```js
 new GeoProperty(
@@ -1704,11 +1706,11 @@ new GeoProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```TitleProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter), [`TypeParameter`](#TypeParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```TitleProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```TitleProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+* The value of ```TitleProperty``` should be of type [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new TitleProperty(
@@ -1727,7 +1729,7 @@ new TitleProperty(
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```RoleProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+* The value of ```RoleProperty``` should be of type [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new RoleProperty(
@@ -1742,11 +1744,11 @@ new RoleProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```LogoProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`PIDParameter`](#PIDParameter), PrefParameter, [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```LogoProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), PrefParameter, [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```LogoProperty``` should be of type [`URIType`](#URIType)
+* The value of ```LogoProperty``` should be of type [`URIType`](#uritype)
 
 ```js
 new LogoProperty(
@@ -1766,11 +1768,11 @@ new LogoProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```OrgProperty``` are [`ValueParameter`](#ValueParameter), [`SortAsParameter`](#SortAsParameter), [`LanguageParameter`](#LanguageParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter), [`TypeParameter`](#TypeParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```OrgProperty``` are [`ValueParameter`](#ValueParameter), [`SortAsParameter`](#sortasparameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```OrgProperty``` should be of type [`SpecialValueType`](#SpecialValueType)
+* The value of ```OrgProperty``` should be of type [`SpecialValueType`](#specialvaluetype)
 
 ```js
 new OrgProperty(
@@ -1790,15 +1792,15 @@ new OrgProperty(
 
 * This class represents the "MEMBER" property
 
-> This property should only be used if the value of the "KIND" ([`KindProperty`](#KindProperty)) property is "group"
+> This property should only be used if the value of the "KIND" ([`KindProperty`](#kindproperty)) property is "group"
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```MemberProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter), [`MediatypeParameter`](#MediatypeParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```MemberProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`MediatypeParameter`](#mediatypeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```MemberProperty``` should be of type [`URIType`](#URIType)
+* The value of ```MemberProperty``` should be of type [`URIType`](#uritype)
 
 ```js
 new MemberProperty(
@@ -1813,11 +1815,11 @@ new MemberProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```RelatedProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`MediatypeParameter`](#MediatypeParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`AltidParameter`](#AltidParameter), [`TypeParameter`](#TypeParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```RelatedProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`MediatypeParameter`](#mediatypeparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```RelatedProperty``` should be of type [`URIType`](#URIType) or [`TextType`](#TextType-and-TextListType)
+* The value of ```RelatedProperty``` should be of type [`URIType`](#uritype) or [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new RelatedProperty(
@@ -1848,11 +1850,11 @@ new RelatedProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```CategoriesProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```CategoriesProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```CategoriesProperty``` should be of type [`TextType`](#TextType-and-TextListType) or [`TextListType`](#TextType-and-TextListType)
+* The value of ```CategoriesProperty``` should be of type [`TextType`](#texttype-and-textlisttype) or [`TextListType`](#texttype-and-textlisttype)
 
 ```js
 new CategoriesProperty(
@@ -1876,11 +1878,11 @@ new CategoriesProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```NoteProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```NoteProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```NoteProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+* The value of ```NoteProperty``` should be of type [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new NoteProperty(
@@ -1895,11 +1897,11 @@ new NoteProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```ProdidProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```ProdidProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```ProdidProperty``` should be of type [`TextType`](#TextType-and-TextListType)
+* The value of ```ProdidProperty``` should be of type [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new ProdidProperty(
@@ -1914,11 +1916,11 @@ new ProdidProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```RevProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```RevProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```RevProperty``` should be of type [`DateTimeType`](#DateTimeType) of type ```timestamp```
+* The value of ```RevProperty``` should be of type [`DateTimeType`](#datetimetype) of type ```timestamp```
 
 ```js
 new RevProperty(
@@ -1933,11 +1935,11 @@ new RevProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```SoundProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#LanguageParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```SoundProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```SoundProperty``` should be of type [`URIType`](#URIType)
+* The value of ```SoundProperty``` should be of type [`URIType`](#uritype)
 
 ```js
 new SoundProperty(
@@ -1957,11 +1959,11 @@ new SoundProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```UIDProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```UIDProperty``` are [`ValueParameter`](#ValueParameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```UIDProperty``` should be of type [`URIType`](#URIType) or [`TextType`](#TextType-and-TextListType)
+* The value of ```UIDProperty``` should be of type [`URIType`](#uritype) or [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new UIDProperty(
@@ -1976,11 +1978,11 @@ new UIDProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameter of ```ClientpidmapProperty``` is [`AnyParameter`](#AnyParameter)
+* The only acceptable parameter of ```ClientpidmapProperty``` is [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```ClientpidmapProperty``` should be of type [`SpecialValueType`](#SpecialValueType)
+* The value of ```ClientpidmapProperty``` should be of type [`SpecialValueType`](#specialvaluetype)
 
 ```js
 new ClientpidmapProperty(
@@ -2001,11 +2003,11 @@ new ClientpidmapProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```URLProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```URLProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```URLProperty``` should be of type [`URIType`](#URIType)
+* The value of ```URLProperty``` should be of type [`URIType`](#uritype)
 
 ```js
 new URLProperty(
@@ -2022,7 +2024,7 @@ new URLProperty(
 
 * ```VersionProperty``` takes no arguments
 
-* It's value is of type [`TextType`](#TextType-and-TextListType)
+* It's value is of type [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new VersionProperty;
@@ -2036,13 +2038,13 @@ new VersionProperty;
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```KeyProperty``` are [`ValueParameter`](#ValueParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```KeyProperty``` are [`ValueParameter`](#ValueParameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
 
-* The [`MediatypeParameter`](#MediatypeParameter) may only be used if the value is of type [`URIType`](#URIType)
+* The [`MediatypeParameter`](#mediatypeparameter) may only be used if the value is of type [`URIType`](#uritype)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```KeyProperty``` should be of type [`URIType`](#URIType) or [`TextType`](#TextType-and-TextListType)
+* The value of ```KeyProperty``` should be of type [`URIType`](#uritype) or [`TextType`](#texttype-and-textlisttype)
 
 ```js
 new KeyProperty(
@@ -2061,11 +2063,11 @@ new KeyProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```FburlProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```FburlProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```FburlProperty``` should be of type [`URIType`](#URIType)
+* The value of ```FburlProperty``` should be of type [`URIType`](#uritype)
 
 ```js
 new FburlProperty(
@@ -2082,11 +2084,11 @@ new FburlProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```CaladruriProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```CaladruriProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```CaladruriProperty``` should be of type [`URIType`](#URIType)
+* The value of ```CaladruriProperty``` should be of type [`URIType`](#uritype)
 
 ```js
 new CaladruriProperty(
@@ -2101,11 +2103,11 @@ new CaladruriProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```CaluriProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#PIDParameter), [`PrefParameter`](#PrefParameter), [`TypeParameter`](#TypeParameter), [`MediatypeParameter`](#MediatypeParameter), [`AltidParameter`](#AltidParameter) and [`AnyParameter`](#AnyParameter)
+* The only acceptable parameters of ```CaluriProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
-* The value of ```CaluriProperty``` should be of type [`URIType`](#URIType)
+* The value of ```CaluriProperty``` should be of type [`URIType`](#uritype)
 
 ```js
 new CaluriProperty(
@@ -2142,13 +2144,15 @@ new ExtendedProperty(
 
 * ```VCARD``` should be called with a single argument that is an array whose items are the properties you want on the vCard
 
-* [`BeginProperty`](#BeginProperty), [`VersionProperty`](#VersionProperty) and [`EndProperty`](#EndProperty) instances __must not__ be supplied in the array. These will be created automatically
+* [`BeginProperty`](#beginproperty), [`VersionProperty`](#versionproperty) and [`EndProperty`](#endproperty) instances __must not__ be supplied in the array. These will be created automatically
 
-* There __must be at least one__ instance of [`FNProperty`](#FNProperty) supplied
+* There __must be at least one__ instance of [`FNProperty`](#fnproperty) supplied
 
-* There __must not be more than one__ instance of the following classes supplied: [`AnniversaryProperty`](#AnniversaryProperty), [`BdayProperty`](#BdayProperty), [`GenderProperty`](#GenderProperty), [`KindProperty`](#KindProperty), [`NProperty`](#NProperty), [`ProdidProperty`](#ProdidProperty), [`RevProperty`](#RevProperty) and [`UIDProperty`](#UIDProperty)
+* There __must not be more than one__ instance of the following classes supplied: [`AnniversaryProperty`](#anniversaryproperty), [`BdayProperty`](#bdayproperty), [`GenderProperty`](#genderproperty), [`KindProperty`](#kindproperty), [`NProperty`](#nproperty), [`ProdidProperty`](#prodidproperty), [`RevProperty`](#revproperty) and [`UIDProperty`](#uidproperty)
 
 * The only accessible method on an instance of ```VCARD``` is ```repr```, which returns a string containing the properly formatted vCard
+
+* The instance object is frozen and therefore its properties and methods cannot be modified after construction, neither can new ones be added
 
 ```js
 let vc = new VCARD([
