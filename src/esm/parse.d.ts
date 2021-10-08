@@ -1,1 +1,55 @@
-export default function _default(vcard: any): {};
+export type PropertyNames =
+  | "SOURCE"
+  | "KIND"
+  | "FN"
+  | "N"
+  | "NICKNAME"
+  | "PHOTO"
+  | "BDAY"
+  | "ANNIVERSARY"
+  | "GENDER"
+  | "ADR"
+  | "TEL"
+  | "EMAIL"
+  | "IMPP"
+  | "LANG"
+  | "TZ"
+  | "GEO"
+  | "TITLE"
+  | "ROLE"
+  | "LOGO"
+  | "ORG"
+  | "MEMBER"
+  | "RELATED"
+  | "CATEGORIES"
+  | "NOTE"
+  | "PRODID"
+  | "REV"
+  | "SOUND"
+  | "UID"
+  | "CLIENTPIDMAP"
+  | "URL"
+  | "KEY"
+  | "FBURL"
+  | "CALADRURI"
+  | "CALURI"
+  | "XML"
+  | string;
+export type PropertyValue = { parameters?: Parameters; value: string };
+export type ParameterNames =
+  | "LANGUAGE"
+  | "VALUE"
+  | "PREF"
+  | "ALTID"
+  | "PID"
+  | "TYPE"
+  | "MEDIATYPE"
+  | "CALSCALE"
+  | "SORT-AS"
+  | "GEO"
+  | "TZ"
+  | string;
+export type Parameters = Record<ParameterNames, string>;
+export type ParsedVCard = Record<PropertyNames, PropertyValue | PropertyValue[]>;
+
+export default function parse(vcard: string): ParsedVCard;
