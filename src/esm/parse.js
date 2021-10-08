@@ -3,6 +3,19 @@ import {
   InvalidArgument
 } from './errors.js';
 
+function splitComponents(value) {
+  let components = [];
+  let start = 0;
+  for (let index = 0; index < value.length; index++) {
+    if (value[index] === ';' && value[index - 1] !== '\\') {
+      components.push(value.substr(start, index - start));
+      start = index + 1;
+    }
+  }
+  components.push(value.substr(start));
+  return components;
+}
+
 export default function(vcard) {
   if (typeof vcard === 'undefined')
   throw new MissingArgument('vCard to be parsed must be supplied');
@@ -33,6 +46,7 @@ export default function(vcard) {
         break;
       }
     }
+    const components = splitComponents(value);
 
     if (typeof propAndParams === 'undefined') break;
 
@@ -59,7 +73,8 @@ export default function(vcard) {
       if (Array.isArray(parsedVcard[prop]))
       parsedVcard[prop].push({
         parameters: paramList,
-        value
+        value,
+        components,
       });
       else {
         let currentValue = parsedVcard[prop];
@@ -67,14 +82,16 @@ export default function(vcard) {
           currentValue,
           {
             parameters: paramList,
-            value
+            value,
+            components,
           }
         ];
       }
     }
     else parsedVcard[prop] = {
       parameters: paramList,
-      value
+      value,
+      components,
     };
   }
 

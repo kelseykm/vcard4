@@ -35,7 +35,7 @@ export type PropertyNames =
   | "CALURI"
   | "XML"
   | string;
-export type PropertyValue = { parameters?: Parameters; value: string };
+export type PropertyValue = { parameters?: Parameters; value: string, components: string[] };
 export type ParameterNames =
   | "LANGUAGE"
   | "VALUE"
