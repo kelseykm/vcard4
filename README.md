@@ -2,7 +2,7 @@
 
 # vcard4
 
-__vCard version 4.0 javascript library for creating or parsing vCards with full implementation of RFC 6350__
+__vCard version 4.0 javascript library for creating or parsing vCards, with full implementation of RFC 6350__
 
 For use in node or in the browser
 
@@ -2281,24 +2281,24 @@ vc.repr();
     ```
 
     * For "N" property, the value is an object with the following keys:
-        1. familyNames
-        2. givenNames
-        3. additionalNames
-        4. honorificPrefixes
-        5. honorificSuffixes
+        1. ```familyNames```
+        2. ```givenNames```
+        3. ```additionalNames```
+        4. ```honorificPrefixes```
+        5. ```honorificSuffixes```
 
     * For "ADR" property, the value is an object with the following keys:
-        1. postOfficeBox
-        2. extendedAddress
-        3. streetAddress
-        4. locality
-        5. region
-        6. postalCode
-        7. countryName
+        1. ```postOfficeBox```
+        2. ```extendedAddress```
+        3. ```streetAddress```
+        4. ```locality```
+        5. ```region```
+        6. ```postalCode```
+        7. ```countryName```
 
     * For "GENDER" property, the value is an object with the following keys:
-        1. sex
-        2. gender
+        1. ```sex```
+        2. ```gender```
 
 * Note that values of object keys at all levels/depths are of type string. The object keys themselves are obviously strings. So, at all times, at any level/depth, the data types you will be dealing with are either strings, arrays of objects, or objects (whose values of object keys are of type string, or either arrays of objects, or objects...and so on...)
 
