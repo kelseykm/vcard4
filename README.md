@@ -2,7 +2,7 @@
 
 # vcard4
 
-__vCard version 4.0 javascript library with full implementation of RFC 6350__
+__vCard version 4.0 javascript library for creating or parsing vCards with full implementation of RFC 6350__
 
 For use in node or in the browser
 
@@ -166,12 +166,26 @@ console.log(parsedVcard);
 // {
 //   BEGIN: { parameters: undefined, value: 'VCARD' },
 //   VERSION: { parameters: undefined, value: '4.0' },
-//   N: { parameters: undefined, value: 'Doe;John;;;' },
-//   FN: { parameters: undefined, value: 'John Doe' },
-//   ORG: { parameters: undefined, value: 'Example.com Inc.;Marketing' },
+//   N: {
+//     parameters: undefined,
+//     value: {
+//       familyNames: 'Stevenson',
+//       givenNames: 'John',
+//       additionalNames: [ 'Philip', 'Paul' ],
+//       honorificPrefixes: 'Dr.',
+//       honorificSuffixes: [ 'Jr.', 'M.D.', 'A.C.P.' ]
+//     }
+//   },
+//   FN: { parameters: undefined, value: 'John Stevenson' },
+//   NICKNAME: [
+//     { parameters: { PREF: '1' }, value: 'Jay' },
+//     { parameters: undefined, value: [ 'Johnny', 'Stevie', 'Phil' ] },
+//     { parameters: { TYPE: 'work' }, value: 'Boss' }
+//   ],
+//   ORG: { parameters: undefined, value: [ 'Example.com Inc.', 'Marketing' ] },
 //   TITLE: { parameters: undefined, value: 'Imaginary test person' },
 //   EMAIL: {
-//     parameters: { TYPE: 'work', PREF: '1' },
+//     parameters: [ { TYPE: 'work' }, { PREF: '1' } ],
 //     value: 'johnDoe@example.org'
 //   },
 //   TEL: [
@@ -182,7 +196,24 @@ console.log(parsedVcard);
 //     parameters: undefined,
 //     value: 'John Doe has a long and varied history\\, being documented on more police files than anyone else. Reports of his death are alas numerous.'
 //   },
-//   CATEGORIES: { parameters: undefined, value: 'Work,Test group' },
+//   CATEGORIES: { parameters: undefined, value: [ 'Work', 'Test group' ] },
+//   ADR: {
+//     parameters: [
+//       { GEO: '"geo:12.3457,78.910"' },
+//       {
+//         LABEL: '"Mr. John Q. Public, Esq.\\nMail Drop: TNE QB\\n123 Main Street\\nAny Town, CA 91921-1234\\nU.S.A."'
+//       }
+//     ],
+//     value: {
+//       postOfficeBox: '',
+//       extendedAddress: '',
+//       streetAddress: '123 Main Street',
+//       locality: 'Any Town',
+//       region: 'CA',
+//       postalCode: '91921-1234',
+//       countryName: 'U.S.A.'
+//     }
+//   },
 //   'X-ABUID': {
 //     parameters: undefined,
 //     value: '5AD380FD-B2DE-4261-BA99-DE1D1DB52FBE\\:ABPerson'
@@ -273,6 +304,7 @@ console.log(parsedVcard);
     + [ExtendedProperty](#extendedproperty)
 - [```VCARD```](#vcard)
 - [```parse```](#parse)
+  * [Shape of returned object](#shape-of-returned-object)
 
 ## Introduction
 
@@ -280,9 +312,9 @@ console.log(parsedVcard);
 
 * That RFC defines the vCard data format for representing and exchanging a variety of information about individuals and other entities (e.g., formatted and structured name and delivery addresses, email address, multiple telephone numbers, photograph, logo, audio clips, etc.)
 
-* The vCards made with this library are strictly version 4.0 vCards
+* __vcard4__ may be used for creating or parsing vCards
 
-* Although the library is primarily intended for _creating_ vCards, a simple vCard [parser](#parse) has been provided
+* The vCards made or parsed with this library are to be strictly version 4.0 vCards
 
 * This library may be used in node or in the browser. It supports the latest versions of both out of the box. For use in old browsers or old node versions, you should transpile the code with ___Babel___ or any other transpiler of your choice
 
@@ -2175,9 +2207,100 @@ vc.repr();
 
 * This function is for parsing version 4.0 vCards
 
-* It is a simple parser that returns an object containing the parsed vCard
+* It returns an object containing the parsed vCard
 
-* ```parse``` should be called with a single argument of type string, that is properly formatted version 4.0 vCard
+* ```parse``` should be called with a single argument of type string, that is a properly formatted version 4.0 vCard
+
+### Shape of returned object
+
+* The keys of the returned object are the names of the properties, e.g. N, ADR, etc.
+
+    ```js
+    {
+      BEGIN: { parameters: undefined, value: 'VCARD' },
+      VERSION: { parameters: undefined, value: '4.0' },
+      FN: { parameters: undefined, value: 'Matt Hugh' },
+      TEL: { parameters: { PREF: '1' }, value: '0129 635043' },
+      END: { parameters: undefined, value: 'VCARD' }
+    }
+    ```
+
+* The top-level values are objects with two keys, the first being ```parameters``` and the second, ```value```. The top-level values may also be an array of objects if the vCard contained more than one instance of a given property, e.g. more than one TEL
+
+    ```js
+    // FN:John Stevenson
+    {
+      ...,
+      FN: { parameters: undefined, value: 'John Stevenson' }
+      ...,
+    }
+
+    // TEL;TYPE=cell:tel:+1 781 555 1212
+    // TEL;TYPE=home:tel:+1 202 555 1212
+    {
+      ...,
+      TEL: [
+        { parameters: { TYPE: 'cell' }, value: 'tel:+1 781 555 1212' },
+        { parameters: { TYPE: 'home' }, value: 'tel:+1 202 555 1212' }
+      ]
+      ...,
+    }
+    ```
+
+* ```parameters``` may either be an object or an array of objects if the content line contained more than one parameters. The object will have a single key which will be the name of the parameter. The value of the key will be the value of the parameter
+
+    ```js
+
+    // TEL;TYPE=home:tel:+1 202 555 1212
+    {
+      parameters: { TYPE: 'cell' },
+      ...,
+    }
+
+    // EMAIL;TYPE=work;PREF=1:johnDoe@example.org
+    {
+      parameters: [ { TYPE: 'work' }, { PREF: '1' } ],
+      ...
+    }
+    ```
+
+* ```value``` may be either a string or an array of strings, depending on whether the value of the content line was comma-separated (or semi-colon delimited, in the case of CLIENTPIDMAP, or Extended properties). Properties for which this is not followed are mentioned below
+
+    ```js
+      // ORG:Example.com Inc.;Marketing
+      {
+        ...,
+        value: [ 'Example.com Inc.', 'Marketing' ]
+      }
+
+      // ORG:ABC
+      {
+        ...,
+        value: 'ABC'
+      }
+    ```
+
+    * For "N" property, the value is an object with the following keys:
+        1. familyNames
+        2. givenNames
+        3. additionalNames
+        4. honorificPrefixes
+        5. honorificSuffixes
+
+    * For "ADR" property, the value is an object with the following keys:
+        1. postOfficeBox
+        2. extendedAddress
+        3. streetAddress
+        4. locality
+        5. region
+        6. postalCode
+        7. countryName
+
+    * For "GENDER" property, the value is an object with the following keys:
+        1. sex
+        2. gender
+
+* Note that values of object keys at all levels/depths are of type string. The object keys themselves are obviously strings. So, at all times, at any level/depth, the data types you will be dealing with are either strings, arrays of objects, or objects (whose values of object keys are of type string, or either arrays of objects, or objects...and so on...)
 
 ```js
 import { parse } from 'vcard4';
@@ -2194,12 +2317,26 @@ console.log(parsedVcard);
 // {
 //   BEGIN: { parameters: undefined, value: 'VCARD' },
 //   VERSION: { parameters: undefined, value: '4.0' },
-//   N: { parameters: undefined, value: 'Doe;John;;;' },
-//   FN: { parameters: undefined, value: 'John Doe' },
-//   ORG: { parameters: undefined, value: 'Example.com Inc.;Marketing' },
+//   N: {
+//     parameters: undefined,
+//     value: {
+//       familyNames: 'Stevenson',
+//       givenNames: 'John',
+//       additionalNames: [ 'Philip', 'Paul' ],
+//       honorificPrefixes: 'Dr.',
+//       honorificSuffixes: [ 'Jr.', 'M.D.', 'A.C.P.' ]
+//     }
+//   },
+//   FN: { parameters: undefined, value: 'John Stevenson' },
+//   NICKNAME: [
+//     { parameters: { PREF: '1' }, value: 'Jay' },
+//     { parameters: undefined, value: [ 'Johnny', 'Stevie', 'Phil' ] },
+//     { parameters: { TYPE: 'work' }, value: 'Boss' }
+//   ],
+//   ORG: { parameters: undefined, value: [ 'Example.com Inc.', 'Marketing' ] },
 //   TITLE: { parameters: undefined, value: 'Imaginary test person' },
 //   EMAIL: {
-//     parameters: { TYPE: 'work', PREF: '1' },
+//     parameters: [ { TYPE: 'work' }, { PREF: '1' } ],
 //     value: 'johnDoe@example.org'
 //   },
 //   TEL: [
@@ -2210,7 +2347,24 @@ console.log(parsedVcard);
 //     parameters: undefined,
 //     value: 'John Doe has a long and varied history\\, being documented on more police files than anyone else. Reports of his death are alas numerous.'
 //   },
-//   CATEGORIES: { parameters: undefined, value: 'Work,Test group' },
+//   CATEGORIES: { parameters: undefined, value: [ 'Work', 'Test group' ] },
+//   ADR: {
+//     parameters: [
+//       { GEO: '"geo:12.3457,78.910"' },
+//       {
+//         LABEL: '"Mr. John Q. Public, Esq.\\nMail Drop: TNE QB\\n123 Main Street\\nAny Town, CA 91921-1234\\nU.S.A."'
+//       }
+//     ],
+//     value: {
+//       postOfficeBox: '',
+//       extendedAddress: '',
+//       streetAddress: '123 Main Street',
+//       locality: 'Any Town',
+//       region: 'CA',
+//       postalCode: '91921-1234',
+//       countryName: 'U.S.A.'
+//     }
+//   },
 //   'X-ABUID': {
 //     parameters: undefined,
 //     value: '5AD380FD-B2DE-4261-BA99-DE1D1DB52FBE\\:ABPerson'
