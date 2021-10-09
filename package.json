@@ -4,7 +4,6 @@
   "description": "vCard version 4.0 library with full implementation of RFC 6350",
   "type": "module",
   "main": "./index.cjs",
-  "types": "./index.d.ts",
   "exports": {
     "import": "./index.js",
     "require": "./index.cjs"
