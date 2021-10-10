@@ -293,8 +293,15 @@ describe('ESM property parameters tests', () => {
 
   describe('SortAsParameter tests', () => {
     it('Accepts valid input', () => {
-      assert.doesNotThrow(() => new SortAsParameter('Marcus'));
-      assert.doesNotThrow(() => new SortAsParameter(['Luther', 'Martin']));
+      assert.doesNotThrow(() => new SortAsParameter(
+        new TextType('Marcus')
+      ));
+      assert.doesNotThrow(() => new SortAsParameter(
+        new TextListType([
+          new TextType('Luther'),
+          new TextType('Martin')
+        ])
+      ));
     });
 
     it('Rejects invalid input', () => {
@@ -303,7 +310,12 @@ describe('ESM property parameters tests', () => {
 
     it('Formats value properly', () => {
       assert.strictEqual(
-        new SortAsParameter(['Luther', 'Martin']).repr(),
+        new SortAsParameter(
+          new TextListType([
+            new TextType('Luther'),
+            new TextType('Martin')
+          ])
+        ).repr(),
         'SORT-AS="Luther,Martin"'
       )
     });
