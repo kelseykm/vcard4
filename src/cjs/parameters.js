@@ -362,7 +362,10 @@ class CalscaleParameter extends AbstractBaseParameter {
     if (typeof calscaleValue === 'undefined')
     throw new MissingArgument('Value for CalscaleParameter must be supplied');
 
-    else if (!this.#calscaleRegExp.test(calscaleValue))
+    else if (!(calscaleValue instanceof TextType))
+    throw new MissingArgument('Value for CalscaleParameter must of type TextType');
+
+    else if (!this.#calscaleRegExp.test(calscaleValue.repr()))
     throw new InvalidArgument('Invalid calscale value');
   }
 
@@ -370,7 +373,7 @@ class CalscaleParameter extends AbstractBaseParameter {
     super();
 
     this.#validate(calscaleValue);
-    this.value = calscaleValue;
+    this.value = calscaleValue.repr();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

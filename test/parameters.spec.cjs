@@ -272,8 +272,8 @@ describe('CJS property parameters tests', () => {
 
   describe('CalscaleParameter tests', () => {
     it('Accepts valid input', () => {
-      assert.doesNotThrow(() => new CalscaleParameter('gregorian'));
-      assert.doesNotThrow(() => new CalscaleParameter('x-arabian'));
+      assert.doesNotThrow(() => new CalscaleParameter(new TextType('gregorian')));
+      assert.doesNotThrow(() => new CalscaleParameter(new TextType('x-arabian')));
     });
 
     it('Rejects invalid input', () => {
@@ -285,7 +285,7 @@ describe('CJS property parameters tests', () => {
 
     it('Formats value properly', () => {
       assert.strictEqual(
-        new CalscaleParameter('gregorian').repr(),
+        new CalscaleParameter(new TextType('gregorian')).repr(),
         "CALSCALE=gregorian"
       )
     });
