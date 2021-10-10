@@ -1045,16 +1045,18 @@ new TypeParameter(
 
 * This class represents the "MEDIATYPE" parameter
 
-* ```MediatypeParameter``` should be called with a single argument that is either a string specifying the media type and subtype, or an array of length 2, whose first item is a string specifying the media type and subtype, and whose second item is a string specifying the media attribute and values
+* ```MediatypeParameter``` should be called with a single argument that is either a [`TextType`](#texttype-and-textlisttype) specifying the media type and subtype, or an array of length 2, whose first item is a [`TextType`](#texttype-and-textlisttype) specifying the media type and subtype, and whose second item is also a [`TextType`](#texttype-and-textlisttype) specifying the media attribute and values
 
-* The media type and subtype string should be of the format ```type-name "/" subtype-name```, while the attribute and value string should be of the format ```attribute "=" value```
+* The media type and subtype [`TextType`](#texttype-and-textlisttype) value should be of the format ```type-name "/" subtype-name```, while the attribute and value [`TextType`](#texttype-and-textlisttype) should be of the format ```attribute "=" value```
 
 ```js
-new MediatypeParameter('audio/mp3');
+new MediatypeParameter(
+  new TextType('audio/mp3')
+);
 
 new MediatypeParameter([
-  'video/jpeg',
-  'someattribute=somevalue'
+  new TextType('video/jpeg'),
+  new TextType('someattribute=somevalue')
 ]);
 ```
 
@@ -2113,7 +2115,9 @@ new VersionProperty;
 ```js
 new KeyProperty(
   [
-    new MediatypeParameter('application/pgp-keys')
+    new MediatypeParameter(
+      new TextType('application/pgp-keys')
+    )
   ],
   new URIType('ftp://example.com/keys/jdoe')
 );
@@ -2136,7 +2140,9 @@ new KeyProperty(
 ```js
 new FburlProperty(
   [
-    new MediatypeParameter('text/calendar')
+    new MediatypeParameter(
+      new TextType('text/calendar')
+    )
   ],
   new URIType('ftp://example.com/busy/project-a.ifb')
 );
@@ -2176,7 +2182,9 @@ new CaladruriProperty(
 ```js
 new CaluriProperty(
   [
-    new MediatypeParameter('text/calendar')
+    new MediatypeParameter(
+      new TextType('text/calendar')
+    )
   ],
   new URIType('ftp://ftp.example.com/calA.ics')
 );
