@@ -1062,24 +1062,35 @@ new MediatypeParameter([
 
 * This class represents the "CALSCALE" parameter
 
-* ```CalscaleParameter``` should be called with a single argument of type string, whose value is either ```gregorian``` or an x-name (names that begin with "x-" or "X-" and are reserved for experimental use, not intended for released products, or for use in bilateral agreements)
+* ```CalscaleParameter``` should be called with a single argument that is an instance of [`TextType`](#texttype-and-textlisttype), and whose value is either ```gregorian``` or an x-name (names that begin with "x-" or "X-" and are reserved for experimental use, not intended for released products, or for use in bilateral agreements)
 
 ```js
-new CalscaleParameter('gregorian');
+new CalscaleParameter(
+  new TextType('gregorian')
+);
 
-new CalscaleParameter('x-mything');
+new CalscaleParameter(
+  new TextType('x-mything')
+);
 ```
 
 ### SortAsParameter
 
 * This class represents the "SORT-AS" parameter
 
-* ```SortAsParameter``` should be called with a single argument of type string, or if you wish to specify multiple values, an array of string items
+* ```SortAsParameter``` should be called with a single argument that is an instance of [`TextType`](#texttype-and-textlisttype) or [`TextListType`](#texttype-and-textlisttype) if you wish to specify multiple values, an array of string items
 
 ```js
-new SortAsParameter([ 'Harten', 'Rene' ]);
+new SortAsParameter(
+  new TextListType([
+    new TextType('Harten'),
+    new TextType('Rene' )
+  ])
+);
 
-new SortAsParameter('Pau Shou Chang');
+new SortAsParameter(
+  new TextType('Pau Shou Chang')
+);
 ```
 
 ### GeoParameter
