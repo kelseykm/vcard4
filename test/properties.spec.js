@@ -393,7 +393,7 @@ describe('ESM properties tests', () => {
           new NicknameProperty(
             [
               new TypeParameter(
-                'work',
+                new TextType('work'),
                 'nicknameproperty'
               )
             ],
@@ -1020,7 +1020,7 @@ describe('ESM properties tests', () => {
         assert.doesNotThrow(() => new RelatedProperty(
           [
             new TypeParameter(
-              'friend',
+              new TextType('friend'),
               'relatedproperty'
             )
           ],
@@ -1029,7 +1029,7 @@ describe('ESM properties tests', () => {
 
         assert.doesNotThrow(() => new RelatedProperty(
           [
-            new TypeParameter('co-worker', 'relatedproperty'),
+            new TypeParameter(new TextType('co-worker'), 'relatedproperty'),
             new ValueParameter(
               new TextType('Please contact my assistant Jane Doe for any inquiries.')
             )
@@ -1055,7 +1055,7 @@ describe('ESM properties tests', () => {
         assert.strictEqual(
           new RelatedProperty(
             [
-              new TypeParameter('co-worker', 'relatedproperty'),
+              new TypeParameter(new TextType('co-worker'), 'relatedproperty'),
               new ValueParameter(
                 new TextType('Please contact my assistant Jane Doe for any inquiries.')
               )

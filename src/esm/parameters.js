@@ -239,36 +239,55 @@ class TypeParameter extends AbstractBaseParameter {
     )
     throw new MissingArgument('Value and target property for TypeParameter must be supplied');
 
+    else if (
+      !(typeValue instanceof TextType) &&
+      !(typeValue instanceof TextListType)
+    )
+    throw new TypeError('Value for TypeParameter must be of type TextType or TextListType');
+
     switch (true) {
       case /^TelProperty$/i.test(targetProp):
         let telre = new RegExp(`(?:${this.#telTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
 
-        if (!Array.isArray(typeValue) && !telre.test(typeValue))
+        if (
+          (typeValue instanceof TextType) &&
+          !telre.test(typeValue.repr())
+        )
         throw new InvalidArgument('Invalid value for TypeParameter for TelProperty');
 
-        else if (Array.isArray(typeValue) && !typeValue.every(type => telre.test(type)))
+        else if (
+          (typeValue instanceof TextListType) &&
+          !typeValue.repr().split(',').every(type => telre.test(type))
+        )
         throw new InvalidArgument('Invalid value for TypeParameter for TelProperty');
 
         break;
       case /^RelatedProperty$/i.test(targetProp):
         let relatedre = new RegExp(`(?:${this.#relatedTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
 
-        if (!Array.isArray(typeValue) && !relatedre.test(typeValue))
+        if (
+          (typeValue instanceof TextType) &&
+          !relatedre.test(typeValue.repr())
+        )
         throw new InvalidArgument('Invalid value for TypeParameter for RelatedProperty');
 
-        else if (Array.isArray(typeValue) && !typeValue.every(type => relatedre.test(type)))
+        else if (
+          (typeValue instanceof TextListType) &&
+          !typeValue.repr().split(',').every(type => relatedre.test(type))
+        )
         throw new InvalidArgument('Invalid value for TypeParameter for RelatedProperty');
 
         break;
       default:
-        if (!Array.isArray(typeValue) && !this.#typeRegExp.test(typeValue))
+        if (
+          (typeValue instanceof TextType) &&
+          !this.#typeRegExp.test(typeValue.repr())
+        )
         throw new InvalidArgument('Invalid value for TypeParameter');
 
         else if (
-          Array.isArray(typeValue) &&
-          !typeValue.every(
-            type => this.#typeRegExp.test(type)
-          )
+          (typeValue instanceof TextListType) &&
+          !typeValue.repr().split(',').every(type => this.#typeRegExp.test(type))
         )
         throw new InvalidArgument('Invalid value for TypeParameter');
     }
@@ -279,12 +298,9 @@ class TypeParameter extends AbstractBaseParameter {
 
     this.#validate(typeValue, targetProp);
 
-    this.value = Array.isArray(typeValue) ?
-    `"${typeValue.reduce((accumulatedTypes, currentType) => {
-      accumulatedTypes.push(currentType.toString());
-      return accumulatedTypes;
-    }, []).join(',')}"` :
-    typeValue.toString();
+    this.value = typeValue instanceof TextListType ?
+    `"${typeValue.repr()}"` :
+    typeValue.repr();
 
     this.targetProp = targetProp;
 

@@ -198,21 +198,31 @@ describe('ESM property parameters tests', () => {
 
   describe('TypeParameter tests', () => {
     it('Accepts valid input', () => {
-      assert.doesNotThrow(() => new TypeParameter('work', 'emailproperty'));
+      assert.doesNotThrow(() => new TypeParameter(
+        new TextType('work'),
+        'emailproperty'
+      ));
 
       assert.doesNotThrow(() => new TypeParameter(
-        ['voice', 'home'],
+        new TextListType([
+          new TextType('voice'),
+          new TextType('home')
+        ]),
         'telproperty'
       ));
 
-      assert.doesNotThrow(() => new TypeParameter('sweetheart', 'relatedproperty'));
+      assert.doesNotThrow(() => new TypeParameter(
+        new TextType('sweetheart'),
+        'relatedproperty'
+      ));
     });
 
     it('Rejects invalid input', () => {
       assert.throws(() => new TypeParameter);
       assert.throws(() => new TypeParameter(1));
       assert.throws(() => new TypeParameter('1'));
-      assert.throws(() => new TypeParameter('sweetheart', 'soundproperty'));
+      assert.throws(() => new TypeParameter('sweetheart', 'relatedproperty'));
+      assert.throws(() => new TypeParameter(new TextType('sweetheart'), 'soundproperty'));
       assert.throws(() => new TypeParameter([1, true, null]));
       assert.throws(() => new TypeParameter(false));
       assert.throws(() => new TypeParameter(null));
@@ -221,7 +231,10 @@ describe('ESM property parameters tests', () => {
     it('Formats value properly', () => {
       assert.strictEqual(
         new TypeParameter(
-          ['voice', 'home'],
+          new TextListType([
+            new TextType('voice'),
+            new TextType('home')
+          ]),
           'telproperty'
         ).repr(),
         'TYPE="voice,home"'
