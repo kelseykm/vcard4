@@ -320,8 +320,14 @@ class MediatypeParameter extends AbstractBaseParameter {
     throw new MissingArgument('Value for MediatypeParameter must be supplied');
 
     else if (
+      !(mediaValue instanceof TextType) &&
+      (Array.isArray(mediaValue) && !mediaValue.every(val => val instanceof TextType))
+    )
+    throw new TypeError('Value for MediatypeParameter must be of TextType or an array of TextTypes');
+
+    else if (
       !Array.isArray(mediaValue) &&
-      !this.#mediaTypeRegExp.test(mediaValue)
+      !this.#mediaTypeRegExp.test(mediaValue.repr())
     )
     throw new InvalidArgument('Invalid media type');
 
@@ -329,10 +335,10 @@ class MediatypeParameter extends AbstractBaseParameter {
       if (mediaValue.length !== 2)
       throw new InvalidArgument('Invalid value for MediatypeParameter. It should be an array with a length of 2');
 
-      else if (!this.#mediaTypeRegExp.test(mediaValue[0]))
+      else if (!this.#mediaTypeRegExp.test(mediaValue[0].repr()))
       throw new InvalidArgument('Invalid media type');
 
-      else if (!this.#attributeRegExp.test(mediaValue[1]))
+      else if (!this.#attributeRegExp.test(mediaValue[1].repr()))
       throw new InvalidArgument('Invalid media type');
     }
   }
@@ -343,10 +349,10 @@ class MediatypeParameter extends AbstractBaseParameter {
     this.#validate(mediaValue);
     this.value = Array.isArray(mediaValue) ?
     `"${mediaValue.reduce((accumulatedTypes, currentType) => {
-      accumulatedTypes.push(currentType.toString());
+      accumulatedTypes.push(currentType.repr());
       return accumulatedTypes;
     }, []).join(';')}"` :
-    mediaValue.toString();
+    mediaValue.repr();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

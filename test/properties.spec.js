@@ -1369,7 +1369,9 @@ describe('ESM properties tests', () => {
       it('Accepts valid input', () => {
         assert.doesNotThrow(() => new KeyProperty(
           [
-            new MediatypeParameter('application/pgp-keys')
+            new MediatypeParameter(
+              new TextType('application/pgp-keys')
+            )
           ],
           new URIType('ftp://example.com/keys/jdoe')
         ));
@@ -1392,7 +1394,9 @@ describe('ESM properties tests', () => {
         assert.strictEqual(
           new KeyProperty(
             [
-              new MediatypeParameter('application/pgp-keys')
+              new MediatypeParameter(
+                new TextType('application/pgp-keys')
+              )
             ],
             new URIType('ftp://example.com/keys/jdoe')
           ).repr(),
@@ -1407,7 +1411,9 @@ describe('ESM properties tests', () => {
       it('Accepts valid input', () => {
         assert.doesNotThrow(() => new FburlProperty(
           [
-            new MediatypeParameter('text/calendar')
+            new MediatypeParameter(
+              new TextType('text/calendar')
+            )
           ],
           new URIType('ftp://example.com/busy/project-a.ifb')
         ));
@@ -1430,7 +1436,9 @@ describe('ESM properties tests', () => {
         assert.strictEqual(
           new FburlProperty(
             [
-              new MediatypeParameter('text/calendar')
+              new MediatypeParameter(
+                new TextType('text/calendar')
+              )
             ],
             new URIType('ftp://example.com/busy/project-a.ifb')
           ).repr(),
@@ -1475,7 +1483,9 @@ describe('ESM properties tests', () => {
       it('Accepts valid input', () => {
         assert.doesNotThrow(() => new CaluriProperty(
           [
-            new MediatypeParameter('text/calendar')
+            new MediatypeParameter(
+              new TextType('text/calendar')
+            )
           ],
           new URIType('ftp://ftp.example.com/calA.ics')
         ));
@@ -1498,7 +1508,9 @@ describe('ESM properties tests', () => {
         assert.strictEqual(
           new CaluriProperty(
             [
-              new MediatypeParameter('text/calendar')
+              new MediatypeParameter(
+                new TextType('text/calendar')
+              )
             ],
             new URIType('ftp://ftp.example.com/calA.ics')
           ).repr(),
