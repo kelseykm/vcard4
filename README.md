@@ -83,7 +83,10 @@ let titleProp = new properties.TitleProperty([], titlePropValue);
 // Email property
 let emailPropValue = new values.TextType('johnDoe@example.org');
 
-let emailPropTypeParam = new parameters.TypeParameter('work', 'EmailProperty');
+let emailPropTypeParam = new parameters.TypeParameter(
+  new values.TextType('work'),
+  'EmailProperty'
+);
 let emailPropPrefParam = new parameters.PrefParameter(
   new values.IntegerType(1)
 );
@@ -98,14 +101,20 @@ let emailProp = new properties.EmailProperty(
 
 // Tel properties
 let telProp1Value = new values.URIType('tel:+1 781 555 1212');
-let telProp1TypeParam = new parameters.TypeParameter('cell', 'TelProperty');
+let telProp1TypeParam = new parameters.TypeParameter(
+  new values.TextType('cell'),
+  'TelProperty'
+);
 let telProp1 = new properties.TelProperty(
   [ telProp1TypeParam  ],
   telProp1Value
 );
 
 let telProp2Value = new values.URIType('tel:+1 202 555 1212');
-let telProp2TypeParam = new parameters.TypeParameter('home', 'TelProperty');
+let telProp2TypeParam = new parameters.TypeParameter(
+  new values.TextType('home'),
+  'TelProperty'
+);
 let telProp2 = new properties.TelProperty(
   [ telProp2TypeParam ],
   telProp2Value
@@ -1004,23 +1013,32 @@ pid.repr();
 
 * The value of the second argument should be a string with the name of the target property as already mentioned
 
-* For all target properties, the value of the first argument should be a string, whose value is either ```"work"```, ```"home"```, an identifier registered with IANA or an x-name (names that begin with "x-" or "X-" and are reserved for experimental use, not intended for released products, or for use in bilateral agreements)
+* For all target properties, the first argument should be an instance of [`TextType`](#texttype-and-textlisttype), whose value is either ```"work"```, ```"home"```, an identifier registered with IANA or an x-name (names that begin with "x-" or "X-" and are reserved for experimental use, not intended for released products, or for use in bilateral agreements)
 
 * Where the value of the second argument is ```"TelProperty"``` (case insensitive), the value of the first argument may be ```"text"```, ```"voice"```, ```"fax"```, ```"cell"```, ```"video"```, ```"pager"``` or ```"textphone"```, in addition to the values specified above for all target properties
 
 * Where the value of the second argument is ```"RelatedProperty"``` (case insensitive), the value of the first argument may be ```"contact"```, ```"acquaintance"```, ```"friend"```, ```"met"```, ```"co-worker"```, ```"colleague"```, ```"co-resident"```, ```"neighbor"```, ```"child"```, ```"parent"```, ```"sibling"```, ```"spouse"```, ```"kin"```, ```"muse"```, ```"crush"```, ```"date"```, ```"sweetheart"```, ```"me"```, ```"agent"``` or  ```"emergency"```, in addition to the values specified above for all target properties
 
-* If you wish to have multiple values for the same TYPE parameter, the value of the first argument may be an array, whose items are those specified above, according to the rules specified above
+* If you wish to have multiple values for the same TYPE parameter, the value of the first argument may be an instance of [`TextListType`](#texttype-and-textlisttype), whose values for individual [`TextType`](#texttype-and-textlisttype) components are those specified above, according to the rules specified above
 
 ```js
-new TypeParameter('work', 'emailproperty');
+new TypeParameter(
+  new TextType('work'),
+  'emailproperty'
+);
 
 new TypeParameter(
-  ['voice', 'home'],
+  new TextListType([
+    new TextType('voice'),
+    new TextType('home')
+  ]),
   'telproperty'
 );
 
-new TypeParameter('sweetheart', 'relatedproperty');
+new TypeParameter(
+  new TextType('sweetheart'),
+  'relatedproperty'
+);
 ```
 
 ### MediatypeParameter
@@ -1443,7 +1461,7 @@ new NicknameProperty(
 new NicknameProperty(
   [
     new TypeParameter(
-      'work',
+      new TextType('work'),
       'nicknameproperty'
     )
   ],
@@ -1857,7 +1875,7 @@ new MemberProperty(
 new RelatedProperty(
   [
     new TypeParameter(
-      'friend',
+      new TextType('friend'),
       'relatedproperty'
     )
   ],
@@ -1867,7 +1885,10 @@ new RelatedProperty(
 let relPropVal = new TextType('Please contact my assistant Jane Doe for any inquiries.');
 new RelatedProperty(
   [
-    new TypeParameter('co-worker', 'relatedproperty'),
+    new TypeParameter(
+      new TextType('co-worker'),
+      'relatedproperty'
+    ),
     new ValueParameter(relPropVal)
   ],
   relPropVal
