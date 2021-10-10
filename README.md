@@ -2332,7 +2332,7 @@ vc.repr();
 
     // TEL;TYPE=home:tel:+1 202 555 1212
     {
-      parameters: { TYPE: 'cell' },
+      parameters: { TYPE: 'home' },
       ...,
     }
 
@@ -2343,7 +2343,7 @@ vc.repr();
     }
     ```
 
-* ```value``` may be either a string or an array of strings, depending on whether the value of the content line was comma-separated (or semi-colon delimited, in the case of CLIENTPIDMAP, or Extended properties). Properties for which this is not followed are mentioned below
+* ```value``` may be either a string or an array of strings, depending on whether the value of the content line was a single value or it was comma/semi-colon delimited. Properties for which this is not followed are mentioned below
 
     ```js
       // ORG:Example.com Inc.;Marketing
