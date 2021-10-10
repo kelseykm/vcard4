@@ -236,6 +236,8 @@ console.log(parsedVcard);
 ## Table of Contents
 
 - [Introduction](#introduction)
+  * [Versioning](#versioning)
+- [API overview](#api-overview)
 - [Property Value Data Types](#property-value-data-types)
   * [TextType and TextListType](#texttype-and-textlisttype)
   * [URIType](#uritype)
@@ -330,6 +332,43 @@ console.log(parsedVcard);
     * __NB__: __vcard4__ uses private class fields and methods heavily. This poses a problem for Safari users because Safari does not support private class methods. It is advised to transpile the code using ___Babel___ or any other transpiler of your choice
 
 * __vcard4__ supports both ES6 module import/export and commonjs require
+
+### Versioning
+
+* __vcard4__ uses ___semver___ for versioning releases
+
+## API overview
+
+* ```vcard4.errors```
+
+    - Provides custom errors used by the library
+
+    - The errors include:
+
+        + ```vcard4.errors.MissingArgument```
+
+        + ```vcard4.errors.InvalidArgument```
+
+
+* ```vcard4.values```
+
+    - Described [here](#property-value-data-types)
+
+* ```vcard4.parameters```
+
+    - Described [here](#property-parameters)
+
+* ```vcard4.properties```
+
+    - Described [here](#properties)
+
+* ```vcard4.VCARD```
+
+    - Described [here](#vcard)
+
+* ```vcard4.parse```
+
+    - Described [here](#parse)
 
 ## Property Value Data Types
 
