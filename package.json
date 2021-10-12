@@ -1,6 +1,6 @@
 {
   "name": "vcard4",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "vCard version 4.0 library with full implementation of RFC 6350",
   "type": "module",
   "main": "./index.cjs",
