@@ -4,35 +4,6 @@ const {
 } = require('./errors');
 
 const {
-  TextType,
-  TextListType,
-  BooleanType,
-  DateTimeType,
-  IntegerType,
-  FloatType,
-  LanguageTagType,
-  URIType,
-  SexType,
-  SpecialValueType
-} = require('./values');
-
-const {
-  LanguageParameter,
-  ValueParameter,
-  PrefParameter,
-  AltidParameter,
-  PIDParameter,
-  TypeParameter,
-  MediatypeParameter,
-  CalscaleParameter,
-  SortAsParameter,
-  GeoParameter,
-  TzParameter,
-  AnyParameter,
-  LabelParameter
-} = require('./parameters');
-
-const {
   BeginProperty,
   EndProperty,
   SourceProperty,

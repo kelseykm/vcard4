@@ -4,35 +4,6 @@ import {
 } from './errors.js';
 
 import {
-  TextType,
-  TextListType,
-  BooleanType,
-  DateTimeType,
-  IntegerType,
-  FloatType,
-  LanguageTagType,
-  URIType,
-  SexType,
-  SpecialValueType
-} from './values.js';
-
-import {
-  LanguageParameter,
-  ValueParameter,
-  PrefParameter,
-  AltidParameter,
-  PIDParameter,
-  TypeParameter,
-  MediatypeParameter,
-  CalscaleParameter,
-  SortAsParameter,
-  GeoParameter,
-  TzParameter,
-  AnyParameter,
-  LabelParameter
-} from './parameters.js';
-
-import {
   BeginProperty,
   EndProperty,
   SourceProperty,
