@@ -8,14 +8,10 @@ import {
   TextListType,
   BooleanType,
   DateTimeType,
-  DateTimeListType,
   IntegerType,
-  IntegerListType,
   FloatType,
-  FloatListType,
   LanguageTagType,
   URIType,
-  SexType,
   SpecialValueType
 } from './values.js';
 

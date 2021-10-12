@@ -8,14 +8,10 @@ const {
   TextListType,
   BooleanType,
   DateTimeType,
-  DateTimeListType,
   IntegerType,
-  IntegerListType,
   FloatType,
-  FloatListType,
   LanguageTagType,
   URIType,
-  SexType,
   SpecialValueType
 } = require('./values');
 
