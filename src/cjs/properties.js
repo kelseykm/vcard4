@@ -59,11 +59,11 @@ class AbstractBaseProperty {
     `${this.constructor.prop || this.prop }:${this.value}` :
     `${this.constructor.prop || this.prop };${this.params}:${this.value}`;
 
-    if (contentLine.length <= 75)
-    return contentLine;
-
     const LINEBREAK = '\r\n' + ' ';
     const MAXWIDTH = 75;
+
+    if (contentLine.length <= MAXWIDTH)
+    return contentLine;
 
     let foldedContentLine = '';
 
