@@ -1,17 +1,10 @@
 const {
   TextType,
   TextListType,
-  BooleanType,
   DateTimeType,
-  DateTimeListType,
   IntegerType,
-  IntegerListType,
-  FloatType,
-  FloatListType,
   LanguageTagType,
-  URIType,
-  SexType,
-  SpecialValueType
+  URIType
 } = require('../src/cjs/values');
 
 const {

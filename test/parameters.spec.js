@@ -1,17 +1,10 @@
 import {
   TextType,
   TextListType,
-  BooleanType,
   DateTimeType,
-  DateTimeListType,
   IntegerType,
-  IntegerListType,
-  FloatType,
-  FloatListType,
   LanguageTagType,
-  URIType,
-  SexType,
-  SpecialValueType
+  URIType
 } from '../src/esm/values.js';
 
 import {
