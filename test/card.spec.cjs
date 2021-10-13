@@ -1,72 +1,12 @@
 const {
   TextType,
-  TextListType,
-  BooleanType,
-  DateTimeType,
-  IntegerType,
-  FloatType,
-  LanguageTagType,
-  URIType,
-  SexType,
-  SpecialValueType
+  URIType
 } = require('../src/cjs/values.js');
 
 const {
-  LanguageParameter,
-  ValueParameter,
-  PrefParameter,
-  AltidParameter,
-  PIDParameter,
-  TypeParameter,
-  MediatypeParameter,
-  CalscaleParameter,
-  SortAsParameter,
-  GeoParameter,
-  TzParameter,
-  AnyParameter,
-  LabelParameter
-} = require('../src/cjs/parameters.js');
-
-const {
-  BeginProperty,
-  EndProperty,
-  SourceProperty,
-  KindProperty,
-  XMLProperty,
   FNProperty,
-  NProperty,
-  NicknameProperty,
-  PhotoProperty,
-  BdayProperty,
-  AnniversaryProperty,
-  GenderProperty,
-  AdrProperty,
-  TelProperty,
-  EmailProperty,
-  IMPPProperty,
-  LangProperty,
-  TzProperty,
-  GeoProperty,
-  TitleProperty,
-  RoleProperty,
-  LogoProperty,
-  OrgProperty,
   MemberProperty,
-  RelatedProperty,
-  CategoriesProperty,
-  NoteProperty,
-  ProdidProperty,
-  RevProperty,
-  SoundProperty,
-  UIDProperty,
-  ClientpidmapProperty,
-  URLProperty,
-  VersionProperty,
-  KeyProperty,
-  FburlProperty,
-  CaladruriProperty,
-  CaluriProperty,
-  ExtendedProperty
+  NoteProperty
 } = require('../src/cjs/properties.js');
 
 const VCARD = require('../src/cjs/card.js');

@@ -1,72 +1,12 @@
 import {
   TextType,
-  TextListType,
-  BooleanType,
-  DateTimeType,
-  IntegerType,
-  FloatType,
-  LanguageTagType,
-  URIType,
-  SexType,
-  SpecialValueType
+  URIType
 } from '../src/esm/values.js';
 
 import {
-  LanguageParameter,
-  ValueParameter,
-  PrefParameter,
-  AltidParameter,
-  PIDParameter,
-  TypeParameter,
-  MediatypeParameter,
-  CalscaleParameter,
-  SortAsParameter,
-  GeoParameter,
-  TzParameter,
-  AnyParameter,
-  LabelParameter
-} from '../src/esm/parameters.js';
-
-import {
-  BeginProperty,
-  EndProperty,
-  SourceProperty,
-  KindProperty,
-  XMLProperty,
   FNProperty,
-  NProperty,
-  NicknameProperty,
-  PhotoProperty,
-  BdayProperty,
-  AnniversaryProperty,
-  GenderProperty,
-  AdrProperty,
-  TelProperty,
-  EmailProperty,
-  IMPPProperty,
-  LangProperty,
-  TzProperty,
-  GeoProperty,
-  TitleProperty,
-  RoleProperty,
-  LogoProperty,
-  OrgProperty,
   MemberProperty,
-  RelatedProperty,
-  CategoriesProperty,
-  NoteProperty,
-  ProdidProperty,
-  RevProperty,
-  SoundProperty,
-  UIDProperty,
-  ClientpidmapProperty,
-  URLProperty,
-  VersionProperty,
-  KeyProperty,
-  FburlProperty,
-  CaladruriProperty,
-  CaluriProperty,
-  ExtendedProperty
+  NoteProperty
 } from '../src/esm/properties.js';
 
 import VCARD from '../src/esm/card.js';
