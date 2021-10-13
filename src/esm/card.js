@@ -145,7 +145,7 @@ class VCARD {
     throw new InvalidArgument('AnniversaryProperty, BdayProperty, GenderProperty, KindProperty, NProperty, ProdidProperty, RevProperty and UIDProperty must not have more than one instance supplied');
 
     else if (
-      !(() => {
+      (() => {
         let hasMemberProperty = false;
         let kindPropertyIsGroup = false;
 
@@ -156,13 +156,12 @@ class VCARD {
           else if (props[index] instanceof KindProperty) {
             if (/^group$/i.test(props[index].value))
             kindPropertyIsGroup = true;
-            break;
           }
         }
 
         return hasMemberProperty ?
-        hasMemberProperty && kindPropertyIsGroup :
-        !hasMemberProperty;
+        hasMemberProperty && !kindPropertyIsGroup :
+        hasMemberProperty;
       })()
     )
     throw new InvalidArgument('MemberProperty should only be used if the value of the KindProperty is "group"')
