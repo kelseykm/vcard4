@@ -1,13 +1,8 @@
 const {
   TextType,
   TextListType,
-  BooleanType,
   DateTimeType,
-  DateTimeListType,
   IntegerType,
-  IntegerListType,
-  FloatType,
-  FloatListType,
   LanguageTagType,
   URIType,
   SexType,
@@ -18,15 +13,9 @@ const {
   LanguageParameter,
   ValueParameter,
   PrefParameter,
-  AltidParameter,
-  PIDParameter,
   TypeParameter,
   MediatypeParameter,
-  CalscaleParameter,
-  SortAsParameter,
   GeoParameter,
-  TzParameter,
-  AnyParameter,
   LabelParameter
 } = require('../src/cjs/parameters');
 
