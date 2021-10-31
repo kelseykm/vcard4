@@ -284,9 +284,9 @@ function parse(vcard) {
   else if (typeof vcard !== 'string')
   throw new TypeError('vCard to be parsed must be of type string');
 
-  vcard = vcard.replace(/\r\n[\t ]/g, '');
+  vcard = vcard.replace(/\r?\n[\t ]/g, '');
 
-  let contentLines = vcard.split('\r\n');
+  let contentLines = vcard.split(/\r?\n/);
 
   if (contentLines.length < 4)
   throw new InvalidArgument('vCard content lines must be delimited by CRLF sequence');
