@@ -284,7 +284,7 @@ function parse(vcard) {
   else if (typeof vcard !== 'string')
   throw new TypeError('vCard to be parsed must be of type string');
 
-  vcard = vcard.replaceAll('\r\n ', '');
+  vcard = vcard.replace(/\r\n[\t ]/g, '');
 
   let contentLines = vcard.split('\r\n');
 
