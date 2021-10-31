@@ -301,7 +301,7 @@ function parse(vcard) {
 
     let { property, parameters, value } = contentLineParser(line);
 
-    if (Object.prototype.hasOwnProperty(parsedVcard, property)) {
+    if (Object.prototype.hasOwnProperty.call(parsedVcard, property)) {
       if (Array.isArray(parsedVcard[property]))
       parsedVcard[property].push({
         parameters,
