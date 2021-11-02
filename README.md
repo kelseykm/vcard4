@@ -2286,7 +2286,7 @@ vc.repr();
 
 * This function is for parsing version 4.0 vCards
 
-* It returns an object containing the parsed vCard
+* It returns an object containing the parsed vCard or an array containing the parsed vCards if the vcard passed contained multiple contacts (vcards) within.
 
 * ```parse``` should be called with a single argument of type string, that is a properly formatted version 4.0 vCard
 
@@ -2380,6 +2380,8 @@ vc.repr();
         2. ```gender```
 
 * Note that values of object keys at all levels/depths are of type string. The object keys themselves are obviously strings. So, at all times, at any level/depth, the data types you will be dealing with are either strings, arrays of objects, or objects (whose values of object keys are of type string, or either arrays of objects, or objects...and so on...)
+
+* If the vCards passed into the parse function contained multiple contacts (vcards), an array of objects will be returned. The objects are as described above.
 
 ```js
 import { parse } from 'vcard4';
