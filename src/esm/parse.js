@@ -286,52 +286,73 @@ function parse(vcard) {
 
   vcard = vcard.replace(/\r\n[\t ]/g, '');
 
-  let contentLines = vcard.split('\r\n');
+  const allContentLines = vcard.split('\r\n');
 
-  if (contentLines.length < 4)
+  if (allContentLines.length < 4)
   throw new InvalidArgument('vCard content lines must be delimited by CRLF sequence');
 
-  let parsedVcard = {};
+  const vcBeginIndices = [];
 
-  for (let line of contentLines) {
-    if (
-      typeof line === 'undefined' ||
-      line?.length === 0
-    ) break;
+  allContentLines.forEach((contentLine, index) => {
+    if (/^BEGIN:VCARD$/i.test(contentLine))
+    vcBeginIndices.push(index);
+  });
 
-    let { property, parameters, value } = contentLineParser(line);
+  const separatedVcards = vcBeginIndices.map((vcBeginIndex, index) => {
+    let stop = vcBeginIndices[index + 1];
+    return allContentLines.slice(vcBeginIndex, stop);
+  });
 
-    if (Object.prototype.hasOwnProperty.call(parsedVcard, property)) {
-      if (Array.isArray(parsedVcard[property]))
-      parsedVcard[property].push({
-        parameters,
-        value
-      });
-      else {
-        let currentValue = parsedVcard[property];
-        parsedVcard[property] = [
-          currentValue,
-          {
-            parameters,
-            value
-          }
-        ];
-      }
-    }
-    else parsedVcard[property] = {
-      parameters,
-      value
-    };
-  }
-
-  if (
-    (typeof parsedVcard['BEGIN'] === 'undefined') ||
-    (typeof parsedVcard['VERSION'] === 'undefined') ||
-    (typeof parsedVcard['END'] === 'undefined')
-  )
+  if (!separatedVcards.length)
   throw new InvalidArgument('Invalid vCard');
 
-  return parsedVcard;
+  const parsedVcards = [];
+
+  for (let separatedVcard of separatedVcards) {
+    let parsedVcard = {};
+
+    for (let line of separatedVcard) {
+      if (
+        typeof line === 'undefined' ||
+        line?.length === 0
+      ) break;
+
+      let { property, parameters, value } = contentLineParser(line);
+
+      if (Object.prototype.hasOwnProperty.call(parsedVcard, property)) {
+        if (Array.isArray(parsedVcard[property]))
+        parsedVcard[property].push({
+          parameters,
+          value
+        });
+        else {
+          let currentValue = parsedVcard[property];
+          parsedVcard[property] = [
+            currentValue,
+            {
+              parameters,
+              value
+            }
+          ];
+        }
+      }
+      else parsedVcard[property] = {
+        parameters,
+        value
+      };
+    }
+
+    if (
+      (typeof parsedVcard['BEGIN'] === 'undefined') ||
+      (typeof parsedVcard['VERSION'] === 'undefined') ||
+      (typeof parsedVcard['END'] === 'undefined')
+    )
+    throw new InvalidArgument('Invalid vCard');
+
+    parsedVcards.push(parsedVcard);
+  }
+
+  return parsedVcards.length === 1 ? parsedVcards.pop() : parsedVcards;
 }
 
 export default parse;
