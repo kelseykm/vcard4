@@ -319,6 +319,8 @@ function parse(vcard) {
 
       let { property, parameters, value } = contentLineParser(line);
 
+      property = property.split('.').slice(-1);
+
       if (Object.prototype.hasOwnProperty.call(parsedVcard, property)) {
         if (Array.isArray(parsedVcard[property]))
         parsedVcard[property].push({
