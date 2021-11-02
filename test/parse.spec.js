@@ -25,6 +25,17 @@ describe('ESM parse tests', () => {
     assert.throws(() => parse());
     assert.throws(() => parse('Hello world'));
     assert.throws(() => parse(
+      'BEGIN:VCARD\n' +
+      'VERSION:4.0\n' +
+      'N:Doe;John;;;\n' +
+      'FN:John Doe\n' +
+      'ORG:Example.com Inc.;Marketing\n' +
+      'TITLE:Imaginary test person\n' +
+      'EMAIL;TYPE=work;PREF=1:johnDoe@example.org\n' +
+      'TEL;TYPE=cell:tel:+1 781 555 1212\n' +
+      'END:VCARD\n'
+    ));
+    assert.throws(() => parse(
       'N:Doe;John;;;\r\n' +
       'FN:John Doe\r\n' +
       'ORG:Example.com Inc.;Marketing\r\n' +
@@ -32,5 +43,30 @@ describe('ESM parse tests', () => {
       'EMAIL;TYPE=work;PREF=1:johnDoe@example.org\r\n' +
       'TEL;TYPE=cell:tel:+1 781 555 1212\r\n'
     ));
+  });
+
+  it('Parses vcards correctly', () => {
+    assert.isArray(parse(
+        "BEGIN:VCARD\r\n" +
+        "VERSION:4.0\r\n" +
+        "FN:James Bond\r\n" +
+        "END:VCARD\r\n" +
+        "BEGIN:VCARD\r\n" +
+        "VERSION:4.0\r\n" +
+        "FN:Jane Bond\r\n" +
+        "END:VCARD\r\n"
+    ));
+    assert.isNotArray(parse(
+        "BEGIN:VCARD\r\n" +
+        "VERSION:4.0\r\n" +
+        "FN:James Bond\r\n" +
+        "END:VCARD\r\n"
+    ));
+    assert.hasAllKeys(parse(
+        "BEGIN:VCARD\r\n" +
+        "VERSION:4.0\r\n" +
+        "FN:James Bond\r\n" +
+        "END:VCARD\r\n"
+    ), ['BEGIN', 'VERSION', 'FN', 'END']);
   });
 });
