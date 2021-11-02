@@ -8,6 +8,9 @@
     "import": "./index.js",
     "require": "./index.cjs"
   },
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
     "test": "mocha"
   },
