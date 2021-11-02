@@ -3,6 +3,18 @@ import {
   InvalidArgument
 } from './errors.js';
 
+function backCountBackslash(str) {
+  const chr = '\\';
+  let count = 0;
+
+  for (let index = str.length - 1; index >= 0; index--) {
+    if (str[index] === chr) count ++;
+    else break;
+  }
+
+  return count;
+}
+
 function valueParser(value, prop) {
   if (typeof value === 'undefined')
   throw new MissingArgument('Value for valueParser must be supplied');
@@ -29,12 +41,15 @@ function valueParser(value, prop) {
 
   let continueFrom = 0;
   for (let index = 0; index < value.length; index++) {
-    if (value[index] === ';' && value[index - 1] !== '\\') {
+    if (value[index] === ';') {
       if (
         quotedValues.some(quotedValue => {
           return (index > quotedValue.start) && (index < quotedValue.stop);
         })
       ) continue;
+
+      const backslashCount = backCountBackslash(value.substring(continueFrom, index));
+      if (backslashCount % 2 !== 0) continue;
 
       parsedValue.push(value.substring(continueFrom, index));
       continueFrom = index + 1;
@@ -65,12 +80,15 @@ function valueParser(value, prop) {
     const holdParsedComponent = [];
     let continueFrom = 0;
     for (let index2 = 0; index2 < component.length; index2++) {
-      if (component[index2] === ',' && component[index2 - 1] !== '\\') {
+      if (component[index2] === ',') {
         if (
           quotedComponents.some(quotedComponent => {
             return (index > quotedComponent.start) && (index < quotedComponent.stop);
           })
         ) continue;
+
+        const backslashCount = backCountBackslash(component.substring(continueFrom, index2));
+        if (backslashCount % 2 !== 0) continue;
 
         holdParsedComponent.push(component.substring(continueFrom, index2));
         continueFrom = index2 + 1;
@@ -133,12 +151,15 @@ function parameterParser(params) {
 
   let continueFrom = 0;
   for (let index = 0; index < params?.length; index++) {
-    if (params[index] === ';' && params[index - 1] !== '\\') {
+    if (params[index] === ';') {
       if (
         quotedParams.some(quotedParam => {
           return (index > quotedParam.start) && (index < quotedParam.stop);
         })
       ) continue;
+
+      const backslashCount = backCountBackslash(params.substring(continueFrom, index));
+      if (backslashCount % 2 !== 0) continue;
 
       paramList.push(params.substring(continueFrom, index));
       continueFrom = index + 1;
@@ -154,12 +175,15 @@ function parameterParser(params) {
     const holdJoinedParam = [];
     let continueFrom = 0;
     for (let index2 = 0; index2 < joinedParam.length; index2++) {
-      if (joinedParam[index2] === '=' && joinedParam[index2 - 1] !== '\\') {
+      if (joinedParam[index2] === '=') {
         if (
           quotedParams.some(quotedParam => {
             return (index > quotedParam.start) && (index < quotedParam.stop);
           })
         ) continue;
+
+        const backslashCount = backCountBackslash(joinedParam.substring(continueFrom, index2));
+        if (backslashCount % 2 !== 0) continue;
 
         holdJoinedParam.push(joinedParam.substring(continueFrom, index2));
         continueFrom = index2 + 1;
@@ -206,12 +230,15 @@ function contentLineParser(contentLine) {
   let propAndParams;
 
   for (let index = 0; index < contentLine.length; index++) {
-    if (contentLine[index] === ':' && contentLine[index - 1] !== '\\') {
+    if (contentLine[index] === ':') {
       if (
         quotedValues.some(quotedValue => {
           return (index > quotedValue.start) && (index < quotedValue.stop);
         })
       ) continue;
+
+      const backslashCount = backCountBackslash(contentLine.substring(0, index));
+      if (backslashCount % 2 !== 0) continue;
 
       value = contentLine.substring(index + 1);
       propAndParams = contentLine.substring(0, index);
@@ -222,12 +249,15 @@ function contentLineParser(contentLine) {
   if (typeof propAndParams === 'undefined') return;
 
   for (let index = 0; index < propAndParams.length; index++) {
-    if (contentLine[index] === ';' && contentLine[index - 1] !== '\\') {
+    if (contentLine[index] === ';') {
       if (
         quotedValues.some(quotedValue => {
           return (index > quotedValue.start) && (index < quotedValue.stop);
         })
       ) continue;
+
+      const backslashCount = backCountBackslash(propAndParams.substring(0, index));
+      if (backslashCount % 2 !== 0) continue;
 
       params = propAndParams.substring(index + 1);
       prop = propAndParams.substring(0, index);
