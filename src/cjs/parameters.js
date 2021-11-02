@@ -241,10 +241,11 @@ class TypeParameter extends AbstractBaseParameter {
     )
     throw new TypeError('Value for TypeParameter must be of type TextType or TextListType');
 
+    const telre = new RegExp(`(?:${this.#telTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
+    const relatedre = new RegExp(`(?:${this.#relatedTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
+
     switch (true) {
       case /^TelProperty$/i.test(targetProp):
-        const telre = new RegExp(`(?:${this.#telTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
-
         if (
           (typeValue instanceof TextType) &&
           !telre.test(typeValue.repr())
@@ -259,8 +260,6 @@ class TypeParameter extends AbstractBaseParameter {
 
         break;
       case /^RelatedProperty$/i.test(targetProp):
-        const relatedre = new RegExp(`(?:${this.#relatedTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
-
         if (
           (typeValue instanceof TextType) &&
           !relatedre.test(typeValue.repr())
