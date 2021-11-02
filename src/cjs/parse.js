@@ -14,16 +14,11 @@ function valueParser(value, prop) {
   let quotedValueIndex = 0;
   for (let index = 0; index < value.length; index++) {
     if (value[index] === '"') {
-      if (typeof quotedValues[quotedValueIndex] !== 'object') {
-        quotedValues[quotedValueIndex] = {
-          start: index,
-        };
-        continue;
-      }
-    }
-
-    if (value[index] === '"') {
-      if (typeof quotedValues[quotedValueIndex] === 'object') {
+      if (typeof quotedValues[quotedValueIndex] !== 'object')
+      quotedValues[quotedValueIndex] = {
+        start: index,
+      };
+      else if (typeof quotedValues[quotedValueIndex] === 'object') {
         quotedValues[quotedValueIndex]['stop'] = index;
         quotedValueIndex++;
       }
@@ -45,11 +40,8 @@ function valueParser(value, prop) {
       continueFrom = index + 1;
     }
 
-    if (index === value.length - 1) {
-      if (continueFrom === value.length)
-      parsedValue.push('');
-      else parsedValue.push(value.substring(continueFrom));
-    }
+    if (index === value.length - 1)
+    parsedValue.push(value.substring(continueFrom));
   }
 
   for (let index = 0; index < parsedValue.length; index++) {
@@ -89,11 +81,8 @@ function valueParser(value, prop) {
         continueFrom = index2 + 1;
       }
 
-      if (index2 === component.length - 1) {
-        if (continueFrom === component.length)
-        holdParsedComponent.push('');
-        else holdParsedComponent.push(component.substring(continueFrom));
-      }
+      if (index2 === component.length - 1)
+      holdParsedComponent.push(component.substring(continueFrom));
     }
 
     if (holdParsedComponent.length > 1)
@@ -136,16 +125,11 @@ function parameterParser(params) {
   let quotedParamIndex = 0;
   for (let index = 0; index < params?.length; index++) {
     if (params[index] === '"') {
-      if (typeof quotedParams[quotedParamIndex] !== 'object') {
-        quotedParams[quotedParamIndex] = {
-          start: index,
-        };
-        continue;
-      }
-    }
-
-    if (params[index] === '"') {
-      if (typeof quotedParams[quotedParamIndex] === 'object') {
+      if (typeof quotedParams[quotedParamIndex] !== 'object')
+      quotedParams[quotedParamIndex] = {
+        start: index,
+      };
+      else if (typeof quotedParams[quotedParamIndex] === 'object') {
         quotedParams[quotedParamIndex]['stop'] = index;
         quotedParamIndex++;
       }
@@ -165,11 +149,8 @@ function parameterParser(params) {
       continueFrom = index + 1;
     }
 
-    if (index === params.length - 1) {
-      if (continueFrom === params.length)
-      paramList.push('');
-      else paramList.push(params.substring(continueFrom));
-    }
+    if (index === params.length - 1)
+    paramList.push(params.substring(continueFrom));
   }
 
   for (let index = 0; index < paramList?.length; index++) {
@@ -189,17 +170,14 @@ function parameterParser(params) {
         continueFrom = index2 + 1;
       }
 
-      if (index2 === joinedParam.length - 1) {
-        if (continueFrom === joinedParam.length)
-        holdJoinedParam.push('');
-        else holdJoinedParam.push(joinedParam.substring(continueFrom));
-      }
+      if (index2 === joinedParam.length - 1)
+      holdJoinedParam.push(joinedParam.substring(continueFrom));
     }
 
     let parsedParam = {};
     for (let index = 0; index < holdJoinedParam.length; index++) {
       if (index % 2 === 0)
-      parsedParam[holdJoinedParam[index]] = holdJoinedParam[index+1]
+      parsedParam[holdJoinedParam[index]] = holdJoinedParam[index + 1]
       else continue;
     }
 
@@ -216,16 +194,11 @@ function contentLineParser(contentLine) {
   let quotedValueIndex = 0;
   for (let index = 0; index < contentLine.length; index++) {
     if (contentLine[index] === '"') {
-      if (typeof quotedValues[quotedValueIndex] !== 'object') {
-        quotedValues[quotedValueIndex] = {
-          start: index,
-        };
-        continue;
-      }
-    }
-
-    if (contentLine[index] === '"') {
-      if (typeof quotedValues[quotedValueIndex] === 'object') {
+      if (typeof quotedValues[quotedValueIndex] !== 'object')
+      quotedValues[quotedValueIndex] = {
+        start: index,
+      };
+      else if (typeof quotedValues[quotedValueIndex] === 'object') {
         quotedValues[quotedValueIndex]['stop'] = index;
         quotedValueIndex++;
       }
