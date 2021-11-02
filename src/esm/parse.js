@@ -51,16 +51,11 @@ function valueParser(value, prop) {
     let quotedComponentIndex = 0;
     for (let index = 0; index < component.length; index++) {
       if (component[index] === '"') {
-        if (typeof quotedComponents[quotedComponentIndex] !== 'object') {
-          quotedComponents[quotedComponentIndex] = {
-            start: index,
-          };
-          continue;
-        }
-      }
-
-      if (component[index] === '"') {
-        if (typeof quotedComponents[quotedComponentIndex] === 'object') {
+        if (typeof quotedComponents[quotedComponentIndex] !== 'object')
+        quotedComponents[quotedComponentIndex] = {
+          start: index,
+        };
+        else if (typeof quotedComponents[quotedComponentIndex] === 'object') {
           quotedComponents[quotedComponentIndex]['stop'] = index;
           quotedComponentIndex++;
         }
