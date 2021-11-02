@@ -10,7 +10,7 @@ function valueParser(value, prop) {
   if (typeof value !== 'string')
   throw new InvalidArgument('Value for valueParser must be of type string');
 
-  let quotedValues = [];
+  const quotedValues = [];
   let quotedValueIndex = 0;
   for (let index = 0; index < value.length; index++) {
     if (value[index] === '"') {
@@ -25,7 +25,7 @@ function valueParser(value, prop) {
     }
   }
 
-  let parsedValue = [];
+  const parsedValue = [];
 
   let continueFrom = 0;
   for (let index = 0; index < value.length; index++) {
@@ -45,9 +45,9 @@ function valueParser(value, prop) {
   }
 
   for (let index = 0; index < parsedValue.length; index++) {
-    let component = parsedValue[index];
+    const component = parsedValue[index];
 
-    let quotedComponents = [];
+    const quotedComponents = [];
     let quotedComponentIndex = 0;
     for (let index = 0; index < component.length; index++) {
       if (component[index] === '"') {
@@ -67,7 +67,7 @@ function valueParser(value, prop) {
       }
     }
 
-    let holdParsedComponent = [];
+    const holdParsedComponent = [];
     let continueFrom = 0;
     for (let index2 = 0; index2 < component.length; index2++) {
       if (component[index2] === ',' && component[index2 - 1] !== '\\') {
@@ -119,9 +119,9 @@ function valueParser(value, prop) {
 }
 
 function parameterParser(params) {
-  let paramList = params ? [] : params;
+  const paramList = params ? [] : params;
 
-  let quotedParams = [];
+  const quotedParams = [];
   let quotedParamIndex = 0;
   for (let index = 0; index < params?.length; index++) {
     if (params[index] === '"') {
@@ -154,9 +154,9 @@ function parameterParser(params) {
   }
 
   for (let index = 0; index < paramList?.length; index++) {
-    let joinedParam = paramList[index];
+    const joinedParam = paramList[index];
 
-    let holdJoinedParam = [];
+    const holdJoinedParam = [];
     let continueFrom = 0;
     for (let index2 = 0; index2 < joinedParam.length; index2++) {
       if (joinedParam[index2] === '=' && joinedParam[index2 - 1] !== '\\') {
@@ -174,7 +174,7 @@ function parameterParser(params) {
       holdJoinedParam.push(joinedParam.substring(continueFrom));
     }
 
-    let parsedParam = {};
+    const parsedParam = {};
     for (let index = 0; index < holdJoinedParam.length; index++) {
       if (index % 2 === 0)
       parsedParam[holdJoinedParam[index]] = holdJoinedParam[index + 1]
@@ -190,7 +190,7 @@ function parameterParser(params) {
 }
 
 function contentLineParser(contentLine) {
-  let quotedValues = [];
+  const quotedValues = [];
   let quotedValueIndex = 0;
   for (let index = 0; index < contentLine.length; index++) {
     if (contentLine[index] === '"') {
@@ -272,7 +272,7 @@ function parse(vcard) {
   });
 
   const separatedVcards = vcBeginIndices.map((vcBeginIndex, index) => {
-    let stop = vcBeginIndices[index + 1];
+    const stop = vcBeginIndices[index + 1];
     return allContentLines.slice(vcBeginIndex, stop);
   });
 
@@ -281,10 +281,10 @@ function parse(vcard) {
 
   const parsedVcards = [];
 
-  for (let separatedVcard of separatedVcards) {
-    let parsedVcard = {};
+  for (const separatedVcard of separatedVcards) {
+    const parsedVcard = {};
 
-    for (let line of separatedVcard) {
+    for (const line of separatedVcard) {
       if (
         typeof line === 'undefined' ||
         line?.length === 0
@@ -301,7 +301,7 @@ function parse(vcard) {
           value
         });
         else {
-          let currentValue = parsedVcard[property];
+          const currentValue = parsedVcard[property];
           parsedVcard[property] = [
             currentValue,
             {

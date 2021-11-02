@@ -542,14 +542,14 @@ describe('ESM properties tests', () => {
 
   describe('Addressing properties tests', () => {
     describe('AdrProperty tests', () => {
-      let addrArr = new Array(7);
+      const addrArr = new Array(7);
       addrArr[2] = new TextType('123 Main Street');
       addrArr[3] = new TextType('Any Town');
       addrArr[4] = new TextType('CA');
       addrArr[5] = new TextType('91921-1234');
       addrArr[6] = new TextType('U.S.A.');
 
-      let addrArr2 = [...addrArr];
+      const addrArr2 = [...addrArr];
 
       it('Accepts valid input', () => {
         assert.doesNotThrow(() => new AdrProperty(

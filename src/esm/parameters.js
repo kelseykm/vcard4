@@ -78,7 +78,7 @@ class ValueParameter extends AbstractBaseParameter {
   #valueType;
 
   get value() {
-    let type = this.#valueType.type || this.#valueType.constructor.type;
+    const type = this.#valueType.type || this.#valueType.constructor.type;
     return type.toLowerCase();
   }
 
@@ -243,7 +243,7 @@ class TypeParameter extends AbstractBaseParameter {
 
     switch (true) {
       case /^TelProperty$/i.test(targetProp):
-        let telre = new RegExp(`(?:${this.#telTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
+        const telre = new RegExp(`(?:${this.#telTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
 
         if (
           (typeValue instanceof TextType) &&
@@ -259,7 +259,7 @@ class TypeParameter extends AbstractBaseParameter {
 
         break;
       case /^RelatedProperty$/i.test(targetProp):
-        let relatedre = new RegExp(`(?:${this.#relatedTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
+        const relatedre = new RegExp(`(?:${this.#relatedTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
 
         if (
           (typeValue instanceof TextType) &&
@@ -438,7 +438,7 @@ class TzParameter extends AbstractBaseParameter {
     if (typeof tzValue === 'undefined')
     throw new MissingArgument('Value for TzParameter must be supplied');
 
-    let types = [
+    const types = [
       TextType,
       URIType,
       DateTimeType

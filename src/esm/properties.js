@@ -55,7 +55,7 @@ class AbstractBaseProperty {
   }
 
   repr() {
-    let contentLine = this.params === '' ?
+    const contentLine = this.params === '' ?
     `${this.constructor.prop || this.prop }:${this.value}` :
     `${this.constructor.prop || this.prop };${this.params}:${this.value}`;
 
