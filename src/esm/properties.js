@@ -29,7 +29,8 @@ import {
   GeoParameter,
   TzParameter,
   AnyParameter,
-  LabelParameter
+  LabelParameter,
+  CcParamater
 } from './parameters.js';
 
 // Abstract Base Class for all properties
@@ -1007,7 +1008,8 @@ class AdrProperty extends AbstractBaseProperty {
     PIDParameter,
     PrefParameter,
     TypeParameter,
-    AnyParameter
+    AnyParameter,
+    CcParamater
   ];
   static acceptableValTypes = SpecialValueType;
 
