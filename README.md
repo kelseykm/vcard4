@@ -2,7 +2,7 @@
 
 # vcard4
 
-__vCard version 4.0 javascript library for creating or parsing vCards, with full implementation of RFC 6350__
+__vCard version 4.0 javascript library for creating or parsing vCards, with full implementation of RFC6350, along with RFC6350 extensions including RFC6474, RFC8605__
 
 For use in node or in the browser
 
@@ -263,6 +263,7 @@ console.log(parsedVcard);
   * [TzParameter](#tzparameter)
   * [AnyParameter](#anyparameter)
   * [LabelParameter](#labelparameter)
+  * [CCParameter](#ccparameter)
 - [Properties](#properties)
   * [General Properties](#general-properties)
     + [BeginProperty](#beginproperty)
@@ -288,6 +289,7 @@ console.log(parsedVcard);
     + [EmailProperty](#emailproperty)
     + [IMPPProperty](#imppproperty)
     + [LangProperty](#langproperty)
+    + [ContactURIProperty](#contacturiproperty)
   * [Geographical Properties](#geographical-properties)
     + [TzProperty](#tzproperty)
     + [GeoProperty](#geoproperty)
@@ -322,7 +324,7 @@ console.log(parsedVcard);
 
 ## Introduction
 
-* This is a vCard JavaScript library that implements RFC6350 fully, along with RFC6350 extensions including RFC6474
+* This is a vCard JavaScript library that implements RFC6350 fully, along with RFC6350 extensions including RFC6474, RFC8605
 
 * That RFC defines the vCard data format for representing and exchanging a variety of information about individuals and other entities (e.g., formatted and structured name and delivery addresses, email address, multiple telephone numbers, photograph, logo, audio clips, etc.)
 
@@ -447,7 +449,7 @@ let people = new TextListType([ person1, person2 ]);
 
 * This class represents the "URI" data type
 
-* ```URIType``` should be called with a single argument of type string, that is formatted as URI as defined in Section 3 of RFC 3986
+* ```URIType``` should be called with a single argument of type string, that is formatted as URI as defined in Section 3 of RFC3986
 
 ```js
 new URIType('http://www.example.com/my/picture.jpg');
@@ -744,9 +746,9 @@ new FloatListType([
 
 * This class represents the "language-tag" data type
 
-* ```LanguageTagType``` should be called with a single argument of type string that is formatted as a language tag as defined in RFC 5646
+* ```LanguageTagType``` should be called with a single argument of type string that is formatted as a language tag as defined in RFC5646
 
-* Note that the value submitted will not be checked to make sure it is an actual language tag that  conforms to RFC 5646, so ensure that whatever value you pass is a valid language tag
+* Note that the value submitted will not be checked to make sure it is an actual language tag that  conforms to RFC5646, so ensure that whatever value you pass is a valid language tag
 
 ```js
 new LanguageTagType('en-us');
@@ -1179,7 +1181,7 @@ new AnyParameter('networkTDOA', 'strong');
 
 ### LabelParameter
 
-* This class represents the "LABEL" parameter for use with the ```ADR``` property
+* This class represents the "LABEL" parameter for use with the [`ADR`](#adrproperty) property
 
 * It is used to present a delivery address label for the address
 
@@ -1193,6 +1195,21 @@ Any Town, CA 91921-1234
 U.S.A.`;
 
 new LabelParameter(deliveryAddress);
+```
+
+### CCParameter
+
+* This class represents the "CC" parameter for use with the [`ADR`](#adrproperty) property
+
+* This parameter contains the ISO 3166 [ISO.3166.1988]
+[two-character country code associated with the "country name" ```ADR``` component](#specialvaluetype)
+
+* ```CCParameter``` should be called with a single argument of type [`TextType`](#texttype-and-textlisttype), whose value is 2 alphanumeric characters
+
+```js
+new CCParameter(
+  new TextType('US')
+);
 ```
 
 ## Properties
@@ -1232,6 +1249,7 @@ new LabelParameter(deliveryAddress);
         2. EMAIL
         3. IMPP
         4. LANG
+        5. CONTACT-URI
 
     - Geographical Properties
 
@@ -1293,28 +1311,29 @@ new LabelParameter(deliveryAddress);
     18. [`EmailProperty`](#emailproperty)
     19. [`IMPPProperty`](#imppproperty)
     20. [`LangProperty`](#langproperty)
-    21. [`TzProperty`](#tzproperty)
-    22. [`GeoProperty`](#geoproperty)
-    23. [`TitleProperty`](#titleproperty)
-    24. [`RoleProperty`](#roleproperty)
-    25. [`LogoProperty`](#logoproperty)
-    26. [`OrgProperty`](#orgproperty)
-    27. [`MemberProperty`](#memberproperty)
-    28. [`RelatedProperty`](#relatedproperty)
-    29. [`CategoriesProperty`](#categoriesproperty)
-    30. [`NoteProperty`](#noteproperty)
-    31. [`ProdidProperty`](#prodidproperty)
-    32. [`RevProperty`](#revproperty)
-    33. [`SoundProperty`](#soundproperty)
-    34. [`UIDProperty`](#uidproperty)
-    35. [`ClientpidmapProperty`](#clientpidmapproperty)
-    36. [`URLProperty`](#urlproperty)
-    37. [`VersionProperty`](#versionproperty)
-    38. [`KeyProperty`](#keyproperty)
-    39. [`FburlProperty`](#fburlproperty)
-    40. [`CaladruriProperty`](#caladruriproperty)
-    41. [`CaluriProperty`](#caluriproperty)
-    42. [`ExtendedProperty`](#extendedproperty)
+    21. [`ContactURIProperty`](#contacturiproperty)
+    22. [`TzProperty`](#tzproperty)
+    23. [`GeoProperty`](#geoproperty)
+    24. [`TitleProperty`](#titleproperty)
+    25. [`RoleProperty`](#roleproperty)
+    26. [`LogoProperty`](#logoproperty)
+    27. [`OrgProperty`](#orgproperty)
+    28. [`MemberProperty`](#memberproperty)
+    29. [`RelatedProperty`](#relatedproperty)
+    30. [`CategoriesProperty`](#categoriesproperty)
+    31. [`NoteProperty`](#noteproperty)
+    32. [`ProdidProperty`](#prodidproperty)
+    33. [`RevProperty`](#revproperty)
+    34. [`SoundProperty`](#soundproperty)
+    35. [`UIDProperty`](#uidproperty)
+    36. [`ClientpidmapProperty`](#clientpidmapproperty)
+    37. [`URLProperty`](#urlproperty)
+    38. [`VersionProperty`](#versionproperty)
+    39. [`KeyProperty`](#keyproperty)
+    40. [`FburlProperty`](#fburlproperty)
+    41. [`CaladruriProperty`](#caladruriproperty)
+    42. [`CaluriProperty`](#caluriproperty)
+    43. [`ExtendedProperty`](#extendedproperty)
 
 * The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard. For example,
 
@@ -1748,7 +1767,7 @@ new DeathDateProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```AdrProperty``` are [`LabelParameter`](#labelparameter), [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`GeoParameter`](#geoparameter), [`TzParameter`](#tzparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```AdrProperty``` are [`LabelParameter`](#labelparameter), [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`GeoParameter`](#geoparameter), [`TzParameter`](#tzparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`AnyParameter`](#anyparameter) and [`CCParameter`](#ccparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -1853,6 +1872,25 @@ new IMPPProperty(
 new LangProperty(
   [],
   new LanguageTagType('fr')
+);
+```
+
+#### ContactURIProperty
+
+* This class represents the "CONTACT-URI" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```ContactURIProperty``` are [`ValueParameter`](#ValueParameter) and [`PrefParameter`](#prefparameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```ContactURIProperty``` should be of type [`URIType`](#uritype). It be either a "mailto", "http", or "https" URI value
+
+```js
+new ContactURIProperty(
+  [],
+  new URIType('mailto:contact@example.com')
 );
 ```
 
