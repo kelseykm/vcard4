@@ -20,7 +20,8 @@ import {
   GeoParameter,
   TzParameter,
   AnyParameter,
-  LabelParameter
+  LabelParameter,
+  CCParameter
 } from '../src/esm/parameters.js';
 
 import { assert } from 'chai';
@@ -412,6 +413,31 @@ Mail Drop: TNE QB
 Any Town, CA 91921-1234
 U.S.A.`).repr(),
         'LABEL="Mr. John Q. Public, Esq.\\nMail Drop: TNE QB\\n123 Main Street\\nAny Town, CA 91921-1234\\nU.S.A."'
+      )
+    });
+  });
+
+  describe('CCParameter tests', () => {
+    it('Accepts valid input', () => {
+      assert.doesNotThrow(() => new CCParameter(
+        new TextType('US')
+      ));
+    });
+
+    it('Rejects invalid input', () => {
+      assert.throws(() => new CCParameter(
+        new TextType('USA')
+      ));
+      assert.throws(() => new CCParameter(1));
+      assert.throws(() => new CCParameter({}));
+    });
+
+    it('Formats value properly', () => {
+      assert.strictEqual(
+        new CCParameter(
+          new TextType('US')
+        ).repr(),
+        'CC=US'
       )
     });
   });
