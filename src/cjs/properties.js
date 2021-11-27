@@ -30,7 +30,7 @@ const {
   TzParameter,
   AnyParameter,
   LabelParameter,
-  CcParamater
+  CCParameter
 } = require('./parameters');
 
 // Abstract Base Class for all properties
@@ -1009,7 +1009,7 @@ class AdrProperty extends AbstractBaseProperty {
     PrefParameter,
     TypeParameter,
     AnyParameter,
-    CcParamater
+    CCParameter
   ];
   static acceptableValTypes = SpecialValueType;
 

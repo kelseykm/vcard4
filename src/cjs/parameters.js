@@ -516,18 +516,18 @@ class LabelParameter extends AbstractBaseParameter {
   }
 }
 
-class CcParamater extends AbstractBaseParameter {
+class CCParameter extends AbstractBaseParameter {
   static param = 'CC';
 
   #validate(ccValue) {
     if (typeof ccValue === 'undefined')
-    throw new MissingArgument('Value for CcParamater must be supplied');
+    throw new MissingArgument('Value for CCParameter must be supplied');
 
     else if (
       !(ccValue instanceof TextType) ||
       !/^[A-Za-z0-9]{2}$/.test(ccValue.repr())
     )
-    throw new InvalidArgument('Invalid value for CcParamater');
+    throw new InvalidArgument('Invalid value for CCParameter');
   }
 
   constructor(ccValue) {
@@ -555,5 +555,5 @@ module.exports = {
   TzParameter,
   AnyParameter,
   LabelParameter,
-  CcParamater
+  CCParameter
 };
