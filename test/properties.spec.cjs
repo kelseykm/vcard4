@@ -32,6 +32,9 @@ const {
   BdayProperty,
   AnniversaryProperty,
   GenderProperty,
+  BirthPlaceProperty,
+  DeathPlaceProperty,
+  DeathDateProperty,
   AdrProperty,
   TelProperty,
   EmailProperty,
@@ -63,7 +66,7 @@ const {
 
 const { assert } = require('chai');
 
-describe('CJS properties tests', () => {
+describe('ESM properties tests', () => {
   describe('General properties tests', () => {
     describe('BeginProperty tests', () => {
       it('Instances can be created', () => {
@@ -538,18 +541,120 @@ describe('CJS properties tests', () => {
         );
       });
     });
+
+    describe('BirthPlaceProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new BirthPlaceProperty(
+          [],
+          new TextType('The hospital')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new BirthPlaceProperty(
+          [],
+          new DateTimeType('19960415', 'date')
+        ));
+        assert.throws(() => new BirthPlaceProperty);
+        assert.throws(() => new BirthPlaceProperty(1));
+        assert.throws(() => new BirthPlaceProperty({}));
+        assert.throws(() => new BirthPlaceProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new BirthPlaceProperty(
+            [
+              new ValueParameter(
+                new TextType('The hospital')
+              )
+            ],
+            new TextType('The hospital')
+          ).repr(),
+          "BIRTHPLACE;VALUE=text:The hospital"
+        );
+      });
+    });
+
+    describe('DeathPlaceProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new DeathPlaceProperty(
+          [],
+          new TextType('The hospital')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new DeathPlaceProperty(
+          [],
+          new DateTimeType('19960415', 'date')
+        ));
+        assert.throws(() => new DeathPlaceProperty);
+        assert.throws(() => new DeathPlaceProperty(1));
+        assert.throws(() => new DeathPlaceProperty({}));
+        assert.throws(() => new DeathPlaceProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new DeathPlaceProperty(
+            [
+              new ValueParameter(
+                new TextType('The hospital')
+              )
+            ],
+            new TextType('The hospital')
+          ).repr(),
+          "DEATHPLACE;VALUE=text:The hospital"
+        );
+      });
+    });
+
+    describe('DeathDateProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new DeathDateProperty(
+          [],
+          new DateTimeType('19960415', 'dateandortime')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new DeathDateProperty(
+          [],
+          new DateTimeType('19960415', 'date')
+        ));
+        assert.throws(() => new DeathDateProperty);
+        assert.throws(() => new DeathDateProperty(1));
+        assert.throws(() => new DeathDateProperty({}));
+        assert.throws(() => new DeathDateProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new DeathDateProperty(
+            [
+              new ValueParameter(
+                new TextType('circa 1800')
+              )
+            ],
+            new TextType('circa 1800')
+          ).repr(),
+          "DEATHDATE;VALUE=text:circa 1800"
+        );
+      });
+    });
   });
 
   describe('Addressing properties tests', () => {
     describe('AdrProperty tests', () => {
-      let addrArr = new Array(7);
+      const addrArr = new Array(7);
       addrArr[2] = new TextType('123 Main Street');
       addrArr[3] = new TextType('Any Town');
       addrArr[4] = new TextType('CA');
       addrArr[5] = new TextType('91921-1234');
       addrArr[6] = new TextType('U.S.A.');
 
-      let addrArr2 = [...addrArr];
+      const addrArr2 = [...addrArr];
 
       it('Accepts valid input', () => {
         assert.doesNotThrow(() => new AdrProperty(
