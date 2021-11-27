@@ -278,6 +278,9 @@ console.log(parsedVcard);
     + [BdayProperty](#bdayproperty)
     + [AnniversaryProperty](#anniversaryproperty)
     + [GenderProperty](#genderproperty)
+    + [BirthPlaceProperty](#birthplaceproperty)
+    + [DeathPlaceProperty](#deathplaceproperty)
+    + [DeathDateProperty](#deathdateproperty)
   * [Delivery Addressing Properties](#delivery-addressing-properties)
     + [AdrProperty](#adrproperty)
   * [Communications Properties](#communications-properties)
@@ -319,7 +322,7 @@ console.log(parsedVcard);
 
 ## Introduction
 
-* This is a vCard JavaScript library that implements RFC 6350 fully
+* This is a vCard JavaScript library that implements RFC6350 fully, along with RFC6350 extensions including RFC6474
 
 * That RFC defines the vCard data format for representing and exchanging a variety of information about individuals and other entities (e.g., formatted and structured name and delivery addresses, email address, multiple telephone numbers, photograph, logo, audio clips, etc.)
 
@@ -1215,6 +1218,9 @@ new LabelParameter(deliveryAddress);
         5. BDAY
         6. ANNIVERSARY
         7. GENDER
+        8. BIRTHPLACE
+        9. DEATHPLACE
+        10. DEATHDATE
 
     - Delivery Addressing Properties
 
@@ -1279,33 +1285,36 @@ new LabelParameter(deliveryAddress);
     10. [`BdayProperty`](#bdayproperty)
     11. [`AnniversaryProperty`](#anniversaryproperty)
     12. [`GenderProperty`](#genderproperty)
-    13. [`AdrProperty`](#adrproperty)
-    14. [`TelProperty`](#telproperty)
-    15. [`EmailProperty`](#emailproperty)
-    16. [`IMPPProperty`](#imppproperty)
-    17. [`LangProperty`](#langproperty)
-    18. [`TzProperty`](#tzproperty)
-    19. [`GeoProperty`](#geoproperty)
-    20. [`TitleProperty`](#titleproperty)
-    21. [`RoleProperty`](#roleproperty)
-    22. [`LogoProperty`](#logoproperty)
-    23. [`OrgProperty`](#orgproperty)
-    24. [`MemberProperty`](#memberproperty)
-    25. [`RelatedProperty`](#relatedproperty)
-    26. [`CategoriesProperty`](#categoriesproperty)
-    27. [`NoteProperty`](#noteproperty)
-    28. [`ProdidProperty`](#prodidproperty)
-    29. [`RevProperty`](#revproperty)
-    30. [`SoundProperty`](#soundproperty)
-    31. [`UIDProperty`](#uidproperty)
-    32. [`ClientpidmapProperty`](#clientpidmapproperty)
-    33. [`URLProperty`](#urlproperty)
-    34. [`VersionProperty`](#versionproperty)
-    35. [`KeyProperty`](#keyproperty)
-    36. [`FburlProperty`](#fburlproperty)
-    37. [`CaladruriProperty`](#caladruriproperty)
-    38. [`CaluriProperty`](#caluriproperty)
-    39. [`ExtendedProperty`](#extendedproperty)
+    13. [`BirthPlaceProperty`](#birthplaceproperty)
+    14. [`DeathPlaceProperty`](#deathplaceproperty)
+    15. [`DeathDateProperty`](#deathdateproperty)
+    16. [`AdrProperty`](#adrproperty)
+    17. [`TelProperty`](#telproperty)
+    18. [`EmailProperty`](#emailproperty)
+    19. [`IMPPProperty`](#imppproperty)
+    20. [`LangProperty`](#langproperty)
+    21. [`TzProperty`](#tzproperty)
+    22. [`GeoProperty`](#geoproperty)
+    23. [`TitleProperty`](#titleproperty)
+    24. [`RoleProperty`](#roleproperty)
+    25. [`LogoProperty`](#logoproperty)
+    26. [`OrgProperty`](#orgproperty)
+    27. [`MemberProperty`](#memberproperty)
+    28. [`RelatedProperty`](#relatedproperty)
+    29. [`CategoriesProperty`](#categoriesproperty)
+    30. [`NoteProperty`](#noteproperty)
+    31. [`ProdidProperty`](#prodidproperty)
+    32. [`RevProperty`](#revproperty)
+    33. [`SoundProperty`](#soundproperty)
+    34. [`UIDProperty`](#uidproperty)
+    35. [`ClientpidmapProperty`](#clientpidmapproperty)
+    36. [`URLProperty`](#urlproperty)
+    37. [`VersionProperty`](#versionproperty)
+    38. [`KeyProperty`](#keyproperty)
+    39. [`FburlProperty`](#fburlproperty)
+    40. [`CaladruriProperty`](#caladruriproperty)
+    41. [`CaluriProperty`](#caluriproperty)
+    42. [`ExtendedProperty`](#extendedproperty)
 
 * The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard. For example,
 
@@ -1636,6 +1645,98 @@ new GenderProperty(
     gpArr,
     'genderproperty'
   )
+);
+```
+
+#### BirthPlaceProperty
+
+* This class represents the "BIRTHPLACE" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```BirthPlaceProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+
+* [`LanguageParameter`](#languageparameter) may only be used when the value is of type [`TextType`](#texttype-and-textlisttype)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```BirthPlaceProperty``` should be of type [`URIType`](#uritype) or [`TextType`](#texttype-and-textlisttype)
+
+```js
+new BirthPlaceProperty(
+  [],
+  new TextType('Meadow village')
+);
+
+let birthplace2val = new TextType('Town center');
+
+new BirthPlaceProperty(
+  [
+    new ValueParameter(birthplace2val)
+  ],
+  birthplace2val
+);
+```
+
+#### DeathPlaceProperty
+
+* This class represents the "DEATHPLACE" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```DeathPlaceProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+
+* [`LanguageParameter`](#languageparameter) may only be used when the value is of type [`TextType`](#texttype-and-textlisttype)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```DeathPlaceProperty``` should be of type [`URIType`](#uritype) or [`TextType`](#texttype-and-textlisttype)
+
+```js
+new DeathPlaceProperty(
+  [],
+  new TextType('Meadow village')
+);
+
+let birthplace2val = new TextType('Town center');
+
+new DeathPlaceProperty(
+  [
+    new ValueParameter(birthplace2val)
+  ],
+  birthplace2val
+);
+```
+
+#### DeathDateProperty
+
+* This class represents the "DEATHDATE" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```DeathDateProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`AltidParameter`](#altidparameter), [`CalscaleParameter`](#calscaleparameter) and [`AnyParameter`](#anyparameter)
+
+* [`CalscaleParameter`](#calscaleparameter) may only be used when the value is of type [`DateTimeType`](#datetimetype)
+
+* [`LanguageParameter`](#languageparameter) may only be used when the value is of type [`TextType`](#texttype-and-textlisttype)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```DeathDateProperty``` should be of type [`DateTimeType`](#datetimetype) of the type ```dateandortime``` or [`TextType`](#texttype-and-textlisttype)
+
+```js
+new DeathDateProperty(
+  [],
+  new DateTimeType('19960415', 'dateandortime')
+);
+
+let bday2val = new TextType('circa 1800');
+
+new DeathDateProperty(
+  [
+    new ValueParameter(bday2val)
+  ],
+  bday2val
 );
 ```
 
