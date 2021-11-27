@@ -766,6 +766,233 @@ class GenderProperty extends AbstractBaseProperty {
   }
 }
 
+class BirthPlaceProperty extends AbstractBaseProperty {
+  static prop = 'BIRTHPLACE';
+  static cardinality = '*1';
+  static acceptableParamTypes = [
+    ValueParameter,
+    LanguageParameter,
+    AltidParameter,
+    AnyParameter
+  ];
+  static acceptableValTypes = [
+    TextType,
+    URIType
+  ];
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for BirthPlaceProperty must be supplied');
+
+    else if (!Array.isArray(params))
+    throw new InvalidArgument('Parameters for BirthPlaceProperty must be passed in an array');
+
+    else if (
+      !params.every(
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => {
+            if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (
+                ((param.value === 'uri') && (value instanceof URIType)) ||
+                ((param.value === 'text') && (value instanceof TextType))
+              )
+            );
+
+            else if (acceptableParamType === LanguageParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (value instanceof TextType)
+            );
+
+            return param instanceof acceptableParamType;
+          }
+        )
+      )
+    )
+    throw new TypeError('Some of the parameters passed are not valid parameters for BirthPlaceProperty');
+
+    else if (
+      !this.constructor.acceptableValTypes.some(
+        valType => value instanceof valType
+      )
+    )
+    throw new TypeError('Invalid type for value of BirthPlaceProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class DeathPlaceProperty extends AbstractBaseProperty {
+  static prop = 'DEATHPLACE';
+  static cardinality = '*1';
+  static acceptableParamTypes = [
+    ValueParameter,
+    LanguageParameter,
+    AltidParameter,
+    AnyParameter
+  ];
+  static acceptableValTypes = [
+    TextType,
+    URIType
+  ];
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for DeathPlaceProperty must be supplied');
+
+    else if (!Array.isArray(params))
+    throw new InvalidArgument('Parameters for DeathPlaceProperty must be passed in an array');
+
+    else if (
+      !params.every(
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => {
+            if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (
+                ((param.value === 'uri') && (value instanceof URIType)) ||
+                ((param.value === 'text') && (value instanceof TextType))
+              )
+            );
+
+            else if (acceptableParamType === LanguageParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (value instanceof TextType)
+            );
+
+            return param instanceof acceptableParamType;
+          }
+        )
+      )
+    )
+    throw new TypeError('Some of the parameters passed are not valid parameters for DeathPlaceProperty');
+
+    else if (
+      !this.constructor.acceptableValTypes.some(
+        valType => value instanceof valType
+      )
+    )
+    throw new TypeError('Invalid type for value of DeathPlaceProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class DeathDateProperty extends AbstractBaseProperty {
+  static prop = 'DEATHDATE';
+  static cardinality = '*1';
+  static acceptableParamTypes = [
+    ValueParameter,
+    LanguageParameter,
+    AltidParameter,
+    CalscaleParameter,
+    AnyParameter
+  ];
+  static acceptableValTypes = [
+    DateTimeType,
+    TextType
+  ];
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for DeathDateProperty must be supplied');
+
+    else if (!Array.isArray(params))
+    throw new InvalidArgument('Parameters for DeathDateProperty must be passed in an array');
+
+    else if (
+      !params.every(
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => {
+            if (acceptableParamType === ValueParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (
+                ((param.value === 'date-and-or-time') && (value instanceof DateTimeType)) ||
+                ((param.value === 'text') && (value instanceof TextType))
+              )
+            );
+
+            else if (acceptableParamType === LanguageParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (value instanceof TextType)
+            );
+
+            else if (acceptableParamType === CalscaleParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              (value instanceof DateTimeType)
+            );
+
+            return param instanceof acceptableParamType;
+          }
+        )
+      )
+    )
+    throw new TypeError('Some of the parameters passed are not valid parameters for DeathDateProperty');
+
+    else if (
+      !this.constructor.acceptableValTypes.some(
+        valType => {
+          if (valType === DateTimeType)
+          return (
+            (value instanceof valType) &&
+            (value.type === 'DATE-AND-OR-TIME')
+          );
+          return value instanceof valType;
+        }
+      )
+    )
+    throw new TypeError('Invalid type for value of DeathDateProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
 // Delivery Addressing Properties
 class AdrProperty extends AbstractBaseProperty {
   static prop = 'ADR';
@@ -2486,6 +2713,9 @@ module.exports = {
   BdayProperty,
   AnniversaryProperty,
   GenderProperty,
+  BirthPlaceProperty,
+  DeathPlaceProperty,
+  DeathDateProperty,
   AdrProperty,
   TelProperty,
   EmailProperty,
