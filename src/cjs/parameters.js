@@ -516,6 +516,31 @@ class LabelParameter extends AbstractBaseParameter {
   }
 }
 
+class CcParamater extends AbstractBaseParameter {
+  static param = 'CC';
+
+  #validate(ccValue) {
+    if (typeof ccValue === 'undefined')
+    throw new MissingArgument('Value for CcParamater must be supplied');
+
+    else if (
+      !(ccValue instanceof TextType) ||
+      !/^[A-Za-z0-9]{2}$/.test(ccValue.repr())
+    )
+    throw new InvalidArgument('Invalid value for CcParamater');
+  }
+
+  constructor(ccValue) {
+    super();
+
+    this.#validate(ccValue);
+    this.value = ccValue.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
 module.exports = {
   LanguageParameter,
   ValueParameter,
@@ -529,5 +554,6 @@ module.exports = {
   GeoParameter,
   TzParameter,
   AnyParameter,
-  LabelParameter
+  LabelParameter,
+  CcParamater
 };
