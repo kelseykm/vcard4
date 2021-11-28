@@ -1,7 +1,7 @@
 const parse = require('../src/cjs/parse');
 const { assert } = require('chai');
 
-describe('ESM parse tests', () => {
+describe('CJS parse tests', () => {
   it('Accepts valid input', () => {
     assert.doesNotThrow(() => parse(
       'BEGIN:VCARD\r\n' +
