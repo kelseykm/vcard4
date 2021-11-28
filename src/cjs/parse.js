@@ -3,8 +3,7 @@ const {
   InvalidArgument
 } = require('./errors');
 
-function backCountBackslash(str) {
-  const chr = '\\';
+function backCount(chr, str) {
   let count = 0;
 
   for (let index = str.length - 1; index >= 0; index--) {
@@ -48,7 +47,7 @@ function valueParser(value, prop) {
         })
       ) continue;
 
-      const backslashCount = backCountBackslash(value.substring(continueFrom, index));
+      const backslashCount = backCount('\\', value.substring(continueFrom, index));
       if (backslashCount % 2 !== 0) continue;
 
       parsedValue.push(value.substring(continueFrom, index));
@@ -87,7 +86,7 @@ function valueParser(value, prop) {
           })
         ) continue;
 
-        const backslashCount = backCountBackslash(component.substring(continueFrom, index2));
+        const backslashCount = backCount('\\', component.substring(continueFrom, index2));
         if (backslashCount % 2 !== 0) continue;
 
         holdParsedComponent.push(component.substring(continueFrom, index2));
@@ -158,7 +157,7 @@ function parameterParser(params) {
         })
       ) continue;
 
-      const backslashCount = backCountBackslash(params.substring(continueFrom, index));
+      const backslashCount = backCount('\\', params.substring(continueFrom, index));
       if (backslashCount % 2 !== 0) continue;
 
       paramList.push(params.substring(continueFrom, index));
@@ -182,7 +181,7 @@ function parameterParser(params) {
           })
         ) continue;
 
-        const backslashCount = backCountBackslash(joinedParam.substring(continueFrom, index2));
+        const backslashCount = backCount('\\', joinedParam.substring(continueFrom, index2));
         if (backslashCount % 2 !== 0) continue;
 
         holdJoinedParam.push(joinedParam.substring(continueFrom, index2));
@@ -201,6 +200,45 @@ function parameterParser(params) {
     }
 
     paramList[index] = parsedParam;
+  }
+
+  for (let index = 0; index < paramList?.length; index++) {
+    const currentParam = paramList[index];
+    const currentParamKey = Object.keys(currentParam).pop();
+    const currentParamValue = Object.values(currentParam).pop();
+
+    let holdCurrentParamValue = '';
+    let continueFrom = 0;
+    for (let index2 = 0; index2 < currentParamValue.length; index2++) {
+      if (currentParamValue[index2] === '^') {
+        const circumflexCount = backCount('^', currentParamValue.substring(continueFrom, index2));
+
+        if (circumflexCount % 2 !== 0) {
+          holdCurrentParamValue += currentParamValue[index2];
+        } else {
+          switch (true) {
+            case currentParamValue[index2 + 1] === 'n':
+              holdCurrentParamValue += '\n';
+              index2++;
+              break;
+            case currentParamValue[index2 + 1] === '’':
+              holdCurrentParamValue += '"';
+              index2++;
+              break;
+            case currentParamValue[index2 + 1] === '^':
+              holdCurrentParamValue += '^';
+              index2++;
+              break;
+          }
+        }
+      }
+      else {
+        holdCurrentParamValue += currentParamValue[index2];
+      }
+      continueFrom = index2 + 1;
+    }
+
+    currentParam[currentParamKey] = holdCurrentParamValue;
   }
 
   return paramList ?
@@ -237,7 +275,7 @@ function contentLineParser(contentLine) {
         })
       ) continue;
 
-      const backslashCount = backCountBackslash(contentLine.substring(0, index));
+      const backslashCount = backCount('\\', contentLine.substring(0, index));
       if (backslashCount % 2 !== 0) continue;
 
       value = contentLine.substring(index + 1);
@@ -256,7 +294,7 @@ function contentLineParser(contentLine) {
         })
       ) continue;
 
-      const backslashCount = backCountBackslash(propAndParams.substring(0, index));
+      const backslashCount = backCount('\\', propAndParams.substring(0, index));
       if (backslashCount % 2 !== 0) continue;
 
       params = propAndParams.substring(index + 1);
