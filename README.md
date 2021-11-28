@@ -1452,7 +1452,7 @@ new EndProperty;
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```SourceProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`MediatypeParameter`](#mediatypeparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```SourceProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`AltidParameter`](#altidparameter), [`MediatypeParameter`](#mediatypeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -1516,7 +1516,7 @@ new XMLProperty([], xmlPropValue );
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```FNProperty``` are [`ValueParameter`](#ValueParameter), [`TypeParameter`](#typeparameter), [`LanguageParameter`](#languageparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```FNProperty``` are [`ValueParameter`](#ValueParameter), [`TypeParameter`](#typeparameter), [`LanguageParameter`](#languageparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -1575,7 +1575,7 @@ new NProperty(
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
 * The only acceptable parameters of ```NicknameProperty``` are
-[`ValueParameter`](#ValueParameter), [`TypeParameter`](#typeparameter), [`LanguageParameter`](#languageparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter) and [`AnyParameter`](#anyparameter)
+[`ValueParameter`](#ValueParameter), [`TypeParameter`](#typeparameter), [`LanguageParameter`](#languageparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -1612,7 +1612,7 @@ new NicknameProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```PhotoProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`PrefParameter`](#prefparameter), [`PIDParameter`](#pidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```PhotoProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`PIDParameter`](#pidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -1896,7 +1896,7 @@ new InterestProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```AdrProperty``` are [`LabelParameter`](#labelparameter), [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`GeoParameter`](#geoparameter), [`TzParameter`](#tzparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`AnyParameter`](#anyparameter) and [`CCParameter`](#ccparameter)
+* The only acceptable parameters of ```AdrProperty``` are [`LabelParameter`](#labelparameter), [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`GeoParameter`](#geoparameter), [`TzParameter`](#tzparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`AnyParameter`](#anyparameter) and [`CCParameter`](#ccparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -1928,7 +1928,7 @@ new AdrProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```TelProperty``` are [`ValueParameter`](#ValueParameter), [`MediatypeParameter`](#mediatypeparameter), [`TypeParameter`](#typeparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```TelProperty``` are [`ValueParameter`](#ValueParameter), [`MediatypeParameter`](#mediatypeparameter), [`TypeParameter`](#typeparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * The [`MediatypeParameter`](#mediatypeparameter) may only be used if the value is of type [`URIType`](#uritype)
 
@@ -1949,7 +1949,7 @@ new TelProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```EmailProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```EmailProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -1972,7 +1972,7 @@ new EmailProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```IMPPProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```IMPPProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -1991,7 +1991,7 @@ new IMPPProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```LangProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```LangProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2010,7 +2010,7 @@ new LangProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```ContactURIProperty``` are [`ValueParameter`](#ValueParameter) and [`PrefParameter`](#prefparameter)
+* The only acceptable parameters of ```ContactURIProperty``` are [`ValueParameter`](#ValueParameter), [`PrefParameter`](#prefparameter) and [`IndexParameter`](#indexparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2031,7 +2031,7 @@ new ContactURIProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```TzProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```TzProperty``` are [`ValueParameter`](#ValueParameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2055,7 +2055,7 @@ new TzProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```GeoProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```GeoProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2076,7 +2076,7 @@ new GeoProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```TitleProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```TitleProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2138,7 +2138,7 @@ new LogoProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```OrgProperty``` are [`ValueParameter`](#ValueParameter), [`SortAsParameter`](#sortasparameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```OrgProperty``` are [`ValueParameter`](#ValueParameter), [`SortAsParameter`](#sortasparameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2166,7 +2166,7 @@ new OrgProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```MemberProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`MediatypeParameter`](#mediatypeparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```MemberProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`AltidParameter`](#altidparameter), [`MediatypeParameter`](#mediatypeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2185,7 +2185,7 @@ new MemberProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```RelatedProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`MediatypeParameter`](#mediatypeparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```RelatedProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`MediatypeParameter`](#mediatypeparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2221,7 +2221,7 @@ new RelatedProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```OrgDirectoryProperty``` are [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```OrgDirectoryProperty``` are [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`IndexParameter`](#indexparameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2242,7 +2242,7 @@ new OrgDirectoryProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```CategoriesProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```CategoriesProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2270,7 +2270,7 @@ new CategoriesProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```NoteProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```NoteProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2327,7 +2327,7 @@ new RevProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```SoundProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```SoundProperty``` are [`ValueParameter`](#ValueParameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2395,7 +2395,7 @@ new ClientpidmapProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```URLProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```URLProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2430,7 +2430,7 @@ new VersionProperty;
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```KeyProperty``` are [`ValueParameter`](#ValueParameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```KeyProperty``` are [`ValueParameter`](#ValueParameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
 
 * The [`MediatypeParameter`](#mediatypeparameter) may only be used if the value is of type [`URIType`](#uritype)
 
@@ -2457,7 +2457,7 @@ new KeyProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```FburlProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```FburlProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2480,7 +2480,7 @@ new FburlProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```CaladruriProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```CaladruriProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
@@ -2499,7 +2499,7 @@ new CaladruriProperty(
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```CaluriProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
+* The only acceptable parameters of ```CaluriProperty``` are [`ValueParameter`](#ValueParameter), [`PIDParameter`](#pidparameter), [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`TypeParameter`](#typeparameter), [`MediatypeParameter`](#mediatypeparameter), [`AltidParameter`](#altidparameter) and [`AnyParameter`](#anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 

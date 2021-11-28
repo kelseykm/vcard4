@@ -129,6 +129,7 @@ class SourceProperty extends AbstractBaseProperty {
     ValueParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     AltidParameter,
     MediatypeParameter,
     AnyParameter
@@ -296,6 +297,7 @@ class FNProperty extends AbstractBaseProperty {
     AltidParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     AnyParameter
   ];
   static acceptableValTypes = TextType;
@@ -415,6 +417,7 @@ class NicknameProperty extends AbstractBaseProperty {
     AltidParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     AnyParameter
   ];
   static acceptableValTypes = [
@@ -482,6 +485,7 @@ class PhotoProperty extends AbstractBaseProperty {
     TypeParameter,
     MediatypeParameter,
     PrefParameter,
+    IndexParameter,
     PIDParameter,
     AnyParameter
   ];
@@ -1033,7 +1037,7 @@ class ExpertiseProperty extends AbstractBaseProperty {
               (param instanceof acceptableParamType) &&
               !/^(?:Related|Tel)Property$/i.test(param.targetProp)
             );
-            
+
             return param instanceof acceptableParamType
           }
         )
@@ -1201,6 +1205,7 @@ class AdrProperty extends AbstractBaseProperty {
     AltidParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     AnyParameter,
     CCParameter
@@ -1268,6 +1273,7 @@ class TelProperty extends AbstractBaseProperty {
     TypeParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     AltidParameter,
     AnyParameter
   ];
@@ -1345,6 +1351,7 @@ class EmailProperty extends AbstractBaseProperty {
     ValueParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     AltidParameter,
     AnyParameter
@@ -1408,6 +1415,7 @@ class IMPPProperty extends AbstractBaseProperty {
     ValueParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     MediatypeParameter,
     AltidParameter,
@@ -1471,6 +1479,7 @@ class LangProperty extends AbstractBaseProperty {
     ValueParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     AltidParameter,
     TypeParameter,
     AnyParameter
@@ -1532,6 +1541,7 @@ class ContactURIProperty extends AbstractBaseProperty {
   static acceptableParamTypes = [
     ValueParameter,
     PrefParameter,
+    IndexParameter,
   ];
   static acceptableValTypes = URIType;
 
@@ -1590,6 +1600,7 @@ class TzProperty extends AbstractBaseProperty {
     AltidParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     MediatypeParameter,
     AnyParameter
@@ -1671,6 +1682,7 @@ class GeoProperty extends AbstractBaseProperty {
     ValueParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     MediatypeParameter,
     AltidParameter,
@@ -1736,6 +1748,7 @@ class TitleProperty extends AbstractBaseProperty {
     LanguageParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     AltidParameter,
     TypeParameter,
     AnyParameter
@@ -1799,6 +1812,7 @@ class RoleProperty extends AbstractBaseProperty {
     LanguageParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     AltidParameter,
     AnyParameter
@@ -1862,6 +1876,7 @@ class LogoProperty extends AbstractBaseProperty {
     LanguageParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     MediatypeParameter,
     AltidParameter,
@@ -1927,6 +1942,7 @@ class OrgProperty extends AbstractBaseProperty {
     LanguageParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     AltidParameter,
     TypeParameter,
     AnyParameter
@@ -1992,6 +2008,7 @@ class MemberProperty extends AbstractBaseProperty {
     ValueParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     AltidParameter,
     MediatypeParameter,
     AnyParameter
@@ -2050,6 +2067,7 @@ class RelatedProperty extends AbstractBaseProperty {
     MediatypeParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     AltidParameter,
     TypeParameter,
     AnyParameter
@@ -2180,6 +2198,7 @@ class CategoriesProperty extends AbstractBaseProperty {
     ValueParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     AltidParameter,
     AnyParameter
@@ -2250,6 +2269,7 @@ class NoteProperty extends AbstractBaseProperty {
     LanguageParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     AltidParameter,
     AnyParameter
@@ -2420,6 +2440,7 @@ class SoundProperty extends AbstractBaseProperty {
     LanguageParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     MediatypeParameter,
     AltidParameter,
@@ -2584,6 +2605,7 @@ class URLProperty extends AbstractBaseProperty {
     ValueParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     MediatypeParameter,
     AltidParameter,
@@ -2670,6 +2692,7 @@ class KeyProperty extends AbstractBaseProperty {
     AltidParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     AnyParameter
   ];
@@ -2742,6 +2765,7 @@ class FburlProperty extends AbstractBaseProperty {
     ValueParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     MediatypeParameter,
     AltidParameter,
@@ -2805,6 +2829,7 @@ class CaladruriProperty extends AbstractBaseProperty {
     ValueParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     MediatypeParameter,
     AltidParameter,
@@ -2868,6 +2893,7 @@ class CaluriProperty extends AbstractBaseProperty {
     ValueParameter,
     PIDParameter,
     PrefParameter,
+    IndexParameter,
     TypeParameter,
     MediatypeParameter,
     AltidParameter,
@@ -2940,7 +2966,10 @@ class ExtendedProperty extends AbstractBaseProperty {
     GeoParameter,
     TzParameter,
     AnyParameter,
-    LabelParameter
+    LabelParameter,
+    CCParameter,
+    IndexParameter,
+    LevelParameter
   ];
   static acceptableValTypes = [
     TextType,
