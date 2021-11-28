@@ -599,6 +599,7 @@ class LevelParameter extends AbstractBaseParameter {
 
     this.#validate(levelValue, targetProp);
     this.value = levelValue.repr();
+    this.targetProp = targetProp;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
