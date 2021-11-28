@@ -21,7 +21,9 @@ const {
   TzParameter,
   AnyParameter,
   LabelParameter,
-  CCParameter
+  CCParameter,
+  IndexParameter,
+  LevelParameter
 } = require('../src/cjs/parameters');
 
 const { assert } = require('chai');
@@ -438,6 +440,67 @@ U.S.A.`).repr(),
           new TextType('US')
         ).repr(),
         'CC=US'
+      )
+    });
+  });
+
+  describe('IndexParameter tests', () => {
+    it('Accepts valid input', () => {
+      assert.doesNotThrow(() => new IndexParameter(
+        new IntegerType(1)
+      ));
+    });
+
+    it('Rejects invalid input', () => {
+      assert.throws(() => new IndexParameter(
+        new IntegerType(-2)
+      ));
+      assert.throws(() => new IndexParameter(1));
+      assert.throws(() => new IndexParameter({}));
+    });
+
+    it('Formats value properly', () => {
+      assert.strictEqual(
+        new IndexParameter(
+          new IntegerType(1)
+        ).repr(),
+        'INDEX=1'
+      )
+    });
+  });
+
+  describe('LevelParameter tests', () => {
+    it('Accepts valid input', () => {
+      assert.doesNotThrow(() => new LevelParameter(
+        new TextType('beginner'),
+        'expertiseproperty'
+      ));
+
+      assert.doesNotThrow(() => new LevelParameter(
+        new TextType('low'),
+        'interestProperty'
+      ));
+    });
+
+    it('Rejects invalid input', () => {
+      assert.throws(() => new LevelParameter(
+        new TextType('low'),
+        'expertiseProperty'
+      ));
+      assert.throws(() => new LevelParameter(
+        new IntegerType(-2)
+      ));
+      assert.throws(() => new LevelParameter(1));
+      assert.throws(() => new LevelParameter({}));
+    });
+
+    it('Formats value properly', () => {
+      assert.strictEqual(
+        new LevelParameter(
+          new TextType('beginner'),
+          'expertiseproperty'
+        ).repr(),
+        'LEVEL=beginner'
       )
     });
   });
