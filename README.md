@@ -2,7 +2,7 @@
 
 # vcard4
 
-__vCard version 4.0 javascript library for creating or parsing vCards, with full implementation of RFC6350, along with RFC6350 extensions including RFC6474, RFC8605__
+__vCard version 4.0 javascript library for creating or parsing vCards, with full implementation of RFC6350, along with RFC6350 extensions including RFC6474, RFC8605, RFC6715 and RFC6868__
 
 For use in node or in the browser
 
@@ -264,6 +264,8 @@ console.log(parsedVcard);
   * [AnyParameter](#anyparameter)
   * [LabelParameter](#labelparameter)
   * [CCParameter](#ccparameter)
+  * [IndexParameter](#indexparameter)
+  * [LevelParameter](#levelparameter)
 - [Properties](#properties)
   * [General Properties](#general-properties)
     + [BeginProperty](#beginproperty)
@@ -282,6 +284,9 @@ console.log(parsedVcard);
     + [BirthPlaceProperty](#birthplaceproperty)
     + [DeathPlaceProperty](#deathplaceproperty)
     + [DeathDateProperty](#deathdateproperty)
+    + [ExpertiseProperty](#expertiseproperty)
+    + [HobbyProperty](#hobbyproperty)
+    + [InterestProperty](#interestproperty)
   * [Delivery Addressing Properties](#delivery-addressing-properties)
     + [AdrProperty](#adrproperty)
   * [Communications Properties](#communications-properties)
@@ -300,6 +305,7 @@ console.log(parsedVcard);
     + [OrgProperty](#orgproperty)
     + [MemberProperty](#memberproperty)
     + [RelatedProperty](#relatedproperty)
+    + [OrgDirectoryProperty](#orgdirectoryproperty)
   * [Explanatory Properties](#explanatory-properties)
     + [CategoriesProperty](#categoriesproperty)
     + [NoteProperty](#noteproperty)
@@ -324,7 +330,7 @@ console.log(parsedVcard);
 
 ## Introduction
 
-* This is a vCard JavaScript library that implements RFC6350 fully, along with RFC6350 extensions including RFC6474, RFC8605
+* This is a vCard JavaScript library that implements RFC6350 fully, along with RFC6350 extensions including RFC6474, RFC8605, RFC6715 and RFC6868
 
 * That RFC defines the vCard data format for representing and exchanging a variety of information about individuals and other entities (e.g., formatted and structured name and delivery addresses, email address, multiple telephone numbers, photograph, logo, audio clips, etc.)
 
@@ -890,6 +896,10 @@ new SpecialValueType(
     9. SORT-AS
     10. GEO
     11. TZ
+    12. LABEL
+    13. CC
+    14. INDEX
+    15. LEVEL
 
 * In the library, these are represented by:
     1. [`LanguageParameter`](#languageparameter)
@@ -905,6 +915,9 @@ new SpecialValueType(
     11. [`TzParameter`](#tzparameter)
     12. [`AnyParameter`](#anyparameter)
     13. [`LabelParameter`](#labelparameter)
+    14. [`CCParameter`](#ccparameter)
+    15. [`IndexParameter`](#indexparameter)
+    16. [`LevelParameter`](#levelparameter)
 
 * The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard. For example,
 
@@ -1212,6 +1225,42 @@ new CCParameter(
 );
 ```
 
+### IndexParameter
+
+* This class represents the "INDEX" parameter
+
+* When a property is multi-valued, INDEX can be used to indicate an ordering or sequence of the values
+
+* ```IndexParameter``` should be called with a single argument of type [`IntegerType`](#integertype-and-integerlisttype), whose value is strictly positive; zero is not allowed
+
+```js
+new IndexParameter(
+  new IntegerType(1)
+);
+```
+
+### LevelParameter
+
+* This class represents the "LEVEL" parameter, for use with the following properties:
+    1. [`ExpertiseProperty`](#expertiseproperty)
+    2. [`HobbyProperty`](#hobbyproperty)
+    3. [`InterestProperty`](#interestproperty)
+
+* ```LevelParameter``` should be called with a two arguments, the first of type [`TextType`](#texttype-and-textlisttype), and the second, a case-insensitive string
+
+* The first argument specifies the value of the parameter while the second specifies the target property
+
+* When the target property is ```"ExpertiseProperty"```, the only valid values for the first argument TextType are ```"beginner"```, ```"average"``` and ```"expert"```
+
+* When the target property is either ```"HobbyProperty"``` or ```"InterestProperty"```, the only valid values for the first argument TextType are ```"high"```, ```"medium"``` and ```"low"```
+
+```js
+new LevelParameter(
+  new TextType('high'),
+  'hobbyproperty'
+);
+```
+
 ## Properties
 
 * After documenting the property value data types and the property parameters, what follows now is the documentation of the properties themselves
@@ -1238,6 +1287,9 @@ new CCParameter(
         8. BIRTHPLACE
         9. DEATHPLACE
         10. DEATHDATE
+        11. EXPERTISE
+        12. HOBBY
+        13. INTEREST
 
     - Delivery Addressing Properties
 
@@ -1264,6 +1316,7 @@ new CCParameter(
         4. ORG
         5. MEMBER
         6. RELATED
+        7. ORG-DIRECTORY
 
     - Explanatory Properties
 
@@ -1306,34 +1359,38 @@ new CCParameter(
     13. [`BirthPlaceProperty`](#birthplaceproperty)
     14. [`DeathPlaceProperty`](#deathplaceproperty)
     15. [`DeathDateProperty`](#deathdateproperty)
-    16. [`AdrProperty`](#adrproperty)
-    17. [`TelProperty`](#telproperty)
-    18. [`EmailProperty`](#emailproperty)
-    19. [`IMPPProperty`](#imppproperty)
-    20. [`LangProperty`](#langproperty)
-    21. [`ContactURIProperty`](#contacturiproperty)
-    22. [`TzProperty`](#tzproperty)
-    23. [`GeoProperty`](#geoproperty)
-    24. [`TitleProperty`](#titleproperty)
-    25. [`RoleProperty`](#roleproperty)
-    26. [`LogoProperty`](#logoproperty)
-    27. [`OrgProperty`](#orgproperty)
-    28. [`MemberProperty`](#memberproperty)
-    29. [`RelatedProperty`](#relatedproperty)
-    30. [`CategoriesProperty`](#categoriesproperty)
-    31. [`NoteProperty`](#noteproperty)
-    32. [`ProdidProperty`](#prodidproperty)
-    33. [`RevProperty`](#revproperty)
-    34. [`SoundProperty`](#soundproperty)
-    35. [`UIDProperty`](#uidproperty)
-    36. [`ClientpidmapProperty`](#clientpidmapproperty)
-    37. [`URLProperty`](#urlproperty)
-    38. [`VersionProperty`](#versionproperty)
-    39. [`KeyProperty`](#keyproperty)
-    40. [`FburlProperty`](#fburlproperty)
-    41. [`CaladruriProperty`](#caladruriproperty)
-    42. [`CaluriProperty`](#caluriproperty)
-    43. [`ExtendedProperty`](#extendedproperty)
+    16. [`ExpertiseProperty`](#expertiseproperty)
+    17. [`HobbyProperty`](#hobbyproperty)
+    18. [`InterestProperty`](#interestproperty)
+    19. [`AdrProperty`](#adrproperty)
+    20. [`TelProperty`](#telproperty)
+    21. [`EmailProperty`](#emailproperty)
+    22. [`IMPPProperty`](#imppproperty)
+    23. [`LangProperty`](#langproperty)
+    24. [`ContactURIProperty`](#contacturiproperty)
+    25. [`TzProperty`](#tzproperty)
+    26. [`GeoProperty`](#geoproperty)
+    27. [`TitleProperty`](#titleproperty)
+    28. [`RoleProperty`](#roleproperty)
+    29. [`LogoProperty`](#logoproperty)
+    30. [`OrgProperty`](#orgproperty)
+    31. [`MemberProperty`](#memberproperty)
+    32. [`RelatedProperty`](#relatedproperty)
+    33. [`OrgDirectoryProperty`](#orgdirectoryproperty)
+    34. [`CategoriesProperty`](#categoriesproperty)
+    35. [`NoteProperty`](#noteproperty)
+    36. [`ProdidProperty`](#prodidproperty)
+    37. [`RevProperty`](#revproperty)
+    38. [`SoundProperty`](#soundproperty)
+    39. [`UIDProperty`](#uidproperty)
+    40. [`ClientpidmapProperty`](#clientpidmapproperty)
+    41. [`URLProperty`](#urlproperty)
+    42. [`VersionProperty`](#versionproperty)
+    43. [`KeyProperty`](#keyproperty)
+    44. [`FburlProperty`](#fburlproperty)
+    45. [`CaladruriProperty`](#caladruriproperty)
+    46. [`CaluriProperty`](#caluriproperty)
+    47. [`ExtendedProperty`](#extendedproperty)
 
 * The only accessible method on an instance of one of the classes listed above is ```repr```, which returns a string containing the value passed, but formatted as it would be on a vCard. For example,
 
@@ -1759,6 +1816,78 @@ new DeathDateProperty(
 );
 ```
 
+#### ExpertiseProperty
+
+* This class represents the "EXPERTISE" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```ExpertiseProperty``` are [`LevelParameter`](#levelparameter), [`IndexParameter`](#indexparameter), [`LanguageParameter`](#languageparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```ExpertiseProperty``` should be of type [`TextType`](#texttype-and-textlisttype)
+
+```js
+new ExpertiseProperty(
+  [
+    new LevelParameter(
+      new TextType('expert'),
+      'expertiseProperty'
+    )
+  ],
+  new TextType('Theoretical Physics')
+);
+```
+
+#### HobbyProperty
+
+* This class represents the "HOBBY" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```HobbyProperty``` are [`LevelParameter`](#levelparameter), [`IndexParameter`](#indexparameter), [`LanguageParameter`](#languageparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```HobbyProperty``` should be of type [`TextType`](#texttype-and-textlisttype)
+
+```js
+new HobbyProperty(
+  [
+    new LevelParameter(
+      new TextType('beginner'),
+      'hobbyProperty'
+    )
+  ],
+  new TextType('Chess')
+);
+```
+
+#### InterestProperty
+
+* This class represents the "INTEREST" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```InterestProperty``` are [`LevelParameter`](#levelparameter), [`IndexParameter`](#indexparameter), [`LanguageParameter`](#languageparameter), [`PrefParameter`](#prefparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```InterestProperty``` should be of type [`TextType`](#texttype-and-textlisttype)
+
+```js
+new InterestProperty(
+  [
+    new LevelParameter(
+      new TextType('average'),
+      'interestProperty'
+    )
+  ],
+  new TextType('Arbitrage betting')
+);
+```
+
 ### Delivery Addressing Properties
 
 #### AdrProperty
@@ -2083,6 +2212,25 @@ new RelatedProperty(
     new ValueParameter(relPropVal)
   ],
   relPropVal
+);
+```
+
+#### OrgDirectoryProperty
+
+* This class represents the "ORG-DIRECTORY" property
+
+* This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+
+* The only acceptable parameters of ```OrgDirectoryProperty``` are [`PrefParameter`](#prefparameter), [`IndexParameter`](#indexparameter), [`LanguageParameter`](#languageparameter), [`PIDParameter`](#pidparameter), [`AltidParameter`](#altidparameter), [`TypeParameter`](#typeparameter) and [`AnyParameter`](#anyparameter)
+
+* If you do not wish that the property have any parameters, leave the first argument array empty
+
+* The value of ```OrgDirectoryProperty``` should be of type [`URIType`](#uritype)
+
+```js
+new OrgDirectoryProperty(
+  [],
+  new URIType('uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6')
 );
 ```
 
