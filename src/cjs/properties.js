@@ -30,7 +30,9 @@ const {
   TzParameter,
   AnyParameter,
   LabelParameter,
-  CCParameter
+  CCParameter,
+  IndexParameter,
+  LevelParameter
 } = require('./parameters');
 
 // Abstract Base Class for all properties
@@ -994,6 +996,156 @@ class DeathDateProperty extends AbstractBaseProperty {
   }
 }
 
+class ExpertiseProperty extends AbstractBaseProperty {
+  static prop = 'EXPERTISE';
+  static cardinality = '*';
+  static acceptableParamTypes = [
+    LevelParameter,
+    IndexParameter,
+    LanguageParameter,
+    PrefParameter,
+    AltidParameter,
+    TypeParameter,
+    AnyParameter
+  ];
+  static acceptableValTypes = TextType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for ExpertiseProperty must be supplied');
+
+    else if (!Array.isArray(params))
+    throw new InvalidArgument('Parameters for ExpertiseProperty must be passed in an array');
+
+    else if (
+      !params.every(
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => param instanceof acceptableParamType
+        )
+      )
+    )
+    throw new TypeError('Some of the parameters passed are not valid parameters for ExpertiseProperty');
+
+    else if (!(value instanceof this.constructor.acceptableValTypes))
+    throw new TypeError('Invalid type for value of ExpertiseProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class HobbyProperty extends AbstractBaseProperty {
+  static prop = 'HOBBY';
+  static cardinality = '*';
+  static acceptableParamTypes = [
+    LevelParameter,
+    IndexParameter,
+    LanguageParameter,
+    PrefParameter,
+    AltidParameter,
+    TypeParameter,
+    AnyParameter
+  ];
+  static acceptableValTypes = TextType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for HobbyProperty must be supplied');
+
+    else if (!Array.isArray(params))
+    throw new InvalidArgument('Parameters for HobbyProperty must be passed in an array');
+
+    else if (
+      !params.every(
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => param instanceof acceptableParamType
+        )
+      )
+    )
+    throw new TypeError('Some of the parameters passed are not valid parameters for HobbyProperty');
+
+    else if (!(value instanceof this.constructor.acceptableValTypes))
+    throw new TypeError('Invalid type for value of HobbyProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class InterestProperty extends AbstractBaseProperty {
+  static prop = 'INTEREST';
+  static cardinality = '*';
+  static acceptableParamTypes = [
+    LevelParameter,
+    IndexParameter,
+    LanguageParameter,
+    PrefParameter,
+    AltidParameter,
+    TypeParameter,
+    AnyParameter
+  ];
+  static acceptableValTypes = TextType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for InterestProperty must be supplied');
+
+    else if (!Array.isArray(params))
+    throw new InvalidArgument('Parameters for InterestProperty must be passed in an array');
+
+    else if (
+      !params.every(
+        param =>
+        this.constructor.acceptableParamTypes.some(
+          acceptableParamType => param instanceof acceptableParamType
+        )
+      )
+    )
+    throw new TypeError('Some of the parameters passed are not valid parameters for InterestProperty');
+
+    else if (!(value instanceof this.constructor.acceptableValTypes))
+    throw new TypeError('Invalid type for value of InterestProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
 // Delivery Addressing Properties
 class AdrProperty extends AbstractBaseProperty {
   static prop = 'ADR';
@@ -1921,6 +2073,55 @@ class RelatedProperty extends AbstractBaseProperty {
   }
 }
 
+class OrgDirectoryProperty extends AbstractBaseProperty {
+  static prop = 'ORG-DIRECTORY';
+  static cardinality = '*';
+  static acceptableParamTypes = [
+    PrefParameter,
+    IndexParameter,
+    LanguageParameter,
+    PIDParameter,
+    AltidParameter,
+    TypeParameter,
+    AnyParameter
+  ];
+  static acceptableValTypes = URIType;
+
+  #validate(params, value) {
+    if (typeof params === 'undefined' || typeof value === 'undefined')
+    throw new MissingArgument('Parameters and value for OrgDirectoryProperty must be supplied');
+
+    else if (!Array.isArray(params))
+    throw new InvalidArgument('Parameters for OrgDirectoryProperty must be passed in an array');
+
+    else if (
+      !params.every(
+        param => this.constructor.acceptableParamTypes.some(
+          acceptableParamType => param instanceof acceptableParamType
+        )
+      )
+    )
+    throw new TypeError('Some of the parameters passed are not valid parameters for OrgDirectoryProperty');
+
+    else if (!(value instanceof this.constructor.acceptableValTypes))
+    throw new TypeError('Invalid type for value of OrgDirectoryProperty');
+  }
+
+  constructor(params, val) {
+    super();
+
+    this.#validate(params, val);
+    this.params = params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+    this.value = val.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
 // Explanatory Properties
 class CategoriesProperty extends AbstractBaseProperty {
   static prop = 'CATEGORIES';
@@ -2773,6 +2974,9 @@ module.exports = {
   BirthPlaceProperty,
   DeathPlaceProperty,
   DeathDateProperty,
+  ExpertiseProperty,
+  HobbyProperty,
+  InterestProperty,
   AdrProperty,
   TelProperty,
   EmailProperty,
@@ -2787,6 +2991,7 @@ module.exports = {
   OrgProperty,
   MemberProperty,
   RelatedProperty,
+  OrgDirectoryProperty,
   CategoriesProperty,
   NoteProperty,
   ProdidProperty,
