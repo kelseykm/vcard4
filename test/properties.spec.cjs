@@ -16,7 +16,8 @@ const {
   TypeParameter,
   MediatypeParameter,
   GeoParameter,
-  LabelParameter
+  LabelParameter,
+  LevelParameter
 } = require('../src/cjs/parameters');
 
 const {
@@ -35,6 +36,9 @@ const {
   BirthPlaceProperty,
   DeathPlaceProperty,
   DeathDateProperty,
+  ExpertiseProperty,
+  HobbyProperty,
+  InterestProperty,
   AdrProperty,
   TelProperty,
   EmailProperty,
@@ -49,6 +53,7 @@ const {
   OrgProperty,
   MemberProperty,
   RelatedProperty,
+  OrgDirectoryProperty,
   CategoriesProperty,
   NoteProperty,
   ProdidProperty,
@@ -644,6 +649,123 @@ describe('CJS properties tests', () => {
         );
       });
     });
+
+    describe('ExpertiseProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new ExpertiseProperty(
+          [],
+          new TextType('golf')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new ExpertiseProperty(
+          [
+            new LevelParameter(
+              new TextType('high'),
+              'hobbyProperty'
+            )
+          ],
+          new TextType('golf')
+        ));
+        assert.throws(() => new ExpertiseProperty(
+          [],
+          new DateTimeType('19960415', 'date')
+        ));
+        assert.throws(() => new ExpertiseProperty);
+        assert.throws(() => new ExpertiseProperty(1));
+        assert.throws(() => new ExpertiseProperty({}));
+        assert.throws(() => new ExpertiseProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new ExpertiseProperty(
+            [],
+            new TextType('golf')
+          ).repr(),
+          "EXPERTISE:golf"
+        );
+      });
+    });
+
+    describe('HobbyProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new HobbyProperty(
+          [],
+          new TextType('golf')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new HobbyProperty(
+          [
+            new LevelParameter(
+              new TextType('beginner'),
+              'expertiseProperty'
+            )
+          ],
+          new TextType('golf')
+        ));
+        assert.throws(() => new HobbyProperty(
+          [],
+          new DateTimeType('19960415', 'date')
+        ));
+        assert.throws(() => new HobbyProperty);
+        assert.throws(() => new HobbyProperty(1));
+        assert.throws(() => new HobbyProperty({}));
+        assert.throws(() => new HobbyProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new HobbyProperty(
+            [],
+            new TextType('golf')
+          ).repr(),
+          "HOBBY:golf"
+        );
+      });
+    });
+
+    describe('InterestProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new InterestProperty(
+          [],
+          new TextType('golf')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new InterestProperty(
+          [
+            new LevelParameter(
+              new TextType('beginner'),
+              'expertiseProperty'
+            )
+          ],
+          new TextType('golf')
+        ));
+        assert.throws(() => new InterestProperty(
+          [],
+          new DateTimeType('19960415', 'date')
+        ));
+        assert.throws(() => new InterestProperty);
+        assert.throws(() => new InterestProperty(1));
+        assert.throws(() => new InterestProperty({}));
+        assert.throws(() => new InterestProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new InterestProperty(
+            [],
+            new TextType('golf')
+          ).repr(),
+          "INTEREST:golf"
+        );
+      });
+    });
   });
 
   describe('Addressing properties tests', () => {
@@ -1200,6 +1322,38 @@ describe('CJS properties tests', () => {
             new TextType('Please contact my assistant Jane Doe for any inquiries.')
           ).repr(),
           "RELATED;TYPE=co-worker;VALUE=text:Please contact my assistant Jane Doe for \r\n any inquiries."
+        );
+      });
+    });
+
+    describe('OrgDirectoryProperty tests', () => {
+      it('Accepts valid input', () => {
+        assert.doesNotThrow(() => new OrgDirectoryProperty(
+          [],
+          new URIType('uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6')
+        ));
+      });
+
+      it('Rejects invalid input', () => {
+        assert.throws(() => new OrgDirectoryProperty(
+          [
+            new IntegerType(55)
+          ],
+          new IntegerType(55)
+        ));
+        assert.throws(() => new OrgDirectoryProperty);
+        assert.throws(() => new OrgDirectoryProperty(1));
+        assert.throws(() => new OrgDirectoryProperty({}));
+        assert.throws(() => new OrgDirectoryProperty('James Bond'));
+      });
+
+      it('Formats value properly', () => {
+        assert.strictEqual(
+          new OrgDirectoryProperty(
+            [],
+            new URIType('uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6')
+          ).repr(),
+          "ORG-DIRECTORY:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
         );
       });
     });
