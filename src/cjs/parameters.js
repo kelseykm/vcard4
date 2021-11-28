@@ -573,8 +573,11 @@ class LevelParameter extends AbstractBaseParameter {
   #hobbyInterestRegExp = /^(?:high|medium|low)$/;
 
   #validate(levelValue, targetProp) {
-    if (typeof levelValue === 'undefined')
-    throw new MissingArgument('Value for LevelParameter must be supplied');
+    if (
+      typeof levelValue === 'undefined' ||
+      typeof targetProp === 'undefined'
+    )
+    throw new MissingArgument('Value and target property for LevelParameter must be supplied');
 
     else if (
       !(levelValue instanceof TextType)
