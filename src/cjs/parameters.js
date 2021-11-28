@@ -541,6 +541,67 @@ class CCParameter extends AbstractBaseParameter {
   }
 }
 
+class IndexParameter extends AbstractBaseParameter {
+  static param = 'INDEX';
+
+  #validate(indexValue) {
+    if (typeof indexValue === 'undefined')
+    throw new MissingArgument('Value for IndexParameter must be supplied');
+
+    else if (
+      !(indexValue instanceof IntegerType) ||
+      !Number(indexValue.repr()) > 0
+    )
+    throw new InvalidArgument('Invalid value for IndexParameter. Must be a positive integer');
+  }
+
+  constructor(indexValue) {
+    super();
+
+    this.#validate(indexValue);
+    this.value = indexValue.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
+class LevelParameter extends AbstractBaseParameter {
+  static param = 'LEVEL';
+
+  #expertiseRegExp = /^(?:beginner|average|expert)$/;
+  #hobbyInterestRegExp = /^(?:high|medium|low)$/;
+
+  #validate(levelValue, targetProp) {
+    if (typeof levelValue === 'undefined')
+    throw new MissingArgument('Value for LevelParameter must be supplied');
+
+    else if (
+      !(levelValue instanceof TextType)
+    )
+    throw new InvalidArgument('Invalid value for LevelParameter');
+
+    switch (true) {
+      case /^expertiseProperty$/i.test(targetProp) && this.#expertiseRegExp.test(levelValue.repr()):
+        break;
+      case /^(?:hobby|interest)Property$/i.test(targetProp) && this.#hobbyInterestRegExp.test(levelValue.repr()):
+        break;
+      default:  
+        throw new InvalidArgument('Invalid value for LevelParameter');
+    }
+  }
+
+  constructor(levelValue, targetProp) {
+    super();
+
+    this.#validate(levelValue, targetProp);
+    this.value = levelValue.repr();
+
+    this.checkAbstractPropertiesAndMethods();
+    Object.freeze(this);
+  }
+}
+
 module.exports = {
   LanguageParameter,
   ValueParameter,
@@ -555,5 +616,7 @@ module.exports = {
   TzParameter,
   AnyParameter,
   LabelParameter,
-  CCParameter
+  CCParameter,
+  IndexParameter,
+  LevelParameter
 };
