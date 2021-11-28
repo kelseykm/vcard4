@@ -550,7 +550,7 @@ class IndexParameter extends AbstractBaseParameter {
 
     else if (
       !(indexValue instanceof IntegerType) ||
-      !Number(indexValue.repr()) > 0
+      !(Number(indexValue.repr()) > 0)
     )
     throw new InvalidArgument('Invalid value for IndexParameter. Must be a positive integer');
   }
