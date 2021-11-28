@@ -1021,7 +1021,21 @@ class ExpertiseProperty extends AbstractBaseProperty {
       !params.every(
         param =>
         this.constructor.acceptableParamTypes.some(
-          acceptableParamType => param instanceof acceptableParamType
+          acceptableParamType => {
+            if (acceptableParamType === LevelParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              /^ExpertiseProperty$/i.test(param.targetProp)
+            );
+
+            else if (acceptableParamType === TypeParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              !/^(?:Related|Tel)Property$/i.test(param.targetProp)
+            );
+            
+            return param instanceof acceptableParamType
+          }
         )
       )
     )
@@ -1071,7 +1085,21 @@ class HobbyProperty extends AbstractBaseProperty {
       !params.every(
         param =>
         this.constructor.acceptableParamTypes.some(
-          acceptableParamType => param instanceof acceptableParamType
+          acceptableParamType => {
+            if (acceptableParamType === LevelParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              /^HobbyProperty$/i.test(param.targetProp)
+            );
+
+            else if (acceptableParamType === TypeParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              !/^(?:Related|Tel)Property$/i.test(param.targetProp)
+            );
+
+            return param instanceof acceptableParamType
+          }
         )
       )
     )
@@ -1121,7 +1149,21 @@ class InterestProperty extends AbstractBaseProperty {
       !params.every(
         param =>
         this.constructor.acceptableParamTypes.some(
-          acceptableParamType => param instanceof acceptableParamType
+          acceptableParamType => {
+            if (acceptableParamType === LevelParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              /^InterestProperty$/i.test(param.targetProp)
+            );
+
+            else if (acceptableParamType === TypeParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              !/^(?:Related|Tel)Property$/i.test(param.targetProp)
+            );
+
+            return param instanceof acceptableParamType
+          }
         )
       )
     )
@@ -2097,7 +2139,15 @@ class OrgDirectoryProperty extends AbstractBaseProperty {
     else if (
       !params.every(
         param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => param instanceof acceptableParamType
+          acceptableParamType => {
+            if (acceptableParamType === TypeParameter)
+            return (
+              (param instanceof acceptableParamType) &&
+              !/^(?:Related|Tel)Property$/i.test(param.targetProp)
+            );
+
+            return param instanceof acceptableParamType
+          }
         )
       )
     )
