@@ -94,7 +94,7 @@ function valueParser(value, prop) {
       if (component[index2] === ',') {
         if (
           quotedComponents.some(quotedComponent => {
-            return (index > quotedComponent.start) && (index < quotedComponent.stop);
+            return (index2 > quotedComponent.start) && (index2 < quotedComponent.stop);
           })
         ) continue;
 
@@ -189,7 +189,7 @@ function parameterParser(params) {
       if (joinedParam[index2] === '=') {
         if (
           quotedParams.some(quotedParam => {
-            return (index > quotedParam.start) && (index < quotedParam.stop);
+            return (index2 > quotedParam.start) && (index2 < quotedParam.stop);
           })
         ) continue;
 
