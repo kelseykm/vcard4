@@ -4,6 +4,18 @@ const {
 } = require('./errors');
 
 function backCount(chr, str) {
+  if (
+    typeof chr === 'undefined' ||
+    typeof str === 'undefined'
+  )
+  throw new MissingArgument('Character and string for backCount must be supplied');
+
+  if (
+    typeof chr !== 'string' ||
+    typeof str !== 'string'
+  )
+  throw new InvalidArgument('Character and string for backCount must be of type string');
+
   let count = 0;
 
   for (let index = str.length - 1; index >= 0; index--) {
