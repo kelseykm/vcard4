@@ -381,6 +381,8 @@ console.log(parsedVcard);
 
     - Described [here](#parse)
 
+* If you are using ES module import, please note that there is no default export, and so you will use named imports. For example, to import the ```parse``` function, ```import { parse } from 'vcard4';```
+
 ## Property Value Data Types
 
 * According to the RFC, the standard value data types are:
