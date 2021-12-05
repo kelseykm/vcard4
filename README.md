@@ -787,19 +787,19 @@ new SexType('F');
     7. [`OrgProperty`](#orgproperty)
     8. [`ClientpidmapProperty`](#clientpidmapproperty)
 
-* ```SpecialValueType``` should be called with two arguments, both of type string. The first should be the value and the second should be the target property
+* ```SpecialValueType``` should be called with two arguments. The first should be the value and the second should be the target property
 
 * The second argument that specifies the target property should have as a value a string with the name of one the eight classes listed above (case insensitive)
 
 * The value first argument depends on the value of the second argument
 
-* Where the second argument is either [`BeginProperty`](#beginproperty) or [`EndProperty`](#endproperty), the only accepted value for the first argument is ```VCARD```.
+* Where the second argument is either [`BeginProperty`](#beginproperty) or [`EndProperty`](#endproperty), the only accepted value for the first argument is ```'VCARD'```.
 
 ```js
 new SpecialValueType('VCARD', 'endproperty');
 ```
 
-* Where the second argument is [`KindProperty`](#kindproperty), the only accepted values for the first argument are ```individual```, ```group```, ```org```, ```location``` or an identifier registered with IANA, e.g. ```hybridCellSector_AGPS```, "```802.11```", e.t.c.
+* Where the second argument is [`KindProperty`](#kindproperty), the only accepted values for the first argument are ```'individual'```, ```'group'```, ```'org'```, ```'location'``` or an identifier registered with IANA, e.g. ```'hybridCellSector_AGPS'```, ```'802.11'```, e.t.c.
 
 ```js
 new SpecialValueType('org', 'KindProperty');
@@ -1047,7 +1047,7 @@ new AltidParameter(
             // PID=1.5
             ```
 
-* You may also combine all three, as below
+* You may also combine the last two, as below
 
 ```js
 let pid = new PIDParameter([
