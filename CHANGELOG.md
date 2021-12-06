@@ -1,3 +1,7 @@
+# 2.3.1
+
+* Removed unused type declarations
+
 # 2.3.0
 
 * Update documentation and changelog

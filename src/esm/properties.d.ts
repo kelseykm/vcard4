@@ -30,10 +30,6 @@ import {
   LevelParameter
 } from './parameters';
 
-declare type ParamList = (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | CalscaleParameter | SortAsParameter | GeoParameter | TzParameter | AnyParameter | LabelParameter | CCParameter | IndexParameter | LevelParameter)[];
-
-declare type ValueType = TextType | TextListType | BooleanType | DateTimeType | IntegerType | FloatType | LanguageTagType | URIType | SexType | SpecialValueType;
-
 export class BeginProperty {
   params: string;
   value: string;
