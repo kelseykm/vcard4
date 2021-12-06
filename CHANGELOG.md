@@ -1,3 +1,6 @@
+# 2.3.0
+
+* Update documentation and changelog
 * Added CHANGELOG.md
 * Added TypeScript types
 * Documentation corrections

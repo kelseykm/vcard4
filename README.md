@@ -6,6 +6,8 @@ __vCard version 4.0 javascript library for creating or parsing vCards, with full
 
 For use in node or in the browser
 
+TypeScript types for the library are included
+
 _See [documentation](#documentation)_
 
 ### Installation
@@ -343,6 +345,8 @@ console.log(parsedVcard);
     * __NB__: __vcard4__ uses private class fields and methods heavily. This poses a problem for Safari users because Safari does not support private class methods. It is advised to transpile the code using ___Babel___ or any other transpiler of your choice
 
 * __vcard4__ supports both ES6 module import/export and commonjs require
+
+* TypeScript types for the library are included
 
 ### Versioning
 
