@@ -1,6 +1,6 @@
 {
   "name": "vcard4",
-  "version": "2.3.1",
+  "version": "2.4.0",
   "description": "vCard version 4.0 javascript library for creating or parsing vCards, with full implementation of RFC 6350",
   "type": "module",
   "main": "./index.cjs",
