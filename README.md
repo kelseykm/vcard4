@@ -2,7 +2,7 @@
 
 # vcard4
 
-__vCard version 4.0 javascript library for creating or parsing vCards, with full implementation of RFC6350, along with RFC6350 extensions including RFC6474, RFC8605, RFC6715 and RFC6868__
+__vCard version 4.0 javascript library for creating or parsing vCards, with full implementation of RFC6350, along with RFC6350 extensions including RFC6474, RFC8605, RFC6715, RFC6868, RFC6473 and RFC7852__
 
 For use in node or in the browser
 
@@ -332,7 +332,7 @@ console.log(parsedVcard);
 
 ## Introduction
 
-* This is a vCard JavaScript library that implements RFC6350 fully, along with RFC6350 extensions including RFC6474, RFC8605, RFC6715 and RFC6868
+* This is a vCard JavaScript library that implements RFC6350 fully, along with RFC6350 extensions including RFC6474, RFC8605, RFC6715, RFC6868, RFC6473 and RFC7852
 
 * That RFC defines the vCard data format for representing and exchanging a variety of information about individuals and other entities (e.g., formatted and structured name and delivery addresses, email address, multiple telephone numbers, photograph, logo, audio clips, etc.)
 
@@ -803,7 +803,7 @@ new SexType('F');
 new SpecialValueType('VCARD', 'endproperty');
 ```
 
-* Where the second argument is [`KindProperty`](#kindproperty), the only accepted values for the first argument are ```'individual'```, ```'group'```, ```'org'```, ```'location'``` or an identifier registered with IANA, e.g. ```'hybridCellSector_AGPS'```, ```'802.11'```, e.t.c.
+* Where the second argument is [`KindProperty`](#kindproperty), the only accepted values for the first argument are ```'individual'```, ```'group'```, ```'org'```, ```'location'```, ```'application'``` or an identifier registered with IANA, e.g. ```'hybridCellSector_AGPS'```, ```'802.11'```, e.t.c.
 
 ```js
 new SpecialValueType('org', 'KindProperty');
@@ -1078,7 +1078,7 @@ pid.repr();
 
 * For all target properties, the first argument should be an instance of [`TextType`](#texttype-and-textlisttype), whose value is either ```"work"```, ```"home"```, an identifier registered with IANA or an x-name (names that begin with "x-" or "X-" and are reserved for experimental use, not intended for released products, or for use in bilateral agreements)
 
-* Where the value of the second argument is ```"TelProperty"``` (case insensitive), the value of the first argument may be ```"text"```, ```"voice"```, ```"fax"```, ```"cell"```, ```"video"```, ```"pager"``` or ```"textphone"```, in addition to the values specified above for all target properties
+* Where the value of the second argument is ```"TelProperty"``` (case insensitive), the value of the first argument may be ```"text"```, ```"voice"```, ```"fax"```, ```"cell"```, ```"video"```, ```"pager"```, ```"textphone"``` or ```"main"``` in addition to the values specified above for all target properties
 
 * Where the value of the second argument is ```"RelatedProperty"``` (case insensitive), the value of the first argument may be ```"contact"```, ```"acquaintance"```, ```"friend"```, ```"met"```, ```"co-worker"```, ```"colleague"```, ```"co-resident"```, ```"neighbor"```, ```"child"```, ```"parent"```, ```"sibling"```, ```"spouse"```, ```"kin"```, ```"muse"```, ```"crush"```, ```"date"```, ```"sweetheart"```, ```"me"```, ```"agent"``` or  ```"emergency"```, in addition to the values specified above for all target properties
 

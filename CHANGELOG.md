@@ -1,3 +1,8 @@
+# 2.4.0
+
+* Added support for RFC6473 and RFC7852
+* Remove readonly from types
+
 # 2.3.1
 
 * Removed unused type declarations
