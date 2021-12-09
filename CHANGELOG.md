@@ -1,3 +1,9 @@
+# 2.4.1
+
+* Bug fixes
+    - correct ParsedVcard type
+    - fix quotedParameter checking
+
 # 2.4.0
 
 * Added support for RFC6473 and RFC7852
