@@ -143,11 +143,13 @@ function valueParser(value, prop) {
 }
 
 function parameterParser(params) {
-  const paramList = params ? [] : params;
+  if (typeof params === 'undefined') return;
+
+  const paramList = [];
 
   const quotedParams = [];
   let quotedParamIndex = 0;
-  for (let index = 0; index < params?.length; index++) {
+  for (let index = 0; index < params.length; index++) {
     if (params[index] === '"') {
       if (typeof quotedParams[quotedParamIndex] !== 'object')
       quotedParams[quotedParamIndex] = {
@@ -161,7 +163,7 @@ function parameterParser(params) {
   }
 
   let continueFrom = 0;
-  for (let index = 0; index < params?.length; index++) {
+  for (let index = 0; index < params.length; index++) {
     if (params[index] === ';') {
       if (
         quotedParams.some(quotedParam => {
@@ -180,16 +182,31 @@ function parameterParser(params) {
     paramList.push(params.substring(continueFrom));
   }
 
-  for (let index = 0; index < paramList?.length; index++) {
+  const refParamList = [...paramList];
+  for (let index = 0; index < paramList.length; index++) {
     const joinedParam = paramList[index];
 
     const holdJoinedParam = [];
     let continueFrom = 0;
     for (let index2 = 0; index2 < joinedParam.length; index2++) {
       if (joinedParam[index2] === '=') {
+        const actualIndex = index ?
+          (() => {
+            let count = 0;
+
+            for (let index3 = 0; index3 < index; index3++) {
+              count += refParamList[index3]['length'];
+              count ++; //for removed semicolon
+            }
+
+            count += index2;
+            
+            return count;
+          })()
+          : index2;
         if (
           quotedParams.some(quotedParam => {
-            return (index2 > quotedParam.start) && (index2 < quotedParam.stop);
+            return (actualIndex > quotedParam.start) && (actualIndex < quotedParam.stop);
           })
         ) continue;
 
@@ -214,7 +231,7 @@ function parameterParser(params) {
     paramList[index] = parsedParam;
   }
 
-  for (let index = 0; index < paramList?.length; index++) {
+  for (let index = 0; index < paramList.length; index++) {
     const currentParam = paramList[index];
     const currentParamKey = Object.keys(currentParam).pop();
     const currentParamValue = Object.values(currentParam).pop();
