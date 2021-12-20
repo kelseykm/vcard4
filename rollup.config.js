@@ -8,8 +8,9 @@ export default [
     input: './src/index.js',
     output: [
       {
-        file: './lib/esm/index.js',
+        dir: './lib/esm/',
         format: 'esm',
+        preserveModules: true,
         sourcemap: true,
       },
       {
@@ -37,8 +38,9 @@ export default [
   {
     input: './types/src/index.d.ts',
     output: {
-      file: './lib/esm/index.d.ts',
+      dir: './lib/esm/',
       format: 'esm',
+      preserveModules: true,
     },
     plugins: [resolve(), dts()],
   }
