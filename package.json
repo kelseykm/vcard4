@@ -10,7 +10,7 @@
     "import": "./lib/esm/index.js",
     "require": "./lib/umd/index.js"
   },
-  "types": "./lib/esm/index.d.ts",
+  "types": "./lib/esm/index.d.d.ts",
   "scripts": {
     "test": "mocha",
     "build": "rollup -c"
