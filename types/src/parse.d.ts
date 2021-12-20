@@ -17,4 +17,4 @@ declare type ParsedVcard = {
 [key: string]: ParsedVcardContentLine | ParsedVcardContentLine[];
 };
 
-export default function parse(vcard: string): ParsedVcard | ParsedVcard[];
+export function parse(vcard: string): ParsedVcard | ParsedVcard[];

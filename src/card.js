@@ -1,9 +1,9 @@
-const {
+import {
   MissingArgument,
   InvalidArgument
-} = require('./errors');
+} from './errors.js';
 
-const {
+import {
   BeginProperty,
   EndProperty,
   SourceProperty,
@@ -51,9 +51,9 @@ const {
   CaladruriProperty,
   CaluriProperty,
   ExtendedProperty
-} = require('./properties');
+} from './properties.js';
 
-class VCARD {
+export class VCARD {
   static cardinalityOneProps = [
     BeginProperty,
     EndProperty,
@@ -192,4 +192,3 @@ class VCARD {
   }
 }
 
-module.exports = VCARD;

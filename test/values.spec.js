@@ -12,11 +12,11 @@ import {
   URIType,
   SexType,
   SpecialValueType
-} from '../src/esm/values.js';
+} from '../src/values.js';
 
 import { assert } from 'chai';
 
-describe('ESM property value data types tests', () => {
+describe('Property value data types tests', () => {
 
   describe('TextType tests', () => {
     it('Accepts valid input', () => {

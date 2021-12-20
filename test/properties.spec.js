@@ -7,7 +7,7 @@ import {
   URIType,
   SexType,
   SpecialValueType
-} from '../src/esm/values.js';
+} from '../src/values.js';
 
 import {
   LanguageParameter,
@@ -18,7 +18,7 @@ import {
   GeoParameter,
   LabelParameter,
   LevelParameter
-} from '../src/esm/parameters.js';
+} from '../src/parameters.js';
 
 import {
   BeginProperty,
@@ -68,11 +68,11 @@ import {
   CaladruriProperty,
   CaluriProperty,
   ExtendedProperty
-} from '../src/esm/properties.js';
+} from '../src/properties.js';
 
 import { assert } from 'chai';
 
-describe('ESM properties tests', () => {
+describe('Properties tests', () => {
   describe('General properties tests', () => {
     describe('BeginProperty tests', () => {
       it('Instances can be created', () => {

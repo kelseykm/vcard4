@@ -5,7 +5,7 @@ import {
   IntegerType,
   LanguageTagType,
   URIType
-} from '../src/esm/values.js';
+} from '../src/values.js';
 
 import {
   LanguageParameter,
@@ -24,11 +24,11 @@ import {
   CCParameter,
   IndexParameter,
   LevelParameter
-} from '../src/esm/parameters.js';
+} from '../src/parameters.js';
 
 import { assert } from 'chai';
 
-describe('ESM property parameters tests', () => {
+describe('Property parameters tests', () => {
 
   describe('LanguageParameter tests', () => {
     it('Accepts valid input', () => {

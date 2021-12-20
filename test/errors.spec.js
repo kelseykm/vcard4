@@ -1,11 +1,11 @@
 import {
   MissingArgument,
   InvalidArgument
-} from '../src/esm/errors.js';
+} from '../src/errors.js';
 
 import { expect } from 'chai';
 
-describe('ESM custom errors tests', () => {
+describe('Custom errors tests', () => {
   describe('MissingArgument tests', () => {
     it('Should work as expected', () => {
       expect(() => {

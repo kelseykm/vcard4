@@ -1,19 +1,19 @@
 import {
   TextType,
   URIType
-} from '../src/esm/values.js';
+} from '../src/values.js';
 
 import {
   FNProperty,
   MemberProperty,
   NoteProperty
-} from '../src/esm/properties.js';
+} from '../src/properties.js';
 
-import VCARD from '../src/esm/card.js';
+import { VCARD } from '../src/card.js';
 
 import { assert } from 'chai';
 
-describe('ESM VCARD tests', () => {
+describe('VCARD tests', () => {
   it('Accepts valid input', () => {
     assert.doesNotThrow(() => new VCARD([
       new FNProperty(

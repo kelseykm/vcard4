@@ -1,7 +1,7 @@
-import parse from '../src/esm/parse.js';
+import { parse } from '../src/parse.js';
 import { assert } from 'chai';
 
-describe('ESM parse tests', () => {
+describe('Parse tests', () => {
   it('Accepts valid input', () => {
     assert.doesNotThrow(() => parse(
       'BEGIN:VCARD\r\n' +

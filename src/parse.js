@@ -1,7 +1,7 @@
-const {
+import {
   MissingArgument,
   InvalidArgument
-} = require('./errors');
+} from './errors.js';
 
 function backCount(chr, str) {
   if (
@@ -342,7 +342,7 @@ function contentLineParser(contentLine) {
   };
 }
 
-function parse(vcard) {
+export function parse(vcard) {
   if (typeof vcard === 'undefined')
   throw new MissingArgument('vCard to be parsed must be supplied');
 
@@ -422,4 +422,3 @@ function parse(vcard) {
   return parsedVcards.length === 1 ? parsedVcards.pop() : parsedVcards;
 }
 
-module.exports = parse;

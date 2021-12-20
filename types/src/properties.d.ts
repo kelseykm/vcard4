@@ -31,20 +31,20 @@ import {
 } from './parameters';
 
 export class BeginProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor();
 }
 
 export class EndProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor();
 }
 
 export class SourceProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PIDParameter | PrefParameter | IndexParameter | AltidParameter | MediatypeParameter | AnyParameter)[],
     val: URIType
@@ -52,8 +52,8 @@ export class SourceProperty {
 }
 
 export class KindProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | AnyParameter)[],
     val: SpecialValueType
@@ -61,8 +61,8 @@ export class KindProperty {
 }
 
 export class XMLProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | AltidParameter)[],
     val: TextType
@@ -70,8 +70,8 @@ export class XMLProperty {
 }
 
 export class FNProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | TypeParameter | LanguageParameter | AltidParameter | PIDParameter | PrefParameter | IndexParameter | AnyParameter)[],
     val: TextType
@@ -79,8 +79,8 @@ export class FNProperty {
 }
 
 export class NProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | SortAsParameter | LanguageParameter | AltidParameter | AnyParameter)[],
     val: SpecialValueType
@@ -88,8 +88,8 @@ export class NProperty {
 }
 
 export class NicknameProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | TypeParameter | LanguageParameter | AltidParameter | PIDParameter | PrefParameter | IndexParameter | AnyParameter)[],
     val: TextType| TextListType,
@@ -97,8 +97,8 @@ export class NicknameProperty {
 }
 
 export class PhotoProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | AltidParameter | TypeParameter | MediatypeParameter | PrefParameter | IndexParameter | PIDParameter | AnyParameter)[],
     val: URIType,
@@ -106,8 +106,8 @@ export class PhotoProperty {
 }
 
 export class BdayProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | LanguageParameter | AltidParameter | CalscaleParameter | AnyParameter)[],
     val: DateTimeType | TextType,
@@ -115,8 +115,8 @@ export class BdayProperty {
 }
 
 export class AnniversaryProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | AltidParameter | CalscaleParameter | AnyParameter)[],
     val: DateTimeType | TextType,
@@ -124,8 +124,8 @@ export class AnniversaryProperty {
 }
 
 export class GenderProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | AnyParameter)[],
     val: SexType | SpecialValueType,
@@ -133,8 +133,8 @@ export class GenderProperty {
 }
 
 export class BirthPlaceProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | LanguageParameter | AltidParameter | AnyParameter)[], 
     val: TextType | URIType
@@ -142,8 +142,8 @@ export class BirthPlaceProperty {
 }
 
 export class DeathPlaceProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (LanguageParameter | ValueParameter | AltidParameter | AnyParameter)[],
     val: TextType | URIType
@@ -151,8 +151,8 @@ export class DeathPlaceProperty {
 }
 
 export class DeathDateProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (LanguageParameter | ValueParameter | AltidParameter | CalscaleParameter | AnyParameter)[],
     val: DateTimeType | TextType
@@ -160,8 +160,8 @@ export class DeathDateProperty {
 }
 
 export class ExpertiseProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (LanguageParameter | PrefParameter | AltidParameter | TypeParameter | AnyParameter | IndexParameter | LevelParameter)[], 
     val: TextType
@@ -169,8 +169,8 @@ export class ExpertiseProperty {
 }
 
 export class HobbyProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (PrefParameter | AltidParameter | TypeParameter | AnyParameter | IndexParameter | LevelParameter | LanguageParameter)[], 
     val: TextType 
@@ -178,8 +178,8 @@ export class HobbyProperty {
 }
 
 export class InterestProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (LanguageParameter | PrefParameter | AltidParameter | TypeParameter | AnyParameter | IndexParameter | LevelParameter)[], 
     val: TextType
@@ -187,8 +187,8 @@ export class InterestProperty {
 }
 
 export class AdrProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | GeoParameter | TzParameter | AnyParameter | LabelParameter | CCParameter | IndexParameter)[], 
     val: SpecialValueType
@@ -196,8 +196,8 @@ export class AdrProperty {
 }
 
 export class TelProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
     val: URIType | TextType
@@ -205,8 +205,8 @@ export class TelProperty {
 }
 
 export class EmailProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | AnyParameter | IndexParameter)[], 
     val: TextType
@@ -214,8 +214,8 @@ export class EmailProperty {
 }
 
 export class IMPPProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
     val: URIType
@@ -223,8 +223,8 @@ export class IMPPProperty {
 }
 
 export class LangProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | AnyParameter | IndexParameter)[], 
     val: LanguageTagType
@@ -232,8 +232,8 @@ export class LangProperty {
 }
 
 export class ContactURIProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | IndexParameter)[], 
     val: URIType
@@ -241,8 +241,8 @@ export class ContactURIProperty {
 }
 
 export class TzProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
     val: TextType | URIType | DateTimeType
@@ -250,8 +250,8 @@ export class TzProperty {
 }
 
 export class GeoProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
     val: URIType
@@ -259,8 +259,8 @@ export class GeoProperty {
 }
 
 export class TitleProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | AnyParameter | IndexParameter)[], 
     val: TextType
@@ -268,8 +268,8 @@ export class TitleProperty {
 }
 
 export class RoleProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | AnyParameter | IndexParameter)[], 
     val: TextType
@@ -277,8 +277,8 @@ export class RoleProperty {
 }
 
 export class LogoProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | CalscaleParameter | AnyParameter | IndexParameter)[], 
     val: URIType
@@ -286,8 +286,8 @@ export class LogoProperty {
 }
 
 export class OrgProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | SortAsParameter | AnyParameter | IndexParameter)[], 
     val: SpecialValueType
@@ -295,8 +295,8 @@ export class OrgProperty {
 }
 
 export class MemberProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
     val: URIType
@@ -304,8 +304,8 @@ export class MemberProperty {
 }
 
 export class RelatedProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | LanguageParameter | PrefParameter | AltidParameter | PIDParameter | MediatypeParameter | TypeParameter | AnyParameter | IndexParameter)[], 
     val: URIType | TextType
@@ -313,8 +313,8 @@ export class RelatedProperty {
 }
 
 export class OrgDirectoryProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (LanguageParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | AnyParameter | IndexParameter)[], 
     val: URIType
@@ -322,8 +322,8 @@ export class OrgDirectoryProperty {
 }
 
 export class CategoriesProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | AnyParameter | IndexParameter)[], 
     val: TextType | TextListType
@@ -331,8 +331,8 @@ export class CategoriesProperty {
 }
 
 export class NoteProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | LanguageParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | AnyParameter | IndexParameter)[], 
     val: TextType
@@ -340,8 +340,8 @@ export class NoteProperty {
 }
 
 export class ProdidProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | AnyParameter)[], 
     val: TextType
@@ -349,8 +349,8 @@ export class ProdidProperty {
 }
 
 export class RevProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | AnyParameter)[], 
     val: DateTimeType
@@ -358,8 +358,8 @@ export class RevProperty {
 }
 
 export class SoundProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
     val: URIType
@@ -367,8 +367,8 @@ export class SoundProperty {
 }
 
 export class UIDProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | AnyParameter)[], 
     val: URIType | TextType 
@@ -376,8 +376,8 @@ export class UIDProperty {
 }
 
 export class ClientpidmapProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: AnyParameter[], 
     val: SpecialValueType
@@ -385,8 +385,8 @@ export class ClientpidmapProperty {
 }
 
 export class URLProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
     val: URIType
@@ -394,8 +394,8 @@ export class URLProperty {
 }
 
 export class VersionProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | AnyParameter)[], 
     val: TextType
@@ -403,8 +403,8 @@ export class VersionProperty {
 }
 
 export class KeyProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
     val: TextType | URIType
@@ -412,8 +412,8 @@ export class KeyProperty {
 }
 
 export class FburlProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
     val: URIType
@@ -421,8 +421,8 @@ export class FburlProperty {
 }
 
 export class CaladruriProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
     val: URIType
@@ -430,8 +430,8 @@ export class CaladruriProperty {
 }
 
 export class CaluriProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
     val: URIType
@@ -439,8 +439,8 @@ export class CaluriProperty {
 }
 
 export class ExtendedProperty {
-  params: string;
-  value: string;
+  readonly params: string;
+  readonly value: string;
   constructor(
     params: (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | CalscaleParameter | SortAsParameter | GeoParameter | TzParameter | AnyParameter | LabelParameter | CCParameter | IndexParameter | LevelParameter)[],
     val: TextType | TextListType | BooleanType | DateTimeType | IntegerType | FloatType | LanguageTagType | URIType | SexType | SpecialValueType
