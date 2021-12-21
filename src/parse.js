@@ -1,7 +1,7 @@
 import {
   MissingArgument,
   InvalidArgument
-} from './errors.js';
+} from './errors/index.js';
 
 function backCount(chr, str) {
   if (

@@ -1,7 +1,7 @@
 import {
   MissingArgument,
   InvalidArgument
-} from './errors.js';
+} from './errors/index.js';
 
 import {
   BeginProperty,
@@ -51,7 +51,7 @@ import {
   CaladruriProperty,
   CaluriProperty,
   ExtendedProperty
-} from './properties.js';
+} from './properties/index.js';
 
 export class VCARD {
   static cardinalityOneProps = [
