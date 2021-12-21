@@ -1,7 +1,7 @@
-import { AbstractBaseParameter } from './AbstractBaseParameter.js';
+import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument } from '../errors/index.js';
 
-export class LabelParameter extends AbstractBaseParameter {
+export class LabelParameter extends BaseParameter {
   static param = 'LABEL';
 
   #validate(value) {

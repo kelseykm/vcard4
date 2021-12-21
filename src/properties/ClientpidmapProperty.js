@@ -1,9 +1,9 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import { AnyParameter } from '../parameters/index.js';
 import { SpecialValueType } from '../values/index.js';
 
-export class ClientpidmapProperty extends AbstractBaseProperty {
+export class ClientpidmapProperty extends BaseProperty {
   static prop = 'CLIENTPIDMAP';
   static cardinality = '*';
   static acceptableParamTypes = AnyParameter;

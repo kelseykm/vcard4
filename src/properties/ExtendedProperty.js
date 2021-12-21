@@ -1,4 +1,4 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   LanguageParameter,
@@ -31,7 +31,7 @@ import {
   SpecialValueType
 } from '../values/index.js';
 
-export class ExtendedProperty extends AbstractBaseProperty {
+export class ExtendedProperty extends BaseProperty {
   static cardinality = '*';
   static acceptableParamTypes = [
     LanguageParameter,

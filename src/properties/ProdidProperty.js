@@ -1,9 +1,9 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import { ValueParameter, AnyParameter } from '../parameters/index.js';
 import { TextType } from '../values/index.js';
 
-export class ProdidProperty extends AbstractBaseProperty {
+export class ProdidProperty extends BaseProperty {
   static prop = 'PRODID';
   static cardinality = '*1';
   static acceptableParamTypes = [

@@ -1,4 +1,4 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   LevelParameter,
@@ -11,7 +11,7 @@ import {
 } from '../parameters/index.js';
 import { TextType } from '../values/index.js';
 
-export class HobbyProperty extends AbstractBaseProperty {
+export class HobbyProperty extends BaseProperty {
   static prop = 'HOBBY';
   static cardinality = '*';
   static acceptableParamTypes = [

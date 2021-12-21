@@ -1,8 +1,8 @@
-import { AbstractBaseParameter } from './AbstractBaseParameter.js';
+import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import { IntegerType } from '../values/index.js';
 
-export class IndexParameter extends AbstractBaseParameter {
+export class IndexParameter extends BaseParameter {
   static param = 'INDEX';
 
   #validate(indexValue) {

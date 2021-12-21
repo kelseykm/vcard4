@@ -1,6 +1,6 @@
-export class AbstractBaseValue {
+export class BaseParameter {
   #abstractPropertiesAndMethods = [
-    'type',
+    'param',
     'value'
   ];
 
@@ -16,11 +16,11 @@ export class AbstractBaseValue {
   }
 
   repr() {
-    return this.value;
+    return `${this.constructor.param || this.param}=${this.value}`;
   }
 
   constructor() {
-    if (this.constructor === AbstractBaseValue)
-    throw new Error('Cannot create instance of abstract class');
+    if (this.constructor === BaseParameter)
+    throw new Error('Cannot create instance of base class');
   }
 }

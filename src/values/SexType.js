@@ -1,7 +1,7 @@
-import { AbstractBaseValue } from './AbstractBaseValue.js';
+import { BaseValue } from './BaseValue.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
-export class SexType extends AbstractBaseValue {
+export class SexType extends BaseValue {
   static type = 'TEXT';
 
   #sexRegExp = /^[MFONU]$/;

@@ -1,8 +1,8 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import { SpecialValueType } from '../values/index.js';
 
-export class BeginProperty extends AbstractBaseProperty {
+export class BeginProperty extends BaseProperty {
   static prop = 'BEGIN';
   static cardinality = '1';
   static acceptableParamTypes = null;

@@ -1,4 +1,4 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   ValueParameter,
@@ -13,7 +13,7 @@ import {
 } from '../parameters/index.js';
 import { SpecialValueType } from '../values/index.js';
 
-export class OrgProperty extends AbstractBaseProperty {
+export class OrgProperty extends BaseProperty {
   static prop = 'ORG';
   static cardinality = '*';
   static acceptableParamTypes = [

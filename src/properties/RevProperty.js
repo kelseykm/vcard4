@@ -1,9 +1,9 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import { ValueParameter, AnyParameter } from '../parameters/index.js';
 import { DateTimeType } from '../values/index.js';
 
-export class RevProperty extends AbstractBaseProperty {
+export class RevProperty extends BaseProperty {
   static prop = 'REV';
   static cardinality = '*1';
   static acceptableParamTypes = [

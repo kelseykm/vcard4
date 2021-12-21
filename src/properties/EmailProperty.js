@@ -1,4 +1,4 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   ValueParameter,
@@ -11,7 +11,7 @@ import {
 } from '../parameters/index.js';
 import { TextType } from '../values/index.js';
 
-export class EmailProperty extends AbstractBaseProperty {
+export class EmailProperty extends BaseProperty {
   static prop = 'EMAIL';
   static cardinality = '*';
   static acceptableParamTypes = [

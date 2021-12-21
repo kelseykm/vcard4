@@ -1,4 +1,4 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   ValueParameter,
@@ -16,7 +16,7 @@ import {
   DateTimeType
 } from '../values/index.js';
 
-export class TzProperty extends AbstractBaseProperty {
+export class TzProperty extends BaseProperty {
   static prop = 'TZ';
   static cardinality = '*';
   static acceptableParamTypes = [

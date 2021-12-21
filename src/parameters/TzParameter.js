@@ -1,8 +1,8 @@
-import { AbstractBaseParameter } from './AbstractBaseParameter.js';
+import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument } from '../errors/index.js';
 import { TextType, URIType, DateTimeType } from '../values/index.js';
 
-export class TzParameter extends AbstractBaseParameter {
+export class TzParameter extends BaseParameter {
   static param = 'TZ';
 
   #validate(tzValue) {

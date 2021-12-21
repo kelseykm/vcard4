@@ -1,8 +1,8 @@
-import { AbstractBaseParameter } from './AbstractBaseParameter.js';
+import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument } from '../errors/index.js';
 import { LanguageTagType } from '../values/index.js';
 
-export class LanguageParameter extends AbstractBaseParameter {
+export class LanguageParameter extends BaseParameter {
   static param = 'LANGUAGE';
 
   #langTag;

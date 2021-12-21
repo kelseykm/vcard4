@@ -1,4 +1,4 @@
-import { AbstractBaseParameter } from './AbstractBaseParameter.js';
+import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   TextType,
@@ -11,7 +11,7 @@ import {
   SpecialValueType
 } from '../values/index.js';
 
-export class ValueParameter extends AbstractBaseParameter {
+export class ValueParameter extends BaseParameter {
   static param = 'VALUE';
 
   #valueType;

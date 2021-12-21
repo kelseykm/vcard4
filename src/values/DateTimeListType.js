@@ -1,8 +1,8 @@
-import { AbstractBaseValue } from './AbstractBaseValue.js';
+import { BaseValue } from './BaseValue.js';
 import { MissingArgument } from '../errors/index.js';
 import { DateTimeType } from './DateTimeType.js';
 
-export class DateTimeListType extends AbstractBaseValue {
+export class DateTimeListType extends BaseValue {
   #validate(datetimelist) {
     if (typeof datetimelist === 'undefined')
     throw new MissingArgument('Value for DateTimeListType must be supplied');

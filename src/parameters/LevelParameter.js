@@ -1,8 +1,8 @@
-import { AbstractBaseParameter } from './AbstractBaseParameter.js';
+import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import { TextType } from '../values/index.js';
 
-export class LevelParameter extends AbstractBaseParameter {
+export class LevelParameter extends BaseParameter {
   static param = 'LEVEL';
 
   #expertiseRegExp = /^(?:beginner|average|expert)$/;

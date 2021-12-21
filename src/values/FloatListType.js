@@ -1,8 +1,8 @@
-import { AbstractBaseValue } from './AbstractBaseValue.js';
+import { BaseValue } from './BaseValue.js';
 import { MissingArgument } from '../errors/index.js';
 import { FloatType } from './FloatType.js';
 
-export class FloatListType extends AbstractBaseValue {
+export class FloatListType extends BaseValue {
   static type = 'FLOAT';
 
   #validate(floatlist) {

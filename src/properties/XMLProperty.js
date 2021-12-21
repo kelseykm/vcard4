@@ -1,9 +1,9 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import { ValueParameter, AltidParameter } from '../parameters/index.js';
 import { TextType } from '../values/index.js';
 
-export class XMLProperty extends AbstractBaseProperty {
+export class XMLProperty extends BaseProperty {
   static prop = 'XML';
   static cardinality = '*';
   static acceptableParamTypes = [

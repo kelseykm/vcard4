@@ -1,7 +1,7 @@
-import { AbstractBaseValue } from './AbstractBaseValue.js';
+import { BaseValue } from './BaseValue.js';
 import { MissingArgument } from '../errors/index.js';
 
-export class TextType extends AbstractBaseValue {
+export class TextType extends BaseValue {
   static type = 'TEXT';
 
   #validate(textValue) {

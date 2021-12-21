@@ -1,8 +1,8 @@
-import { AbstractBaseParameter } from './AbstractBaseParameter.js';
+import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import { IntegerType, TextType } from '../values/index.js';
 
-export class AltidParameter extends AbstractBaseParameter {
+export class AltidParameter extends BaseParameter {
   static param = 'ALTID';
 
   #validate(altidValue) {

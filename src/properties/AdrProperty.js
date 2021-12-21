@@ -1,4 +1,4 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   LabelParameter,
@@ -16,7 +16,7 @@ import {
 } from '../parameters/index.js';
 import { SpecialValueType } from '../values/index.js';
 
-export class AdrProperty extends AbstractBaseProperty {
+export class AdrProperty extends BaseProperty {
   static prop = 'ADR';
   static cardinality = '*';
   static acceptableParamTypes = [

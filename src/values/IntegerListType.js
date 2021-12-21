@@ -1,8 +1,8 @@
-import { AbstractBaseValue } from './AbstractBaseValue.js';
+import { BaseValue } from './BaseValue.js';
 import { MissingArgument } from '../errors/index.js';
 import { IntegerType } from './IntegerType.js';
 
-export class IntegerListType extends AbstractBaseValue {
+export class IntegerListType extends BaseValue {
   static type = 'INTEGER';
 
   #validate(integerlist) {

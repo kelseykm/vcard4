@@ -1,7 +1,7 @@
-import { AbstractBaseValue } from './AbstractBaseValue.js';
+import { BaseValue } from './BaseValue.js';
 import { MissingArgument } from '../errors/index.js';
 
-export class BooleanType extends AbstractBaseValue {
+export class BooleanType extends BaseValue {
   static type = 'BOOLEAN';
 
   #validate(boolValue) {

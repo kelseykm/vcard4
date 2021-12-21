@@ -1,4 +1,4 @@
-export class AbstractBaseProperty {
+export class BaseProperty {
   #abstractPropertiesAndMethods = [
     'prop',
     'cardinality',
@@ -16,7 +16,7 @@ export class AbstractBaseProperty {
         Object.prototype.hasOwnProperty.call(this.constructor, abstractPropertyOrMethod)
       )
     )
-    throw new Error('All abstract properties and methods in abstract base class must be defined in child class');
+    throw new Error('All abstract properties and methods in base class must be defined in child class');
   }
 
   repr() {
@@ -44,7 +44,7 @@ export class AbstractBaseProperty {
   }
 
   constructor() {
-    if (this.constructor === AbstractBaseProperty)
-    throw new Error('Cannot create instance of abstract class');
+    if (this.constructor === BaseProperty)
+    throw new Error('Cannot create instance of base class');
   }
 }

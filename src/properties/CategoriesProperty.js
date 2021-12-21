@@ -1,4 +1,4 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   ValueParameter,
@@ -14,7 +14,7 @@ import {
   TextListType
 } from '../values/index.js';
 
-export class CategoriesProperty extends AbstractBaseProperty {
+export class CategoriesProperty extends BaseProperty {
   static prop = 'CATEGORIES';
   static cardinality = '*';
   static acceptableParamTypes = [

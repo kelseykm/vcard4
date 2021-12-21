@@ -1,4 +1,4 @@
-import { AbstractBaseValue } from './AbstractBaseValue.js';
+import { BaseValue } from './BaseValue.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import { TextType } from './TextType.js';
 import { TextListType } from './TextListType.js';
@@ -6,7 +6,7 @@ import { IntegerType } from './IntegerType.js';
 import { SexType } from './SexType.js';
 import { URIType } from './URIType.js';
 
-export class SpecialValueType extends AbstractBaseValue {
+export class SpecialValueType extends BaseValue {
   #validate(value, targetProp) {
     if (
       (typeof value === 'undefined') ||

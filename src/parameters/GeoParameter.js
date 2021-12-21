@@ -1,8 +1,8 @@
-import { AbstractBaseParameter } from './AbstractBaseParameter.js';
+import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument } from '../errors/index.js';
 import { URIType } from '../values/index.js';
 
-export class GeoParameter extends AbstractBaseParameter {
+export class GeoParameter extends BaseParameter {
   static param = 'GEO';
 
   #validate(geoValue) {

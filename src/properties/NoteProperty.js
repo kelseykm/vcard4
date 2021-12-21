@@ -1,4 +1,4 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   ValueParameter,
@@ -12,7 +12,7 @@ import {
 } from '../parameters/index.js';
 import { TextType } from '../values/index.js';
 
-export class NoteProperty extends AbstractBaseProperty {
+export class NoteProperty extends BaseProperty {
   static prop = 'NOTE';
   static cardinality = '*';
   static acceptableParamTypes = [

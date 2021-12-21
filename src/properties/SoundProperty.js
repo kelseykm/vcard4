@@ -1,4 +1,4 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   ValueParameter,
@@ -13,7 +13,7 @@ import {
 } from '../parameters/index.js';
 import { URIType } from '../values/index.js';
 
-export class SoundProperty extends AbstractBaseProperty {
+export class SoundProperty extends BaseProperty {
   static prop = 'SOUND';
   static cardinality = '*';
   static acceptableParamTypes = [

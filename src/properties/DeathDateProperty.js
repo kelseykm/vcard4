@@ -1,4 +1,4 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   ValueParameter,
@@ -12,7 +12,7 @@ import {
   TextType
 } from '../values/index.js';
 
-export class DeathDateProperty extends AbstractBaseProperty {
+export class DeathDateProperty extends BaseProperty {
   static prop = 'DEATHDATE';
   static cardinality = '*1';
   static acceptableParamTypes = [

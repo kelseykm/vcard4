@@ -1,4 +1,4 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   ValueParameter,
@@ -7,7 +7,7 @@ import {
 } from '../parameters/index.js';
 import { URIType } from '../values/index.js';
 
-export class ContactURIProperty extends AbstractBaseProperty {
+export class ContactURIProperty extends BaseProperty {
   static prop = 'CONTACT-URI';
   static cardinality = '*';
   static acceptableParamTypes = [

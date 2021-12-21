@@ -1,7 +1,7 @@
-import { AbstractBaseValue } from './AbstractBaseValue.js';
+import { BaseValue } from './BaseValue.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
-export class URIType extends AbstractBaseValue {
+export class URIType extends BaseValue {
   static type = 'URI';
 
   //Credit for the following regex goes to Jonas Hermsmeier, who got it from Jeff Roberson and added capture groups

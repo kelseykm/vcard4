@@ -1,8 +1,8 @@
-import { AbstractBaseParameter } from './AbstractBaseParameter.js';
+import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument } from '../errors/index.js';
 import { TextType, TextListType } from '../values/index.js';
 
-export class SortAsParameter extends AbstractBaseParameter {
+export class SortAsParameter extends BaseParameter {
   static param = 'SORT-AS';
 
   #validate(sortValue) {

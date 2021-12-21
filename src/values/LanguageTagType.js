@@ -1,7 +1,7 @@
-import { AbstractBaseValue } from './AbstractBaseValue.js';
+import { BaseValue } from './BaseValue.js';
 import { MissingArgument } from '../errors/index.js';
 
-export class LanguageTagType extends AbstractBaseValue {
+export class LanguageTagType extends BaseValue {
   static type = 'LANGUAGE-TAG';
 
   #validate(langTagValue) {

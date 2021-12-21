@@ -1,9 +1,9 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import { ValueParameter, AnyParameter } from '../parameters/index.js';
 import { URIType, TextType } from '../values/index.js';
 
-export class UIDProperty extends AbstractBaseProperty {
+export class UIDProperty extends BaseProperty {
   static prop = 'UID';
   static cardinality = '*1';
   static acceptableParamTypes = [

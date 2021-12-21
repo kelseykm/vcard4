@@ -1,4 +1,4 @@
-import { AbstractBaseProperty } from './AbstractBaseProperty.js';
+import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import {
   ValueParameter,
@@ -12,7 +12,7 @@ import {
 } from '../parameters/index.js';
 import { TextType } from '../values/index.js';
 
-export class RoleProperty extends AbstractBaseProperty {
+export class RoleProperty extends BaseProperty {
   static prop = 'ROLE';
   static cardinality = '*';
   static acceptableParamTypes = [

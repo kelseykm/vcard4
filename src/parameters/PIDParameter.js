@@ -1,8 +1,8 @@
-import { AbstractBaseParameter } from './AbstractBaseParameter.js';
+import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 import { IntegerType } from '../values/index.js';
 
-export class PIDParameter extends AbstractBaseParameter {
+export class PIDParameter extends BaseParameter {
   static param = 'PID';
 
   #pidRegExp = /^\d+(?:\.\d+)?$/;
