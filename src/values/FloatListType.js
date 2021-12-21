@@ -1,5 +1,6 @@
 import { AbstractBaseValue } from './AbstractBaseValue.js';
 import { MissingArgument } from '../errors/index.js';
+import { FloatType } from './FloatType.js';
 
 export class FloatListType extends AbstractBaseValue {
   static type = 'FLOAT';
