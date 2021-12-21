@@ -11,9 +11,9 @@ export class AbstractBaseProperty {
   checkAbstractPropertiesAndMethods() {
     if (
       !this.#abstractPropertiesAndMethods.every(
-        abstractPropertyOrMethod => Object.prototype.hasOwnProperty(this, abstractPropertyOrMethod) ||
-        Object.prototype.hasOwnProperty(Object.getPrototypeOf(this), abstractPropertyOrMethod) ||
-        Object.prototype.hasOwnProperty(this.constructor, abstractPropertyOrMethod)
+        abstractPropertyOrMethod => Object.prototype.hasOwnProperty.call(this, abstractPropertyOrMethod) ||
+        Object.prototype.hasOwnProperty.call(Object.getPrototypeOf(this), abstractPropertyOrMethod) ||
+        Object.prototype.hasOwnProperty.call(this.constructor, abstractPropertyOrMethod)
       )
     )
     throw new Error('All abstract properties and methods in abstract base class must be defined in child class');
