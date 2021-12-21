@@ -80,3 +80,5 @@ export class OrgProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(OrgProperty);

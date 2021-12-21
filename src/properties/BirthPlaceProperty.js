@@ -81,3 +81,5 @@ export class BirthPlaceProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(BirthPlaceProperty);

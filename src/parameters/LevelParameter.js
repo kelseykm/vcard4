@@ -41,3 +41,5 @@ export class LevelParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(LevelParameter);

@@ -26,3 +26,5 @@ export class AltidParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(AltidParameter);

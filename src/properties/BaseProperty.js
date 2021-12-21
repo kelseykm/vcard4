@@ -48,3 +48,5 @@ export class BaseProperty {
     throw new Error('Cannot create instance of base class');
   }
 }
+
+Object.freeze(BaseProperty);

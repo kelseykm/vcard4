@@ -64,3 +64,5 @@ export class UIDProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(UIDProperty);

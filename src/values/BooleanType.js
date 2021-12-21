@@ -22,3 +22,5 @@ export class BooleanType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(BooleanType);

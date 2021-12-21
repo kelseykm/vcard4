@@ -73,3 +73,5 @@ export class FNProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(FNProperty);

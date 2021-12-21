@@ -75,3 +75,5 @@ export class GeoProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(GeoProperty);

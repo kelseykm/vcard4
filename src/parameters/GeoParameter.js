@@ -23,3 +23,5 @@ export class GeoParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(GeoParameter);

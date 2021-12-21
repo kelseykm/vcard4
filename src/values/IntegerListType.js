@@ -33,3 +33,5 @@ export class IntegerListType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(IntegerListType);

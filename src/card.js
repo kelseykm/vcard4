@@ -192,3 +192,4 @@ export class VCARD {
   }
 }
 
+Object.freeze(VCARD);

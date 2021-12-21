@@ -75,3 +75,5 @@ export class FburlProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(FburlProperty);

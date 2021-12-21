@@ -41,3 +41,5 @@ export class ClientpidmapProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(ClientpidmapProperty);

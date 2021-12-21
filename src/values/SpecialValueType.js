@@ -138,3 +138,5 @@ export class SpecialValueType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(SpecialValueType);

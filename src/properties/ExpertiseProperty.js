@@ -74,3 +74,5 @@ export class ExpertiseProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(ExpertiseProperty);

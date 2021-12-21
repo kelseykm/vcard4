@@ -57,3 +57,5 @@ export class RevProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(RevProperty);

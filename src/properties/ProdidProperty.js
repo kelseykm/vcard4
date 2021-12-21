@@ -54,3 +54,5 @@ export class ProdidProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(ProdidProperty);

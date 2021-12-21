@@ -81,3 +81,5 @@ export class DeathPlaceProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(DeathPlaceProperty);

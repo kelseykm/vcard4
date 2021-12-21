@@ -68,3 +68,5 @@ export class GenderProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(GenderProperty);

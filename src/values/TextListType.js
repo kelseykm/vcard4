@@ -33,3 +33,5 @@ export class TextListType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(TextListType);

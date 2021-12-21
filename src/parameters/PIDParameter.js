@@ -56,3 +56,5 @@ export class PIDParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(PIDParameter);

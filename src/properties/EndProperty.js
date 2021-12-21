@@ -18,3 +18,5 @@ export class EndProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(EndProperty);

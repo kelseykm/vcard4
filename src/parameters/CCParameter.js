@@ -26,3 +26,5 @@ export class CCParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(CCParameter);

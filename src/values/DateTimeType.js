@@ -79,3 +79,5 @@ export class DateTimeType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(DateTimeType);

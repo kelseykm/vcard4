@@ -28,3 +28,5 @@ export class FloatType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(FloatType);

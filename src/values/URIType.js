@@ -28,3 +28,5 @@ export class URIType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(URIType);

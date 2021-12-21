@@ -26,3 +26,5 @@ export class LabelParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(LabelParameter);

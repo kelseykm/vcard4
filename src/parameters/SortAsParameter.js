@@ -28,3 +28,5 @@ export class SortAsParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(SortAsParameter);

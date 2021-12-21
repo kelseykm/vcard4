@@ -22,3 +22,5 @@ export class VersionProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(VersionProperty);

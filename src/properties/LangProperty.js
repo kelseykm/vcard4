@@ -73,3 +73,5 @@ export class LangProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(LangProperty);

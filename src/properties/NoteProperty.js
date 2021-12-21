@@ -75,3 +75,5 @@ export class NoteProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(NoteProperty);

@@ -67,3 +67,5 @@ export class MemberProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(MemberProperty);

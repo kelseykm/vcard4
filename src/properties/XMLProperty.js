@@ -54,3 +54,5 @@ export class XMLProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(XMLProperty);

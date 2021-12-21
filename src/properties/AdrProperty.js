@@ -85,3 +85,5 @@ export class AdrProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(AdrProperty);

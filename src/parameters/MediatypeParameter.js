@@ -51,3 +51,5 @@ export class MediatypeParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(MediatypeParameter);

@@ -96,3 +96,5 @@ export class DeathDateProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(DeathDateProperty);

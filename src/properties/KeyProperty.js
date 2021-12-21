@@ -88,3 +88,5 @@ export class KeyProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(KeyProperty);

@@ -80,3 +80,5 @@ export class NicknameProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(NicknameProperty);

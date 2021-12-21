@@ -24,3 +24,5 @@ export class BaseValue {
     throw new Error('Cannot create instance of base class');
   }
 }
+
+Object.freeze(BaseValue);

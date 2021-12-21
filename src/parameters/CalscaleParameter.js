@@ -28,3 +28,5 @@ export class CalscaleParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(CalscaleParameter);

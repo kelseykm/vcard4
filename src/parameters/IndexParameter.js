@@ -26,3 +26,5 @@ export class IndexParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(IndexParameter);

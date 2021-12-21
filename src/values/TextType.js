@@ -25,3 +25,5 @@ export class TextType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(TextType);

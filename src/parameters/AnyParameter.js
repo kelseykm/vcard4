@@ -27,3 +27,5 @@ export class AnyParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(AnyParameter);

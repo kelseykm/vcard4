@@ -98,3 +98,5 @@ export class TzProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(TzProperty);

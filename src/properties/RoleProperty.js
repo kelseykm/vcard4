@@ -75,3 +75,5 @@ export class RoleProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(RoleProperty);

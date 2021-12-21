@@ -91,3 +91,5 @@ export class TelProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(TelProperty);

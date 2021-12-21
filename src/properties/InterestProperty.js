@@ -74,3 +74,5 @@ export class InterestProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(InterestProperty);

@@ -75,3 +75,5 @@ export class TitleProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(TitleProperty);

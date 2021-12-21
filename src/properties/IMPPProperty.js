@@ -75,3 +75,5 @@ export class IMPPProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(IMPPProperty);

@@ -49,3 +49,5 @@ export class ValueParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(ValueParameter);

@@ -87,3 +87,5 @@ export class RelatedProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(RelatedProperty);

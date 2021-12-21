@@ -66,3 +66,5 @@ export class NProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(NProperty);

@@ -29,3 +29,5 @@ export class LanguageParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(LanguageParameter);

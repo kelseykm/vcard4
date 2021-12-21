@@ -46,3 +46,5 @@ export class DateTimeListType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(DateTimeListType);

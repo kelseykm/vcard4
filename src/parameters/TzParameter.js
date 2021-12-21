@@ -38,3 +38,5 @@ export class TzParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(TzParameter);

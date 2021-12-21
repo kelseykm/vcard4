@@ -116,3 +116,5 @@ export class ExtendedProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(ExtendedProperty);

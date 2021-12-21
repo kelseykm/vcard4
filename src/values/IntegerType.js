@@ -43,3 +43,5 @@ export class IntegerType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(IntegerType);

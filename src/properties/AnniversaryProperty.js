@@ -94,3 +94,5 @@ export class AnniversaryProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(AnniversaryProperty);

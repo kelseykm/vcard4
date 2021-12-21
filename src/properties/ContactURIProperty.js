@@ -62,3 +62,5 @@ export class ContactURIProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(ContactURIProperty);

@@ -29,3 +29,5 @@ export class PrefParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(PrefParameter);

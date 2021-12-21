@@ -4,3 +4,5 @@ export class InvalidArgument extends Error {
     this.name = 'InvalidArgument';
   }
 }
+
+Object.freeze(InvalidArgument);

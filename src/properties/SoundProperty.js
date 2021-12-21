@@ -77,3 +77,5 @@ export class SoundProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(SoundProperty);

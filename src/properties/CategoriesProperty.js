@@ -83,3 +83,5 @@ export class CategoriesProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(CategoriesProperty);

@@ -33,3 +33,5 @@ export class FloatListType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(FloatListType);

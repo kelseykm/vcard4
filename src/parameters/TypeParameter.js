@@ -86,3 +86,5 @@ export class TypeParameter extends BaseParameter {
     Object.freeze(this);
   }
 }
+
+Object.freeze(TypeParameter);

@@ -18,3 +18,5 @@ export class BeginProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(BeginProperty);

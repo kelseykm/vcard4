@@ -74,3 +74,5 @@ export class HobbyProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(HobbyProperty);

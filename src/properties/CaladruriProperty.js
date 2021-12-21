@@ -75,3 +75,5 @@ export class CaladruriProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(CaladruriProperty);

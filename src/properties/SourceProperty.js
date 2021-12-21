@@ -67,3 +67,5 @@ export class SourceProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(SourceProperty);

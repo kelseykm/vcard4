@@ -74,3 +74,5 @@ export class EmailProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(EmailProperty);

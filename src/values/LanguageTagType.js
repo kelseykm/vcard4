@@ -22,3 +22,5 @@ export class LanguageTagType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(LanguageTagType);

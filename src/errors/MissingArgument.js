@@ -4,3 +4,5 @@ export class MissingArgument extends Error {
     this.name = 'MissingArgument';
   }
 }
+
+Object.freeze(MissingArgument);

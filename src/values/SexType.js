@@ -24,3 +24,5 @@ export class SexType extends BaseValue {
     Object.freeze(this);
   }
 }
+
+Object.freeze(SexType);

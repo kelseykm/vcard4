@@ -77,3 +77,5 @@ export class LogoProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(LogoProperty);

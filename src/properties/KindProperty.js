@@ -57,3 +57,5 @@ export class KindProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(KindProperty);

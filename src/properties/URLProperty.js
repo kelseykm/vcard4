@@ -75,3 +75,5 @@ export class URLProperty extends BaseProperty {
     Object.freeze(this);
   }
 }
+
+Object.freeze(URLProperty);
