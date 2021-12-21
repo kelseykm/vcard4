@@ -1,13 +1,13 @@
 import {
   TextType,
   URIType
-} from '../src/values.js';
+} from '../src/values/index.js';
 
 import {
   FNProperty,
   MemberProperty,
   NoteProperty
-} from '../src/properties.js';
+} from '../src/properties/index.js';
 
 import { VCARD } from '../src/card.js';
 

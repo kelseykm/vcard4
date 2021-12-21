@@ -7,7 +7,7 @@ import {
   URIType,
   SexType,
   SpecialValueType
-} from '../src/values.js';
+} from '../src/values/index.js';
 
 import {
   LanguageParameter,
@@ -18,7 +18,7 @@ import {
   GeoParameter,
   LabelParameter,
   LevelParameter
-} from '../src/parameters.js';
+} from '../src/parameters/index.js';
 
 import {
   BeginProperty,
@@ -68,7 +68,7 @@ import {
   CaladruriProperty,
   CaluriProperty,
   ExtendedProperty
-} from '../src/properties.js';
+} from '../src/properties/index.js';
 
 import { assert } from 'chai';
 

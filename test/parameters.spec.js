@@ -5,7 +5,7 @@ import {
   IntegerType,
   LanguageTagType,
   URIType
-} from '../src/values.js';
+} from '../src/values/index.js';
 
 import {
   LanguageParameter,
@@ -24,7 +24,7 @@ import {
   CCParameter,
   IndexParameter,
   LevelParameter
-} from '../src/parameters.js';
+} from '../src/parameters/index.js';
 
 import { assert } from 'chai';
 

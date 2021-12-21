@@ -12,7 +12,7 @@ import {
   URIType,
   SexType,
   SpecialValueType
-} from '../src/values.js';
+} from '../src/values/index.js';
 
 import { assert } from 'chai';
 

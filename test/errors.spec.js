@@ -1,7 +1,7 @@
 import {
   MissingArgument,
   InvalidArgument
-} from '../src/errors.js';
+} from '../src/errors/index.js';
 
 import { expect } from 'chai';
 
