@@ -1,6 +1,5 @@
 import { BaseValue } from './BaseValue.js';
 import { MissingArgument } from '../errors/index.js';
-import { DateTimeType } from './DateTimeType.js';
 
 export class DateTimeListType extends BaseValue {
   #validate(datetimelist) {
@@ -8,37 +7,29 @@ export class DateTimeListType extends BaseValue {
     throw new MissingArgument('Value for DateTimeListType must be supplied');
 
     else if (!Array.isArray(datetimelist))
-    throw new TypeError('Invalid type for value of DateTimeListType. It should be an array of FloatTypes');
+    throw new TypeError('Value for DateTimeListType should be passed in an array');
 
-    else if (
-      !datetimelist.every(
-        datetime => datetime instanceof DateTimeType
-      )
-    )
-    throw new TypeError('Invalid type for value of DateTimeListType. It should be an array of DateTimeTypes');
+    const conformType = datetimelist[0]['type'];
 
-    else if (
-      !datetimelist.every(
-        datetime => datetime.type === datetimelist[0].type
-      )
-    )
-    throw new TypeError('Invalid type for value of DateTimeListType. It should be an array of DateTimeTypes of the same type');
+    for (const datetime of datetimelist) {
+      if (datetime.type !== conformType)
+      throw new TypeError('Value for DateTimeListType should be an array of DateTimeTypes of the same type');
 
-    else if (
-      datetimelist.some(
-        datetime => datetime.type === 'UTC-OFFSET'
-      )
-    )
-    throw new TypeError('Invalid type for value of DateTimeListType');
+      else if (datetime.type === 'UTC-OFFSET')
+      throw new TypeError('Invalid type for value of DateTimeListType');
+
+      else if (!/^(?:(?:DATE((?:-AND-OR)?(?:-TIME))?)|(?:TIME(?:STAMP)?))$/.test(datetime.type))
+      throw new TypeError('Value for DateTimeListType should be an array of DateTimeTypes');
+    }
   }
 
   constructor(datetimelist) {
     super();
 
     this.#validate(datetimelist);
-    this.value = datetimelist.reduce((accumulatedFloatTypes, currentFloatType) => {
-      accumulatedFloatTypes.push(currentFloatType.repr());
-      return accumulatedFloatTypes;
+    this.value = datetimelist.reduce((accumulatedDateTimeTypes, currentDateTimeType) => {
+      accumulatedDateTimeTypes.push(currentDateTimeType.repr());
+      return accumulatedDateTimeTypes;
     }, []).join(',');
     this.type = datetimelist[0].type;
 

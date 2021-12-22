@@ -1,6 +1,5 @@
 import { BaseValue } from './BaseValue.js';
 import { MissingArgument } from '../errors/index.js';
-import { TextType } from './TextType.js';
 
 export class TextListType extends BaseValue {
   static type = 'TEXT';
@@ -12,12 +11,10 @@ export class TextListType extends BaseValue {
     else if (!Array.isArray(textlist))
     throw new TypeError('Invalid type for value of TextListType. It should be an array of TextTypes');
 
-    else if (
-      !textlist.every(
-        text => text instanceof TextType
-      )
-    )
-    throw new TypeError('Invalid type for value of TextListType. It should be an array of TextTypes');
+    for (const text of textlist) {
+      if (text.constructor.type !== 'TEXT')
+      throw new TypeError('Invalid type for value of TextListType. It should be an array of TextTypes');
+    }
   }
 
   constructor(textlist) {

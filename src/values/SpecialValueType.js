@@ -1,10 +1,5 @@
 import { BaseValue } from './BaseValue.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { TextType } from './TextType.js';
-import { TextListType } from './TextListType.js';
-import { IntegerType } from './IntegerType.js';
-import { SexType } from './SexType.js';
-import { URIType } from './URIType.js';
 
 export class SpecialValueType extends BaseValue {
   #validate(value, targetProp) {
@@ -12,7 +7,7 @@ export class SpecialValueType extends BaseValue {
       (typeof value === 'undefined') ||
       (typeof targetProp === 'undefined')
     )
-    throw new MissingArgument('Type, value and target property for SpecialValueType must be supplied');
+    throw new MissingArgument('Value and target property for SpecialValueType must be supplied');
 
     const valueRegExp = /^(?:individual|group|org|location|application|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)$/i;
 
@@ -39,10 +34,7 @@ export class SpecialValueType extends BaseValue {
 
         for (let index = 0; index < value.length; index++)
         if (value[index])
-        if (
-          !(value[index] instanceof TextType) &&
-          !(value[index] instanceof TextListType)
-        )
+        if (value[index].constructor.type !== 'TEXT')
         throw new TypeError('Invalid value for SpecialValueType for NProperty. The items in the array, if present, should be of type TextType or TextListType');
 
         break;
@@ -55,7 +47,7 @@ export class SpecialValueType extends BaseValue {
 
         else if (
           value[0] &&
-          !(value[0] instanceof SexType)
+          !/^[MFONU]$/.test(value[0].repr())
         )
         throw new TypeError('Invalid value for SpecialValueType for GenderProperty. The first item in the array, if present, should be of type SexType');
 
@@ -63,7 +55,7 @@ export class SpecialValueType extends BaseValue {
           (!value[0] && !value[1]) ||
           (
             value[1] &&
-            !(value[1] instanceof TextType)
+            (value[1].constructor.type !== 'TEXT')
           )
         )
         throw new TypeError('Invalid value for SpecialValueType for GenderProperty. The second item in the array, if present, should be of type TextType');
@@ -78,7 +70,7 @@ export class SpecialValueType extends BaseValue {
 
         for (let index = 0; index < value.length; index++)
         if (value[index])
-        if (!(value[index] instanceof TextType))
+        if (value[index].constructor.type !== 'TEXT')
         throw new TypeError('Invalid value for SpecialValueType for AdrProperty. The items in the array, if present, should be of type TextType');
 
         break;
@@ -91,7 +83,7 @@ export class SpecialValueType extends BaseValue {
 
         for (let index = 0; index < value.length; index++)
         if (value[index])
-        if (!(value[index] instanceof TextType))
+        if (value[index].constructor.type !== 'TEXT')
         throw new TypeError('Invalid value for SpecialValueType for OrgProperty. The items in the array, if present, should be of type TextType');
 
         break;
@@ -102,13 +94,13 @@ export class SpecialValueType extends BaseValue {
         )
         throw new InvalidArgument('Invalid value for SpecialValueType for ClientpidmapProperty. It should be an array with a length of 2');
 
-        else if (!(value[0] instanceof IntegerType))
+        else if (value[0].constructor.type !== 'INTEGER')
         throw new TypeError('Invalid value for SpecialValueType for ClientpidmapProperty. The first item in the array should be of type IntegerType');
 
         else if (0 > Number(value[0].repr()))
         throw new InvalidArgument('Invalid value for SpecialValueType for ClientpidmapProperty. The first item in the array should be a positive integer of type IntegerType')
 
-        else if (!(value[1] instanceof URIType))
+        else if (value[1].constructor.type !== 'URI')
         throw new TypeError('Invalid value for SpecialValueType for ClientpidmapProperty. The second item in the array should be of type URIType');
 
         break;

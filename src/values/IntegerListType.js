@@ -1,6 +1,5 @@
 import { BaseValue } from './BaseValue.js';
 import { MissingArgument } from '../errors/index.js';
-import { IntegerType } from './IntegerType.js';
 
 export class IntegerListType extends BaseValue {
   static type = 'INTEGER';
@@ -12,12 +11,10 @@ export class IntegerListType extends BaseValue {
     else if (!Array.isArray(integerlist))
     throw new TypeError('Invalid type for value of IntegerListType. It should be an array of IntegerTypes');
 
-    else if (
-      !integerlist.every(
-        integer => integer instanceof IntegerType
-      )
-    )
-    throw new TypeError('Invalid type for value of IntegerListType. It should be an array of IntegerTypes');
+    for (const integer of integerlist) {
+      if (integer.constructor.type !== 'INTEGER')
+      throw new TypeError('Invalid type for value of IntegerListType. It should be an array of IntegerTypes');
+    }
   }
 
   constructor(integerlist) {

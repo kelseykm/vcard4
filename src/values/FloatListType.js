@@ -1,6 +1,5 @@
 import { BaseValue } from './BaseValue.js';
 import { MissingArgument } from '../errors/index.js';
-import { FloatType } from './FloatType.js';
 
 export class FloatListType extends BaseValue {
   static type = 'FLOAT';
@@ -10,14 +9,12 @@ export class FloatListType extends BaseValue {
     throw new MissingArgument('Value for FloatListType must be supplied');
 
     else if (!Array.isArray(floatlist))
-    throw new TypeError('Invalid type for value of FloatListType. It should be an array of FloatTypes');
+    throw new TypeError('Value of FloatListType should be passed in an array');
 
-    else if (
-      !floatlist.every(
-        float => float instanceof FloatType
-      )
-    )
-    throw new TypeError('Invalid type for value of FloatListType. It should be an array of FloatTypes');
+    for (const float of floatlist) {
+      if (float.constructor.type !== 'FLOAT')
+      throw new TypeError('Value of FloatListType should be an array of FloatTypes');
+    }
   }
 
   constructor(floatlist) {

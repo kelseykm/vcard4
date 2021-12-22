@@ -23,43 +23,43 @@ export class DateTimeType extends BaseValue {
     )
     throw new InvalidArgument('Accepted values of type for DateTimeType are date, time, datetime, dateandortime, timestamp or utcoffset');
 
-    switch (true) {
-      case /^date$/.test(type):
+    switch (type) {
+      case 'date':
         if (!this.#dateRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type date of DateTimeType');
 
         this.type = 'DATE';
         this.value = dateTimeValue.toString();
         break;
-      case /^time$/.test(type):
+      case 'time':
         if (!this.#timeRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type time of DateTimeType');
 
         this.type = 'TIME';
         this.value = dateTimeValue.toString();
         break;
-      case /^datetime$/.test(type):
+      case 'datetime':
         if (!this.#dateTimeRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type datetime of DateTimeType');
 
         this.type = 'DATE-TIME';
         this.value = dateTimeValue.toString();
         break;
-      case /^dateandortime$/.test(type):
+      case 'dateandortime':
         if (!this.#dateAndOrTimeRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type dateandortime of DateTimeType');
 
         this.type = 'DATE-AND-OR-TIME';
         this.value = dateTimeValue.toString();
         break;
-      case /^timestamp$/.test(type):
+      case 'timestamp':
         if (!this.#timestampRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type timestamp of DateTimeType');
 
         this.type = 'TIMESTAMP';
         this.value = dateTimeValue.toString();
         break;
-      case /^utcoffset$/.test(type):
+      case 'utcoffset':
         if (!this.#utcOffsetRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type utcoffset of DateTimeType');
 
