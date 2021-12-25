@@ -954,8 +954,7 @@ new LanguageParameter(
 
 * It is used to identify the data type of the value of a property
 
-* ```ValueParameter``` should be called with a single argument of either one of the following types:
-[`TextType`](#texttype-and-textlisttype), [`BooleanType`](#booleantype), [`DateTimeType`](#datetimetype), [`IntegerType`](#integertype-and-integerlisttype), [`FloatType`](#floattype-and-floatlisttype), [`LanguageTagType`](#languagetagtype), [`URIType`](#uritype) and [`SpecialValueType`](#specialvaluetype)
+* ```ValueParameter``` should be called with a single argument of either one of the [types](#property-value-data-types)
 
 * Note that the data type specified by the ```ValueParameter``` must correspond to the value of the property
 
