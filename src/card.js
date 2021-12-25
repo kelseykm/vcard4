@@ -1,11 +1,5 @@
 import { MissingArgument, InvalidArgument } from './errors/index.js';
 
-import {
-  BeginProperty,
-  EndProperty,
-  VersionProperty,
-} from './properties/index.js';
-
 export class VCARD {
   static cardinalityOneProps = new Set([
     'BEGIN',
@@ -72,15 +66,15 @@ export class VCARD {
     const CRLF = '\r\n';
 
     this.value = '';
-    this.value += new BeginProperty().repr() + CRLF;
-    this.value += new VersionProperty().repr() + CRLF;
+    this.value += 'BEGIN:VCARD' + CRLF;
+    this.value += 'VERSION:4.0' + CRLF;
 
     this.value += this.props.reduce((accumulatedProps, currentProp) => {
       accumulatedProps.push(currentProp.repr());
       return accumulatedProps;
     }, []).join(CRLF) + CRLF;
 
-    this.value += new EndProperty().repr() + CRLF;
+    this.value += 'END:VCARD' + CRLF;
   }
 
   #validate(props) {
