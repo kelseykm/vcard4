@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { IntegerType } from '../values/index.js';
 
 export class IndexParameter extends BaseParameter {
   static param = 'INDEX';
@@ -10,7 +9,7 @@ export class IndexParameter extends BaseParameter {
     throw new MissingArgument('Value for IndexParameter must be supplied');
 
     else if (
-      !(indexValue instanceof IntegerType) ||
+      indexValue.constructor.type !== 'INTEGER' ||
       !(Number(indexValue.repr()) > 0)
     )
     throw new InvalidArgument('Invalid value for IndexParameter. Must be a positive integer');

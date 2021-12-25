@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument } from '../errors/index.js';
-import { URIType } from '../values/index.js';
 
 export class GeoParameter extends BaseParameter {
   static param = 'GEO';
@@ -9,7 +8,7 @@ export class GeoParameter extends BaseParameter {
     if (typeof geoValue === 'undefined')
     throw new MissingArgument('Value for GeoParameter must be supplied');
 
-    else if (!(geoValue instanceof URIType))
+    else if (geoValue.constructor.type !== 'URI')
     throw new TypeError('Value for GeoParameter must be of type URIType');
   }
 

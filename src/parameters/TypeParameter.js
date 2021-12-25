@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { TextType, TextListType } from '../values/index.js';
 
 export class TypeParameter extends BaseParameter {
   static param = 'TYPE';
@@ -18,10 +17,7 @@ export class TypeParameter extends BaseParameter {
     )
     throw new MissingArgument('Value and target property for TypeParameter must be supplied');
 
-    else if (
-      !(typeValue instanceof TextType) &&
-      !(typeValue instanceof TextListType)
-    )
+    else if (typeValue.constructor.type !== 'TEXT')
     throw new TypeError('Value for TypeParameter must be of type TextType or TextListType');
 
     const telre = new RegExp(`(?:${this.#telTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
@@ -30,13 +26,7 @@ export class TypeParameter extends BaseParameter {
     switch (true) {
       case /^TelProperty$/i.test(targetProp):
         if (
-          (typeValue instanceof TextType) &&
-          !telre.test(typeValue.repr())
-        )
-        throw new InvalidArgument('Invalid value for TypeParameter for TelProperty');
-
-        else if (
-          (typeValue instanceof TextListType) &&
+          !telre.test(typeValue.repr()) &&
           !typeValue.repr().split(',').every(type => telre.test(type))
         )
         throw new InvalidArgument('Invalid value for TypeParameter for TelProperty');
@@ -44,13 +34,7 @@ export class TypeParameter extends BaseParameter {
         break;
       case /^RelatedProperty$/i.test(targetProp):
         if (
-          (typeValue instanceof TextType) &&
-          !relatedre.test(typeValue.repr())
-        )
-        throw new InvalidArgument('Invalid value for TypeParameter for RelatedProperty');
-
-        else if (
-          (typeValue instanceof TextListType) &&
+          !relatedre.test(typeValue.repr()) &&
           !typeValue.repr().split(',').every(type => relatedre.test(type))
         )
         throw new InvalidArgument('Invalid value for TypeParameter for RelatedProperty');
@@ -58,13 +42,7 @@ export class TypeParameter extends BaseParameter {
         break;
       default:
         if (
-          (typeValue instanceof TextType) &&
-          !this.#typeRegExp.test(typeValue.repr())
-        )
-        throw new InvalidArgument('Invalid value for TypeParameter');
-
-        else if (
-          (typeValue instanceof TextListType) &&
+          !this.#typeRegExp.test(typeValue.repr()) &&
           !typeValue.repr().split(',').every(type => this.#typeRegExp.test(type))
         )
         throw new InvalidArgument('Invalid value for TypeParameter');
@@ -76,9 +54,7 @@ export class TypeParameter extends BaseParameter {
 
     this.#validate(typeValue, targetProp);
 
-    this.value = typeValue instanceof TextListType ?
-    `"${typeValue.repr()}"` :
-    typeValue.repr();
+    this.value = /,/.test(typeValue.repr()) ? `"${typeValue.repr()}"` : typeValue.repr();
 
     this.targetProp = targetProp;
 

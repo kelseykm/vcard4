@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument } from '../errors/index.js';
-import { LanguageTagType } from '../values/index.js';
 
 export class LanguageParameter extends BaseParameter {
   static param = 'LANGUAGE';
@@ -15,7 +14,7 @@ export class LanguageParameter extends BaseParameter {
     if (typeof langTag === 'undefined')
     throw new MissingArgument('Language Tag for LanguageParameter must be supplied');
 
-    else if (!(langTag instanceof LanguageTagType))
+    else if (langTag.constructor.type !== 'LANGUAGE-TAG')
     throw new TypeError('The value of the LANGUAGE property parameter should be of type LanguageTagType');
   }
 

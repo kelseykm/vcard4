@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument } from '../errors/index.js';
-import { TextType, TextListType } from '../values/index.js';
 
 export class SortAsParameter extends BaseParameter {
   static param = 'SORT-AS';
@@ -9,10 +8,7 @@ export class SortAsParameter extends BaseParameter {
     if (typeof sortValue === 'undefined')
     throw new MissingArgument('Value for SortAsParameter must be supplied');
 
-    else if (
-      !(sortValue instanceof TextType) &&
-      !(sortValue instanceof TextListType)
-    )
+    else if (sortValue.constructor.type !== 'TEXT')
     throw new TypeError('Value for SortAsParameter must be of type TextType or TextListType');
   }
 
@@ -20,9 +16,7 @@ export class SortAsParameter extends BaseParameter {
     super();
 
     this.#validate(sortValue);
-    this.value = sortValue instanceof TextListType ?
-    `"${sortValue.repr()}"` :
-    sortValue.repr();
+    this.value = /,/.test(sortValue.repr()) ? `"${sortValue.repr()}"` : sortValue.repr();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

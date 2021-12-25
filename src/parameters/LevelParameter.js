@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { TextType } from '../values/index.js';
 
 export class LevelParameter extends BaseParameter {
   static param = 'LEVEL';
@@ -15,9 +14,7 @@ export class LevelParameter extends BaseParameter {
     )
     throw new MissingArgument('Value and target property for LevelParameter must be supplied');
 
-    else if (
-      !(levelValue instanceof TextType)
-    )
+    else if (levelValue.constructor.type !== 'TEXT')
     throw new InvalidArgument('Invalid value for LevelParameter');
 
     switch (true) {

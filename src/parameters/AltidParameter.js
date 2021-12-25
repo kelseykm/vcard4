@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { IntegerType, TextType } from '../values/index.js';
 
 export class AltidParameter extends BaseParameter {
   static param = 'ALTID';
@@ -10,8 +9,8 @@ export class AltidParameter extends BaseParameter {
     throw new MissingArgument('Value for AltidParameter must be supplied');
 
     else if (
-      !(altidValue instanceof IntegerType) &&
-      !(altidValue instanceof TextType)
+      altidValue.constructor.type !== 'INTEGER' &&
+      altidValue.constructor.type !== 'TEXT'
     )
     throw new InvalidArgument('Value for AltidParameter must be of type IntegerType or TextType');
   }

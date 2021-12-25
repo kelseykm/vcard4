@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { TextType } from '../values/index.js';
 
 export class CCParameter extends BaseParameter {
   static param = 'CC';
@@ -10,7 +9,7 @@ export class CCParameter extends BaseParameter {
     throw new MissingArgument('Value for CCParameter must be supplied');
 
     else if (
-      !(ccValue instanceof TextType) ||
+      ccValue.constructor.type !== 'TEXT' ||
       !/^[A-Za-z0-9]{2}$/.test(ccValue.repr())
     )
     throw new InvalidArgument('Invalid value for CCParameter');

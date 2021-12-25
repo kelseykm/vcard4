@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { IntegerType } from '../values/index.js';
 
 export class PrefParameter extends BaseParameter {
   static param = 'PREF';
@@ -9,7 +8,7 @@ export class PrefParameter extends BaseParameter {
     if (typeof prefValue === 'undefined')
     throw new MissingArgument('Value for PrefParameter must be supplied');
 
-    else if (!(prefValue instanceof IntegerType))
+    else if (prefValue.constructor.type !== 'INTEGER')
     throw new TypeError('Value for PrefParameter should be of type IntegerType');
 
     else if (

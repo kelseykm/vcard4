@@ -1,15 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import {
-  TextType,
-  BooleanType,
-  DateTimeType,
-  IntegerType,
-  FloatType,
-  LanguageTagType,
-  URIType,
-  SpecialValueType
-} from '../values/index.js';
 
 export class ValueParameter extends BaseParameter {
   static param = 'VALUE';
@@ -25,17 +15,10 @@ export class ValueParameter extends BaseParameter {
     if (typeof valType === 'undefined')
     throw new MissingArgument('Value for ValueParameter must be supplied');
 
-    const types = [
-      TextType,
-      BooleanType,
-      DateTimeType,
-      IntegerType,
-      FloatType,
-      LanguageTagType,
-      URIType,
-      SpecialValueType
-    ];
-    if (!types.some(type => valType instanceof type))
+    if (
+      !Object.prototype.hasOwnProperty.call(valType, 'type') &&
+      !Object.prototype.hasOwnProperty.call(valType.constructor, 'type')
+    )
     throw new InvalidArgument('Value for ValueParameter not recognized');
   }
 

@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { TextType } from '../values/index.js';
 
 export class MediatypeParameter extends BaseParameter {
   static param = 'MEDIATYPE';
@@ -13,8 +12,8 @@ export class MediatypeParameter extends BaseParameter {
     throw new MissingArgument('Value for MediatypeParameter must be supplied');
 
     else if (
-      !(mediaValue instanceof TextType) &&
-      (Array.isArray(mediaValue) && !mediaValue.every(val => val instanceof TextType))
+      mediaValue.constructor.type !== 'TEXT' &&
+      (Array.isArray(mediaValue) && !mediaValue.every(val => val.constructor.type === 'TEXT'))
     )
     throw new TypeError('Value for MediatypeParameter must be of TextType or an array of TextTypes');
 

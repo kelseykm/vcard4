@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { IntegerType } from '../values/index.js';
 
 export class PIDParameter extends BaseParameter {
   static param = 'PID';
@@ -13,7 +12,7 @@ export class PIDParameter extends BaseParameter {
 
     else if (
       !Array.isArray(pidValue) &&
-      !(pidValue instanceof IntegerType)
+      pidValue.constructor.type !== 'INTEGER'
     )
     throw new InvalidArgument('Invalid value for PIDParameter');
 
@@ -22,9 +21,9 @@ export class PIDParameter extends BaseParameter {
       !pidValue.every(val1 => {
         if (Array.isArray(val1))
         return val1.every(
-          val2 => val2 instanceof IntegerType
+          val2 => val2.constructor.type === 'INTEGER'
         );
-        return val1 instanceof IntegerType;
+        return val1.constructor.type === 'INTEGER';
       })
     )
     throw new InvalidArgument('Invalid value for PIDParameter');
