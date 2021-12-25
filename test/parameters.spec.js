@@ -64,12 +64,6 @@ describe('Property parameters tests', () => {
     it('Rejects invalid input', () => {
       assert.throws(() => new ValueParameter(1));
       assert.throws(() => new ValueParameter);
-      assert.throws(() => new ValueParameter(
-        new TextListType([
-          new TextType('a'),
-          new TextType('b'),
-        ])
-      ));
       assert.throws(() => new ValueParameter({}));
     });
 
