@@ -21,8 +21,6 @@ import {
 } from '../src/parameters/index.js';
 
 import {
-  BeginProperty,
-  EndProperty,
   SourceProperty,
   KindProperty,
   XMLProperty,
@@ -62,7 +60,6 @@ import {
   UIDProperty,
   ClientpidmapProperty,
   URLProperty,
-  VersionProperty,
   KeyProperty,
   FburlProperty,
   CaladruriProperty,
@@ -74,32 +71,6 @@ import { assert } from 'chai';
 
 describe('Properties tests', () => {
   describe('General properties tests', () => {
-    describe('BeginProperty tests', () => {
-      it('Instances can be created', () => {
-        assert.doesNotThrow(() => new BeginProperty);
-      });
-
-      it('Formats value properly', () => {
-        assert.strictEqual(
-          new BeginProperty().repr(),
-          "BEGIN:VCARD"
-        );
-      });
-    });
-
-    describe('EndProperty tests', () => {
-      it('Instances can be created', () => {
-        assert.doesNotThrow(() => new BeginProperty);
-      });
-
-      it('Formats value properly', () => {
-        assert.strictEqual(
-          new EndProperty().repr(),
-          "END:VCARD"
-        );
-      });
-    });
-
     describe('SourceProperty tests', () => {
       it('Accepts valid input', () => {
         assert.doesNotThrow(() => new SourceProperty(
@@ -1637,19 +1608,6 @@ describe('Properties tests', () => {
             new URIType('http://example.org/restaurant.french/chezchic.html')
           ).repr(),
           "URL:http://example.org/restaurant.french/chezchic.html"
-        );
-      });
-    });
-
-    describe('VersionProperty tests', () => {
-      it('Instances can be created', () => {
-        assert.doesNotThrow(() => new VersionProperty);
-      });
-
-      it('Formats value properly', () => {
-        assert.strictEqual(
-          new VersionProperty().repr(),
-          "VERSION:4.0"
         );
       });
     });
