@@ -353,7 +353,7 @@ describe('Property value data types tests', () => {
 
   describe('SpecialValueType tests', () => {
     it('Accepts valid input', () => {
-      assert.doesNotThrow(() => new SpecialValueType('VCARD', 'endproperty'));
+      assert.doesNotThrow(() => new SpecialValueType('group', 'kindproperty'));
       assert.doesNotThrow(() => new SpecialValueType(
         [
           new IntegerType(1),
