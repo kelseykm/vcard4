@@ -3,6 +3,7 @@ import { MissingArgument } from '../errors/index.js';
 
 export class BooleanType extends BaseValue {
   static type = 'BOOLEAN';
+  static identifier = 'BooleanType';
 
   #validate(boolValue) {
     if (typeof boolValue === 'undefined')

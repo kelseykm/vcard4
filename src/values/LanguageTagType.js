@@ -3,6 +3,7 @@ import { MissingArgument } from '../errors/index.js';
 
 export class LanguageTagType extends BaseValue {
   static type = 'LANGUAGE-TAG';
+  static identifier = 'LanguageTagType';
 
   #validate(langTagValue) {
     if (typeof langTagValue === 'undefined')

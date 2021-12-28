@@ -12,6 +12,7 @@ import {
 import { URIType } from '../values/index.js';
 
 export class MemberProperty extends BaseProperty {
+  static identifier = 'MemberProperty';
   static prop = 'MEMBER';
   static cardinality = '*';
   static acceptableParamTypes = [

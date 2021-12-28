@@ -12,6 +12,7 @@ import {
 import { URIType } from '../values/index.js';
 
 export class SourceProperty extends BaseProperty {
+  static identifier = 'SourceProperty';
   static prop = 'SOURCE';
   static cardinality = '*';
   static acceptableParamTypes = [

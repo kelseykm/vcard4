@@ -3,6 +3,7 @@ import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
 export class AltidParameter extends BaseParameter {
   static param = 'ALTID';
+  static identifier = 'AltidParameter';
 
   #validate(altidValue) {
     if (typeof altidValue === 'undefined')

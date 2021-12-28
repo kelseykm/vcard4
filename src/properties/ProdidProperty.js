@@ -4,6 +4,7 @@ import { ValueParameter, AnyParameter } from '../parameters/index.js';
 import { TextType } from '../values/index.js';
 
 export class ProdidProperty extends BaseProperty {
+  static identifier = 'ProdidProperty';
   static prop = 'PRODID';
   static cardinality = '*1';
   static acceptableParamTypes = [

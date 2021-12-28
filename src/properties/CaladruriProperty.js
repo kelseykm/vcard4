@@ -13,6 +13,7 @@ import {
 import { URIType } from '../values/index.js';
 
 export class CaladruriProperty extends BaseProperty {
+  static identifier = 'CaladruriProperty';
   static prop = 'CALADRURI';
   static cardinality = '*';
   static acceptableParamTypes = [

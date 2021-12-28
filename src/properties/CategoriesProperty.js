@@ -15,6 +15,7 @@ import {
 } from '../values/index.js';
 
 export class CategoriesProperty extends BaseProperty {
+  static identifier = 'CategoriesProperty';
   static prop = 'CATEGORIES';
   static cardinality = '*';
   static acceptableParamTypes = [

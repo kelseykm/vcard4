@@ -13,6 +13,7 @@ import {
 import { TextType } from '../values/index.js';
 
 export class TitleProperty extends BaseProperty {
+  static identifier = 'TitleProperty';
   static prop = 'TITLE';
   static cardinality = '*';
   static acceptableParamTypes = [

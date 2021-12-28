@@ -3,6 +3,7 @@ import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
 export class ValueParameter extends BaseParameter {
   static param = 'VALUE';
+  static identifier = 'ValueParameter';
 
   #valueType;
 

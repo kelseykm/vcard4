@@ -3,6 +3,7 @@ import { MissingArgument } from '../errors/index.js';
 
 export class GeoParameter extends BaseParameter {
   static param = 'GEO';
+  static identifier = 'GeoParameter';
 
   #validate(geoValue) {
     if (typeof geoValue === 'undefined')

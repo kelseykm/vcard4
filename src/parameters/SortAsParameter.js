@@ -3,6 +3,7 @@ import { MissingArgument } from '../errors/index.js';
 
 export class SortAsParameter extends BaseParameter {
   static param = 'SORT-AS';
+  static identifier = 'SortAsParameter';
 
   #validate(sortValue) {
     if (typeof sortValue === 'undefined')

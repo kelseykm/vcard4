@@ -13,6 +13,7 @@ import {
 import { URIType } from '../values/index.js';
 
 export class IMPPProperty extends BaseProperty {
+  static identifier = 'IMPPProperty';
   static prop = 'IMPP';
   static cardinality = '*';
   static acceptableParamTypes = [

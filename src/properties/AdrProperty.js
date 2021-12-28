@@ -17,6 +17,7 @@ import {
 import { SpecialValueType } from '../values/index.js';
 
 export class AdrProperty extends BaseProperty {
+  static identifier = 'AdrProperty';
   static prop = 'ADR';
   static cardinality = '*';
   static acceptableParamTypes = [

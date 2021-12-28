@@ -16,6 +16,7 @@ import {
 } from '../values/index.js';
 
 export class KeyProperty extends BaseProperty {
+  static identifier = 'KeyProperty';
   static prop = 'KEY';
   static cardinality = '*';
   static acceptableParamTypes = [

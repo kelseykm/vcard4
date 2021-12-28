@@ -4,6 +4,7 @@ import { ValueParameter, AnyParameter } from '../parameters/index.js';
 import { DateTimeType } from '../values/index.js';
 
 export class RevProperty extends BaseProperty {
+  static identifier = 'RevProperty';
   static prop = 'REV';
   static cardinality = '*1';
   static acceptableParamTypes = [

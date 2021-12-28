@@ -4,6 +4,7 @@ import { ValueParameter, AltidParameter } from '../parameters/index.js';
 import { TextType } from '../values/index.js';
 
 export class XMLProperty extends BaseProperty {
+  static identifier = 'XMLProperty';
   static prop = 'XML';
   static cardinality = '*';
   static acceptableParamTypes = [

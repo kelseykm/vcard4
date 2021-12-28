@@ -4,6 +4,7 @@ import { ValueParameter, AnyParameter } from '../parameters/index.js';
 import { URIType, TextType } from '../values/index.js';
 
 export class UIDProperty extends BaseProperty {
+  static identifier = 'UIDProperty';
   static prop = 'UID';
   static cardinality = '*1';
   static acceptableParamTypes = [

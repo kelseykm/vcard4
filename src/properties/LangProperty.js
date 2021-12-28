@@ -12,6 +12,7 @@ import {
 import { LanguageTagType } from '../values/index.js';
 
 export class LangProperty extends BaseProperty {
+  static identifier = 'LangProperty';
   static prop = 'LANG';
   static cardinality = '*';
   static acceptableParamTypes = [

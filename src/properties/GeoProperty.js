@@ -13,6 +13,7 @@ import {
 import { URIType } from '../values/index.js';
 
 export class GeoProperty extends BaseProperty {
+  static identifier = 'GeoProperty';
   static prop = 'GEO';
   static cardinality = '*';
   static acceptableParamTypes = [

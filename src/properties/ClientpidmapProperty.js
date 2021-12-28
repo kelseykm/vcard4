@@ -4,6 +4,7 @@ import { AnyParameter } from '../parameters/index.js';
 import { SpecialValueType } from '../values/index.js';
 
 export class ClientpidmapProperty extends BaseProperty {
+  static identifier = 'ClientpidmapProperty';
   static prop = 'CLIENTPIDMAP';
   static cardinality = '*';
   static acceptableParamTypes = AnyParameter;

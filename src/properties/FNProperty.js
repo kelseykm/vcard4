@@ -13,6 +13,7 @@ import {
 import { TextType } from '../values/index.js';
 
 export class FNProperty extends BaseProperty {
+  static identifier = 'FNProperty';
   static prop = 'FN';
   static cardinality = '1*';
   static acceptableParamTypes = [

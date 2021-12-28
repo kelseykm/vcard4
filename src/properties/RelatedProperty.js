@@ -14,6 +14,7 @@ import {
 import { URIType, TextType } from '../values/index.js';
 
 export class RelatedProperty extends BaseProperty {
+  static identifier = 'RelatedProperty';
   static prop = 'RELATED';
   static cardinality = '*';
   static acceptableParamTypes = [

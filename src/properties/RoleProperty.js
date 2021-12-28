@@ -13,6 +13,7 @@ import {
 import { TextType } from '../values/index.js';
 
 export class RoleProperty extends BaseProperty {
+  static identifier = 'RoleProperty';
   static prop = 'ROLE';
   static cardinality = '*';
   static acceptableParamTypes = [

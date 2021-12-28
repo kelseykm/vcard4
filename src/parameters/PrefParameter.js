@@ -3,6 +3,7 @@ import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
 export class PrefParameter extends BaseParameter {
   static param = 'PREF';
+  static identifier = 'PrefParameter';
 
   #validate(prefValue) {
     if (typeof prefValue === 'undefined')

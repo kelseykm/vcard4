@@ -3,6 +3,7 @@ import { MissingArgument } from '../errors/index.js';
 
 export class FloatType extends BaseValue {
   static type = 'FLOAT';
+  static identifier = 'FloatType';
 
   #validate(floatValue) {
     if (typeof floatValue === 'undefined')

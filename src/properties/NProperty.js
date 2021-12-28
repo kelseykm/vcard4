@@ -10,6 +10,7 @@ import {
 import { SpecialValueType } from '../values/index.js';
 
 export class NProperty extends BaseProperty {
+  static identifier = 'NProperty';
   static prop = 'N';
   static cardinality = '*1';
   static acceptableParamTypes = [

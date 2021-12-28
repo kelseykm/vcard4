@@ -14,6 +14,7 @@ import {
 import { SpecialValueType } from '../values/index.js';
 
 export class OrgProperty extends BaseProperty {
+  static identifier = 'OrgProperty';
   static prop = 'ORG';
   static cardinality = '*';
   static acceptableParamTypes = [

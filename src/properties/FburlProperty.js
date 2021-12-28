@@ -13,6 +13,7 @@ import {
 import { URIType } from '../values/index.js';
 
 export class FburlProperty extends BaseProperty {
+  static identifier = 'FburlProperty';
   static prop = 'FBURL';
   static cardinality = '*';
   static acceptableParamTypes = [

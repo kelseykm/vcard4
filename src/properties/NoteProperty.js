@@ -13,6 +13,7 @@ import {
 import { TextType } from '../values/index.js';
 
 export class NoteProperty extends BaseProperty {
+  static identifier = 'NoteProperty';
   static prop = 'NOTE';
   static cardinality = '*';
   static acceptableParamTypes = [

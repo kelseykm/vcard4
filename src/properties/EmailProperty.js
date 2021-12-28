@@ -12,6 +12,7 @@ import {
 import { TextType } from '../values/index.js';
 
 export class EmailProperty extends BaseProperty {
+  static identifier = 'EmailProperty';
   static prop = 'EMAIL';
   static cardinality = '*';
   static acceptableParamTypes = [

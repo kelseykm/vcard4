@@ -3,6 +3,7 @@ import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
 export class IntegerType extends BaseValue {
   static type = 'INTEGER';
+  static identifier = 'IntegerType';
 
   #validate(intValue) {
     if (typeof intValue === 'undefined')

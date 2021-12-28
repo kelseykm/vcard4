@@ -1,7 +1,8 @@
 export class BaseValue {
   #abstractPropertiesAndMethods = [
     'type',
-    'value'
+    'value',
+    'identifier'
   ];
 
   checkAbstractPropertiesAndMethods() {

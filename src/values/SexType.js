@@ -3,6 +3,7 @@ import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
 export class SexType extends BaseValue {
   static type = 'TEXT';
+  static identifier = 'SexType';
 
   #sexRegExp = /^[MFONU]$/;
 

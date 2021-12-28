@@ -13,6 +13,7 @@ import {
 import { TextType, TextListType } from '../values/index.js';
 
 export class NicknameProperty extends BaseProperty {
+  static identifier = 'NicknameProperty';
   static prop = 'NICKNAME';
   static cardinality = '*';
   static acceptableParamTypes = [

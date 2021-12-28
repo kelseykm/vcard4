@@ -4,6 +4,7 @@ import { ValueParameter, AnyParameter } from '../parameters/index.js';
 import { SpecialValueType } from '../values/index.js';
 
 export class KindProperty extends BaseProperty {
+  static identifier = 'KindProperty';
   static prop = 'KIND';
   static cardinality = '*1';
   static acceptableParamTypes = [

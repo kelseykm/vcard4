@@ -13,6 +13,7 @@ import {
 } from '../values/index.js';
 
 export class DeathDateProperty extends BaseProperty {
+  static identifier = 'DeathDateProperty';
   static prop = 'DEATHDATE';
   static cardinality = '*1';
   static acceptableParamTypes = [

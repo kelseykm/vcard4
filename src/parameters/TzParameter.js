@@ -3,6 +3,7 @@ import { MissingArgument } from '../errors/index.js';
 
 export class TzParameter extends BaseParameter {
   static param = 'TZ';
+  static identifier = 'TzParameter';
 
   #validate(tzValue) {
     if (typeof tzValue === 'undefined')

@@ -2,6 +2,8 @@ import { BaseValue } from './BaseValue.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
 export class SpecialValueType extends BaseValue {
+  static identifier = 'SpecialValueType';
+
   #validate(value, targetProp) {
     if (
       (typeof value === 'undefined') ||

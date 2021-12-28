@@ -12,6 +12,7 @@ import {
 import { TextType } from '../values/index.js';
 
 export class InterestProperty extends BaseProperty {
+  static identifier = 'InterestProperty';
   static prop = 'INTEREST';
   static cardinality = '*';
   static acceptableParamTypes = [

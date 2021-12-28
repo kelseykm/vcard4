@@ -3,6 +3,7 @@ import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
 export class PIDParameter extends BaseParameter {
   static param = 'PID';
+  static identifier = 'PIDParameter';
 
   #pidRegExp = /^\d+(?:\.\d+)?$/;
 

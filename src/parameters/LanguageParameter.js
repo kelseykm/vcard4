@@ -3,6 +3,7 @@ import { MissingArgument } from '../errors/index.js';
 
 export class LanguageParameter extends BaseParameter {
   static param = 'LANGUAGE';
+  static identifier = 'LanguageParameter';
 
   #langTag;
 

@@ -12,6 +12,7 @@ import {
 } from '../values/index.js';
 
 export class AnniversaryProperty extends BaseProperty {
+  static identifier = 'AnniversaryProperty';
   static prop = 'ANNIVERSARY';
   static cardinality = '*1';
   static acceptableParamTypes = [

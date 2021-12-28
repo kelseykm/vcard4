@@ -8,6 +8,7 @@ import {
 import { URIType } from '../values/index.js';
 
 export class ContactURIProperty extends BaseProperty {
+  static identifier = 'ContactURIProperty';
   static prop = 'CONTACT-URI';
   static cardinality = '*';
   static acceptableParamTypes = [

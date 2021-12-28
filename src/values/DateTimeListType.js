@@ -2,6 +2,8 @@ import { BaseValue } from './BaseValue.js';
 import { MissingArgument } from '../errors/index.js';
 
 export class DateTimeListType extends BaseValue {
+  static identifier = 'DateTimeListType';
+
   #validate(datetimelist) {
     if (typeof datetimelist === 'undefined')
     throw new MissingArgument('Value for DateTimeListType must be supplied');

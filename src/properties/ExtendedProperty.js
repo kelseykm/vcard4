@@ -32,6 +32,7 @@ import {
 } from '../values/index.js';
 
 export class ExtendedProperty extends BaseProperty {
+  static identifier = 'ExtendedProperty';
   static cardinality = '*';
   static acceptableParamTypes = [
     LanguageParameter,

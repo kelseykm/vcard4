@@ -3,6 +3,7 @@ import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
 export class CalscaleParameter extends BaseParameter {
   static param = 'CALSCALE';
+  static identifier = 'CalscaleParameter';
 
   #calscaleRegExp = /^(?:gregorian|x-[A-Za-z0-9]+)$/;
 

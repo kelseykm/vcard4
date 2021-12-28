@@ -14,6 +14,7 @@ import {
 import { URIType } from '../values/index.js';
 
 export class LogoProperty extends BaseProperty {
+  static identifier = 'LogoProperty';
   static prop = 'LOGO';
   static cardinality = '*';
   static acceptableParamTypes = [

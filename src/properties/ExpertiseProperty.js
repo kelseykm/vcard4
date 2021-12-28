@@ -12,6 +12,7 @@ import {
 import { TextType } from '../values/index.js';
 
 export class ExpertiseProperty extends BaseProperty {
+  static identifier = 'ExpertiseProperty';
   static prop = 'EXPERTISE';
   static cardinality = '*';
   static acceptableParamTypes = [

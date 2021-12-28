@@ -12,6 +12,7 @@ import {
 import { URIType } from '../values/index.js';
 
 export class OrgDirectoryProperty extends BaseProperty {
+  static identifier = 'OrgDirectoryProperty';
   static prop = 'ORG-DIRECTORY';
   static cardinality = '*';
   static acceptableParamTypes = [

@@ -13,6 +13,7 @@ import {
 import { URIType, TextType } from '../values/index.js';
 
 export class TelProperty extends BaseProperty {
+  static identifier = 'TelProperty';
   static prop = 'TEL';
   static cardinality = '*';
   static acceptableParamTypes = [

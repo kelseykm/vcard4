@@ -4,6 +4,7 @@ import { ValueParameter, AnyParameter } from '../parameters/index.js';
 import { SexType, SpecialValueType } from '../values/index.js';
 
 export class GenderProperty extends BaseProperty {
+  static identifier = 'GenderProperty';
   static prop = 'GENDER';
   static cardinality = '*1';
   static acceptableParamTypes = [

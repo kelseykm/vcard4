@@ -6,6 +6,7 @@ export class BaseProperty {
     'acceptableValTypes',
     'params',
     'value',
+    'identifier',
   ];
 
   checkAbstractPropertiesAndMethods() {

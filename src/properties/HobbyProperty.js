@@ -12,6 +12,7 @@ import {
 import { TextType } from '../values/index.js';
 
 export class HobbyProperty extends BaseProperty {
+  static identifier = 'HobbyProperty';
   static prop = 'HOBBY';
   static cardinality = '*';
   static acceptableParamTypes = [

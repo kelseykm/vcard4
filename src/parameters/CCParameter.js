@@ -3,6 +3,7 @@ import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
 export class CCParameter extends BaseParameter {
   static param = 'CC';
+  static identifier = 'CCParameter';
 
   #validate(ccValue) {
     if (typeof ccValue === 'undefined')

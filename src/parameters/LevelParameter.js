@@ -3,6 +3,7 @@ import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
 export class LevelParameter extends BaseParameter {
   static param = 'LEVEL';
+  static identifier = 'LevelParameter';
 
   #expertiseRegExp = /^(?:beginner|average|expert)$/;
   #hobbyInterestRegExp = /^(?:high|medium|low)$/;

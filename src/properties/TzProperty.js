@@ -17,6 +17,7 @@ import {
 } from '../values/index.js';
 
 export class TzProperty extends BaseProperty {
+  static identifier = 'TzProperty';
   static prop = 'TZ';
   static cardinality = '*';
   static acceptableParamTypes = [

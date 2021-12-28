@@ -13,6 +13,7 @@ import {
 import { URIType } from '../values/index.js';
 
 export class URLProperty extends BaseProperty {
+  static identifier = 'URLProperty';
   static prop = 'URL';
   static cardinality = '*';
   static acceptableParamTypes = [

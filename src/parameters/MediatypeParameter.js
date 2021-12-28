@@ -3,6 +3,7 @@ import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
 export class MediatypeParameter extends BaseParameter {
   static param = 'MEDIATYPE';
+  static identifier = 'MediatypeParameter';
 
   #mediaTypeRegExp = /^(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}\/(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}$/;
   #attributeRegExp = /^.+=.+$/;

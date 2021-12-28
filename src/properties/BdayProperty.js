@@ -13,6 +13,7 @@ import {
 } from '../values/index.js';
 
 export class BdayProperty extends BaseProperty {
+  static identifier = 'BdayProperty';
   static prop = 'BDAY';
   static cardinality = '*1';
   static acceptableParamTypes = [

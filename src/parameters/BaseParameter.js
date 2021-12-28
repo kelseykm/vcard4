@@ -1,7 +1,8 @@
 export class BaseParameter {
   #abstractPropertiesAndMethods = [
     'param',
-    'value'
+    'value',
+    'identifier',
   ];
 
   checkAbstractPropertiesAndMethods() {

@@ -12,6 +12,7 @@ import {
 } from '../values/index.js';
 
 export class BirthPlaceProperty extends BaseProperty {
+  static identifier = 'BirthPlaceProperty';
   static prop = 'BIRTHPLACE';
   static cardinality = '*1';
   static acceptableParamTypes = [

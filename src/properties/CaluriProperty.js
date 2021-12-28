@@ -13,6 +13,7 @@ import {
 import { URIType } from '../values/index.js';
 
 export class CaluriProperty extends BaseProperty {
+  static identifier = 'CaluriProperty';
   static prop = 'CALURI';
   static cardinality = '*';
   static acceptableParamTypes = [

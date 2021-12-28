@@ -3,6 +3,7 @@ import { MissingArgument, InvalidArgument } from '../errors/index.js';
 
 export class IndexParameter extends BaseParameter {
   static param = 'INDEX';
+  static identifier = 'IndexParameter';
 
   #validate(indexValue) {
     if (typeof indexValue === 'undefined')

@@ -3,6 +3,7 @@ import { MissingArgument } from '../errors/index.js';
 
 export class TextListType extends BaseValue {
   static type = 'TEXT';
+  static identifier = 'TextListType';
 
   #validate(textlist) {
     if (typeof textlist === 'undefined')

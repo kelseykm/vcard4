@@ -14,6 +14,7 @@ import {
 import { URIType } from '../values/index.js';
 
 export class SoundProperty extends BaseProperty {
+  static identifier = 'SoundProperty';
   static prop = 'SOUND';
   static cardinality = '*';
   static acceptableParamTypes = [

@@ -3,6 +3,7 @@ import { MissingArgument } from '../errors/index.js';
 
 export class IntegerListType extends BaseValue {
   static type = 'INTEGER';
+  static identifier = 'IntegerListType';
 
   #validate(integerlist) {
     if (typeof integerlist === 'undefined')

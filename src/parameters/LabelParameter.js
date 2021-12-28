@@ -3,6 +3,7 @@ import { MissingArgument } from '../errors/index.js';
 
 export class LabelParameter extends BaseParameter {
   static param = 'LABEL';
+  static identifier = 'LabelParameter';
 
   #validate(value) {
     if (typeof value === 'undefined')
