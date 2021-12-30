@@ -362,7 +362,7 @@ describe('Property parameters tests', () => {
         new TzParameter(
           new TextType('Raleigh/North America')
         ).repr(),
-        'TZ="Raleigh/North America"'
+        'TZ=Raleigh/North America'
       )
     });
   });
