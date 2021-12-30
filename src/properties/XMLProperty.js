@@ -1,17 +1,15 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { ValueParameter, AltidParameter } from '../parameters/index.js';
-import { TextType } from '../values/index.js';
 
 export class XMLProperty extends BaseProperty {
   static identifier = 'XMLProperty';
   static prop = 'XML';
   static cardinality = '*';
-  static acceptableParamTypes = [
-    ValueParameter,
-    AltidParameter
-  ];
-  static acceptableValTypes = TextType;
+  static acceptableParamTypes = new Set([
+    'ValueParameter',
+    'AltidParameter'
+  ]);
+  static acceptableValTypes = 'TextType';
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -21,23 +19,16 @@ export class XMLProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for XMLProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param =>
-        this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === ValueParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (param.value === 'text')
-            );
-            return param instanceof acceptableParamType;
-          }
-        )
-      )
+      !params.every(param => {
+        if (param.constructor.identifier === 'ValueParameter')
+        return param.value === 'text';
+
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for XMLProperty');
 
-    else if (!(value instanceof this.constructor.acceptableValTypes))
+    else if (value.constructor.identifier !== this.constructor.acceptableValTypes)
     throw new TypeError('Invalid type for value of XMLProperty');
   }
 

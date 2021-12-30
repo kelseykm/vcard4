@@ -1,32 +1,21 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import {
-  ValueParameter,
-  PIDParameter,
-  PrefParameter,
-  IndexParameter,
-  TypeParameter,
-  MediatypeParameter,
-  AltidParameter,
-  AnyParameter
-} from '../parameters/index.js';
-import { URIType } from '../values/index.js';
 
 export class GeoProperty extends BaseProperty {
   static identifier = 'GeoProperty';
   static prop = 'GEO';
   static cardinality = '*';
-  static acceptableParamTypes = [
-    ValueParameter,
-    PIDParameter,
-    PrefParameter,
-    IndexParameter,
-    TypeParameter,
-    MediatypeParameter,
-    AltidParameter,
-    AnyParameter
-  ];
-  static acceptableValTypes = URIType;
+  static acceptableParamTypes = new Set([
+    'ValueParameter',
+    'PIDParameter',
+    'PrefParameter',
+    'IndexParameter',
+    'TypeParameter',
+    'MediatypeParameter',
+    'AltidParameter',
+    'AnyParameter'
+  ]);
+  static acceptableValTypes = 'URIType';
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -36,29 +25,19 @@ export class GeoProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for GeoProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === TypeParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              !/^(?:Related|Tel)Property$/i.test(param.targetProp)
-            );
+      !params.every(param => {
+        if (param.constructor.identifier === 'TypeParameter')
+        return !/^(?:Related|Tel)Property$/i.test(param.targetProp);
 
-            else if (acceptableParamType === ValueParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (param.value === 'uri')
-            );
+        else if (param.constructor.identifier === 'ValueParameter')
+        return param.value === 'uri';
 
-            return param instanceof acceptableParamType;
-          }
-        )
-      )
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for GeoProperty');
 
-    else if (!(value instanceof this.constructor.acceptableValTypes))
+    else if (value.constructor.identifier !== this.constructor.acceptableValTypes)
     throw new TypeError('Invalid type for value of GeoProperty');
   }
 

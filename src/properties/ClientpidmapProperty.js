@@ -1,14 +1,12 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { AnyParameter } from '../parameters/index.js';
-import { SpecialValueType } from '../values/index.js';
 
 export class ClientpidmapProperty extends BaseProperty {
   static identifier = 'ClientpidmapProperty';
   static prop = 'CLIENTPIDMAP';
   static cardinality = '*';
-  static acceptableParamTypes = AnyParameter;
-  static acceptableValTypes = SpecialValueType;
+  static acceptableParamTypes = 'AnyParameter';
+  static acceptableValTypes = 'SpecialValueType';
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -17,14 +15,10 @@ export class ClientpidmapProperty extends BaseProperty {
     else if (!Array.isArray(params))
     throw new InvalidArgument('Parameters for ClientpidmapProperty must be passed in an array');
 
-    else if (
-      !params.every(
-        param => param instanceof this.constructor.acceptableParamTypes
-      )
-    )
+    else if (!params.every(param => param.constructor.identifier === this.constructor.acceptableParamTypes))
     throw new TypeError('Some of the parameters passed are not valid parameters for ClientpidmapProperty');
 
-    else if (!(value instanceof this.constructor.acceptableValTypes))
+    else if (value.constructor.identifier !== this.constructor.acceptableValTypes)
     throw new TypeError('Invalid type for value of ClientpidmapProperty');
   }
 

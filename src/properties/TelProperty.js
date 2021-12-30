@@ -1,35 +1,24 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import {
-  ValueParameter,
-  MediatypeParameter,
-  TypeParameter,
-  PIDParameter,
-  PrefParameter,
-  IndexParameter,
-  AltidParameter,
-  AnyParameter
-} from '../parameters/index.js';
-import { URIType, TextType } from '../values/index.js';
 
 export class TelProperty extends BaseProperty {
   static identifier = 'TelProperty';
   static prop = 'TEL';
   static cardinality = '*';
-  static acceptableParamTypes = [
-    ValueParameter,
-    MediatypeParameter,
-    TypeParameter,
-    PIDParameter,
-    PrefParameter,
-    IndexParameter,
-    AltidParameter,
-    AnyParameter
-  ];
-  static acceptableValTypes = [
-    URIType,
-    TextType
-  ];
+  static acceptableParamTypes = new Set([
+    'ValueParameter',
+    'MediatypeParameter',
+    'TypeParameter',
+    'PIDParameter',
+    'PrefParameter',
+    'IndexParameter',
+    'AltidParameter',
+    'AnyParameter'
+  ]);
+  static acceptableValTypes = new Set([
+    'URIType',
+    'TextType'
+  ]);
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -39,42 +28,25 @@ export class TelProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for TelProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === TypeParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              /^TelProperty$/i.test(param.targetProp)
-            );
+      !params.every(param => {
+        if (param.constructor.identifier === TypeParameter)
+        return /^TelProperty$/i.test(param.targetProp);
 
-            else if (acceptableParamType === ValueParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (
-                ((param.value === 'uri') && (value instanceof URIType)) ||
-                ((param.value === 'text') && (value instanceof TextType))
-              )
-            );
+        else if (param.constructor.identifier === 'ValueParameter')
+        return (
+          ((param.value === 'uri') && (value.constructor.identifier === 'URIType')) ||
+          ((param.value === 'text') && (value.constructor.identifier === 'TextType'))
+        );
 
-            else if (acceptableParamType === MediatypeParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (value instanceof URIType)
-            );
+        else if (param.constructor.identifier === MediatypeParameter)
+        return value.constructor.identifier === 'URIType';
 
-            return param instanceof acceptableParamType;
-          }
-        )
-      )
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for TelProperty');
 
-    else if (
-      !this.constructor.acceptableValTypes.some(
-        valType => value instanceof valType
-      )
-    )
+    else if (!this.constructor.acceptableValTypes.has(value.constructor.identifier))
     throw new TypeError('Invalid type for value of TelProperty');
   }
 

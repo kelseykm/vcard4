@@ -1,17 +1,15 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { ValueParameter, AnyParameter } from '../parameters/index.js';
-import { SpecialValueType } from '../values/index.js';
 
 export class KindProperty extends BaseProperty {
   static identifier = 'KindProperty';
   static prop = 'KIND';
   static cardinality = '*1';
-  static acceptableParamTypes = [
-    ValueParameter,
-    AnyParameter
-  ];
-  static acceptableValTypes = SpecialValueType;
+  static acceptableParamTypes = new Set([
+    'ValueParameter',
+    'AnyParameter'
+  ]);
+  static acceptableValTypes = 'SpecialValueType';
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -21,24 +19,17 @@ export class KindProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for KindProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param =>
-        this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === ValueParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (param.value === 'text')
-            );
-            return param instanceof acceptableParamType;
-          }
-        )
-      )
+      !params.every(param => {
+        if (param.constructor.identifier === 'ValueParameter')
+        return param.value === 'text';
+
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for KindProperty');
 
     else if (
-      !(value instanceof this.constructor.acceptableValTypes) ||
+      value.constructor.identifier !== this.constructor.acceptableValTypes ||
       !/^KindProperty$/i.test(value.targetProp)
     )
     throw new TypeError('Invalid type for value of KindProperty');

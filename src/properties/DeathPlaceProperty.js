@@ -1,30 +1,20 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import {
-  ValueParameter,
-  LanguageParameter,
-  AltidParameter,
-  AnyParameter
-} from '../parameters/index.js';
-import {
-  TextType,
-  URIType
-} from '../values/index.js';
 
 export class DeathPlaceProperty extends BaseProperty {
   static identifier = 'DeathPlaceProperty';
   static prop = 'DEATHPLACE';
   static cardinality = '*1';
-  static acceptableParamTypes = [
-    ValueParameter,
-    LanguageParameter,
-    AltidParameter,
-    AnyParameter
-  ];
-  static acceptableValTypes = [
-    TextType,
-    URIType
-  ];
+  static acceptableParamTypes = new Set([
+    'ValueParameter',
+    'LanguageParameter',
+    'AltidParameter',
+    'AnyParameter'
+  ]);
+  static acceptableValTypes = new Set([
+    'TextType',
+    'URIType'
+  ]);
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -34,37 +24,22 @@ export class DeathPlaceProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for DeathPlaceProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param =>
-        this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === ValueParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (
-                ((param.value === 'uri') && (value instanceof URIType)) ||
-                ((param.value === 'text') && (value instanceof TextType))
-              )
-            );
+      !params.every(param => {
+        if (param.constructor.identifier === 'ValueParameter')
+        return (
+          ((param.value === 'uri') && (value.constructor.identifier === 'URIType')) ||
+          ((param.value === 'text') && (value.constructor.identifier === 'TextType'))
+        );
 
-            else if (acceptableParamType === LanguageParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (value instanceof TextType)
-            );
+        else if (param.constructor.identifier === 'LanguageParameter')
+        return value.constructor.identifier === 'TextType';
 
-            return param instanceof acceptableParamType;
-          }
-        )
-      )
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier); 
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for DeathPlaceProperty');
 
-    else if (
-      !this.constructor.acceptableValTypes.some(
-        valType => value instanceof valType
-      )
-    )
+    else if (!this.constructor.acceptableValTypes.has(value.constructor.identifier))
     throw new TypeError('Invalid type for value of DeathPlaceProperty');
   }
 

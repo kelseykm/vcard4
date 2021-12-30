@@ -1,37 +1,25 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import {
-  ValueParameter,
-  LanguageParameter,
-  MediatypeParameter,
-  PIDParameter,
-  PrefParameter,
-  IndexParameter,
-  AltidParameter,
-  TypeParameter,
-  AnyParameter
-} from '../parameters/index.js';
-import { URIType, TextType } from '../values/index.js';
 
 export class RelatedProperty extends BaseProperty {
   static identifier = 'RelatedProperty';
   static prop = 'RELATED';
   static cardinality = '*';
-  static acceptableParamTypes = [
-    ValueParameter,
-    LanguageParameter,
-    MediatypeParameter,
-    PIDParameter,
-    PrefParameter,
-    IndexParameter,
-    AltidParameter,
-    TypeParameter,
-    AnyParameter
-  ];
-  static acceptableValTypes = [
-    URIType,
-    TextType
-  ];
+  static acceptableParamTypes = new Set([
+    'ValueParameter',
+    'LanguageParameter',
+    'MediatypeParameter',
+    'PIDParameter',
+    'PrefParameter',
+    'IndexParameter',
+    'AltidParameter',
+    'TypeParameter',
+    'AnyParameter'
+  ]);
+  static acceptableValTypes = new Set([
+    'URIType',
+    'TextType'
+  ]);
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -41,36 +29,22 @@ export class RelatedProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for RelatedProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === TypeParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              /^RelatedProperty$/i.test(param.targetProp)
-            );
+      !params.every(param => {
+        if (param.constructor.identifier === 'TypeParameter')
+        return /^RelatedProperty$/i.test(param.targetProp);
 
-            else if (acceptableParamType === ValueParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (
-                ((param.value === 'uri') && (value instanceof URIType)) ||
-                ((param.value === 'text') && (value instanceof TextType))
-              )
-            );
+        else if (param.constructor.identifier === 'ValueParameter')
+        return (
+          ((param.value === 'uri') && (value.constructor.identifier === 'URIType')) ||
+          ((param.value === 'text') && (value.constructor.identifier === 'TextType'))
+        );
 
-            return param instanceof acceptableParamType;
-          }
-        )
-      )
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for RelatedProperty');
 
-    else if (
-      !this.constructor.acceptableValTypes.some(
-        valType => value instanceof valType
-      )
-    )
+    else if (!this.constructor.acceptableValTypes.has(value.constructor.identifier))
     throw new TypeError('Invalid type for value of RelatedProperty');
   }
 

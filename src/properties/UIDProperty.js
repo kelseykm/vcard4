@@ -1,20 +1,18 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import { ValueParameter, AnyParameter } from '../parameters/index.js';
-import { URIType, TextType } from '../values/index.js';
 
 export class UIDProperty extends BaseProperty {
   static identifier = 'UIDProperty';
   static prop = 'UID';
   static cardinality = '*1';
-  static acceptableParamTypes = [
-    ValueParameter,
-    AnyParameter
-  ];
-  static acceptableValTypes = [
-    URIType,
-    TextType
-  ];
+  static acceptableParamTypes = new Set([
+    'ValueParameter',
+    'AnyParameter'
+  ]);
+  static acceptableValTypes = new Set([
+    'URIType',
+    'TextType'
+  ]);
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -24,30 +22,19 @@ export class UIDProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for UIDProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === ValueParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (
-                ((param.value === 'uri') && (value instanceof URIType)) ||
-                ((param.value === 'text') && (value instanceof TextType))
-              )
-            );
+      !params.every(param => {
+        if (param.constructor.identifier === 'ValueParameter')
+        return (
+          ((param.value === 'uri') && (value.constructor.identifier === 'URIType')) ||
+          ((param.value === 'text') && (value.constructor.identifier === 'TextType'))
+        );
 
-            return param instanceof acceptableParamType;
-          }
-        )
-      )
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for UIDProperty');
 
-    else if (
-      !this.constructor.acceptableValTypes.some(
-        valType => value instanceof valType
-      )
-    )
+    else if (!this.constructor.acceptableValTypes.has(value.constructor.identifier))
     throw new TypeError('Invalid type for value of UIDProperty');
   }
 

@@ -1,22 +1,16 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import {
-  ValueParameter,
-  PrefParameter,
-  IndexParameter,
-} from '../parameters/index.js';
-import { URIType } from '../values/index.js';
 
 export class ContactURIProperty extends BaseProperty {
   static identifier = 'ContactURIProperty';
   static prop = 'CONTACT-URI';
   static cardinality = '*';
-  static acceptableParamTypes = [
-    ValueParameter,
-    PrefParameter,
-    IndexParameter,
-  ];
-  static acceptableValTypes = URIType;
+  static acceptableParamTypes = new Set([
+    'ValueParameter',
+    'PrefParameter',
+    'IndexParameter',
+  ]);
+  static acceptableValTypes = 'URIType';
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -26,23 +20,16 @@ export class ContactURIProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for ContactURIProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === ValueParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (param.value === 'uri')
-            );
+      !params.every(param => {
+        if (param.constructor.identifier === 'ValueParameter')
+        return param.value === 'uri';
 
-            return param instanceof acceptableParamType;
-          }
-        )
-      )
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for ContactURIProperty');
 
-    else if (!(value instanceof this.constructor.acceptableValTypes))
+    else if (value.constructor.identifier !== this.constructor.acceptableValTypes)
     throw new TypeError('Invalid type for value of ContactURIProperty');
 
     else if (!/^(mailto|https?)/.test(value.repr()))

@@ -1,30 +1,20 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import {
-  ValueParameter,
-  PIDParameter,
-  PrefParameter,
-  IndexParameter,
-  AltidParameter,
-  TypeParameter,
-  AnyParameter
-} from '../parameters/index.js';
-import { LanguageTagType } from '../values/index.js';
 
 export class LangProperty extends BaseProperty {
   static identifier = 'LangProperty';
   static prop = 'LANG';
   static cardinality = '*';
-  static acceptableParamTypes = [
-    ValueParameter,
-    PIDParameter,
-    PrefParameter,
-    IndexParameter,
-    AltidParameter,
-    TypeParameter,
-    AnyParameter
-  ];
-  static acceptableValTypes = LanguageTagType;
+  static acceptableParamTypes = new Set([
+    'ValueParameter',
+    'PIDParameter',
+    'PrefParameter',
+    'IndexParameter',
+    'AltidParameter',
+    'TypeParameter',
+    'AnyParameter'
+  ]);
+  static acceptableValTypes = 'LanguageTagType';
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -34,29 +24,19 @@ export class LangProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for LangProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === TypeParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              !/^(?:Related|Tel)Property$/i.test(param.targetProp)
-            );
+      !params.every(param => {
+        if (param.constructor.identifier === 'TypeParameter')
+        return !/^(?:Related|Tel)Property$/i.test(param.targetProp);
 
-            else if (acceptableParamType === ValueParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (param.value === 'language-tag')
-            );
+        else if (param.constructor.identifier === 'ValueParameter')
+        return param.value === 'language-tag';
 
-            return param instanceof acceptableParamType;
-          }
-        )
-      )
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for LangProperty');
 
-    else if (!(value instanceof this.constructor.acceptableValTypes))
+    else if (value.constructor.identifier !== this.constructor.acceptableValTypes)
     throw new TypeError('Invalid type for value of LangProperty');
   }
 

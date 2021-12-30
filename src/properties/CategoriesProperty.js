@@ -1,36 +1,23 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import {
-  ValueParameter,
-  PIDParameter,
-  PrefParameter,
-  IndexParameter,
-  TypeParameter,
-  AltidParameter,
-  AnyParameter
-} from '../parameters/index.js';
-import {
-  TextType,
-  TextListType
-} from '../values/index.js';
 
 export class CategoriesProperty extends BaseProperty {
   static identifier = 'CategoriesProperty';
   static prop = 'CATEGORIES';
   static cardinality = '*';
-  static acceptableParamTypes = [
-    ValueParameter,
-    PIDParameter,
-    PrefParameter,
-    IndexParameter,
-    TypeParameter,
-    AltidParameter,
-    AnyParameter
-  ];
-  static acceptableValTypes = [
-    TextType,
-    TextListType
-  ];
+  static acceptableParamTypes = new Set([
+    'ValueParameter',
+    'PIDParameter',
+    'PrefParameter',
+    'IndexParameter',
+    'TypeParameter',
+    'AltidParameter',
+    'AnyParameter'
+  ]);
+  static acceptableValTypes = new Set([
+    'TextType',
+    'TextListType'
+  ]);
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -40,33 +27,19 @@ export class CategoriesProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for CategoriesProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === TypeParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              !/^(?:Related|Tel)Property$/i.test(param.targetProp)
-            );
+      !params.every(param => {
+        if (param.constructor.identifier === 'TypeParameter')
+        return !/^(?:Related|Tel)Property$/i.test(param.targetProp);
 
-            else if (acceptableParamType === ValueParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (param.value === 'text')
-            );
+        else if (param.constructor.identifier === 'ValueParameter')
+        return param.value === 'text';
 
-            return param instanceof acceptableParamType;
-          }
-        )
-      )
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier); 
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for CategoriesProperty');
 
-    else if (
-      !this.constructor.acceptableValTypes.some(
-        valType => value instanceof valType
-      )
-    )
+    else if (!this.constructor.acceptableValTypes.has(value.constructor.identifier))
     throw new TypeError('Invalid type for value of CategoriesProperty');
   }
 

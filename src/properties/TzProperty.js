@@ -1,40 +1,25 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import {
-  ValueParameter,
-  AltidParameter,
-  PIDParameter,
-  PrefParameter,
-  IndexParameter,
-  TypeParameter,
-  MediatypeParameter,
-  AnyParameter
-} from '../parameters/index.js';
-import {
-  TextType,
-  URIType,
-  DateTimeType
-} from '../values/index.js';
 
 export class TzProperty extends BaseProperty {
   static identifier = 'TzProperty';
   static prop = 'TZ';
   static cardinality = '*';
-  static acceptableParamTypes = [
-    ValueParameter,
-    AltidParameter,
-    PIDParameter,
-    PrefParameter,
-    IndexParameter,
-    TypeParameter,
-    MediatypeParameter,
-    AnyParameter
-  ];
-  static acceptableValTypes = [
-    TextType,
-    URIType,
-    DateTimeType
-  ];
+  static acceptableParamTypes = new Set([
+    'ValueParameter',
+    'AltidParameter',
+    'PIDParameter',
+    'PrefParameter',
+    'IndexParameter',
+    'TypeParameter',
+    'MediatypeParameter',
+    'AnyParameter'
+  ]);
+  static acceptableValTypes = new Set([
+    'TextType',
+    'URIType',
+    'DateTimeType'
+  ]);
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -44,43 +29,25 @@ export class TzProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for TzProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param => this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === TypeParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              !/^(?:Related|Tel)Property$/i.test(param.targetProp)
-            );
+      !params.every(param => {
+        if (param.constructor.identifier === 'TypeParameter')
+        return !/^(?:Related|Tel)Property$/i.test(param.targetProp);
 
-            else if (acceptableParamType === ValueParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (
-                ((param.value === 'text') && (value instanceof TextType)) ||
-                ((param.value === 'uri') && (value instanceof URIType)) ||
-                ((param.value === 'utc-offset') && (value instanceof DateTimeType))
-              )
-            );
+        else if (param.constructor.identifier === 'ValueParameter')
+        return (
+          ((param.value === 'text') && (value.constructor.identifier === 'TextType')) ||
+          ((param.value === 'uri') && (value.constructor.identifier === 'URIType')) ||
+          ((param.value === 'utc-offset') && (value.constructor.identifier === 'DateTimeType'))
+        );
 
-            return param instanceof acceptableParamType;
-          }
-        )
-      )
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for TzProperty');
 
     else if (
-      !this.constructor.acceptableValTypes.some(
-        valType => {
-          if (valType === DateTimeType)
-          return (
-            (value instanceof valType) &&
-            (value.type === 'UTC-OFFSET')
-          );
-          return value instanceof valType;
-        }
-      )
+      !this.constructor.acceptableValTypes.has(value.constructor.identifier) ||
+      ((value.constructor.identifier === 'DateTimeType') && (value.type !== 'UTC-OFFSET'))
     )
     throw new TypeError('Invalid type for value of TzProperty');
   }

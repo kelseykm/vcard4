@@ -1,30 +1,20 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import {
-  LevelParameter,
-  IndexParameter,
-  LanguageParameter,
-  PrefParameter,
-  AltidParameter,
-  TypeParameter,
-  AnyParameter
-} from '../parameters/index.js';
-import { TextType } from '../values/index.js';
 
 export class HobbyProperty extends BaseProperty {
   static identifier = 'HobbyProperty';
   static prop = 'HOBBY';
   static cardinality = '*';
-  static acceptableParamTypes = [
-    LevelParameter,
-    IndexParameter,
-    LanguageParameter,
-    PrefParameter,
-    AltidParameter,
-    TypeParameter,
-    AnyParameter
-  ];
-  static acceptableValTypes = TextType;
+  static acceptableParamTypes = new Set([
+    'LevelParameter',
+    'IndexParameter',
+    'LanguageParameter',
+    'PrefParameter',
+    'AltidParameter',
+    'TypeParameter',
+    'AnyParameter'
+  ]);
+  static acceptableValTypes = 'TextType';
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -34,30 +24,19 @@ export class HobbyProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for HobbyProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param =>
-        this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === LevelParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              /^HobbyProperty$/i.test(param.targetProp)
-            );
+      !params.every(param => {
+        if (param.constructor.identifier === 'LevelParameter')
+        return /^HobbyProperty$/i.test(param.targetProp);
 
-            else if (acceptableParamType === TypeParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              !/^(?:Related|Tel)Property$/i.test(param.targetProp)
-            );
+        else if (param.constructor.identifier === 'TypeParameter')
+        return !/^(?:Related|Tel)Property$/i.test(param.targetProp);
 
-            return param instanceof acceptableParamType
-          }
-        )
-      )
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for HobbyProperty');
 
-    else if (!(value instanceof this.constructor.acceptableValTypes))
+    else if (value.constructor.identifier !== this.constructor.acceptableValTypes)
     throw new TypeError('Invalid type for value of HobbyProperty');
   }
 

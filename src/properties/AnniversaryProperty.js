@@ -1,30 +1,20 @@
 import { BaseProperty } from './BaseProperty.js';
 import { MissingArgument, InvalidArgument } from '../errors/index.js';
-import {
-  ValueParameter,
-  AltidParameter,
-  CalscaleParameter,
-  AnyParameter
-} from '../parameters/index.js';
-import {
-  DateTimeType,
-  TextType
-} from '../values/index.js';
 
 export class AnniversaryProperty extends BaseProperty {
   static identifier = 'AnniversaryProperty';
   static prop = 'ANNIVERSARY';
   static cardinality = '*1';
-  static acceptableParamTypes = [
-    ValueParameter,
-    AltidParameter,
-    CalscaleParameter,
-    AnyParameter
-  ];
-  static acceptableValTypes = [
-    DateTimeType,
-    TextType
-  ];
+  static acceptableParamTypes = new Set([
+    'ValueParameter',
+    'AltidParameter',
+    'CalscaleParameter',
+    'AnyParameter'
+  ]);
+  static acceptableValTypes = new Set([
+    'DateTimeType',
+    'TextType'
+  ]);
 
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
@@ -34,49 +24,27 @@ export class AnniversaryProperty extends BaseProperty {
     throw new InvalidArgument('Parameters for AnniversaryProperty must be passed in an array');
 
     else if (
-      !params.every(
-        param =>
-        this.constructor.acceptableParamTypes.some(
-          acceptableParamType => {
-            if (acceptableParamType === ValueParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (
-                ((param.value === 'date-and-or-time') && (value instanceof DateTimeType)) ||
-                ((param.value === 'text') && (value instanceof TextType))
-              )
-            );
+      !params.every(param => {
+        if (param.constructor.identifier === 'ValueParameter')
+        return (
+          ((param.value === 'date-and-or-time') && (value.constructor.identifier === 'DateTimeType')) ||
+          ((param.value === 'text') && (value.constructor.identifier === 'TextType'))
+        );
 
-            else if (acceptableParamType === LanguageParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (value instanceof TextType)
-            );
+        else if (param.constructor.identifier === 'LanguageParameter')
+        return value.constructor.identifier === 'TextType';
 
-            else if (acceptableParamType === CalscaleParameter)
-            return (
-              (param instanceof acceptableParamType) &&
-              (value instanceof DateTimeType)
-            );
+        else if (param.constructor.identifier === 'CalscaleParameter')
+        return value.constructor.identifier === 'DateTimeType';
 
-            return param instanceof acceptableParamType;
-          }
-        )
-      )
+        return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
+      })
     )
     throw new TypeError('Some of the parameters passed are not valid parameters for AnniversaryProperty');
 
     else if (
-      !this.constructor.acceptableValTypes.some(
-        valType => {
-          if (valType === DateTimeType)
-          return (
-            (value instanceof valType) &&
-            (value.type === 'DATE-AND-OR-TIME')
-          );
-          return value instanceof valType;
-        }
-      )
+      !this.constructor.acceptableValTypes.has(value.constructor.identifier) ||
+      ((value.constructor.identifier === 'DateTimeType') && (value.type !== 'DATE-AND-OR-TIME'))
     )
     throw new TypeError('Invalid type for value of AnniversaryProperty');
   }
