@@ -13,8 +13,8 @@ export class MediatypeParameter extends BaseParameter {
     throw new MissingArgument('Value for MediatypeParameter must be supplied');
 
     else if (
-      mediaValue.constructor.type !== 'TEXT' &&
-      (Array.isArray(mediaValue) && !mediaValue.every(val => val.constructor.type === 'TEXT'))
+      mediaValue.constructor.identifier !== 'TextType' &&
+      (Array.isArray(mediaValue) && !mediaValue.every(val => val.constructor.identifier === 'TextType'))
     )
     throw new TypeError('Value for MediatypeParameter must be of TextType or an array of TextTypes');
 

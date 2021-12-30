@@ -10,7 +10,7 @@ export class CCParameter extends BaseParameter {
     throw new MissingArgument('Value for CCParameter must be supplied');
 
     else if (
-      ccValue.constructor.type !== 'TEXT' ||
+      ccValue.constructor.identifier !== 'TextType' ||
       !/^[A-Za-z0-9]{2}$/.test(ccValue.repr())
     )
     throw new InvalidArgument('Invalid value for CCParameter');

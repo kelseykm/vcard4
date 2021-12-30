@@ -9,7 +9,10 @@ export class SortAsParameter extends BaseParameter {
     if (typeof sortValue === 'undefined')
     throw new MissingArgument('Value for SortAsParameter must be supplied');
 
-    else if (sortValue.constructor.type !== 'TEXT')
+    else if (
+      sortValue.constructor.identifier !== 'TextType' &&
+      sortValue.constructor.identifier !== 'TextListType'
+    )
     throw new TypeError('Value for SortAsParameter must be of type TextType or TextListType');
   }
 
@@ -17,7 +20,7 @@ export class SortAsParameter extends BaseParameter {
     super();
 
     this.#validate(sortValue);
-    this.value = /,/.test(sortValue.repr()) ? `"${sortValue.repr()}"` : sortValue.repr();
+    this.value = sortValue.constructor.identifier === 'TextListType' ? `"${sortValue.repr()}"` : sortValue.repr();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

@@ -13,7 +13,7 @@ export class PIDParameter extends BaseParameter {
 
     else if (
       !Array.isArray(pidValue) &&
-      pidValue.constructor.type !== 'INTEGER'
+      pidValue.constructor.identifier !== 'IntegerType'
     )
     throw new InvalidArgument('Invalid value for PIDParameter');
 
@@ -22,9 +22,9 @@ export class PIDParameter extends BaseParameter {
       !pidValue.every(val1 => {
         if (Array.isArray(val1))
         return val1.every(
-          val2 => val2.constructor.type === 'INTEGER'
+          val2 => val2.constructor.identifier === 'IntegerType'
         );
-        return val1.constructor.type === 'INTEGER';
+        return val1.constructor.identifier === 'IntegerType';
       })
     )
     throw new InvalidArgument('Invalid value for PIDParameter');

@@ -10,9 +10,9 @@ export class TzParameter extends BaseParameter {
     throw new MissingArgument('Value for TzParameter must be supplied');
 
     if (
-      tzValue.constructor.type !== 'TEXT' &&
-      tzValue.constructor.type !== 'URI' &&
-      tzValue.type !== 'UTC-OFFSET'
+      tzValue.constructor.identifier !== 'TextType' &&
+      tzValue.constructor.identifier !== 'URIType' &&
+      !(tzValue.constructor.identifier === 'DateTimeType' && tzValue.type === 'UTC-OFFSET')
     )
     throw new TypeError('Invalid type for value for TzParameter');
   }
@@ -21,7 +21,7 @@ export class TzParameter extends BaseParameter {
     super();
 
     this.#validate(tzValue);
-    this.value = tzValue.constructor.type !== 'URI' ? `"${tzValue.repr()}"` : tzValue.repr();
+    this.value = tzValue.constructor.identifier === 'URIType' ? `"${tzValue.repr()}"` : tzValue.repr();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

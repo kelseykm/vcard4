@@ -15,7 +15,7 @@ export class LevelParameter extends BaseParameter {
     )
     throw new MissingArgument('Value and target property for LevelParameter must be supplied');
 
-    else if (levelValue.constructor.type !== 'TEXT')
+    else if (levelValue.constructor.identifier !== 'TextType')
     throw new InvalidArgument('Invalid value for LevelParameter');
 
     switch (true) {

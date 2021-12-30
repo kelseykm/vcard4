@@ -18,7 +18,10 @@ export class TypeParameter extends BaseParameter {
     )
     throw new MissingArgument('Value and target property for TypeParameter must be supplied');
 
-    else if (typeValue.constructor.type !== 'TEXT')
+    else if (
+      typeValue.constructor.identifier !== 'TextType' &&
+      typeValue.constructor.identifier !== 'TextListType'
+    )
     throw new TypeError('Value for TypeParameter must be of type TextType or TextListType');
 
     const telre = new RegExp(`(?:${this.#telTypeRegExp.source}|${this.#typeRegExp.source})`, 'i');
@@ -55,7 +58,7 @@ export class TypeParameter extends BaseParameter {
 
     this.#validate(typeValue, targetProp);
 
-    this.value = /,/.test(typeValue.repr()) ? `"${typeValue.repr()}"` : typeValue.repr();
+    this.value = typeValue.constructor.identifier === 'TextListType' ? `"${typeValue.repr()}"` : typeValue.repr();
 
     this.targetProp = targetProp;
 

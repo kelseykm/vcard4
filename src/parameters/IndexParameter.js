@@ -10,7 +10,7 @@ export class IndexParameter extends BaseParameter {
     throw new MissingArgument('Value for IndexParameter must be supplied');
 
     else if (
-      indexValue.constructor.type !== 'INTEGER' ||
+      indexValue.constructor.identifier !== 'IntegerType' ||
       !(Number(indexValue.repr()) > 0)
     )
     throw new InvalidArgument('Invalid value for IndexParameter. Must be a positive integer');

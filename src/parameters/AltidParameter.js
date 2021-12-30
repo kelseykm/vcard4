@@ -10,8 +10,8 @@ export class AltidParameter extends BaseParameter {
     throw new MissingArgument('Value for AltidParameter must be supplied');
 
     else if (
-      altidValue.constructor.type !== 'INTEGER' &&
-      altidValue.constructor.type !== 'TEXT'
+      altidValue.constructor.identifier !== 'IntegerType' &&
+      altidValue.constructor.identifier !== 'TextType'
     )
     throw new InvalidArgument('Value for AltidParameter must be of type IntegerType or TextType');
   }

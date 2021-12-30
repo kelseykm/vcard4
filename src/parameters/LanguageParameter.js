@@ -15,7 +15,7 @@ export class LanguageParameter extends BaseParameter {
     if (typeof langTag === 'undefined')
     throw new MissingArgument('Language Tag for LanguageParameter must be supplied');
 
-    else if (langTag.constructor.type !== 'LANGUAGE-TAG')
+    else if (langTag.constructor.identifier !== 'LanguageTagType')
     throw new TypeError('The value of the LANGUAGE property parameter should be of type LanguageTagType');
   }
 

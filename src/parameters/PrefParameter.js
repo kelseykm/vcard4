@@ -9,7 +9,7 @@ export class PrefParameter extends BaseParameter {
     if (typeof prefValue === 'undefined')
     throw new MissingArgument('Value for PrefParameter must be supplied');
 
-    else if (prefValue.constructor.type !== 'INTEGER')
+    else if (prefValue.constructor.identifier !== 'IntegerType')
     throw new TypeError('Value for PrefParameter should be of type IntegerType');
 
     else if (

@@ -9,7 +9,7 @@ export class GeoParameter extends BaseParameter {
     if (typeof geoValue === 'undefined')
     throw new MissingArgument('Value for GeoParameter must be supplied');
 
-    else if (geoValue.constructor.type !== 'URI')
+    else if (geoValue.constructor.identifier !== 'URIType')
     throw new TypeError('Value for GeoParameter must be of type URIType');
   }
 
