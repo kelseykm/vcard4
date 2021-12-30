@@ -10,10 +10,10 @@ export class TextListType extends BaseValue {
     throw new MissingArgument('Value for TextListType must be supplied');
 
     else if (!Array.isArray(textlist))
-    throw new TypeError('Invalid type for value of TextListType. It should be an array of TextTypes');
+    throw new TypeError('Value for TextListType must be passed in an array');
 
     for (const text of textlist) {
-      if (text.constructor.type !== 'TEXT')
+      if (text.constructor.identifier !== 'TextType')
       throw new TypeError('Invalid type for value of TextListType. It should be an array of TextTypes');
     }
   }

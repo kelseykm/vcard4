@@ -13,7 +13,7 @@ export class FloatListType extends BaseValue {
     throw new TypeError('Value of FloatListType should be passed in an array');
 
     for (const float of floatlist) {
-      if (float.constructor.type !== 'FLOAT')
+      if (float.constructor.identifier !== 'FloatType')
       throw new TypeError('Value of FloatListType should be an array of FloatTypes');
     }
   }

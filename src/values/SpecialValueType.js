@@ -31,7 +31,10 @@ export class SpecialValueType extends BaseValue {
 
         for (let index = 0; index < value.length; index++)
         if (value[index])
-        if (value[index].constructor.type !== 'TEXT')
+        if (
+          value[index].constructor.identifier !== 'TextType' &&
+          value[index].constructor.identifier !== 'TextListType'
+        )
         throw new TypeError('Invalid value for SpecialValueType for NProperty. The items in the array, if present, should be of type TextType or TextListType');
 
         break;
@@ -44,7 +47,7 @@ export class SpecialValueType extends BaseValue {
 
         else if (
           value[0] &&
-          !/^[MFONU]$/.test(value[0].repr())
+          (value[0].constructor.identifier !== 'SexType')
         )
         throw new TypeError('Invalid value for SpecialValueType for GenderProperty. The first item in the array, if present, should be of type SexType');
 
@@ -52,7 +55,7 @@ export class SpecialValueType extends BaseValue {
           (!value[0] && !value[1]) ||
           (
             value[1] &&
-            (value[1].constructor.type !== 'TEXT')
+            (value[1].constructor.identifier !== 'TextType')
           )
         )
         throw new TypeError('Invalid value for SpecialValueType for GenderProperty. The second item in the array, if present, should be of type TextType');
@@ -67,7 +70,7 @@ export class SpecialValueType extends BaseValue {
 
         for (let index = 0; index < value.length; index++)
         if (value[index])
-        if (value[index].constructor.type !== 'TEXT')
+        if (value[index].constructor.identifier !== 'TextType')
         throw new TypeError('Invalid value for SpecialValueType for AdrProperty. The items in the array, if present, should be of type TextType');
 
         break;
@@ -80,7 +83,7 @@ export class SpecialValueType extends BaseValue {
 
         for (let index = 0; index < value.length; index++)
         if (value[index])
-        if (value[index].constructor.type !== 'TEXT')
+        if (value[index].constructor.identifier !== 'TextType')
         throw new TypeError('Invalid value for SpecialValueType for OrgProperty. The items in the array, if present, should be of type TextType');
 
         break;
@@ -91,13 +94,13 @@ export class SpecialValueType extends BaseValue {
         )
         throw new InvalidArgument('Invalid value for SpecialValueType for ClientpidmapProperty. It should be an array with a length of 2');
 
-        else if (value[0].constructor.type !== 'INTEGER')
+        else if (value[0].constructor.identifier !== 'IntegerType')
         throw new TypeError('Invalid value for SpecialValueType for ClientpidmapProperty. The first item in the array should be of type IntegerType');
 
         else if (0 > Number(value[0].repr()))
         throw new InvalidArgument('Invalid value for SpecialValueType for ClientpidmapProperty. The first item in the array should be a positive integer of type IntegerType')
 
-        else if (value[1].constructor.type !== 'URI')
+        else if (value[1].constructor.identifier !== 'URIType')
         throw new TypeError('Invalid value for SpecialValueType for ClientpidmapProperty. The second item in the array should be of type URIType');
 
         break;

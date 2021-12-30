@@ -10,10 +10,10 @@ export class IntegerListType extends BaseValue {
     throw new MissingArgument('Value for IntegerListType must be supplied');
 
     else if (!Array.isArray(integerlist))
-    throw new TypeError('Invalid type for value of IntegerListType. It should be an array of IntegerTypes');
+    throw new TypeError('Value for IntegerListType must be passed in an array');
 
     for (const integer of integerlist) {
-      if (integer.constructor.type !== 'INTEGER')
+      if (integer.constructor.identifier !== 'IntegerType')
       throw new TypeError('Invalid type for value of IntegerListType. It should be an array of IntegerTypes');
     }
   }

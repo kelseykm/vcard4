@@ -20,7 +20,7 @@ export class DateTimeListType extends BaseValue {
       else if (datetime.type === 'UTC-OFFSET')
       throw new TypeError('Invalid type for value of DateTimeListType');
 
-      else if (!/^(?:(?:DATE((?:-AND-OR)?(?:-TIME))?)|(?:TIME(?:STAMP)?))$/.test(datetime.type))
+      else if (datetime.constructor.identifier !== 'DateTimeType')
       throw new TypeError('Value for DateTimeListType should be an array of DateTimeTypes');
     }
   }
