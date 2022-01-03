@@ -1,61 +1,18 @@
 import { MissingArgument, InvalidArgument } from './errors/index.js';
 
 export class VCARD {
-  static cardinalityOneProps = new Set([
-    'BEGIN',
-    'END',
-    'VERSION'
-  ]);
-
-  static cardinalityOneOrMoreProps = new Set(['FN']);
-
   static cardinalityNoneOrOneProps = new Set([
-    'ANNIVERSARY',
-    'BDAY',
-    'GENDER',
-    'BIRTHPLACE',
-    'DEATHPLACE',
-    'DEATHDATE',
-    'KIND',
-    'N',
-    'PRODID',
-    'REV',
-    'UID'
-  ]);
-
-  static cardinalityNoLimitProps = new Set([
-    'ADR',
-    'CALADRURI',
-    'CALURI',
-    'CATEGORIES',
-    'CLIENTPIDMAP',
-    'EMAIL',
-    'EXTENDEDPROPERTY',
-    'FBURL',
-    'GEO',
-    'IMPP',
-    'KEY',
-    'LANG',
-    'LOGO',
-    'MEMBER',
-    'NICKNAME',
-    'NOTE',
-    'ORG',
-    'PHOTO',
-    'EXPERTISE',
-    'HOBBY',
-    'INTEREST',
-    'CONTACTURI',
-    'RELATED',
-    'ORG-DIRECTORY',
-    'ROLE',
-    'SOUND',
-    'SOURCE',
-    'TEL',
-    'TITLE',
-    'TZ',
-    'URL',
-    'XML'
+    'AnniversaryProperty',
+    'BdayProperty',
+    'GenderProperty',
+    'BirthplaceProperty',
+    'DeathplaceProperty',
+    'DeathdateProperty',
+    'KindProperty',
+    'NProperty',
+    'ProdidProperty',
+    'RevProperty',
+    'UIDProperty'
   ]);
 
   repr() {
@@ -85,58 +42,58 @@ export class VCARD {
     throw new InvalidArgument('Properties for VCARD must be passed in an array');
 
     const propertyInstanceCount = new Map([
-      ['BEGIN', 0],
-      ['VERSION', 0],
-      ['END', 0],
-      ['FN', 0],
-      ['ANNIVERSARY', 0],
-      ['BDAY', 0],
-      ['GENDER', 0],
-      ['BIRTHPLACE', 0],
-      ['DEATHPLACE', 0],
-      ['DEATHDATE', 0],
-      ['KIND', 0],
-      ['N', 0],
-      ['PRODID', 0],
-      ['REV', 0],
-      ['UID', 0]
+      ['FNProperty', 0],
+      ['AnniversaryProperty', 0],
+      ['BdayProperty', 0],
+      ['GenderProperty', 0],
+      ['BirthplaceProperty', 0],
+      ['DeathplaceProperty', 0],
+      ['DeathdateProperty', 0],
+      ['KindProperty', 0],
+      ['NProperty', 0],
+      ['ProdidProperty', 0],
+      ['RevProperty', 0],
+      ['UIDProperty', 0]
     ]);
     let hasMemberProperty = false;
     let kindPropertyIsGroup = false;
     
     for (const prop of props) {
-      switch(prop.constructor.prop) {
-        case 'MEMBER':
+      switch(prop.constructor.identifier) {
+        case 'MemberProperty':
           hasMemberProperty = true;
           break;
 
-        case 'KIND':
+        case 'KindProperty':
           if (/^group$/i.test(prop.value))
           kindPropertyIsGroup = true;
+          break;
+
+        case 'BeginProperty':
+        case 'VersionProperty':
+        case 'EndProperty':
+          throw new InvalidArgument('BeginProperty, VersionProperty and EndProperty instances must not be supplied');
       }
 
-      if (!propertyInstanceCount.has(prop.constructor.prop))
-        continue
+      if (!propertyInstanceCount.has(prop.constructor.identifier))
+      continue;
 
-      let count = propertyInstanceCount.get(prop.constructor.prop);
+      let count = propertyInstanceCount.get(prop.constructor.identifier);
       count++;
-      propertyInstanceCount.set(prop.constructor.prop, count);
+      propertyInstanceCount.set(prop.constructor.identifier, count);
 
-      if (this.constructor.cardinalityOneProps.has(prop.constructor.prop))
-      throw new InvalidArgument('BeginProperty, VersionProperty and EndProperty instances must not be supplied');
-
-      else if (
-        this.constructor.cardinalityNoneOrOneProps.has(prop.constructor.prop) &&
+      if (
+        this.constructor.cardinalityNoneOrOneProps.has(prop.constructor.identifier) &&
         count > 1
       )
       throw new InvalidArgument('AnniversaryProperty, BdayProperty, GenderProperty, KindProperty, NProperty, ProdidProperty, RevProperty and UIDProperty must not have more than one instance supplied');
     }
 
-    if (propertyInstanceCount.get('FN') < 1)
+    if (propertyInstanceCount.get('FNProperty') < 1)
     throw new MissingArgument('One or more FNProperty instances must be supplied');
 
     else if (hasMemberProperty && !kindPropertyIsGroup)
-    throw new InvalidArgument('MemberProperty should only be used if the value of the KindProperty is "group"')
+    throw new InvalidArgument('MemberProperty should only be used if the value of the KindProperty is "group"');
   }
 
   constructor(props) {
