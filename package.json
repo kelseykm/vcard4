@@ -13,7 +13,7 @@
   "types": "./lib/esm/index.d.d.ts",
   "scripts": {
     "test": "mocha",
-    "build": "rollup -c"
+    "build": "rm -r dist/ lib/esm lib/umd/index* && rollup -c"
   },
   "repository": {
     "type": "git",
