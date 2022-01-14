@@ -2,6 +2,7 @@ export class BaseValue {
   #abstractPropertiesAndMethods = [
     'type',
     'value',
+    'valueXML',
     'identifier'
   ];
 

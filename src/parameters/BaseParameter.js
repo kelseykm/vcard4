@@ -2,6 +2,7 @@ export class BaseParameter {
   #abstractPropertiesAndMethods = [
     'param',
     'value',
+    'valueXML',
     'identifier',
   ];
 
