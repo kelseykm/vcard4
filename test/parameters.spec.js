@@ -104,9 +104,6 @@ describe('Property parameters tests', () => {
   describe('AltidParameter tests', () => {
     it('Accepts valid input', () => {
       assert.doesNotThrow(() => new AltidParameter(
-        new IntegerType(1)
-      ));
-      assert.doesNotThrow(() => new AltidParameter(
         new TextType('1')
       ));
     });
@@ -369,13 +366,13 @@ describe('Property parameters tests', () => {
 
   describe('AnyParameter tests', () => {
     it('Accepts valid input', () => {
-      assert.doesNotThrow(() => new AnyParameter('X-CAR', 'Volvo'));
-      assert.doesNotThrow(() => new AnyParameter('networkTDOA', 'strong'));
+      assert.doesNotThrow(() => new AnyParameter('X-CAR', new TextType('Volvo')));
+      assert.doesNotThrow(() => new AnyParameter('networkTDOA', new TextType('strong')));
     });
 
     it('Rejects invalid input', () => {
       assert.throws(() => new AnyParameter);
-      assert.throws(() => new AnyParameter('letter', 'a'));
+      assert.throws(() => new AnyParameter('x-letter', 'a'));
       assert.throws(() => new AnyParameter(1));
       assert.throws(() => new AnyParameter({}));
       assert.throws(() => new AnyParameter('A-GNSS'));
@@ -383,7 +380,7 @@ describe('Property parameters tests', () => {
 
     it('Formats value properly', () => {
       assert.strictEqual(
-        new AnyParameter('X-CAR', 'Volvo').repr(),
+        new AnyParameter('X-CAR', new TextType('Volvo')).repr(),
         'X-CAR=Volvo'
       )
     });
