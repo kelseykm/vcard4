@@ -5,23 +5,37 @@ export class LabelParameter extends BaseParameter {
   static param = 'LABEL';
   static identifier = 'LabelParameter';
 
-  #validate(value) {
-    if (typeof value === 'undefined')
+  #labelValue;
+  
+  get value() {
+    return `"${this.#cleanUp(this.#labelValue)}"`;
+  }
+
+  get valueXML() {
+    return `<text>${this.#cleanUpXML(this.#labelValue)}</text>`;
+  }
+
+  #validate(labelValue) {
+    if (typeof labelValue === 'undefined')
     throw new MissingArgument('Value for LabelParameter must be supplied');
 
-    else if (typeof value !== 'string')
+    else if (typeof labelValue !== 'string')
     throw new TypeError('Only type string allowed for LabelParameter value');
   }
 
-  #cleanUp(value) {
-    return value.replaceAll('^', '^^').replaceAll('\n', '^n').replaceAll('"', '^’');
+  #cleanUp(labelValue) {
+    return labelValue.replaceAll('^', '^^').replaceAll('\n', '^n').replaceAll('"', '^’');
   }
 
-  constructor(value) {
+  #cleanUpXML(textValue) {
+    return textValue.replaceAll('&', '&amp').replaceAll('>', '&gt').replaceAll('<', '&lt').replaceAll('"', '&quot').replaceAll("'", '&apos');
+  }
+
+  constructor(labelValue) {
     super();
 
-    this.#validate(value);
-    this.value = `"${this.#cleanUp(value)}"`;
+    this.#validate(labelValue);
+    this.#labelValue = labelValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

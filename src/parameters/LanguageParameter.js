@@ -11,6 +11,10 @@ export class LanguageParameter extends BaseParameter {
     return this.#langTag.repr();
   }
 
+  get valueXML() {
+    return this.#langTag.reprXML();
+  }
+
   #validate(langTag) {
     if (typeof langTag === 'undefined')
     throw new MissingArgument('Language Tag for LanguageParameter must be supplied');

@@ -5,6 +5,16 @@ export class IndexParameter extends BaseParameter {
   static param = 'INDEX';
   static identifier = 'IndexParameter';
 
+  #indexValue;
+  
+  get value() {
+    return this.#indexValue.repr();
+  }
+
+  get valueXML() {
+    return this.#indexValue.reprXML();
+  }
+
   #validate(indexValue) {
     if (typeof indexValue === 'undefined')
     throw new MissingArgument('Value for IndexParameter must be supplied');
@@ -20,7 +30,7 @@ export class IndexParameter extends BaseParameter {
     super();
 
     this.#validate(indexValue);
-    this.value = indexValue.repr();
+    this.#indexValue = indexValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

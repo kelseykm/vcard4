@@ -5,8 +5,27 @@ export class MediatypeParameter extends BaseParameter {
   static param = 'MEDIATYPE';
   static identifier = 'MediatypeParameter';
 
-  #mediaTypeRegExp = /^(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}\/(?:[A-Za-z0-9!#\$&\.\+\-\^]){1,127}$/;
-  #attributeRegExp = /^.+=.+$/;
+  #mediaTypeRegExp = /^(?:[A-Za-z0-9!#\$&\.\+\-\^_]){1,127}\/(?:[A-Za-z0-9!#\$&\.\+\-\^_]){1,127}$/;
+  #attributeRegExp = /^[A-Za-z0-9!#\$&\.\+\-\^_]+=[A-Za-z0-9!#\$&\.\+\-\^_]+$/;
+  #mediaValue;
+
+  get value() {
+    return Array.isArray(this.#mediaValue) ?
+    `"${this.#mediaValue.reduce((accumulated, current) => {
+      accumulated.push(current.repr());
+      return accumulated;
+    }, []).join(';')}"` :
+    this.#mediaValue.repr();
+  }
+
+  get valueXML() {
+    return Array.isArray(this.#mediaValue) ?
+    '<text>' + this.#mediaValue.reduce((accumulated, current) => {
+      accumulated.push(current.reprXML());
+      return accumulated;
+    }, []).join(';').replace(/<\/?text>/g,'') + '</text>' :
+    this.#mediaValue.reprXML();
+  }
 
   #validate(mediaValue) {
     if (typeof mediaValue === 'undefined')
@@ -40,12 +59,7 @@ export class MediatypeParameter extends BaseParameter {
     super();
 
     this.#validate(mediaValue);
-    this.value = Array.isArray(mediaValue) ?
-    `"${mediaValue.reduce((accumulatedTypes, currentType) => {
-      accumulatedTypes.push(currentType.repr());
-      return accumulatedTypes;
-    }, []).join(';')}"` :
-    mediaValue.repr();
+    this.#mediaValue = mediaValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

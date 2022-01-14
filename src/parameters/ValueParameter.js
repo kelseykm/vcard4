@@ -12,22 +12,24 @@ export class ValueParameter extends BaseParameter {
     return type.toLowerCase();
   }
 
-  #validate(valType) {
-    if (typeof valType === 'undefined')
+  get valueXML() { return ''; }
+
+  #validate(valueType) {
+    if (typeof valueType === 'undefined')
     throw new MissingArgument('Value for ValueParameter must be supplied');
 
     if (
-      !Object.prototype.hasOwnProperty.call(valType, 'type') &&
-      !Object.prototype.hasOwnProperty.call(valType.constructor, 'type')
+      !Object.prototype.hasOwnProperty.call(valueType, 'type') &&
+      !Object.prototype.hasOwnProperty.call(valueType.constructor, 'type')
     )
     throw new InvalidArgument('Value for ValueParameter not recognized');
   }
 
-  constructor(valType) {
+  constructor(valueType) {
     super();
 
-    this.#validate(valType);
-    this.#valueType = valType;
+    this.#validate(valueType);
+    this.#valueType = valueType;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

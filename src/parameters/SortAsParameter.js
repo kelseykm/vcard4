@@ -5,6 +5,16 @@ export class SortAsParameter extends BaseParameter {
   static param = 'SORT-AS';
   static identifier = 'SortAsParameter';
 
+  #sortValue;
+
+  get value() {
+    return this.#sortValue.constructor.identifier === 'TextListType' ? `"${this.#sortValue.repr()}"` : this.#sortValue.repr();
+  }
+
+  get valueXML() {
+    return this.#sortValue.reprXML();
+  }
+
   #validate(sortValue) {
     if (typeof sortValue === 'undefined')
     throw new MissingArgument('Value for SortAsParameter must be supplied');
@@ -20,7 +30,7 @@ export class SortAsParameter extends BaseParameter {
     super();
 
     this.#validate(sortValue);
-    this.value = sortValue.constructor.identifier === 'TextListType' ? `"${sortValue.repr()}"` : sortValue.repr();
+    this.#sortValue = sortValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

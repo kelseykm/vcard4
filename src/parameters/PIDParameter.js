@@ -5,7 +5,50 @@ export class PIDParameter extends BaseParameter {
   static param = 'PID';
   static identifier = 'PIDParameter';
 
+  #pidValue;
   #pidRegExp = /^\d+(?:\.\d+)?$/;
+
+  get value() {
+    return Array.isArray(this.#pidValue) ?
+
+    `${this.#pidValue.reduce((accumulatedTypes, currentType) => {
+      if (Array.isArray(currentType)) {
+        accumulatedTypes.push(
+          currentType.reduce((accumType, currType) => {
+            accumType.push(currType.repr());
+            return accumType;
+          }, []).join('.')
+        );
+      }
+      else accumulatedTypes.push(currentType.repr());
+
+      return accumulatedTypes;
+    }, []).join(',')}` :
+
+    this.#pidValue.repr();
+  }
+
+  get valueXML() {
+    const xml = Array.isArray(this.#pidValue) ?
+
+    `${this.#pidValue.reduce((accumulatedTypes, currentType) => {
+      if (Array.isArray(currentType)) {
+        accumulatedTypes.push(
+          '<integer>' + currentType.reduce((accumType, currType) => {
+            accumType.push(currType.repr());
+            return accumType;
+          }, []).join('.') + '</integer>'
+        );
+      }
+      else accumulatedTypes.push(currentType.reprXML());
+
+      return accumulatedTypes;
+    }, []).join('')}` :
+
+    this.#pidValue.reprXML();
+
+    return xml.replaceAll('integer', 'text');
+  }
 
   #validate(pidValue) {
     if (typeof pidValue === 'undefined')
@@ -34,23 +77,7 @@ export class PIDParameter extends BaseParameter {
     super();
 
     this.#validate(pidValue);
-    this.value = Array.isArray(pidValue) ?
-
-    `${pidValue.reduce((accumulatedTypes, currentType) => {
-      if (Array.isArray(currentType)) {
-        accumulatedTypes.push(
-          currentType.reduce((accumType, currType) => {
-            accumType.push(currType.repr());
-            return accumType;
-          }, []).join('.')
-        );
-      }
-      else accumulatedTypes.push(currentType.repr());
-
-      return accumulatedTypes;
-    }, []).join(',')}` :
-
-    pidValue.repr();
+    this.#pidValue = pidValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

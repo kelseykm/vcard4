@@ -5,7 +5,16 @@ export class CalscaleParameter extends BaseParameter {
   static param = 'CALSCALE';
   static identifier = 'CalscaleParameter';
 
+  #calscaleValue;
   #calscaleRegExp = /^(?:gregorian|x-[A-Za-z0-9]+)$/;
+  
+  get value() {
+    return this.#calscaleValue.repr();
+  }
+
+  get valueXML() {
+    return this.#calscaleValue.reprXML();
+  }
 
   #validate(calscaleValue) {
     if (typeof calscaleValue === 'undefined')
@@ -22,7 +31,7 @@ export class CalscaleParameter extends BaseParameter {
     super();
 
     this.#validate(calscaleValue);
-    this.value = calscaleValue.repr();
+    this.#calscaleValue = calscaleValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

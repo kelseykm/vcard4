@@ -5,6 +5,16 @@ export class TypeParameter extends BaseParameter {
   static param = 'TYPE';
   static identifier = 'TypeParameter';
 
+  #typeValue;
+
+  get value() {
+    return this.#typeValue.constructor.identifier === 'TextListType' ? `"${this.#typeValue.repr()}"` : this.#typeValue.repr();
+  }
+
+  get valueXML() {
+    return this.#typeValue.reprXML();
+  }
+
   #typeRegExp = /^(?:work|home|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)$/i;
 
   #telTypeRegExp = /^(?:text|voice|fax|cell|video|pager|textphone|main)$/i;
@@ -57,10 +67,9 @@ export class TypeParameter extends BaseParameter {
     super();
 
     this.#validate(typeValue, targetProp);
+    this.#typeValue = typeValue;
 
-    this.value = typeValue.constructor.identifier === 'TextListType' ? `"${typeValue.repr()}"` : typeValue.repr();
-
-    this.targetProp = targetProp;
+    this.targetProp = targetProp.toUpperCase();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

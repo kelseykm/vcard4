@@ -7,6 +7,15 @@ export class LevelParameter extends BaseParameter {
 
   #expertiseRegExp = /^(?:beginner|average|expert)$/;
   #hobbyInterestRegExp = /^(?:high|medium|low)$/;
+  #levelValue;
+
+  get value() {
+    return this.#levelValue.repr();
+  }
+
+  get valueXML() {
+    return this.#levelValue.reprXML();
+  }
 
   #validate(levelValue, targetProp) {
     if (
@@ -32,8 +41,8 @@ export class LevelParameter extends BaseParameter {
     super();
 
     this.#validate(levelValue, targetProp);
-    this.value = levelValue.repr();
-    this.targetProp = targetProp;
+    this.#levelValue = levelValue;
+    this.targetProp = targetProp.toUpperCase();
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

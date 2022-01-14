@@ -5,6 +5,16 @@ export class CCParameter extends BaseParameter {
   static param = 'CC';
   static identifier = 'CCParameter';
 
+  #ccValue;
+  
+  get value() {
+    return this.#ccValue.repr();
+  }
+
+  get valueXML() {
+    return this.#ccValue.reprXML();
+  }
+
   #validate(ccValue) {
     if (typeof ccValue === 'undefined')
     throw new MissingArgument('Value for CCParameter must be supplied');
@@ -20,7 +30,7 @@ export class CCParameter extends BaseParameter {
     super();
 
     this.#validate(ccValue);
-    this.value = ccValue.repr();
+    this.#ccValue = ccValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

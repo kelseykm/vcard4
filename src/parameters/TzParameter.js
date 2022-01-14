@@ -5,6 +5,16 @@ export class TzParameter extends BaseParameter {
   static param = 'TZ';
   static identifier = 'TzParameter';
 
+  #tzValue;
+
+  get value() {
+    return this.#tzValue.constructor.identifier === 'URIType' ? `"${this.#tzValue.repr()}"` : this.#tzValue.repr();
+  }
+
+  get valueXML() {
+    return this.#tzValue.reprXML();
+  }
+
   #validate(tzValue) {
     if (typeof tzValue === 'undefined')
     throw new MissingArgument('Value for TzParameter must be supplied');
@@ -21,7 +31,7 @@ export class TzParameter extends BaseParameter {
     super();
 
     this.#validate(tzValue);
-    this.value = tzValue.constructor.identifier === 'URIType' ? `"${tzValue.repr()}"` : tzValue.repr();
+    this.#tzValue = tzValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

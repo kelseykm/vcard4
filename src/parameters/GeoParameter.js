@@ -5,6 +5,16 @@ export class GeoParameter extends BaseParameter {
   static param = 'GEO';
   static identifier = 'GeoParameter';
 
+  #geoValue;
+  
+  get value() {
+    return `"${this.#geoValue.repr()}"`;
+  }
+
+  get valueXML() {
+    return this.#geoValue.reprXML();
+  }
+
   #validate(geoValue) {
     if (typeof geoValue === 'undefined')
     throw new MissingArgument('Value for GeoParameter must be supplied');
@@ -17,7 +27,7 @@ export class GeoParameter extends BaseParameter {
     super();
 
     this.#validate(geoValue);
-    this.value = `"${geoValue.repr()}"`;
+    this.#geoValue = geoValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

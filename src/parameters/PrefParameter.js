@@ -5,6 +5,16 @@ export class PrefParameter extends BaseParameter {
   static param = 'PREF';
   static identifier = 'PrefParameter';
 
+  #prefValue;
+
+  get value() {
+    return this.#prefValue.repr();
+  }
+
+  get valueXML() {
+    return this.#prefValue.reprXML();
+  }
+
   #validate(prefValue) {
     if (typeof prefValue === 'undefined')
     throw new MissingArgument('Value for PrefParameter must be supplied');
@@ -23,7 +33,7 @@ export class PrefParameter extends BaseParameter {
     super();
 
     this.#validate(prefValue);
-    this.value = prefValue.repr();
+    this.#prefValue = prefValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

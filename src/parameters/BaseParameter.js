@@ -20,6 +20,19 @@ export class BaseParameter {
     return `${this.constructor.param || this.param}=${this.value}`;
   }
 
+  reprXML() {
+    let tag = this.constructor.param?.toLowerCase() || this.param?.toLowerCase();
+
+    const knownTagRegExp = /^(?:altid|base|calscale|cc|geo|index|label|language|level|mediatype|pid|pref|sortas|type|tz|value)$/;
+
+    if (!knownTagRegExp.test(tag))
+    return `<unknown>${this.valueXML.replace(/<[a-z\-]+?>/g,'<text>').replace(/<\/[a-z\-]+?>/g,'</text>')}</unknown>`;
+    else if (tag === 'value')
+    return '';
+
+    return `<${tag}>${this.valueXML}</${tag}>`;
+  }
+
   constructor() {
     if (this.constructor === BaseParameter)
     throw new Error('Cannot create instance of base class');
