@@ -5,6 +5,21 @@ export class IntegerListType extends BaseValue {
   static type = 'INTEGER';
   static identifier = 'IntegerListType';
 
+  #integerlist;
+
+  get value() {
+    return this.#integerlist.reduce((accumulatedIntegerTypes, currentIntegerType) => {
+      accumulatedIntegerTypes.push(currentIntegerType.repr());
+      return accumulatedIntegerTypes;
+    }, []).join(',');
+  }
+
+  get valueXML() {
+    return this.#integerlist.reduce(
+      (accumulatedIntegerTypes, currentIntegerType) => accumulatedIntegerTypes + currentIntegerType.reprXML()
+    , '');
+  }
+
   #validate(integerlist) {
     if (typeof integerlist === 'undefined')
     throw new MissingArgument('Value for IntegerListType must be supplied');
@@ -22,10 +37,7 @@ export class IntegerListType extends BaseValue {
     super();
 
     this.#validate(integerlist);
-    this.value = integerlist.reduce((accumulatedIntegerTypes, currentIntegerType) => {
-      accumulatedIntegerTypes.push(currentIntegerType.repr());
-      return accumulatedIntegerTypes;
-    }, []).join(',');
+    this.#integerlist = integerlist;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

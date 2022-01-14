@@ -5,6 +5,8 @@ export class TextType extends BaseValue {
   static type = 'TEXT';
   static identifier = 'TextType';
 
+  #textValue;
+
   #validate(textValue) {
     if (typeof textValue === 'undefined')
     throw new MissingArgument('Value for TextType must be supplied');
@@ -17,10 +19,22 @@ export class TextType extends BaseValue {
     return textValue.replaceAll('\\', '\\\\').replaceAll(',', '\\,').replaceAll(':', '\\:').replaceAll(';', '\\;').replaceAll('\n', '\\n');
   }
 
+  #cleanUpXML(textValue) {
+    return textValue.replaceAll('&', '&amp').replaceAll('>', '&gt').replaceAll('<', '&lt').replaceAll('"', '&quot').replaceAll("'", '&apos');
+  }
+
+  get value() {
+    return this.#cleanUp(this.#textValue);
+  }
+
+  get valueXML() {
+    return `<${this.constructor.type.toLowerCase()}>${this.#cleanUpXML(this.#textValue)}</${this.constructor.type.toLowerCase()}>`;
+  }
+
   constructor(textValue) {
     super();
     this.#validate(textValue);
-    this.value = this.#cleanUp(textValue);
+    this.#textValue = textValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

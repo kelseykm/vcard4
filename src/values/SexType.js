@@ -6,6 +6,7 @@ export class SexType extends BaseValue {
   static identifier = 'SexType';
 
   #sexRegExp = /^[MFONU]$/;
+  #sexValue;
 
   #validate(sexValue) {
     if (typeof sexValue === 'undefined')
@@ -15,11 +16,19 @@ export class SexType extends BaseValue {
     throw new InvalidArgument('Invalid sex');
   }
 
+  get value() {
+    return this.#sexValue;
+  }
+
+  get valueXML() {
+    return `<sex>${this.#sexValue}</sex>`;
+  }
+
   constructor(sexValue) {
     super();
 
     this.#validate(sexValue);
-    this.value = sexValue;
+    this.#sexValue = sexValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

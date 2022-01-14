@@ -5,6 +5,21 @@ export class TextListType extends BaseValue {
   static type = 'TEXT';
   static identifier = 'TextListType';
 
+  #textlist;
+
+  get value() {
+    return this.#textlist.reduce((accumulatedTextTypes, currentTextType) => {
+      accumulatedTextTypes.push(currentTextType.repr());
+      return accumulatedTextTypes;
+    }, []).join(',');
+  }
+
+  get valueXML() {
+    return this.#textlist.reduce(
+      (accumulatedTextTypes, currentTextType) => accumulatedTextTypes + currentTextType.reprXML()
+    , '');
+  }
+
   #validate(textlist) {
     if (typeof textlist === 'undefined')
     throw new MissingArgument('Value for TextListType must be supplied');
@@ -22,10 +37,7 @@ export class TextListType extends BaseValue {
     super();
 
     this.#validate(textlist);
-    this.value = textlist.reduce((accumulatedTextTypes, currentTextType) => {
-      accumulatedTextTypes.push(currentTextType.repr());
-      return accumulatedTextTypes;
-    }, []).join(',');
+    this.#textlist = textlist;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

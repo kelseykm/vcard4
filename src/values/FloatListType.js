@@ -5,6 +5,21 @@ export class FloatListType extends BaseValue {
   static type = 'FLOAT';
   static identifier = 'FloatListType';
 
+  #floatlist;
+
+  get value() {
+    return this.#floatlist.reduce((accumulatedFloatTypes, currentFloatType) => {
+      accumulatedFloatTypes.push(currentFloatType.repr());
+      return accumulatedFloatTypes;
+    }, []).join(',');
+  }
+
+  get valueXML() {
+    return this.#floatlist.reduce(
+      (accumulatedFloatTypes, currentFloatType) => accumulatedFloatTypes + currentFloatType.reprXML()
+    , '');
+  }
+
   #validate(floatlist) {
     if (typeof floatlist === 'undefined')
     throw new MissingArgument('Value for FloatListType must be supplied');
@@ -22,10 +37,7 @@ export class FloatListType extends BaseValue {
     super();
 
     this.#validate(floatlist);
-    this.value = floatlist.reduce((accumulatedFloatTypes, currentFloatType) => {
-      accumulatedFloatTypes.push(currentFloatType.repr());
-      return accumulatedFloatTypes;
-    }, []).join(',');
+    this.#floatlist = floatlist;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

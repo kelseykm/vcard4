@@ -5,6 +5,8 @@ export class LanguageTagType extends BaseValue {
   static type = 'LANGUAGE-TAG';
   static identifier = 'LanguageTagType';
 
+  #langTagValue;
+
   #validate(langTagValue) {
     if (typeof langTagValue === 'undefined')
     throw new MissingArgument('Value for LanguageTagType must be supplied');
@@ -13,11 +15,19 @@ export class LanguageTagType extends BaseValue {
     throw new TypeError('Value for LanguageTagType should be of type string');
   }
 
+  get value() {
+    return this.#langTagValue;
+  }
+
+  get valueXML() {
+    return `<${this.constructor.type.toLowerCase()}>${this.#langTagValue}<${this.constructor.type.toLowerCase()}>`;
+  }
+
   constructor(langTagValue) {
     super();
 
     this.#validate(langTagValue);
-    this.value = langTagValue;
+    this.#langTagValue = langTagValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

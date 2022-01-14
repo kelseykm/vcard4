@@ -5,6 +5,8 @@ export class BooleanType extends BaseValue {
   static type = 'BOOLEAN';
   static identifier = 'BooleanType';
 
+  #boolValue;
+
   #validate(boolValue) {
     if (typeof boolValue === 'undefined')
     throw new MissingArgument('boolValue must be supplied');
@@ -13,11 +15,20 @@ export class BooleanType extends BaseValue {
     throw new TypeError('Value for BooleanType should be of type boolean');
   }
 
+  get value() {
+    return `${this.#boolValue}`;
+
+  }
+
+  get valueXML() {
+    return `<${this.constructor.type.toLowerCase()}>${this.#boolValue}</${this.constructor.type.toLowerCase()}>`;
+  }
+
   constructor(boolValue) {
     super();
 
     this.#validate(boolValue);
-    this.value = boolValue ? 'TRUE' : 'FALSE';
+    this.#boolValue = boolValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

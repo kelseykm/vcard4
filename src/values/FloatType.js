@@ -5,6 +5,8 @@ export class FloatType extends BaseValue {
   static type = 'FLOAT';
   static identifier = 'FloatType';
 
+  #floatValue;
+
   #validate(floatValue) {
     if (typeof floatValue === 'undefined')
     throw new MissingArgument('Value for FloatType must be supplied');
@@ -19,11 +21,19 @@ export class FloatType extends BaseValue {
     throw new TypeError('Invalid value for FloatType');
   }
 
+  get value() {
+    return `${this.#floatValue}`;
+  }
+
+  get valueXML() {
+    return `<${this.constructor.type.toLowerCase()}>${this.#floatValue}</${this.constructor.type.toLowerCase()}>`;
+  }
+
   constructor(floatValue) {
     super();
 
     this.#validate(floatValue);
-    this.value = floatValue.toString();
+    this.#floatValue = floatValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

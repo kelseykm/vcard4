@@ -4,6 +4,21 @@ import { MissingArgument } from '../errors/index.js';
 export class DateTimeListType extends BaseValue {
   static identifier = 'DateTimeListType';
 
+  #datetimelist;
+
+  get value() {
+    return this.#datetimelist.reduce((accumulatedDateTimeTypes, currentDateTimeType) => {
+      accumulatedDateTimeTypes.push(currentDateTimeType.repr());
+      return accumulatedDateTimeTypes;
+    }, []).join(',');
+  }
+
+  get valueXML() {
+    return this.#datetimelist.reduce(
+      (accumulatedDateTimeTypes, currentDateTimeType) => accumulatedDateTimeTypes + currentDateTimeType.reprXML()
+    , '');
+  }
+
   #validate(datetimelist) {
     if (typeof datetimelist === 'undefined')
     throw new MissingArgument('Value for DateTimeListType must be supplied');
@@ -29,11 +44,8 @@ export class DateTimeListType extends BaseValue {
     super();
 
     this.#validate(datetimelist);
-    this.value = datetimelist.reduce((accumulatedDateTimeTypes, currentDateTimeType) => {
-      accumulatedDateTimeTypes.push(currentDateTimeType.repr());
-      return accumulatedDateTimeTypes;
-    }, []).join(',');
-    this.type = datetimelist[0].type;
+    this.#datetimelist = datetimelist;
+    this.type = datetimelist[0]['type'];
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

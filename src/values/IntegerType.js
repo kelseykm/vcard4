@@ -5,6 +5,8 @@ export class IntegerType extends BaseValue {
   static type = 'INTEGER';
   static identifier = 'IntegerType';
 
+  #intValue;
+
   #validate(intValue) {
     if (typeof intValue === 'undefined')
     throw new MissingArgument('Value for IntegerType must be supplied');
@@ -34,11 +36,19 @@ export class IntegerType extends BaseValue {
     throw new InvalidArgument('The maximum value is 9223372036854775807n, and the minimum value is -9223372036854775808n for bigint IntegerType');
   }
 
+  get value() {
+    return `${this.#intValue}`;
+  }
+
+  get valueXML() {
+    return `<${this.constructor.type.toLowerCase()}>${this.#intValue}</${this.constructor.type.toLowerCase()}>`;
+  }
+
   constructor(intValue) {
     super();
 
     this.#validate(intValue);
-    this.value = intValue.toString();
+    this.#intValue = intValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

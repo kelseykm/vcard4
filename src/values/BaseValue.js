@@ -20,6 +20,10 @@ export class BaseValue {
     return this.value;
   }
 
+  reprXML() {
+    return this.valueXML;
+  }
+
   constructor() {
     if (this.constructor === BaseValue)
     throw new Error('Cannot create instance of base class');

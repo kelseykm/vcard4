@@ -4,6 +4,33 @@ import { MissingArgument, InvalidArgument } from '../errors/index.js';
 export class DateTimeType extends BaseValue {
   static identifier = 'DateTimeType';
 
+  #dateTimeValue;
+
+  get value() {
+    return `${this.#dateTimeValue}`;
+  }
+
+  get valueXML() {
+    let tag = this.type.toLowerCase(); 
+    const value = this.#dateTimeValue;
+
+    if (tag === 'date-and-or-time') {
+      switch (true) {
+        case this.#dateRegExp.test(value):
+          tag = 'date';
+          break;
+        case this.#timeRegExp.test(value):
+          tag = 'time';
+          break;
+        case this.#dateTimeRegExp.test(value):
+          tag = 'date-time';
+          break;
+      }
+    }
+
+    return`<${tag}>${value}</${tag}>`;
+  }
+
   #dateRegExp = /^(?:(?:\d{4})|(?:(?:\d{4}(?:(?:(?:0[469]|11)(?:[0-2]\d|30))|(?:(?:0[13578]|1[02])(?:[0-2]\d|3[01]))))|(?:\d{2}(?:(?:(?:[02468][048]|[13579][26])(?:02)(?:[0-2]\d))|(?:(:?\d[13579]|[02468][26]|[13579][048])(?:02)(?:[0-2][0-8])))))|(?:-{2}(?:(?:(?:0[469]|11)(?:[0-2]\d|30)?)|(?:(?:0[13578]|1[02])(?:[0-2]\d|3[01])?)|(?:(?:02)(?:[0-2]\d)?)))|(?:-{3}(?:[0-2]\d|3[01]))|(?:\d{4}-(?:(?:0[1-9])|1[0-2])))$/;
 
   #timeRegExp = /^(?:(?:(?:(?:[01]\d)|(?:2[0-3]))(?:(?:[0-5]\d){1,2})?)|(?:-(?:[0-5]\d){1,2})|(?:-{2}[0-5]\d))(?:Z|(?:[+-]((?:[01]\d)|(?:2[0-3]))(?:[0-5]\d)?))?$/;
@@ -16,7 +43,7 @@ export class DateTimeType extends BaseValue {
 
   #utcOffsetRegExp = /^(?:[+-]((?:[01]\d)|(?:2[0-3]))(?:[0-5]\d)?)$/;
 
-  #validateAndSet(dateTimeValue, type) {
+  #validateAndSetType(dateTimeValue, type) {
     if (typeof dateTimeValue === 'undefined' || typeof type === 'undefined')
     throw new MissingArgument('Value and type for DateTimeType must be supplied');
 
@@ -31,42 +58,36 @@ export class DateTimeType extends BaseValue {
         throw new InvalidArgument('Invalid value for type date of DateTimeType');
 
         this.type = 'DATE';
-        this.value = dateTimeValue.toString();
         break;
       case 'time':
         if (!this.#timeRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type time of DateTimeType');
 
         this.type = 'TIME';
-        this.value = dateTimeValue.toString();
         break;
       case 'datetime':
         if (!this.#dateTimeRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type datetime of DateTimeType');
 
         this.type = 'DATE-TIME';
-        this.value = dateTimeValue.toString();
         break;
       case 'dateandortime':
         if (!this.#dateAndOrTimeRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type dateandortime of DateTimeType');
 
         this.type = 'DATE-AND-OR-TIME';
-        this.value = dateTimeValue.toString();
         break;
       case 'timestamp':
         if (!this.#timestampRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type timestamp of DateTimeType');
 
         this.type = 'TIMESTAMP';
-        this.value = dateTimeValue.toString();
         break;
       case 'utcoffset':
         if (!this.#utcOffsetRegExp.test(dateTimeValue))
         throw new InvalidArgument('Invalid value for type utcoffset of DateTimeType');
 
         this.type = 'UTC-OFFSET';
-        this.value = dateTimeValue.toString();
         break;
       default:
         throw new InvalidArgument('Accepted values for type property of type object for DateTimeType are date, time, datetime, dateandortime, timestamp or utcoffset');
@@ -75,7 +96,8 @@ export class DateTimeType extends BaseValue {
 
   constructor(dateTimeValue, type) {
     super();
-    this.#validateAndSet(dateTimeValue, type);
+    this.#validateAndSetType(dateTimeValue, type);
+    this.#dateTimeValue = dateTimeValue;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
