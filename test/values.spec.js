@@ -84,7 +84,7 @@ describe('Property value data types tests', () => {
     it('Formats value properly', () => {
       assert.strictEqual(
         new BooleanType(false).repr(),
-        "FALSE"
+        "false"
       );
     });
   });
