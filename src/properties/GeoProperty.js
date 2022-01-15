@@ -17,6 +17,28 @@ export class GeoProperty extends BaseProperty {
   ]);
   static acceptableValTypes = 'URIType';
 
+  #params;
+  #value;
+
+  get params() {
+    return this.#params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+  }
+  
+  get paramsXML() {
+    return this.#params.reduce((accumulatedParameters, currentParameter) => accumulatedParameters + currentParameter.reprXML(), '');
+  }
+
+  get value() {
+    return this.#value.repr();
+  }
+  
+  get valueXML() {
+    return this.#value.reprXML();
+  }
+
   #validate(params, value) {
     if (typeof params === 'undefined' || typeof value === 'undefined')
     throw new MissingArgument('Parameters and value for GeoProperty must be supplied');
@@ -45,11 +67,8 @@ export class GeoProperty extends BaseProperty {
     super();
 
     this.#validate(params, val);
-    this.params = params.reduce((parametersArray, currentParameter) => {
-      parametersArray.push(currentParameter.repr());
-      return parametersArray;
-    }, []).join(';');
-    this.value = val.repr();
+    this.#params = params;
+    this.#value = val;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);

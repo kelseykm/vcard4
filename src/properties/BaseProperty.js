@@ -6,6 +6,7 @@ export class BaseProperty {
     'acceptableValTypes',
     'params',
     'value',
+    'valueXML',
     'identifier',
   ];
 
@@ -42,6 +43,13 @@ export class BaseProperty {
       else foldedContentLine += contentLine[index];
     }
     return foldedContentLine;
+  }
+
+  reprXML() {
+    const tag = this.constructor.prop?.toLowerCase() || this.prop?.toLowerCase();
+    return this.paramsXML === '' ?
+    `<${tag}>${this.valueXML}</${tag}>` :
+    `<${tag}><parameters>${this.paramsXML}</parameters>${this.valueXML}</${tag}>`;
   }
 
   constructor() {

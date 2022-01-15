@@ -39,6 +39,27 @@ export class ExtendedProperty extends BaseProperty {
   ]);
 
   #propRegExp = /^[Xx]-[A-Za-z0-9]+$/;
+  #params;
+  #value;
+
+  get params() {
+    return this.#params.reduce((parametersArray, currentParameter) => {
+      parametersArray.push(currentParameter.repr());
+      return parametersArray;
+    }, []).join(';');
+  }
+  
+  get paramsXML() {
+    return this.#params.reduce((accumulatedParameters, currentParameter) => accumulatedParameters + currentParameter.reprXML(), '');
+  }
+
+  get value() {
+    return this.#value.repr();
+  }
+  
+  get valueXML() {
+    return this.#value.reprXML();
+  }
 
   #validate(prop, params, value) {
     if (typeof prop === 'undefined' || typeof params === 'undefined' || typeof value === 'undefined')
@@ -68,11 +89,8 @@ export class ExtendedProperty extends BaseProperty {
 
     this.#validate(prop, params, value);
     this.prop = prop.toString().toUpperCase();
-    this.params = params.reduce((parametersArray, currentParameter) => {
-      parametersArray.push(currentParameter.repr());
-      return parametersArray;
-    }, []).join(';');
-    this.value = value.repr();
+    this.#params = params;
+    this.#value = value;
 
     this.checkAbstractPropertiesAndMethods();
     Object.freeze(this);
