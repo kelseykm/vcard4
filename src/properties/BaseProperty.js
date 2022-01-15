@@ -5,6 +5,7 @@ export class BaseProperty {
     'acceptableParamTypes',
     'acceptableValTypes',
     'params',
+    'paramsXML',
     'value',
     'valueXML',
     'identifier',
