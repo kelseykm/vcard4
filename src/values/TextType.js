@@ -31,6 +31,10 @@ export class TextType extends BaseValue {
     return `<${this.constructor.type.toLowerCase()}>${this.#cleanUpXML(this.#textValue)}</${this.constructor.type.toLowerCase()}>`;
   }
 
+  get _unsafe_raw_value() {
+    return this.#textValue;
+  }
+
   constructor(textValue) {
     super();
     this.#validate(textValue);
