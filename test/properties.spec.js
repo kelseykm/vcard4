@@ -175,7 +175,7 @@ describe('Properties tests', () => {
       it('Accepts valid input', () => {
         assert.doesNotThrow(() => new XMLProperty(
           [],
-          new TextType('...')
+          new TextType(`<love-letter xmlns="urn:imaginary-namespace"><note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Don't forget me, this weekend!</body></note></love-letter>`)
         ));
 
         assert.doesNotThrow(() => new XMLProperty(
@@ -184,7 +184,7 @@ describe('Properties tests', () => {
               new TextType('...')
             )
           ],
-          new TextType('...')
+          new TextType(`<love-letter xmlns="urn:imaginary-namespace"><note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Don't forget me, this weekend!</body></note></love-letter>`)
         ));
       });
 
@@ -205,9 +205,9 @@ describe('Properties tests', () => {
         assert.strictEqual(
           new XMLProperty(
             [],
-            new TextType(`<?xml version="1.0" encoding="ISO-8859-1"?><note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Don't forget me this weekend!</body></note>`)
+            new TextType(`<love-letter xmlns="urn:imaginary-namespace"><note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Don't forget me, this weekend!</body></note></love-letter>`)
           ).repr(),
-          `XML:<?xml version="1.0" encoding="ISO-8859-1"?><note><to>Tove</to><from>Jan\r\n i</from><heading>Reminder</heading><body>Don't forget me this weekend!</bod\r\n y></note>`
+          "XML:<love-letter xmlns=\"urn\\:imaginary-namespace\"><note><to>Tove</to><from>\r\n Jani</from><heading>Reminder</heading><body>Don't forget me\\, this weekend!\r\n </body></note></love-letter>"
         );
       });
     });
