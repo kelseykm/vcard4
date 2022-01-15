@@ -30,7 +30,7 @@ export class XMLProperty extends BaseProperty {
   }
   
   get valueXML() {
-    return this.#value.reprXML();
+    return this.#value._unsafe_raw_value;
   }
 
   #validate(params, value) {
@@ -52,6 +52,12 @@ export class XMLProperty extends BaseProperty {
 
     else if (value.constructor.identifier !== this.constructor.acceptableValTypes)
     throw new TypeError('Invalid type for value of XMLProperty');
+
+    else if (!/xmlns=".+?"/.test(value._unsafe_raw_value))
+    throw new InvalidArgument('The XML element namespace must be explicitly specified using the xmlns attribute');
+
+    else if (/xmlns="urn:ietf:params:xml:ns:vcard-4.0"/.test(value._unsafe_raw_value))
+    throw new InvalidArgument('The XML element namespace must not be the vCard 4 namespace');
   }
 
   constructor(params, val) {

@@ -48,6 +48,10 @@ export class BaseProperty {
 
   reprXML() {
     const tag = this.constructor.prop?.toLowerCase() || this.prop?.toLowerCase();
+
+    if (tag === 'xml')
+    return this.valueXML;
+
     return this.paramsXML === '' ?
     `<${tag}>${this.valueXML}</${tag}>` :
     `<${tag}><parameters>${this.paramsXML}</parameters>${this.valueXML}</${tag}>`;
