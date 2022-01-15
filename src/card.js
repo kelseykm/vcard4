@@ -15,23 +15,40 @@ export class VCARD {
     'UIDProperty'
   ]);
 
-  repr() {
-    return this.value;
-  }
+  #props;
 
-  #assemble() {
+  repr() {
     const CRLF = '\r\n';
 
-    this.value = '';
-    this.value += 'BEGIN:VCARD' + CRLF;
-    this.value += 'VERSION:4.0' + CRLF;
+    let value = '';
+    value += 'BEGIN:VCARD' + CRLF;
+    value += 'VERSION:4.0' + CRLF;
 
-    this.value += this.props.reduce((accumulatedProps, currentProp) => {
+    value += this.#props.reduce((accumulatedProps, currentProp) => {
       accumulatedProps.push(currentProp.repr());
       return accumulatedProps;
     }, []).join(CRLF) + CRLF;
 
-    this.value += 'END:VCARD' + CRLF;
+    value += 'END:VCARD' + CRLF;
+
+    return value;
+  }
+
+  reprXML() {
+    let valueXML = '';
+    valueXML += '<?xml version="1.0" encoding="UTF-8"?>';
+    valueXML += '<vcards xmlns="urn:ietf:params:xml:ns:vcard-4.0">';
+    valueXML += '<vcard>';
+
+    valueXML += this.#props.reduce(
+      (accumulatedParameters, currentParameter) => accumulatedParameters + currentParameter.reprXML(), 
+      ''
+    );
+
+    valueXML += '</vcard>';
+    valueXML += '</vcards>';
+
+    return valueXML;
   }
 
   #validate(props) {
@@ -98,8 +115,7 @@ export class VCARD {
 
   constructor(props) {
     this.#validate(props);
-    this.props = props;
-    this.#assemble();
+    this.#props = props;
 
     Object.freeze(this);
   }
