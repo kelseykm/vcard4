@@ -51,7 +51,7 @@ export class TelProperty extends BaseProperty {
 
     else if (
       !params.every(param => {
-        if (param.constructor.identifier === TypeParameter)
+        if (param.constructor.identifier === 'TypeParameter')
         return /^TelProperty$/i.test(param.targetProp);
 
         else if (param.constructor.identifier === 'ValueParameter')
@@ -60,7 +60,7 @@ export class TelProperty extends BaseProperty {
           ((param.value === 'text') && (value.constructor.identifier === 'TextType'))
         );
 
-        else if (param.constructor.identifier === MediatypeParameter)
+        else if (param.constructor.identifier === 'MediatypeParameter')
         return value.constructor.identifier === 'URIType';
 
         return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
