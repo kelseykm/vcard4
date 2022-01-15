@@ -22,7 +22,7 @@ export class BaseParameter {
   }
 
   reprXML() {
-    let tag = this.constructor.param?.toLowerCase() || this.param?.toLowerCase();
+    const tag = this.constructor.param?.toLowerCase() || this.param?.toLowerCase();
 
     const knownTagRegExp = /^(?:altid|base|calscale|cc|geo|index|label|language|level|mediatype|pid|pref|sortas|type|tz|value)$/;
 
