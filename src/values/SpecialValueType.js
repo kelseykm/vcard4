@@ -82,7 +82,7 @@ export class SpecialValueType extends BaseValue {
           case 4:
             if (!value[index])
             this.valueXML += '<suffix/>';
-            else this.valueXML = value[index].reprXML().replaceAll('text>', 'suffix>');
+            else this.valueXML += value[index].reprXML().replaceAll('text>', 'suffix>');
         }
 
         break;
