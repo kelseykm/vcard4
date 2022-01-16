@@ -28,7 +28,7 @@ export class LabelParameter extends BaseParameter {
   }
 
   #cleanUpXML(textValue) {
-    return textValue.replaceAll('&', '&amp').replaceAll('>', '&gt').replaceAll('<', '&lt').replaceAll('"', '&quot').replaceAll("'", '&apos');
+    return textValue.replaceAll('&', '&amp;').replaceAll('>', '&gt;').replaceAll('<', '&lt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;');
   }
 
   constructor(labelValue) {

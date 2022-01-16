@@ -20,7 +20,7 @@ export class TextType extends BaseValue {
   }
 
   #cleanUpXML(textValue) {
-    return textValue.replaceAll('&', '&amp').replaceAll('>', '&gt').replaceAll('<', '&lt').replaceAll('"', '&quot').replaceAll("'", '&apos');
+    return textValue.replaceAll('&', '&amp;').replaceAll('>', '&gt;').replaceAll('<', '&lt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;');
   }
 
   get value() {
