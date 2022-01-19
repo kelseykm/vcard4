@@ -15,6 +15,7 @@ export class SpecialValueType extends BaseValue {
     const valueRegExp = /^(?:individual|group|org|location|application|A-GNSS|A-GPS|AOA|best-guess|Cell|DBH|DBH_HELO|Derived|Device-Assisted_A-GPS|Device-Assisted_EOTD|Device-Based_A-GPS|Device-Based_EOTD|DHCP|E-CID|ELS-BLE|ELS-WiFi|GNSS|GPS|Handset_AFLT|Handset_EFLT|Hybrid_A-GPS|hybridAGPS_AFLT|hybridCellSector_AGPS|hybridTDOA_AOA|hybridTDOA_AGPS|hybridTDOA_AGPS_AOA|IPDL|LLDP-MED|Manual|MBS|MPL|NEAD-BLE|NEAD-WiFi|networkRFFingerprinting|networkTDOA|networkTOA|NMR|OTDOA|RFID|RSSI|RSSI-RTT|RTT|TA|TA-NMR|Triangulation|UTDOA|Wiremap|802\.11|x-[A-Za-z0-9]+)$/i;
 
     let valueCopy;
+    let _tempValue;
 
     switch (true) {
       case /^KindProperty$/i.test(targetProp):
@@ -31,7 +32,7 @@ export class SpecialValueType extends BaseValue {
         break;
       case /^NProperty$/i.test(targetProp):
         if (
-          !Array.isArray(value) &&
+          !Array.isArray(value) ||
           (value.length !== 5)
         )
         throw new InvalidArgument('Invalid value for SpecialValueType for NProperty. It should be an array with a length of 5');
@@ -63,7 +64,14 @@ export class SpecialValueType extends BaseValue {
             }
             else {
               this.valueXML += value[index].reprXML().replaceAll('text>', 'surname>');
-              this.valueJSON[index] = value[index].reprJSON().pop();
+
+              _tempValue = value[index].reprJSON();
+              if (_tempValue.length === 2)
+              this.valueJSON[index] = _tempValue.pop();
+              else {
+                 _tempValue.shift();
+                this.valueJSON[index] = _tempValue;
+              }
             }
 
             break;
@@ -74,7 +82,14 @@ export class SpecialValueType extends BaseValue {
             }
             else {
               this.valueXML += value[index].reprXML().replaceAll('text>', 'given>');
-              this.valueJSON[index] = value[index].reprJSON().pop();
+
+              _tempValue = value[index].reprJSON();
+              if (_tempValue.length === 2)
+              this.valueJSON[index] = _tempValue.pop();
+              else {
+                 _tempValue.shift();
+                this.valueJSON[index] = _tempValue;
+              }
             }
 
             break;
@@ -85,7 +100,14 @@ export class SpecialValueType extends BaseValue {
             }
             else {
               this.valueXML += value[index].reprXML().replaceAll('text>', 'additional>');
-              this.valueJSON[index] = value[index].reprJSON().pop();
+
+              _tempValue = value[index].reprJSON();
+              if (_tempValue.length === 2)
+              this.valueJSON[index] = _tempValue.pop();
+              else {
+                 _tempValue.shift();
+                this.valueJSON[index] = _tempValue;
+              }
             }
 
             break;
@@ -96,7 +118,14 @@ export class SpecialValueType extends BaseValue {
             }
             else {
               this.valueXML += value[index].reprXML().replaceAll('text>', 'prefix>');
-              this.valueJSON[index] = value[index].reprJSON().pop();
+              
+              _tempValue = value[index].reprJSON();
+              if (_tempValue.length === 2)
+              this.valueJSON[index] = _tempValue.pop();
+              else {
+                 _tempValue.shift();
+                this.valueJSON[index] = _tempValue;
+              }
             }
 
             break;
@@ -107,7 +136,14 @@ export class SpecialValueType extends BaseValue {
             }
             else {
               this.valueXML += value[index].reprXML().replaceAll('text>', 'suffix>');
-              this.valueJSON[index] = value[index].reprJSON().pop();
+
+              _tempValue = value[index].reprJSON();
+              if (_tempValue.length === 2)
+              this.valueJSON[index] = _tempValue.pop();
+              else {
+                 _tempValue.shift();
+                this.valueJSON[index] = _tempValue;
+              }
             }
         }
 
@@ -119,7 +155,7 @@ export class SpecialValueType extends BaseValue {
         break;
       case /^GenderProperty$/i.test(targetProp):
         if (
-          !Array.isArray(value) &&
+          !Array.isArray(value) ||
           (value.length !== 2)
         )
         throw new InvalidArgument('Invalid value for SpecialValueType for GenderProperty. It should be an array with a length of 2');
@@ -159,7 +195,7 @@ export class SpecialValueType extends BaseValue {
         break;
       case /^AdrProperty$/i.test(targetProp):
         if (
-          !Array.isArray(value) &&
+          !Array.isArray(value) ||
           (value.length !== 7)
         )
         throw new InvalidArgument('Invalid value for SpecialValueType for AdrProperty. It should be an array with a length of 7');
@@ -188,7 +224,14 @@ export class SpecialValueType extends BaseValue {
             }
             else {
               this.valueXML += value[index].reprXML().replaceAll('text>', 'pobox>');
-              this.valueJSON[index] = value[index].reprJSON().pop();
+              
+              _tempValue = value[index].reprJSON();
+              if (_tempValue.length === 2)
+              this.valueJSON[index] = _tempValue.pop();
+              else {
+                 _tempValue.shift();
+                this.valueJSON[index] = _tempValue;
+              }
             }
 
             break;
@@ -199,7 +242,14 @@ export class SpecialValueType extends BaseValue {
             }
             else {
               this.valueXML += value[index].reprXML().replaceAll('text>', 'ext>');
-              this.valueJSON[index] = value[index].reprJSON().pop();
+
+              _tempValue = value[index].reprJSON();
+              if (_tempValue.length === 2)
+              this.valueJSON[index] = _tempValue.pop();
+              else {
+                 _tempValue.shift();
+                this.valueJSON[index] = _tempValue;
+              }
             }
 
             break;
@@ -210,7 +260,14 @@ export class SpecialValueType extends BaseValue {
             }
             else {
               this.valueXML += value[index].reprXML().replaceAll('text>', 'street>');
-              this.valueJSON[index] = value[index].reprJSON().pop();
+
+              _tempValue = value[index].reprJSON();
+              if (_tempValue.length === 2)
+              this.valueJSON[index] = _tempValue.pop();
+              else {
+                 _tempValue.shift();
+                this.valueJSON[index] = _tempValue;
+              }
             }
 
             break;
@@ -221,7 +278,14 @@ export class SpecialValueType extends BaseValue {
             }
             else {
               this.valueXML += value[index].reprXML().replaceAll('text>', 'locality>');
-              this.valueJSON[index] = value[index].reprJSON().pop();
+
+              _tempValue = value[index].reprJSON();
+              if (_tempValue.length === 2)
+              this.valueJSON[index] = _tempValue.pop();
+              else {
+                 _tempValue.shift();
+                this.valueJSON[index] = _tempValue;
+              }
             }
 
             break;
@@ -232,7 +296,14 @@ export class SpecialValueType extends BaseValue {
             }
             else {
               this.valueXML += value[index].reprXML().replaceAll('text>', 'region>');
-              this.valueJSON[index] = value[index].reprJSON().pop();
+
+              _tempValue = value[index].reprJSON();
+              if (_tempValue.length === 2)
+              this.valueJSON[index] = _tempValue.pop();
+              else {
+                 _tempValue.shift();
+                this.valueJSON[index] = _tempValue;
+              }
             }
 
             break;
@@ -243,7 +314,14 @@ export class SpecialValueType extends BaseValue {
             }
             else {
               this.valueXML += value[index].reprXML().replaceAll('text>', 'code>');
-              this.valueJSON[index] = value[index].reprJSON().pop();
+
+              _tempValue = value[index].reprJSON();
+              if (_tempValue.length === 2)
+              this.valueJSON[index] = _tempValue.pop();
+              else {
+                 _tempValue.shift();
+                this.valueJSON[index] = _tempValue;
+              }
             }
 
             break;
@@ -254,7 +332,14 @@ export class SpecialValueType extends BaseValue {
             }
             else {
               this.valueXML += value[index].reprXML().replaceAll('text>', 'country>');
-              this.valueJSON[index] = value[index].reprJSON().pop();
+
+              _tempValue = value[index].reprJSON();
+              if (_tempValue.length === 2)
+              this.valueJSON[index] = _tempValue.pop();
+              else {
+                 _tempValue.shift();
+                this.valueJSON[index] = _tempValue;
+              }
             }
         }
 
@@ -295,7 +380,7 @@ export class SpecialValueType extends BaseValue {
         break;
       case /^ClientpidmapProperty$/i.test(targetProp):
         if (
-          !Array.isArray(value) &&
+          !Array.isArray(value) ||
           (value.length !== 2)
         )
         throw new InvalidArgument('Invalid value for SpecialValueType for ClientpidmapProperty. It should be an array with a length of 2');
