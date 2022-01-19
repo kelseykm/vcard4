@@ -20,6 +20,19 @@ export class IntegerListType extends BaseValue {
     , '');
   }
 
+  get valueJSON() {
+    const value = this.#integerlist.reduce((accumulatedIntegerTypes, currentIntegerType) => {
+      accumulatedIntegerTypes.push(
+        currentIntegerType.reprJSON().pop()
+      );
+      return accumulatedIntegerTypes;
+    }, []);
+
+    value.unshift(this.constructor.type.toLowerCase());
+
+    return value;
+  }
+
   #validate(integerlist) {
     if (typeof integerlist === 'undefined')
     throw new MissingArgument('Value for IntegerListType must be supplied');

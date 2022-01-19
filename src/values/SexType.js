@@ -24,6 +24,10 @@ export class SexType extends BaseValue {
     return `<sex>${this.#sexValue}</sex>`;
   }
 
+  get valueJSON() {
+    return [ this.constructor.type.toLowerCase(), this.#sexValue ];
+  }
+
   constructor(sexValue) {
     super();
 

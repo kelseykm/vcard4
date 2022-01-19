@@ -29,6 +29,10 @@ export class URIType extends BaseValue {
     return `<${this.constructor.type.toLowerCase()}>${this.#uriValue}</${this.constructor.type.toLowerCase()}>`;
   }
 
+  get valueJSON() {
+    return [ this.constructor.type.toLowerCase(), this.#uriValue ];
+  }
+
   constructor(uriValue) {
     super();
 

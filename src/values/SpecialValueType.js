@@ -26,6 +26,7 @@ export class SpecialValueType extends BaseValue {
 
         this.value = value;
         this.valueXML = `<text>${value}</text>`;
+        this.valueJSON = [ this.constructor.type.toLowerCase(), value ];
 
         break;
       case /^NProperty$/i.test(targetProp):
@@ -50,40 +51,70 @@ export class SpecialValueType extends BaseValue {
         valueCopy[index] = valueCopy[index].repr();
 
         this.value = valueCopy.join(';');
-
         this.valueXML = '';
+        this.valueJSON = [];
 
         for (let index = 0; index < value.length; index++)
         switch (index) {
           case 0:
-            if (!value[index])
-            this.valueXML += '<surname/>';
-            else this.valueXML += value[index].reprXML().replaceAll('text>', 'surname>');
+            if (!value[index]) {
+              this.valueXML += '<surname/>';
+              this.valueJSON[index] = '';
+            }
+            else {
+              this.valueXML += value[index].reprXML().replaceAll('text>', 'surname>');
+              this.valueJSON[index] = value[index].reprJSON().pop();
+            }
 
             break;
           case 1:
-            if (!value[index])
-            this.valueXML += '<given/>';
-            else this.valueXML += value[index].reprXML().replaceAll('text>', 'given>');
+            if (!value[index]) {
+              this.valueXML += '<given/>';
+              this.valueJSON[index] = '';
+            }
+            else {
+              this.valueXML += value[index].reprXML().replaceAll('text>', 'given>');
+              this.valueJSON[index] = value[index].reprJSON().pop();
+            }
 
             break;
           case 2:
-            if (!value[index])
-            this.valueXML += '<additional/>';
-            else this.valueXML += value[index].reprXML().replaceAll('text>', 'additional>');
+            if (!value[index]) {
+              this.valueXML += '<additional/>';
+              this.valueJSON[index] = '';
+            }
+            else {
+              this.valueXML += value[index].reprXML().replaceAll('text>', 'additional>');
+              this.valueJSON[index] = value[index].reprJSON().pop();
+            }
 
             break;
           case 3:
-            if (!value[index])
-            this.valueXML += '<prefix/>';
-            else this.valueXML += value[index].reprXML().replaceAll('text>', 'prefix>');
+            if (!value[index]) {
+              this.valueXML += '<prefix/>';
+              this.valueJSON[index] = '';
+            }
+            else {
+              this.valueXML += value[index].reprXML().replaceAll('text>', 'prefix>');
+              this.valueJSON[index] = value[index].reprJSON().pop();
+            }
 
             break;
           case 4:
-            if (!value[index])
-            this.valueXML += '<suffix/>';
-            else this.valueXML += value[index].reprXML().replaceAll('text>', 'suffix>');
+            if (!value[index]) {
+              this.valueXML += '<suffix/>';
+              this.valueJSON[index] = '';
+            }
+            else {
+              this.valueXML += value[index].reprXML().replaceAll('text>', 'suffix>');
+              this.valueJSON[index] = value[index].reprJSON().pop();
+            }
         }
+
+        this.valueJSON = [
+          this.constructor.type.toLowerCase(),
+          this.valueJSON
+        ];
 
         break;
       case /^GenderProperty$/i.test(targetProp):
@@ -114,6 +145,17 @@ export class SpecialValueType extends BaseValue {
 
         this.valueXML = value.reduce((accumulated, current) => accumulated + current.reprXML(), '');
 
+        this.valueJSON = value.reduce((accumulated, current) => {
+          accumulated.push(
+            current.reprJSON().pop()
+          );
+          return accumulated;
+        }, []);
+
+        if (this.valueJSON.length === 1)
+        this.valueJSON.unshift(this.constructor.type.toLowerCase());
+        else this.valueJSON = [ this.constructor.type.toLowerCase(), this.valueJSON ];
+
         break;
       case /^AdrProperty$/i.test(targetProp):
         if (
@@ -134,52 +176,92 @@ export class SpecialValueType extends BaseValue {
         valueCopy[index] = valueCopy[index].repr();
 
         this.value = valueCopy.join(';');
-
         this.valueXML = '';
+        this.valueJSON = [];
 
         for (let index = 0; index < value.length; index++)
         switch (index) {
           case 0:
-            if (!value[index])
-            this.valueXML += '<pobox/>';
-            else this.valueXML += value[index].reprXML().replaceAll('text>', 'pobox>');
+            if (!value[index]) {
+              this.valueXML += '<pobox/>';
+              this.valueJSON[index] = '';
+            }
+            else {
+              this.valueXML += value[index].reprXML().replaceAll('text>', 'pobox>');
+              this.valueJSON[index] = value[index].reprJSON().pop();
+            }
 
             break;
           case 1:
-            if (!value[index])
-            this.valueXML += '<ext/>';
-            else this.valueXML += value[index].reprXML().replaceAll('text>', 'ext>');
+            if (!value[index]) {
+              this.valueXML += '<ext/>';
+              this.valueJSON[index] = '';
+            }
+            else {
+              this.valueXML += value[index].reprXML().replaceAll('text>', 'ext>');
+              this.valueJSON[index] = value[index].reprJSON().pop();
+            }
 
             break;
           case 2:
-            if (!value[index])
-            this.valueXML += '<street/>';
-            else this.valueXML += value[index].reprXML().replaceAll('text>', 'street>');
+            if (!value[index]) {
+              this.valueXML += '<street/>';
+              this.valueJSON[index] = '';
+            }
+            else {
+              this.valueXML += value[index].reprXML().replaceAll('text>', 'street>');
+              this.valueJSON[index] = value[index].reprJSON().pop();
+            }
 
             break;
           case 3:
-            if (!value[index])
-            this.valueXML += '<locality/>';
-            else this.valueXML += value[index].reprXML().replaceAll('text>', 'locality>');
+            if (!value[index]) {
+              this.valueXML += '<locality/>';
+              this.valueJSON[index] = '';
+            }
+            else {
+              this.valueXML += value[index].reprXML().replaceAll('text>', 'locality>');
+              this.valueJSON[index] = value[index].reprJSON().pop();
+            }
 
             break;
           case 4:
-            if (!value[index])
-            this.valueXML += '<region/>';
-            else this.valueXML += value[index].reprXML().replaceAll('text>', 'region>');
+            if (!value[index]) {
+              this.valueXML += '<region/>';
+              this.valueJSON[index] = '';
+            }
+            else {
+              this.valueXML += value[index].reprXML().replaceAll('text>', 'region>');
+              this.valueJSON[index] = value[index].reprJSON().pop();
+            }
 
             break;
           case 5:
-            if (!value[index])
-            this.valueXML += '<code/>';
-            else this.valueXML += value[index].reprXML().replaceAll('text>', 'code>');
+            if (!value[index]) {
+              this.valueXML += '<code/>';
+              this.valueJSON[index] = '';
+            }
+            else {
+              this.valueXML += value[index].reprXML().replaceAll('text>', 'code>');
+              this.valueJSON[index] = value[index].reprJSON().pop();
+            }
 
             break;
           case 6:
-            if (!value[index])
-            this.valueXML += '<country/>';
-            else this.valueXML += value[index].reprXML().replaceAll('text>', 'country>');
+            if (!value[index]) {
+              this.valueXML += '<country/>';
+              this.valueJSON[index] = '';
+            }
+            else {
+              this.valueXML += value[index].reprXML().replaceAll('text>', 'country>');
+              this.valueJSON[index] = value[index].reprJSON().pop();
+            }
         }
+
+        this.valueJSON = [
+          this.constructor.type.toLowerCase(),
+          this.valueJSON
+        ];
 
         break;
       case /^OrgProperty$/i.test(targetProp):
@@ -199,6 +281,17 @@ export class SpecialValueType extends BaseValue {
 
         this.valueXML = value.reduce((accumulated, current) => accumulated + current.reprXML(), '');
 
+        this.valueJSON = value.reduce((accumulated, current) => {
+          accumulated.push(
+            current.reprJSON().pop()
+          );
+          return accumulated;
+        }, []);
+
+        if (this.valueJSON.length === 1)
+        this.valueJSON.unshift(this.constructor.type.toLowerCase());
+        else this.valueJSON = [ this.constructor.type.toLowerCase(), this.valueJSON ];
+
         break;
       case /^ClientpidmapProperty$/i.test(targetProp):
         if (
@@ -210,8 +303,8 @@ export class SpecialValueType extends BaseValue {
         else if (value[0]?.constructor?.identifier !== 'IntegerType')
         throw new TypeError('Invalid value for SpecialValueType for ClientpidmapProperty. The first item in the array should be of type IntegerType');
 
-        else if (0 > Number(value[0].repr()))
-        throw new InvalidArgument('Invalid value for SpecialValueType for ClientpidmapProperty. The first item in the array should be a positive integer of type IntegerType')
+        else if (0 >= Number(value[0].repr()))
+        throw new InvalidArgument('Invalid value for SpecialValueType for ClientpidmapProperty. The first item in the array should be a positive integer of type IntegerType. Zero is not allowed')
 
         else if (value[1]?.constructor?.identifier !== 'URIType')
         throw new TypeError('Invalid value for SpecialValueType for ClientpidmapProperty. The second item in the array should be of type URIType');
@@ -221,6 +314,16 @@ export class SpecialValueType extends BaseValue {
         }, '');
 
         this.valueXML = value.reduce((accumulated, current) => accumulated + current.reprXML(), '');
+
+        this.valueJSON = [
+          'unknown',
+          value.reduce((accumulated, current) => {
+            accumulated.push(
+              current.reprJSON().pop()
+            );
+            return accumulated;
+          }, [])
+        ]
 
         break;
       default:

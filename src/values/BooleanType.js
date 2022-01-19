@@ -24,6 +24,10 @@ export class BooleanType extends BaseValue {
     return `<${this.constructor.type.toLowerCase()}>${this.#boolValue}</${this.constructor.type.toLowerCase()}>`;
   }
 
+  get valueJSON() {
+    return [ this.constructor.type.toLowerCase(), this.#boolValue ];
+  }
+
   constructor(boolValue) {
     super();
 

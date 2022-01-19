@@ -19,6 +19,19 @@ export class DateTimeListType extends BaseValue {
     , '');
   }
 
+  get valueJSON() {
+    const value = this.#datetimelist.reduce((accumulatedIntegerTypes, currentIntegerType) => {
+      accumulatedIntegerTypes.push(
+        currentIntegerType.reprJSON().pop()
+      );
+      return accumulatedIntegerTypes;
+    }, []);
+
+    value.unshift(this.type.toLowerCase());
+
+    return value;
+  }
+
   #validate(datetimelist) {
     if (typeof datetimelist === 'undefined')
     throw new MissingArgument('Value for DateTimeListType must be supplied');

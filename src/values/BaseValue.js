@@ -3,6 +3,7 @@ export class BaseValue {
     'type',
     'value',
     'valueXML',
+    'valueJSON',
     'identifier'
   ];
 
@@ -23,6 +24,10 @@ export class BaseValue {
 
   reprXML() {
     return this.valueXML;
+  }
+
+  reprJSON() {
+    return this.valueJSON;
   }
 
   constructor() {

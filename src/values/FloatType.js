@@ -29,6 +29,10 @@ export class FloatType extends BaseValue {
     return `<${this.constructor.type.toLowerCase()}>${this.#floatValue}</${this.constructor.type.toLowerCase()}>`;
   }
 
+  get valueJSON() {
+    return [ this.constructor.type.toLowerCase(), this.#floatValue ];
+  }
+
   constructor(floatValue) {
     super();
 

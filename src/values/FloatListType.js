@@ -20,6 +20,19 @@ export class FloatListType extends BaseValue {
     , '');
   }
 
+  get valueJSON() {
+    const value = this.#floatlist.reduce((accumulatedFloatTypes, currentFloatType) => {
+      accumulatedFloatTypes.push(
+        currentFloatType.reprJSON().pop()
+      );
+      return accumulatedFloatTypes;
+    }, []);
+
+    value.unshift(this.constructor.type.toLowerCase());
+
+    return value;
+  }
+
   #validate(floatlist) {
     if (typeof floatlist === 'undefined')
     throw new MissingArgument('Value for FloatListType must be supplied');

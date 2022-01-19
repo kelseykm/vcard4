@@ -23,6 +23,10 @@ export class LanguageTagType extends BaseValue {
     return `<${this.constructor.type.toLowerCase()}>${this.#langTagValue}<${this.constructor.type.toLowerCase()}>`;
   }
 
+  get valueJSON() {
+    return [ this.constructor.type.toLowerCase(), this.#langTagValue ];
+  }
+
   constructor(langTagValue) {
     super();
 

@@ -44,6 +44,10 @@ export class IntegerType extends BaseValue {
     return `<${this.constructor.type.toLowerCase()}>${this.#intValue}</${this.constructor.type.toLowerCase()}>`;
   }
 
+  get valueJSON() {
+    return [ this.constructor.type.toLowerCase(), this.#intValue ];
+  }
+
   constructor(intValue) {
     super();
 

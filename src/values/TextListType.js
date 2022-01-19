@@ -20,6 +20,19 @@ export class TextListType extends BaseValue {
     , '');
   }
 
+  get valueJSON() {
+    const value = this.#textlist.reduce((accumulatedTextTypes, currentTextType) => {
+      accumulatedTextTypes.push(
+        currentTextType.reprJSON().pop()
+      );
+      return accumulatedTextTypes;
+    }, []);
+
+    value.unshift(this.constructor.type.toLowerCase());
+
+    return value;
+  }
+
   #validate(textlist) {
     if (typeof textlist === 'undefined')
     throw new MissingArgument('Value for TextListType must be supplied');
