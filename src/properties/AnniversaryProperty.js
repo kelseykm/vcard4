@@ -30,6 +30,17 @@ export class AnniversaryProperty extends BaseProperty {
     return this.#params.reduce((accumulatedParameters, currentParameter) => accumulatedParameters + currentParameter.reprXML(), '');
   }
 
+  get paramsJSON() {
+    return this.#params.reduce(
+      (accumulatedParameters, currentParameter) => ({ ...currentParameter.reprJSON(), ...accumulatedParameters }),
+      {}
+    );
+  }
+
+  get valueJSON() {
+    return this.#value.reprJSON();
+  }
+
   get value() {
     return this.#value.repr();
   }

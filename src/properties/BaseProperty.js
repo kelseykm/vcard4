@@ -6,8 +6,10 @@ export class BaseProperty {
     'acceptableValTypes',
     'params',
     'paramsXML',
+    'paramsJSON',
     'value',
     'valueXML',
+    'valueJSON',
     'identifier',
   ];
 
@@ -55,6 +57,14 @@ export class BaseProperty {
     return this.paramsXML === '' ?
     `<${tag}>${this.valueXML}</${tag}>` :
     `<${tag}><parameters>${this.paramsXML}</parameters>${this.valueXML}</${tag}>`;
+  }
+
+  reprJSON() {
+    return [
+      this.constructor.prop?.toLowerCase() || this.prop?.toLowerCase(),
+      this.paramsJSON,
+      ...this.valueJSON
+    ];
   }
 
   constructor() {

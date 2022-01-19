@@ -31,12 +31,23 @@ export class FNProperty extends BaseProperty {
     return this.#params.reduce((accumulatedParameters, currentParameter) => accumulatedParameters + currentParameter.reprXML(), '');
   }
 
+  get paramsJSON() {
+    return this.#params.reduce(
+      (accumulatedParameters, currentParameter) => ({ ...currentParameter.reprJSON(), ...accumulatedParameters }),
+      {}
+    );
+  }
+
   get value() {
     return this.#value.repr();
   }
   
   get valueXML() {
     return this.#value.reprXML();
+  }
+
+  get valueJSON() {
+    return this.#value.reprJSON();
   }
 
   #validate(params, value) {
