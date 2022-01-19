@@ -17,6 +17,10 @@ export class LevelParameter extends BaseParameter {
     return this.#levelValue.reprXML();
   }
 
+  get valueJSON() {
+    return this.#levelValue.reprJSON();
+  }
+
   #validate(levelValue, targetProp) {
     if (
       typeof levelValue === 'undefined' ||

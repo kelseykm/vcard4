@@ -50,6 +50,30 @@ export class PIDParameter extends BaseParameter {
     return xml.replaceAll('integer', 'text');
   }
 
+  get valueJSON() {
+    if (Array.isArray(this.#pidValue)) {
+      const json = this.#pidValue.reduce((accumulatedTypes, currentType) => {
+        if (Array.isArray(currentType)) {
+          accumulatedTypes.push(
+            currentType.reduce((accumType, currType) => {
+              accumType.push(currType.repr());
+              return accumType;
+            }, []).join('.')
+          );
+        }
+        else accumulatedTypes.push(currentType.repr());
+
+        return accumulatedTypes;
+      }, []);
+
+      json.unshift('integer');
+
+      return json;
+    }
+
+    return this.#pidValue.reprJSON();
+  }
+
   #validate(pidValue) {
     if (typeof pidValue === 'undefined')
     throw new MissingArgument('Value for PIDParameter must be supplied');

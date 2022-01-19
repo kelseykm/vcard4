@@ -15,6 +15,10 @@ export class SortAsParameter extends BaseParameter {
     return this.#sortValue.reprXML();
   }
 
+  get valueJSON() {
+    return this.#sortValue.reprJSON();
+  }
+
   #validate(sortValue) {
     if (typeof sortValue === 'undefined')
     throw new MissingArgument('Value for SortAsParameter must be supplied');

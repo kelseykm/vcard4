@@ -15,6 +15,10 @@ export class IndexParameter extends BaseParameter {
     return this.#indexValue.reprXML();
   }
 
+  get valueJSON() {
+    return this.#indexValue.reprJSON();
+  }
+
   #validate(indexValue) {
     if (typeof indexValue === 'undefined')
     throw new MissingArgument('Value for IndexParameter must be supplied');

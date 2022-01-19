@@ -15,6 +15,10 @@ export class GeoParameter extends BaseParameter {
     return this.#geoValue.reprXML();
   }
 
+  get valueJSON() {
+    return this.#geoValue.reprJSON();
+  }
+
   #validate(geoValue) {
     if (typeof geoValue === 'undefined')
     throw new MissingArgument('Value for GeoParameter must be supplied');

@@ -15,6 +15,10 @@ export class PrefParameter extends BaseParameter {
     return this.#prefValue.reprXML();
   }
 
+  get valueJSON() {
+    return this.#prefValue.reprJSON();
+  }
+
   #validate(prefValue) {
     if (typeof prefValue === 'undefined')
     throw new MissingArgument('Value for PrefParameter must be supplied');

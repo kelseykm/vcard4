@@ -27,6 +27,19 @@ export class MediatypeParameter extends BaseParameter {
     this.#mediaValue.reprXML();
   }
 
+  get valueJSON() {
+    if (Array.isArray(this.#mediaValue))
+    return [ 
+      'text',
+      this.#mediaValue.reduce((accumulated, current) => {
+        accumulated.push(current.repr());
+        return accumulated;
+      }, []).join(';')
+    ];
+
+    return this.#mediaValue.reprJSON();
+  }
+
   #validate(mediaValue) {
     if (typeof mediaValue === 'undefined')
     throw new MissingArgument('Value for MediatypeParameter must be supplied');

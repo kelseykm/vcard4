@@ -14,6 +14,8 @@ export class ValueParameter extends BaseParameter {
 
   get valueXML() { return ''; }
 
+  get valueJSON() { return []; }
+
   #validate(valueType) {
     if (typeof valueType === 'undefined')
     throw new MissingArgument('Value for ValueParameter must be supplied');

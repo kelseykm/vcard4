@@ -15,6 +15,10 @@ export class TzParameter extends BaseParameter {
     return this.#tzValue.reprXML();
   }
 
+  get valueJSON() {
+    return this.#tzValue.reprJSON();
+  }
+
   #validate(tzValue) {
     if (typeof tzValue === 'undefined')
     throw new MissingArgument('Value for TzParameter must be supplied');

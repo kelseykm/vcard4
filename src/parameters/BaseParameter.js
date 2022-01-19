@@ -3,6 +3,7 @@ export class BaseParameter {
     'param',
     'value',
     'valueXML',
+    'valueJSON',
     'identifier',
   ];
 
@@ -32,6 +33,22 @@ export class BaseParameter {
     return '';
 
     return `<${tag}>${this.valueXML}</${tag}>`;
+  }
+
+  reprJSON() {
+    const key = this.constructor.param?.toLowerCase() || this.param?.toLowerCase(); 
+
+    if (key === 'value')
+    return {};
+
+    let value = this.valueJSON;
+    value.shift();
+    value = value.map(val => val.toString());
+    
+    if (value.length === 1)
+    value = value.pop();
+
+    return { [key]: value };
   }
 
   constructor() {

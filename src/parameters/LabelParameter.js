@@ -15,6 +15,10 @@ export class LabelParameter extends BaseParameter {
     return `<text>${this.#cleanUpXML(this.#labelValue)}</text>`;
   }
 
+  get valueJSON() {
+    return [ 'text', this.#labelValue ];
+  }
+
   #validate(labelValue) {
     if (typeof labelValue === 'undefined')
     throw new MissingArgument('Value for LabelParameter must be supplied');

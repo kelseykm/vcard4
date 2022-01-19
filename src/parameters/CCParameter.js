@@ -15,6 +15,10 @@ export class CCParameter extends BaseParameter {
     return this.#ccValue.reprXML();
   }
 
+  get valueJSON() {
+    return this.#ccValue.reprJSON();
+  }
+
   #validate(ccValue) {
     if (typeof ccValue === 'undefined')
     throw new MissingArgument('Value for CCParameter must be supplied');

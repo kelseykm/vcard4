@@ -15,6 +15,10 @@ export class AltidParameter extends BaseParameter {
     return this.#altidValue.reprXML();
   }
 
+  get valueJSON() {
+    return this.#altidValue.reprJSON();
+  }
+
   #validate(altidValue) {
     if (typeof altidValue === 'undefined')
     throw new MissingArgument('Value for AltidParameter must be supplied');

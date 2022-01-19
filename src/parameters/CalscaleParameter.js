@@ -16,6 +16,10 @@ export class CalscaleParameter extends BaseParameter {
     return this.#calscaleValue.reprXML();
   }
 
+  get valueJSON() {
+    return this.#calscaleValue.reprJSON();
+  }
+
   #validate(calscaleValue) {
     if (typeof calscaleValue === 'undefined')
     throw new MissingArgument('Value for CalscaleParameter must be supplied');
