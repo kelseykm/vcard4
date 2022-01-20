@@ -56,9 +56,21 @@ export class EmailProperty extends BaseProperty {
     else if (!Array.isArray(params))
     throw new InvalidArgument('Parameters for EmailProperty must be passed in an array');
 
+    const parameterInstanceCount = new Set();
 
-    else if (
+    if (
+
       !params.every(param => {
+        if (param.constructor.identifier !== 'AnyParameter') {
+          if (parameterInstanceCount.has(param.constructor.identifier))
+          throw new InvalidArgument('Parameters must not have more than one instance supplied');
+          else parameterInstanceCount.add(param.constructor.identifier);
+        } else {
+          if (parameterInstanceCount.has(param.param))
+          throw new InvalidArgument('Parameters must not have more than one instance supplied');
+          else parameterInstanceCount.add(param.param);
+        }
+
         if (param.constructor.identifier === 'TypeParameter')
         return !/^(?:Related|Tel)Property$/i.test(param.targetProp);
 

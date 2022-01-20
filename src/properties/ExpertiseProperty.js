@@ -56,8 +56,20 @@ export class ExpertiseProperty extends BaseProperty {
     else if (!Array.isArray(params))
     throw new InvalidArgument('Parameters for ExpertiseProperty must be passed in an array');
 
-    else if (
+    const parameterInstanceCount = new Set();
+
+    if (
       !params.every(param => {
+        if (param.constructor.identifier !== 'AnyParameter') {
+          if (parameterInstanceCount.has(param.constructor.identifier))
+          throw new InvalidArgument('Parameters must not have more than one instance supplied');
+          else parameterInstanceCount.add(param.constructor.identifier);
+        } else {
+          if (parameterInstanceCount.has(param.param))
+          throw new InvalidArgument('Parameters must not have more than one instance supplied');
+          else parameterInstanceCount.add(param.param);
+        }
+
         if (param.constructor.identifier === 'LevelParameter')
         return /^ExpertiseProperty$/i.test(param.targetProp);
 

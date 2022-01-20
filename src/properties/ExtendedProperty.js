@@ -82,8 +82,20 @@ export class ExtendedProperty extends BaseProperty {
     else if (!this.#propRegExp.test(prop))
     throw new InvalidArgument('Invalid property for ExtendedProperty');
 
-    else if (
+    const parameterInstanceCount = new Set();
+
+    if (
       !params.every(param => {
+        if (param.constructor.identifier !== 'AnyParameter') {
+          if (parameterInstanceCount.has(param.constructor.identifier))
+          throw new InvalidArgument('Parameters must not have more than one instance supplied');
+          else parameterInstanceCount.add(param.constructor.identifier);
+        } else {
+          if (parameterInstanceCount.has(param.param))
+          throw new InvalidArgument('Parameters must not have more than one instance supplied');
+          else parameterInstanceCount.add(param.param);
+        }
+
         if (param.constructor.identifier === 'ValueParameter')
         return param.value === value.repr().toLowerCase();
         return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
