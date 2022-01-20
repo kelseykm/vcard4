@@ -51,6 +51,16 @@ export class VCARD {
     return valueXML;
   }
 
+  reprJSON() {
+    return [
+      'vcard',
+      this.#props.reduce((accumulatedProps, currentProp) => {
+        accumulatedProps.push(currentProp.reprJSON());
+        return accumulatedProps;
+      }, [])
+    ];
+  }
+
   #validate(props) {
     if (typeof props === 'undefined')
     throw new MissingArgument('Properties for VCARD must be supplied');
