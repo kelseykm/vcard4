@@ -1,0 +1,386 @@
+import {
+  MissingArgument,
+  InvalidArgument,
+  InvalidVcard
+} from '../errors/index.js';
+
+export class Tokenizer {
+  static identifier = 'Tokenizer';
+
+  #_unfoldedVcard;
+
+  //Credit for the following regex goes to Jonas Hermsmeier, who got it from Jeff Roberson and added capture groups
+  #uriRegExp = new RegExp("([A-Za-z][A-Za-z0-9+\\-.]*):(?:(//)(?:((?:[A-Za-z0-9\\-._~!$&'()*+,;=:]|%[0-9A-Fa-f]{2})*)@)?((?:\\[(?:(?:(?:(?:[0-9A-Fa-f]{1,4}:){6}|::(?:[0-9A-Fa-f]{1,4}:){5}|(?:[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,1}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){3}|(?:(?:[0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})?::(?:[0-9A-Fa-f]{1,4}:){2}|(?:(?:[0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}:|(?:(?:[0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})?::)(?:[0-9A-Fa-f]{1,4}:[0-9A-Fa-f]{1,4}|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|(?:(?:[0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})?::[0-9A-Fa-f]{1,4}|(?:(?:[0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})?::)|[Vv][0-9A-Fa-f]+\\.[A-Za-z0-9\\-._~!$&'()*+,;=:]+)\\]|(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)|(?:[A-Za-z0-9\\-._~!$&'()*+,;=]|%[0-9A-Fa-f]{2})*))(?::([0-9]*))?((?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)|/((?:(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)?)|((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})+(?:/(?:[A-Za-z0-9\\-._~!$&'()*+,;=:@]|%[0-9A-Fa-f]{2})*)*)|)(?:\\?((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@/?]|%[0-9A-Fa-f]{2})*))?(?:\\#((?:[A-Za-z0-9\\-._~!$&'()*+,;=:@/?]|%[0-9A-Fa-f]{2})*))?");
+
+  get numberOfvCards() {
+    return (this.#_unfoldedVcard.match(/BEGIN:VCARD\r\n/ig) ?? []).length;
+  }
+
+  #backCount(chr, str) {
+    if (
+      typeof chr === 'undefined' ||
+      typeof str === 'undefined'
+    )
+    throw new MissingArgument('Character and string for this.#backCount must be supplied');
+
+    if (
+      typeof chr !== 'string' ||
+      typeof str !== 'string'
+    )
+    throw new InvalidArgument('Character and string for this.#backCount must be of type string');
+
+    let count = 0;
+
+    for (let index = str.length - 1; index >= 0; index--) {
+      if (str[index] === chr) count ++;
+      else break;
+    }
+
+    return count;
+  }
+
+  #separateVcardContentLines() {
+    if (this.numberOfvCards === 1)
+    return this.#_unfoldedVcard
+      .split('\r\n')
+      .filter(vcard => vcard !== '');
+
+    return this.#_unfoldedVcard
+      .split(/BEGIN:VCARD\r\n/ig)
+      .filter(vcard => vcard !== '')
+      .map(vcard => ('BEGIN:VCARD\r\n' + vcard)
+        .split('\r\n')
+        .filter(vcard => vcard !== '')
+      );
+  }
+
+  #valueSeparator(value) {
+    if (this.#uriRegExp.test(value))
+    return value;
+
+    const quotedValues = [];
+    let quotedValueIndex = 0;
+    for (let index = 0; index < value.length; index++) {
+      if (value[index] === '"') {
+        if (typeof quotedValues[quotedValueIndex] !== 'object')
+        quotedValues[quotedValueIndex] = {
+          start: index,
+        };
+        else if (typeof quotedValues[quotedValueIndex] === 'object') {
+          quotedValues[quotedValueIndex]['stop'] = index;
+          quotedValueIndex++;
+        }
+      }
+    }
+
+    let parsedValue = [];
+
+    let continueFrom = 0;
+    for (let index = 0; index < value.length; index++) {
+      if (value[index] === ';') {
+        if (
+          quotedValues.some(quotedValue => {
+            return (index > quotedValue.start) && (index < quotedValue.stop);
+          })
+        ) continue;
+
+        const backslashCount = this.#backCount('\\', value.substring(continueFrom, index));
+        if (backslashCount % 2 !== 0) continue;
+
+        parsedValue.push(value.substring(continueFrom, index));
+        continueFrom = index + 1;
+      }
+
+      if (index === value.length - 1)
+      parsedValue.push(value.substring(continueFrom));
+    }
+
+    for (let index = 0; index < parsedValue.length; index++) {
+      const component = parsedValue[index];
+
+      const quotedComponents = [];
+      let quotedComponentIndex = 0;
+      for (let index = 0; index < component.length; index++) {
+        if (component[index] === '"') {
+          if (typeof quotedComponents[quotedComponentIndex] !== 'object')
+          quotedComponents[quotedComponentIndex] = {
+            start: index,
+          };
+          else if (typeof quotedComponents[quotedComponentIndex] === 'object') {
+            quotedComponents[quotedComponentIndex]['stop'] = index;
+            quotedComponentIndex++;
+          }
+        }
+      }
+
+      const holdParsedComponent = [];
+      let continueFrom = 0;
+      for (let index2 = 0; index2 < component.length; index2++) {
+        if (component[index2] === ',') {
+          if (
+            quotedComponents.some(quotedComponent => {
+              return (index2 > quotedComponent.start) && (index2 < quotedComponent.stop);
+            })
+          ) continue;
+
+          const backslashCount = this.#backCount('\\', component.substring(continueFrom, index2));
+          if (backslashCount % 2 !== 0) continue;
+
+          holdParsedComponent.push(component.substring(continueFrom, index2));
+          continueFrom = index2 + 1;
+        }
+
+        if (index2 === component.length - 1)
+        holdParsedComponent.push(component.substring(continueFrom));
+      }
+
+      if (holdParsedComponent.length > 1)
+      parsedValue[index] = holdParsedComponent;
+    }
+
+    parsedValue = parsedValue.map(val => {
+      if (!Array.isArray(val))
+      return val.replaceAll('\\n', '\n')
+        .replaceAll('\\;', ';')
+        .replaceAll('\\:', ':')
+        .replaceAll('\\,', ',')
+        .replaceAll('\\\\', '\\');
+
+      return val.map(innerVal => (
+        innerVal.replaceAll('\\n', '\n')
+          .replaceAll('\\;', ';')
+          .replaceAll('\\:', ':')
+          .replaceAll('\\,', ',')
+          .replaceAll('\\\\', '\\')
+      ));
+    });
+
+    return parsedValue.length > 1 ? parsedValue : parsedValue[0];
+  }
+
+  #parametersSeparator(params) {
+    const paramList = [];
+
+    const quotedParams = [];
+    let quotedParamIndex = 0;
+    for (let index = 0; index < params.length; index++) {
+      if (params[index] === '"') {
+        if (typeof quotedParams[quotedParamIndex] !== 'object')
+        quotedParams[quotedParamIndex] = {
+          start: index,
+        };
+        else if (typeof quotedParams[quotedParamIndex] === 'object') {
+          quotedParams[quotedParamIndex]['stop'] = index;
+          quotedParamIndex++;
+        }
+      }
+    }
+
+    let continueFrom = 0;
+    for (let index = 0; index < params.length; index++) {
+      if (params[index] === ';') {
+        if (
+          quotedParams.some(quotedParam => {
+            return (index > quotedParam.start) && (index < quotedParam.stop);
+          })
+        ) continue;
+
+        const backslashCount = this.#backCount('\\', params.substring(continueFrom, index));
+        if (backslashCount % 2 !== 0) continue;
+
+        paramList.push(params.substring(continueFrom, index));
+        continueFrom = index + 1;
+      }
+
+      if (index === params.length - 1)
+      paramList.push(params.substring(continueFrom));
+    }
+
+    const refParamList = [...paramList];
+    for (let index = 0; index < paramList.length; index++) {
+      const joinedParam = paramList[index];
+
+      const holdJoinedParam = [];
+      let continueFrom = 0;
+      for (let index2 = 0; index2 < joinedParam.length; index2++) {
+        if (joinedParam[index2] === '=') {
+          const actualIndex = index ?
+            (() => {
+              let count = 0;
+
+              for (let index3 = 0; index3 < index; index3++) {
+                count += refParamList[index3]['length'];
+                count ++; //for removed semicolon
+              }
+
+              count += index2;
+
+              return count;
+            })()
+            : index2;
+          if (
+            quotedParams.some(quotedParam => {
+              return (actualIndex > quotedParam.start) && (actualIndex < quotedParam.stop);
+            })
+          ) continue;
+
+          const backslashCount = this.#backCount('\\', joinedParam.substring(continueFrom, index2));
+          if (backslashCount % 2 !== 0) continue;
+
+          holdJoinedParam.push(joinedParam.substring(continueFrom, index2));
+          continueFrom = index2 + 1;
+        }
+
+        if (index2 === joinedParam.length - 1)
+        holdJoinedParam.push(joinedParam.substring(continueFrom));
+      }
+
+      const parsedParam = {};
+      for (let index = 0; index < holdJoinedParam.length; index++) {
+        if (index % 2 === 0)
+        parsedParam[holdJoinedParam[index]] = holdJoinedParam[index + 1]
+        else continue;
+      }
+
+      paramList[index] = parsedParam;
+    }
+
+    for (let index = 0; index < paramList.length; index++) {
+      const currentParam = paramList[index];
+      const currentParamKey = Object.keys(currentParam).pop();
+      const currentParamValue = Object.values(currentParam).pop();
+
+      let holdCurrentParamValue = '';
+      let continueFrom = 0;
+      for (let index2 = 0; index2 < currentParamValue.length; index2++) {
+        if (currentParamValue[index2] === '^') {
+          const circumflexCount = this.#backCount('^', currentParamValue.substring(continueFrom, index2));
+
+          if (circumflexCount % 2 !== 0) {
+            holdCurrentParamValue += currentParamValue[index2];
+          } else {
+            switch (true) {
+              case currentParamValue[index2 + 1] === 'n':
+                holdCurrentParamValue += '\n';
+                index2++;
+                break;
+              case currentParamValue[index2 + 1] === '’':
+                holdCurrentParamValue += '"';
+                index2++;
+                break;
+              case currentParamValue[index2 + 1] === '^':
+                holdCurrentParamValue += '^';
+                index2++;
+                break;
+            }
+          }
+        }
+        else {
+          holdCurrentParamValue += currentParamValue[index2];
+        }
+        continueFrom = index2 + 1;
+      }
+
+      if (
+        (
+          holdCurrentParamValue.startsWith('"') &&
+          holdCurrentParamValue.startsWith('"')
+        ) &&
+        !this.#uriRegExp.test(holdCurrentParamValue.slice(1, -1))
+      )
+      holdCurrentParamValue = this.#valueSeparator(
+        holdCurrentParamValue.slice(1, -1)
+      );
+
+      currentParam[currentParamKey] = holdCurrentParamValue;
+    }
+
+    return paramList.reduce((accumulatedParams, currentParam) => {
+      const key = Object.keys(currentParam)[0].toUpperCase();
+      const value = Object.values(currentParam)[0];
+      accumulatedParams[key] = value;
+      return accumulatedParams;
+    }, {});
+  }
+
+  #contentLineTokenizer(contentLine) {
+    const firstSemiColonIndex = contentLine.indexOf(';');
+    const firstColonIndex = contentLine.indexOf(':');
+
+    const propEndPoint = firstSemiColonIndex !== -1 ?
+      (
+        firstColonIndex < firstSemiColonIndex ?
+          firstColonIndex :
+          firstSemiColonIndex
+      ) :
+      firstColonIndex;
+
+    let property = contentLine.slice(0, propEndPoint).toUpperCase();
+    let group = null;
+
+    if (property.indexOf('.') !== -1) {
+      [group, property] = property.split('.')
+    }
+
+    if (firstSemiColonIndex === -1 || firstColonIndex < firstSemiColonIndex)
+    return {
+      group,
+      property,
+      parameters: {},
+      value: this.#valueSeparator(
+        contentLine.slice(propEndPoint + 1)
+      )
+    };
+
+    return {
+      group,
+      property,
+      parameters: this.#parametersSeparator(
+        contentLine.slice(firstSemiColonIndex + 1, firstColonIndex)
+      ),
+      value: this.#valueSeparator(
+        contentLine.slice(firstColonIndex + 1)
+      )
+    };
+  }
+
+  #initialValidation(vcard) {
+    if (typeof vcard === 'undefined')
+    throw new MissingArgument('vCard to be tokenized must be supplied');
+
+    else if (typeof vcard !== 'string')
+    throw new TypeError('vCard to be tokenized must be of type string');
+
+    if ((vcard.match(/\r\n/g) ?? []).length < 4)
+    throw new InvalidVcard('vCard content lines must be delimited by CRLF (\\r\\n) sequence');
+  }
+
+  get tokens() {
+    const tokens = [];
+
+    if (this.numberOfvCards === 1) {
+      for (const contentLine of this.#separateVcardContentLines())
+      tokens.push(this.#contentLineTokenizer(contentLine));
+    } else {
+      for (const vcard of this.#separateVcardContentLines()) {
+        const _cardTokens = [];
+
+        for (const contentLine of vcard)
+        _cardTokens.push(this.#contentLineTokenizer(contentLine));
+
+        tokens.push(_cardTokens);
+      }
+    }
+
+    return tokens;
+  }
+
+  constructor(vcard) {
+    this.#initialValidation(vcard);
+    this.#_unfoldedVcard = vcard.replace(/\r\n[\t ]/g, ''); //unfold
+
+    Object.freeze(this);
+  }
+}
+
+Object.freeze(Tokenizer);
