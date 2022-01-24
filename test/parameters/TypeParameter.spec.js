@@ -44,6 +44,26 @@ describe('TypeParameter tests', () => {
         'telproperty'
       ).repr(),
       'TYPE="voice,home"'
-    )
+    );
+    assert.strictEqual(
+      new TypeParameter(
+        new TextListType([
+          new TextType('voice'),
+          new TextType('home')
+        ]),
+        'telproperty'
+      ).reprXML(),
+      '<type><text>voice</text><text>home</text></type>'
+    );
+    assert.deepEqual(
+      new TypeParameter(
+        new TextListType([
+          new TextType('voice'),
+          new TextType('home')
+        ]),
+        'telproperty'
+      ).reprJSON(),
+      {type: ["voice", "home"]}
+    );
   });
 });

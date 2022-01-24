@@ -23,6 +23,18 @@ describe('IndexParameter tests', () => {
         new IntegerType(1)
       ).repr(),
       'INDEX=1'
-    )
+    );
+    assert.strictEqual(
+      new IndexParameter(
+        new IntegerType(1)
+      ).reprXML(),
+      '<index><integer>1</integer></index>'
+    );
+    assert.deepEqual(
+      new IndexParameter(
+        new IntegerType(1)
+      ).reprJSON(),
+      {index: "1"}
+    );
   });
 });

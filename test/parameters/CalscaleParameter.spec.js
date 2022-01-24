@@ -19,6 +19,14 @@ describe('CalscaleParameter tests', () => {
     assert.strictEqual(
       new CalscaleParameter(new TextType('gregorian')).repr(),
       "CALSCALE=gregorian"
-    )
+    );
+    assert.strictEqual(
+      new CalscaleParameter(new TextType('gregorian')).reprXML(),
+      "<calscale><text>gregorian</text></calscale>"
+    );
+    assert.deepEqual(
+      new CalscaleParameter(new TextType('gregorian')).reprJSON(),
+      {'calscale' : 'gregorian'}
+    );
   });
 });

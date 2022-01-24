@@ -28,6 +28,20 @@ describe('MediatypeParameter tests', () => {
         new TextType('someattribute=somevalue')
       ]).repr(),
       'MEDIATYPE="video/jpeg;someattribute=somevalue"'
-    )
+    );
+    assert.strictEqual(
+      new MediatypeParameter([
+        new TextType('video/jpeg'),
+        new TextType('someattribute=somevalue')
+      ]).reprXML(),
+      '<mediatype><text>video/jpeg;someattribute=somevalue</text></mediatype>'
+    );
+    assert.deepEqual(
+      new MediatypeParameter([
+        new TextType('video/jpeg'),
+        new TextType('someattribute=somevalue')
+      ]).reprJSON(),
+      {mediatype: "video/jpeg;someattribute=somevalue"}
+    );
   });
 });

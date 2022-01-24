@@ -21,6 +21,18 @@ describe('ValueParameter tests', () => {
         new LanguageTagType('en-us')
       ).repr(),
       "VALUE=language-tag"
-    )
+    );
+    assert.strictEqual(
+      new ValueParameter(
+        new LanguageTagType('en-us')
+      ).reprXML(),
+      ""
+    );
+    assert.deepEqual(
+      new ValueParameter(
+        new LanguageTagType('en-us')
+      ).reprJSON(),
+      {}
+    );
   });
 });

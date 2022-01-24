@@ -34,6 +34,20 @@ describe('LevelParameter tests', () => {
         'expertiseproperty'
       ).repr(),
       'LEVEL=beginner'
-    )
+    );
+    assert.strictEqual(
+      new LevelParameter(
+        new TextType('beginner'),
+        'expertiseproperty'
+      ).reprXML(),
+      '<level><text>beginner</text></level>'
+    );
+    assert.deepEqual(
+      new LevelParameter(
+        new TextType('beginner'),
+        'expertiseproperty'
+      ).reprJSON(),
+      {level: 'beginner'}
+    );
   });
 });

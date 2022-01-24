@@ -23,6 +23,18 @@ describe('CCParameter tests', () => {
         new TextType('US')
       ).repr(),
       'CC=US'
-    )
+    );
+    assert.strictEqual(
+      new CCParameter(
+        new TextType('US')
+      ).reprXML(),
+      '<cc><text>US</text></cc>'
+    );
+    assert.deepEqual(
+      new CCParameter(
+        new TextType('US')
+      ).reprJSON(),
+      {cc:'US'}
+    );
   });
 });

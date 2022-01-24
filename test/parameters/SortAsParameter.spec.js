@@ -28,6 +28,24 @@ describe('SortAsParameter tests', () => {
         ])
       ).repr(),
       'SORT-AS="Luther,Martin"'
-    )
+    );
+    assert.strictEqual(
+      new SortAsParameter(
+        new TextListType([
+          new TextType('Luther'),
+          new TextType('Martin')
+        ])
+      ).reprXML(),
+      '<sort-as><text>Luther</text><text>Martin</text></sort-as>'
+    );
+    assert.deepEqual(
+      new SortAsParameter(
+        new TextListType([
+          new TextType('Luther'),
+          new TextType('Martin')
+        ])
+      ).reprJSON(),
+      {'sort-as' : ["Luther", "Martin"]}
+    );
   });
 });

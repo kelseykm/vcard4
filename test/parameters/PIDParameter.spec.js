@@ -53,6 +53,32 @@ describe('PIDParameter tests', () => {
         ]
       ]).repr(),
       "PID=1.7,23.24"
-    )
+    );
+    assert.strictEqual(
+      new PIDParameter([
+        [
+          new IntegerType(1),
+          new IntegerType(7),
+        ],
+        [
+          new IntegerType(23),
+          new IntegerType(24)
+        ]
+      ]).reprXML(),
+      "<pid><text>1.7</text><text>23.24</text></pid>"
+    );
+    assert.deepEqual(
+      new PIDParameter([
+        [
+          new IntegerType(1),
+          new IntegerType(7),
+        ],
+        [
+          new IntegerType(23),
+          new IntegerType(24)
+        ]
+      ]).reprJSON(),
+      {pid: ["1.7", "23.24"]}
+    );
   });
 });

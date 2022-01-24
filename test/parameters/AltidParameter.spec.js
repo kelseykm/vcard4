@@ -25,6 +25,18 @@ describe('AltidParameter tests', () => {
         new TextType('yah')
       ).repr(),
       "ALTID=yah"
-    )
+    );
+    assert.strictEqual(
+      new AltidParameter(
+        new TextType('yah')
+      ).reprXML(),
+      "<altid><text>yah</text></altid>"
+    );
+    assert.deepEqual(
+      new AltidParameter(
+        new TextType('yah')
+      ).reprJSON(),
+      {altid: "yah"}
+    );
   });
 });

@@ -22,6 +22,18 @@ describe('PrefParameter tests', () => {
         new IntegerType(1)
       ).repr(),
       "PREF=1"
-    )
+    );
+    assert.strictEqual(
+      new PrefParameter(
+        new IntegerType(1)
+      ).reprXML(),
+      "<pref><integer>1</integer></pref>"
+    );
+    assert.deepEqual(
+      new PrefParameter(
+        new IntegerType(1)
+      ).reprJSON(),
+      {pref: "1"}
+    );
   });
 });

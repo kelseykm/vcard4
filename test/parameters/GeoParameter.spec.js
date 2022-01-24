@@ -22,6 +22,18 @@ describe('GeoParameter tests', () => {
         new URIType('geo:37.386013,-122.082932')
       ).repr(),
       'GEO="geo:37.386013,-122.082932"'
-    )
+    );
+    assert.strictEqual(
+      new GeoParameter(
+        new URIType('geo:37.386013,-122.082932')
+      ).reprXML(),
+      '<geo><uri>geo:37.386013,-122.082932</uri></geo>'
+    );
+    assert.deepEqual(
+      new GeoParameter(
+        new URIType('geo:37.386013,-122.082932')
+      ).reprJSON(),
+      {geo: "geo:37.386013,-122.082932"}
+    );
   });
 });

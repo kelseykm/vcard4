@@ -20,6 +20,14 @@ describe('AnyParameter tests', () => {
     assert.strictEqual(
       new AnyParameter('X-CAR', new TextType('Volvo')).repr(),
       'X-CAR=Volvo'
-    )
+    );
+    assert.strictEqual(
+      new AnyParameter('X-CAR', new TextType('Volvo')).reprXML(),
+      '<x-car><text>Volvo</text></x-car>'
+    );
+    assert.deepEqual(
+      new AnyParameter('X-CAR', new TextType('Volvo')).reprJSON(),
+      {'x-car': 'Volvo'}
+    );
   });
 });

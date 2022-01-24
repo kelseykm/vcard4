@@ -28,6 +28,18 @@ describe('TzParameter tests', () => {
         new TextType('Raleigh/North America')
       ).repr(),
       'TZ=Raleigh/North America'
-    )
+    );
+    assert.strictEqual(
+      new TzParameter(
+        new TextType('Raleigh/North America')
+      ).reprXML(),
+      '<tz><text>Raleigh/North America</text></tz>'
+    );
+    assert.deepEqual(
+      new TzParameter(
+        new TextType('Raleigh/North America')
+      ).reprJSON(),
+      {tz:'Raleigh/North America'}
+    );
   });
 });

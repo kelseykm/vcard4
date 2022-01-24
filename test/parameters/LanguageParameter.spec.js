@@ -22,6 +22,18 @@ describe('LanguageParameter tests', () => {
         new LanguageTagType('en-us')
       ).repr(),
       "LANGUAGE=en-us"
-    )
+    );
+    assert.strictEqual(
+      new LanguageParameter(
+        new LanguageTagType('en-us')
+      ).reprXML(),
+      "<language><language-tag>en-us</language-tag></language>"
+    );
+    assert.deepEqual(
+      new LanguageParameter(
+        new LanguageTagType('en-us')
+      ).reprJSON(),
+      {language: "en-us"}
+    );
   });
 });
