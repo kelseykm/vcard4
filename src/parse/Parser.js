@@ -218,10 +218,18 @@ export class Parser {
         }, [])));
       },
       get propertiesWithoutParameters() {
-        return _parsedTokens.filter(parsedToken => Object.keys(parsedToken.parameters).length === 0);
+        return Array.from(new Set(_parsedTokens.reduce((accumulated, current) => {
+          if (Object.keys(current.parameters).length === 0)
+          accumulated.push(current.property);
+          return accumulated;
+        }, [])));
       },
       get propertiesWithParameters() {
-        return _parsedTokens.filter(parsedToken => Object.keys(parsedToken.parameters).length > 0);
+        return Array.from(new Set(_parsedTokens.reduce((accumulated, current) => {
+          if (Object.keys(current.parameters).length > 0)
+          accumulated.push(current.property);
+          return accumulated;
+        }, [])));
       },
       get groups() {
         return Array.from(new Set(_parsedTokens.reduce((accumulated, current) => {

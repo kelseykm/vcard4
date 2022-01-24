@@ -11,7 +11,7 @@ export function parse(vcard) {
 
   const tokenizedVcard = new Tokenizer(vcard);
 
-  if (tokenizedVcard.numberOfvCards === 1)
+  if (tokenizedVcard.numberOfVcards === 1)
   return new Parser(tokenizedVcard.tokens).parsed;
 
   const _tokenizedVcards = [];
