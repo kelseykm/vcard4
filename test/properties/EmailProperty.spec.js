@@ -44,5 +44,27 @@ describe('EmailProperty tests', () => {
       ).repr(),
       "EMAIL;PREF=1:jane_doe@example.com"
     );
+    assert.strictEqual(
+      new EmailProperty(
+        [
+          new PrefParameter(
+            new IntegerType(1)
+          )
+        ],
+        new TextType('jane_doe@example.com')
+      ).reprXML(),
+      "<email><parameters><pref><integer>1</integer></pref></parameters><text>jane_doe@example.com</text></email>"
+    );
+    assert.deepEqual(
+      new EmailProperty(
+        [
+          new PrefParameter(
+            new IntegerType(1)
+          )
+        ],
+        new TextType('jane_doe@example.com')
+      ).reprJSON(),
+      ["email", {pref: "1"}, "text", "jane_doe@example.com"]
+    );
   });
 });

@@ -40,5 +40,27 @@ describe('FburlProperty tests', () => {
       ).repr(),
       "FBURL;MEDIATYPE=text/calendar:ftp://example.com/busy/project-a.ifb"
     );
+    assert.strictEqual(
+      new FburlProperty(
+        [
+          new MediatypeParameter(
+            new TextType('text/calendar')
+          )
+        ],
+        new URIType('ftp://example.com/busy/project-a.ifb')
+      ).reprXML(),
+      "<fburl><parameters><mediatype><text>text/calendar</text></mediatype></parameters><uri>ftp://example.com/busy/project-a.ifb</uri></fburl>"
+    );
+    assert.deepEqual(
+      new FburlProperty(
+        [
+          new MediatypeParameter(
+            new TextType('text/calendar')
+          )
+        ],
+        new URIType('ftp://example.com/busy/project-a.ifb')
+      ).reprJSON(),
+      ["fburl", {mediatype: "text/calendar"}, "uri", "ftp://example.com/busy/project-a.ifb"]
+    );
   });
 });

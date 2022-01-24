@@ -31,5 +31,19 @@ describe('MemberProperty tests', () => {
       ).repr(),
       "MEMBER:urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af"
     );
+    assert.strictEqual(
+      new MemberProperty(
+        [],
+        new URIType('urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af')
+      ).reprXML(),
+      "<member><uri>urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af</uri></member>"
+    );
+    assert.deepEqual(
+      new MemberProperty(
+        [],
+        new URIType('urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af')
+      ).reprJSON(),
+      ["member", {}, "uri", "urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af"]
+    );
   });
 });

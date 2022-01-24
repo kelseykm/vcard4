@@ -36,5 +36,19 @@ describe('FNProperty tests', () => {
       ).repr(),
       "FN:James Bond"
     );
+    assert.strictEqual(
+      new FNProperty(
+        [],
+        new TextType('James Bond')
+      ).reprXML(),
+      "<fn><text>James Bond</text></fn>"
+    );
+    assert.deepEqual(
+      new FNProperty(
+        [],
+        new TextType('James Bond')
+      ).reprJSON(),
+      ["fn", {}, "text", "James Bond"]
+    );
   });
 });

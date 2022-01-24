@@ -31,5 +31,19 @@ describe('CaladruriProperty tests', () => {
       ).repr(),
       "CALADRURI:http://example.com/calendar/jdoe"
     );
+    assert.strictEqual(
+      new CaladruriProperty(
+        [],
+        new URIType('http://example.com/calendar/jdoe')
+      ).reprXML(),
+      "<caladruri><uri>http://example.com/calendar/jdoe</uri></caladruri>"
+    );
+    assert.deepEqual(
+      new CaladruriProperty(
+        [],
+        new URIType('http://example.com/calendar/jdoe')
+      ).reprJSON(),
+      ["caladruri", {}, "uri", "http://example.com/calendar/jdoe"]
+    );
   });
 });

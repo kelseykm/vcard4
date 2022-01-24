@@ -31,5 +31,19 @@ describe('LogoProperty tests', () => {
       ).repr(),
       "LOGO:http://www.example.com/pub/logos/abccorp.jpg"
     );
+    assert.strictEqual(
+      new LogoProperty(
+        [],
+        new URIType('http://www.example.com/pub/logos/abccorp.jpg')
+      ).reprXML(),
+      '<logo><uri>http://www.example.com/pub/logos/abccorp.jpg</uri></logo>'
+    );
+    assert.deepEqual(
+      new LogoProperty(
+        [],
+        new URIType('http://www.example.com/pub/logos/abccorp.jpg')
+      ).reprJSON(),
+      ["logo", {}, "uri", "http://www.example.com/pub/logos/abccorp.jpg"]
+    );
   });
 });

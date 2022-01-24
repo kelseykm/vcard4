@@ -52,5 +52,29 @@ describe('RelatedProperty tests', () => {
       ).repr(),
       "RELATED;TYPE=co-worker;VALUE=text:Please contact my assistant Jane Doe for \r\n any inquiries."
     );
+    assert.strictEqual(
+      new RelatedProperty(
+        [
+          new TypeParameter(new TextType('co-worker'), 'relatedproperty'),
+          new ValueParameter(
+            new TextType('Please contact my assistant Jane Doe for any inquiries.')
+          )
+        ],
+        new TextType('Please contact my assistant Jane Doe for any inquiries.')
+      ).reprXML(),
+      "<related><parameters><type><text>co-worker</text></type></parameters><text>Please contact my assistant Jane Doe for any inquiries.</text></related>"
+    );
+    assert.deepEqual(
+      new RelatedProperty(
+        [
+          new TypeParameter(new TextType('co-worker'), 'relatedproperty'),
+          new ValueParameter(
+            new TextType('Please contact my assistant Jane Doe for any inquiries.')
+          )
+        ],
+        new TextType('Please contact my assistant Jane Doe for any inquiries.')
+      ).reprJSON(),
+      ["related", {type:'co-worker'}, "text", "Please contact my assistant Jane Doe for any inquiries."]
+    );
   });
 });

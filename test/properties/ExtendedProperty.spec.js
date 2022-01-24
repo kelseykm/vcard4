@@ -33,5 +33,21 @@ describe('ExtendedProperty tests', () => {
        ).repr(),
       "X-CAR:Volvo"
     );
+    assert.strictEqual(
+      new ExtendedProperty(
+        'X-CAR',
+        [],
+        new TextType('Volvo')
+      ).reprXML(),
+      "<x-car><text>Volvo</text></x-car>"
+    );
+    assert.deepEqual(
+      new ExtendedProperty(
+        'X-CAR',
+        [],
+        new TextType('Volvo')
+      ).reprJSON(),
+      ["x-car", {}, "text", "Volvo"]
+    );
   });
 });

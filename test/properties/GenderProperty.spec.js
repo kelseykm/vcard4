@@ -40,5 +40,31 @@ describe('GenderProperty tests', () => {
       ).repr(),
       "GENDER:O;intersex"
     );
+    assert.strictEqual(
+      new GenderProperty(
+        [],
+        new SpecialValueType(
+          [
+            new SexType('O'),
+            new TextType('intersex')
+          ],
+          'genderproperty'
+        )
+      ).reprXML(),
+      "<gender><sex>O</sex><text>intersex</text></gender>"
+    );
+    assert.deepEqual(
+      new GenderProperty(
+        [],
+        new SpecialValueType(
+          [
+            new SexType('O'),
+            new TextType('intersex')
+          ],
+          'genderproperty'
+        )
+      ).reprJSON(),
+      ["gender", {}, "text", ["O", "intersex"]]
+    );
   });
 });

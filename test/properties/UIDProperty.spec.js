@@ -31,5 +31,19 @@ describe('UIDProperty tests', () => {
       ).repr(),
       "UID:urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
     );
+    assert.strictEqual(
+      new UIDProperty(
+        [],
+        new URIType('urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6')
+      ).reprXML(),
+      "<uid><uri>urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6</uri></uid>"
+    );
+    assert.deepEqual(
+      new UIDProperty(
+        [],
+        new URIType('urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6')
+      ).reprJSON(),
+      ["uid", {}, "uri", "urn:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"]
+    );
   });
 });

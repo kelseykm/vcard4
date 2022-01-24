@@ -43,5 +43,31 @@ describe('ClientpidmapProperty tests', () => {
       ).repr(),
       "CLIENTPIDMAP:1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"
     );
+    assert.strictEqual(
+      new ClientpidmapProperty(
+        [],
+        new SpecialValueType(
+          [
+            new IntegerType(1),
+            new URIType('urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b')
+          ],
+          'clientpidmapproperty'
+        )
+      ).reprXML(),
+      "<clientpidmap><integer>1</integer><uri>urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b</uri></clientpidmap>"
+    );
+    assert.deepEqual(
+      new ClientpidmapProperty(
+        [],
+        new SpecialValueType(
+          [
+            new IntegerType(1),
+            new URIType('urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b')
+          ],
+          'clientpidmapproperty'
+        )
+      ).reprJSON(),
+      ["clientpidmap", {}, "unknown", [1, "urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"]]
+    );
   });
 });

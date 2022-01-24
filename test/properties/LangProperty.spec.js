@@ -36,5 +36,19 @@ describe('LangProperty tests', () => {
       ).repr(),
       "LANG:fr"
     );
+    assert.strictEqual(
+      new LangProperty(
+        [],
+        new LanguageTagType('fr')
+      ).reprXML(),
+      "<lang><language-tag>fr</language-tag></lang>"
+    );
+    assert.deepEqual(
+      new LangProperty(
+        [],
+        new LanguageTagType('fr')
+      ).reprJSON(),
+      ["lang", {}, "language-tag", "fr"]
+    );
   });
 });

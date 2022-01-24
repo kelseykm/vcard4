@@ -34,5 +34,27 @@ describe('DeathDateProperty tests', () => {
       ).repr(),
       "DEATHDATE;VALUE=text:circa 1800"
     );
+    assert.strictEqual(
+      new DeathDateProperty(
+        [
+          new ValueParameter(
+            new TextType('circa 1800')
+          )
+        ],
+        new TextType('circa 1800')
+      ).reprXML(),
+      "<deathdate><text>circa 1800</text></deathdate>"
+    );
+    assert.deepEqual(
+      new DeathDateProperty(
+        [
+          new ValueParameter(
+            new TextType('circa 1800')
+          )
+        ],
+        new TextType('circa 1800')
+      ).reprJSON(),
+      ["deathdate", {}, "text", "circa 1800"]
+    );
   });
 });

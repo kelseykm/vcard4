@@ -31,5 +31,19 @@ describe('NoteProperty tests', () => {
       ).repr(),
       "NOTE:This fax number is operational 0800 to 1715 EST\\, Mon-Fri."
     );
+    assert.strictEqual(
+      new NoteProperty(
+        [],
+        new TextType('This fax number is operational 0800 to 1715 EST, Mon-Fri.')
+      ).reprXML(),
+      "<note><text>This fax number is operational 0800 to 1715 EST, Mon-Fri.</text></note>"
+    );
+    assert.deepEqual(
+      new NoteProperty(
+        [],
+        new TextType('This fax number is operational 0800 to 1715 EST, Mon-Fri.')
+      ).reprJSON(),
+      ["note", {}, "text", "This fax number is operational 0800 to 1715 EST, Mon-Fri."]
+    );
   });
 });

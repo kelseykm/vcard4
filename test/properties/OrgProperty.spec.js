@@ -45,5 +45,33 @@ describe('OrgProperty tests', () => {
       ).repr(),
       "ORG:ABC\\, Inc.;North American Division;Marketing"
     );
+    assert.strictEqual(
+      new OrgProperty(
+        [],
+        new SpecialValueType(
+          [
+            new TextType('ABC, Inc.'),
+            new TextType('North American Division'),
+            new TextType('Marketing')
+          ],
+          'orgproperty'
+        )
+      ).reprXML(),
+      "<org><text>ABC, Inc.</text><text>North American Division</text><text>Marketing</text></org>"
+    );
+    assert.deepEqual(
+      new OrgProperty(
+        [],
+        new SpecialValueType(
+          [
+            new TextType('ABC, Inc.'),
+            new TextType('North American Division'),
+            new TextType('Marketing')
+          ],
+          'orgproperty'
+        )
+      ).reprJSON(),
+      ["org", {}, "text", ["ABC, Inc.", "North American Division", "Marketing"]]
+    );
   });
 });

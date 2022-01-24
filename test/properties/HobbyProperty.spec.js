@@ -39,5 +39,19 @@ describe('HobbyProperty tests', () => {
       ).repr(),
       "HOBBY:golf"
     );
+    assert.strictEqual(
+      new HobbyProperty(
+        [],
+        new TextType('golf')
+      ).reprXML(),
+      "<hobby><text>golf</text></hobby>"
+    );
+    assert.deepEqual(
+      new HobbyProperty(
+        [],
+        new TextType('golf')
+      ).reprJSON(),
+      ["hobby", {}, "text", "golf"]
+    );
   });
 });

@@ -33,5 +33,27 @@ describe('AnniversaryProperty tests', () => {
       ).repr(),
       "ANNIVERSARY;VALUE=text:circa 1800"
     );
+    assert.strictEqual(
+      new AnniversaryProperty(
+        [
+          new ValueParameter(
+            new TextType('circa 1800')
+          )
+        ],
+        new TextType('circa 1800')
+      ).reprXML(),
+      "<anniversary><text>circa 1800</text></anniversary>"
+    );
+    assert.deepEqual(
+      new AnniversaryProperty(
+        [
+          new ValueParameter(
+            new TextType('circa 1800')
+          )
+        ],
+        new TextType('circa 1800')
+      ).reprJSON(),
+      ["anniversary", {}, "text", "circa 1800"]
+    );
   });
 });

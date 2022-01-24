@@ -31,5 +31,19 @@ describe('TitleProperty tests', () => {
       ).repr(),
       "TITLE:Research Scientist"
     );
+    assert.strictEqual(
+      new TitleProperty(
+        [],
+        new TextType('Research Scientist')
+      ).reprXML(),
+      "<title><text>Research Scientist</text></title>"
+    );
+    assert.deepEqual(
+      new TitleProperty(
+        [],
+        new TextType('Research Scientist')
+      ).reprJSON(),
+      ["title", {}, "text", "Research Scientist"]
+    );
   });
 });

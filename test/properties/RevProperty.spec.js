@@ -31,5 +31,19 @@ describe('RevProperty tests', () => {
       ).repr(),
       "REV:19951031T222710Z"
     );
+    assert.strictEqual(
+      new RevProperty(
+        [],
+        new DateTimeType('19951031T222710Z', 'timestamp')
+      ).reprXML(),
+      "<rev><timestamp>19951031T222710Z</timestamp></rev>"
+    );
+    assert.deepEqual(
+      new RevProperty(
+        [],
+        new DateTimeType('19951031T222710Z', 'timestamp')
+      ).reprJSON(),
+      ["rev", {}, "timestamp", "1995-10-31T22:27:10Z"]
+    );
   });
 });

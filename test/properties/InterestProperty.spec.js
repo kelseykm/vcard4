@@ -39,5 +39,19 @@ describe('InterestProperty tests', () => {
       ).repr(),
       "INTEREST:golf"
     );
+    assert.strictEqual(
+      new InterestProperty(
+        [],
+        new TextType('golf')
+      ).reprXML(),
+      "<interest><text>golf</text></interest>"
+    );
+    assert.deepEqual(
+      new InterestProperty(
+        [],
+        new TextType('golf')
+      ).reprJSON(),
+      ["interest", {}, "text", "golf"]
+    );
   });
 });

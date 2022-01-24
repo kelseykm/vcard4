@@ -41,5 +41,19 @@ describe('TelProperty tests', () => {
       ).repr(),
       "TEL:tel:+33-01-23-45-67"
     );
+    assert.strictEqual(
+      new TelProperty(
+        [],
+        new URIType('tel:+33-01-23-45-67')
+      ).reprXML(),
+      "<tel><uri>tel:+33-01-23-45-67</uri></tel>"
+    );
+    assert.deepEqual(
+      new TelProperty(
+        [],
+        new URIType('tel:+33-01-23-45-67')
+      ).reprJSON(),
+      ["tel", {}, "uri", "tel:+33-01-23-45-67"]
+    );
   });
 });

@@ -50,5 +50,27 @@ describe('SourceProperty tests', () => {
       ).repr(),
       "SOURCE;PREF=1:ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US"
     );
+    assert.strictEqual(
+      new SourceProperty(
+        [
+          new PrefParameter(
+            new IntegerType(1)
+          )
+        ],
+        new URIType('ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US')
+      ).reprXML(),
+      "<source><parameters><pref><integer>1</integer></pref></parameters><uri>ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US</uri></source>"
+    );
+    assert.deepEqual(
+      new SourceProperty(
+        [
+          new PrefParameter(
+            new IntegerType(1)
+          )
+        ],
+        new URIType('ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US')
+      ).reprJSON(),
+      ["source", {pref: "1"}, "uri", "ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US"]
+    );
   });
 });

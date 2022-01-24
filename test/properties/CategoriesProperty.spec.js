@@ -44,5 +44,27 @@ describe('CategoriesProperty tests', () => {
       ).repr(),
       "CATEGORIES:INTERNET,IETF,INDUSTRY"
     );
+    assert.strictEqual(
+      new CategoriesProperty(
+        [],
+        new TextListType([
+          new TextType('INTERNET'),
+          new TextType('IETF'),
+          new TextType('INDUSTRY')
+        ])
+      ).reprXML(),
+      "<categories><text>INTERNET</text><text>IETF</text><text>INDUSTRY</text></categories>"
+    );
+    assert.deepEqual(
+      new CategoriesProperty(
+        [],
+        new TextListType([
+          new TextType('INTERNET'),
+          new TextType('IETF'),
+          new TextType('INDUSTRY')
+        ])
+      ).reprJSON(),
+      ["categories", {}, 'text', "INTERNET","IETF","INDUSTRY"]
+    );
   });
 });

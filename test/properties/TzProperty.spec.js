@@ -41,5 +41,19 @@ describe('TzProperty tests', () => {
       ).repr(),
       "TZ:Raleigh/North America"
     );
+    assert.strictEqual(
+      new TzProperty(
+        [],
+        new TextType('Raleigh/North America')
+      ).reprXML(),
+      "<tz><text>Raleigh/North America</text></tz>"
+    );
+    assert.deepEqual(
+      new TzProperty(
+        [],
+        new TextType('Raleigh/North America')
+      ).reprJSON(),
+      ["tz", {}, "text", "Raleigh/North America"]
+    );
   });
 });

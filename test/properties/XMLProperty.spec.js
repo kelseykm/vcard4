@@ -41,5 +41,19 @@ describe('XMLProperty tests', () => {
       ).repr(),
       "XML:<love-letter xmlns=\"urn\\:imaginary-namespace\"><note><to>Tove</to><from>\r\n Jani</from><heading>Reminder</heading><body>Don't forget me\\, this weekend!\r\n </body></note></love-letter>"
     );
+    assert.strictEqual(
+      new XMLProperty(
+        [],
+        new TextType(`<love-letter xmlns="urn:imaginary-namespace"><note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Don't forget me, this weekend!</body></note></love-letter>`)
+      ).reprXML(),
+      `<love-letter xmlns="urn:imaginary-namespace"><note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Don't forget me, this weekend!</body></note></love-letter>`
+    );
+    assert.deepEqual(
+      new XMLProperty(
+        [],
+        new TextType(`<love-letter xmlns="urn:imaginary-namespace"><note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Don't forget me, this weekend!</body></note></love-letter>`)
+      ).reprJSON(),
+      ["xml", {}, "text", `<love-letter xmlns="urn:imaginary-namespace"><note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Don't forget me, this weekend!</body></note></love-letter>`]
+    );
   });
 });

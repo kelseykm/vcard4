@@ -31,5 +31,19 @@ describe('RoleProperty tests', () => {
       ).repr(),
       "ROLE:Project Leader"
     );
+    assert.strictEqual(
+      new RoleProperty(
+        [],
+        new TextType('Project Leader')
+      ).reprXML(),
+      "<role><text>Project Leader</text></role>"
+    );
+    assert.deepEqual(
+      new RoleProperty(
+        [],
+        new TextType('Project Leader')
+      ).reprJSON(),
+      ["role", {}, "text", "Project Leader"]
+    );
   });
 });

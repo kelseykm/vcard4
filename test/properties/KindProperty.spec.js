@@ -50,5 +50,27 @@ describe('KindProperty tests', () => {
       ).repr(),
       "KIND;VALUE=text:individual"
     );
+    assert.strictEqual(
+      new KindProperty(
+        [
+          new ValueParameter(
+            new SpecialValueType('individual', 'kindproperty')
+          )
+        ],
+        new SpecialValueType('individual', 'kindproperty')
+      ).reprXML(),
+      "<kind><text>individual</text></kind>"
+    );
+    assert.deepEqual(
+      new KindProperty(
+        [
+          new ValueParameter(
+            new SpecialValueType('individual', 'kindproperty')
+          )
+        ],
+        new SpecialValueType('individual', 'kindproperty')
+      ).reprJSON(),
+      ["kind", {}, "text", "individual"]
+    );
   });
 });

@@ -31,5 +31,19 @@ describe('ProdidProperty tests', () => {
       ).repr(),
       "PRODID:-//ONLINE DIRECTORY//NONSGML Version 1//EN"
     );
+    assert.strictEqual(
+      new ProdidProperty(
+        [],
+        new TextType('-//ONLINE DIRECTORY//NONSGML Version 1//EN')
+      ).reprXML(),
+      "<prodid><text>-//ONLINE DIRECTORY//NONSGML Version 1//EN</text></prodid>"
+    );
+    assert.deepEqual(
+      new ProdidProperty(
+        [],
+        new TextType('-//ONLINE DIRECTORY//NONSGML Version 1//EN')
+      ).reprJSON(),
+      ["prodid", {}, "text", "-//ONLINE DIRECTORY//NONSGML Version 1//EN"]
+    );
   });
 });

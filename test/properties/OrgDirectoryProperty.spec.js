@@ -31,5 +31,19 @@ describe('OrgDirectoryProperty tests', () => {
       ).repr(),
       "ORG-DIRECTORY:uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"
     );
+    assert.strictEqual(
+      new OrgDirectoryProperty(
+        [],
+        new URIType('uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6')
+      ).reprXML(),
+      "<org-directory><uri>uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6</uri></org-directory>"
+    );
+    assert.deepEqual(
+      new OrgDirectoryProperty(
+        [],
+        new URIType('uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6')
+      ).reprJSON(),
+      ["org-directory", {}, "uri", "uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"]
+    );
   });
 });

@@ -34,5 +34,27 @@ describe('BirthPlaceProperty tests', () => {
       ).repr(),
       "BIRTHPLACE;VALUE=text:The hospital"
     );
+    assert.strictEqual(
+      new BirthPlaceProperty(
+        [
+          new ValueParameter(
+            new TextType('The hospital')
+          )
+        ],
+        new TextType('The hospital')
+      ).reprXML(),
+      "<birthplace><text>The hospital</text></birthplace>"
+    );
+    assert.deepEqual(
+      new BirthPlaceProperty(
+        [
+          new ValueParameter(
+            new TextType('The hospital')
+          )
+        ],
+        new TextType('The hospital')
+      ).reprJSON(),
+      [ "birthplace", {}, "text", "The hospital" ]
+    );
   });
 });

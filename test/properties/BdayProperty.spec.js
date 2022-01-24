@@ -34,5 +34,27 @@ describe('BdayProperty tests', () => {
       ).repr(),
       "BDAY;VALUE=text:circa 1800"
     );
+    assert.strictEqual(
+      new BdayProperty(
+        [
+          new ValueParameter(
+            new TextType('circa 1800')
+          )
+        ],
+        new TextType('circa 1800')
+      ).reprXML(),
+      "<bday><text>circa 1800</text></bday>"
+    );
+    assert.deepEqual(
+      new BdayProperty(
+        [
+          new ValueParameter(
+            new TextType('circa 1800')
+          )
+        ],
+        new TextType('circa 1800')
+      ).reprJSON(),
+      ["bday", {}, "text", "circa 1800"]
+    );
   });
 });

@@ -36,5 +36,19 @@ describe('IMPPProperty tests', () => {
       ).repr(),
       "IMPP:xmpp:alice@example.com"
     );
+    assert.strictEqual(
+      new IMPPProperty(
+        [],
+        new URIType('xmpp:alice@example.com')
+      ).reprXML(),
+      "<impp><uri>xmpp:alice@example.com</uri></impp>"
+    );
+    assert.deepEqual(
+      new IMPPProperty(
+        [],
+        new URIType('xmpp:alice@example.com')
+      ).reprJSON(),
+      ["impp", {}, "uri", "xmpp:alice@example.com"]
+    );
   });
 });

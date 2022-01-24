@@ -39,5 +39,19 @@ describe('ExpertiseProperty tests', () => {
       ).repr(),
       "EXPERTISE:golf"
     );
+    assert.strictEqual(
+      new ExpertiseProperty(
+        [],
+        new TextType('golf')
+      ).reprXML(),
+      "<expertise><text>golf</text></expertise>"
+    );
+    assert.deepEqual(
+      new ExpertiseProperty(
+        [],
+        new TextType('golf')
+      ).reprJSON(),
+      ["expertise", {}, "text","golf"]
+    );
   });
 });

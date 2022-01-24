@@ -40,5 +40,27 @@ describe('CaluriProperty tests', () => {
       ).repr(),
       "CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics"
     );
+    assert.strictEqual(
+      new CaluriProperty(
+        [
+          new MediatypeParameter(
+            new TextType('text/calendar')
+          )
+        ],
+        new URIType('ftp://ftp.example.com/calA.ics')
+      ).reprXML(),
+      "<caluri><parameters><mediatype><text>text/calendar</text></mediatype></parameters><uri>ftp://ftp.example.com/calA.ics</uri></caluri>"
+    );
+    assert.deepEqual(
+      new CaluriProperty(
+        [
+          new MediatypeParameter(
+            new TextType('text/calendar')
+          )
+        ],
+        new URIType('ftp://ftp.example.com/calA.ics')
+      ).reprJSON(),
+      ["caluri", {mediatype: "text/calendar"}, "uri","ftp://ftp.example.com/calA.ics"]
+    );
   });
 });

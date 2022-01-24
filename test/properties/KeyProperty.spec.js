@@ -40,5 +40,27 @@ describe('KeyProperty tests', () => {
       ).repr(),
       "KEY;MEDIATYPE=application/pgp-keys:ftp://example.com/keys/jdoe"
     );
+    assert.strictEqual(
+      new KeyProperty(
+        [
+          new MediatypeParameter(
+            new TextType('application/pgp-keys')
+          )
+        ],
+        new URIType('ftp://example.com/keys/jdoe')
+      ).reprXML(),
+      "<key><parameters><mediatype><text>application/pgp-keys</text></mediatype></parameters><uri>ftp://example.com/keys/jdoe</uri></key>"
+    );
+    assert.deepEqual(
+      new KeyProperty(
+        [
+          new MediatypeParameter(
+            new TextType('application/pgp-keys')
+          )
+        ],
+        new URIType('ftp://example.com/keys/jdoe')
+      ).reprJSON(),
+      ["key", {mediatype: "application/pgp-keys"}, "uri", "ftp://example.com/keys/jdoe"]
+    );
   });
 });

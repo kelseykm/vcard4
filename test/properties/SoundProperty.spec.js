@@ -31,5 +31,19 @@ describe('SoundProperty tests', () => {
       ).repr(),
       "SOUND:CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"
     );
+    assert.strictEqual(
+      new SoundProperty(
+        [],
+        new URIType('CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com')
+      ).reprXML(),
+      "<sound><uri>CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com</uri></sound>"
+    );
+    assert.deepEqual(
+      new SoundProperty(
+        [],
+        new URIType('CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com')
+      ).reprJSON(),
+      ["sound", {}, "uri", "CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"]
+    );
   });
 });

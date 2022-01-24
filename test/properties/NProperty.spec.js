@@ -70,5 +70,51 @@ describe('NProperty tests', () => {
       ).repr(),
       "N:Stevenson;John;Phillip,Paul;Dr.;Jr.,M.D.,A.C.P."
     );
+    assert.strictEqual(
+      new NProperty(
+        [],
+        new SpecialValueType(
+          [
+            new TextType('Stevenson'),
+            new TextType('John'),
+            new TextListType([
+              new TextType('Phillip'),
+              new TextType('Paul')
+            ]),
+            new TextType('Dr.'),
+            new TextListType([
+              new TextType('Jr.'),
+              new TextType('M.D.'),
+              new TextType('A.C.P.')
+            ])
+          ],
+          'nproperty'
+        )
+      ).reprXML(),
+      "<n><surname>Stevenson</surname><given>John</given><additional>Phillip</additional><additional>Paul</additional><prefix>Dr.</prefix><suffix>Jr.</suffix><suffix>M.D.</suffix><suffix>A.C.P.</suffix></n>"
+    );
+    assert.deepEqual(
+      new NProperty(
+        [],
+        new SpecialValueType(
+          [
+            new TextType('Stevenson'),
+            new TextType('John'),
+            new TextListType([
+              new TextType('Phillip'),
+              new TextType('Paul')
+            ]),
+            new TextType('Dr.'),
+            new TextListType([
+              new TextType('Jr.'),
+              new TextType('M.D.'),
+              new TextType('A.C.P.')
+            ])
+          ],
+          'nproperty'
+        )
+      ).reprJSON(),
+      ["n", {}, "text", ["Stevenson", "John", ["Phillip", "Paul"], "Dr.", ["Jr.", "M.D.", "A.C.P."]]]
+    );
   });
 });

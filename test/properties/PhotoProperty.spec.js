@@ -38,5 +38,19 @@ describe('PhotoProperty tests', () => {
       ).repr(),
       "PHOTO:http://www.example.com/pub/photos/jqpublic.gif"
     );
+    assert.strictEqual(
+      new PhotoProperty(
+        [],
+        new URIType('http://www.example.com/pub/photos/jqpublic.gif')
+      ).reprXML(),
+      "<photo><uri>http://www.example.com/pub/photos/jqpublic.gif</uri></photo>"
+    );
+    assert.deepEqual(
+      new PhotoProperty(
+        [],
+        new URIType('http://www.example.com/pub/photos/jqpublic.gif')
+      ).reprJSON(),
+      ["photo", {}, "uri", "http://www.example.com/pub/photos/jqpublic.gif"]
+    );
   });
 });

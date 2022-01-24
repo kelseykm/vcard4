@@ -42,5 +42,27 @@ describe('ContactURIProperty tests', () => {
       ).repr(),
       "CONTACT-URI;PREF=1:mailto:contact@example.com"
     );
+    assert.strictEqual(
+      new ContactURIProperty(
+        [
+          new PrefParameter(
+            new IntegerType(1)
+          )
+        ],
+        new URIType('mailto:contact@example.com')
+      ).reprXML(),
+      "<contact-uri><parameters><pref><integer>1</integer></pref></parameters><uri>mailto:contact@example.com</uri></contact-uri>"
+    );
+    assert.deepEqual(
+      new ContactURIProperty(
+        [
+          new PrefParameter(
+            new IntegerType(1)
+          )
+        ],
+        new URIType('mailto:contact@example.com')
+      ).reprJSON(),
+      ["contact-uri", {pref:"1"}, "uri","mailto:contact@example.com"]
+    );
   });
 });

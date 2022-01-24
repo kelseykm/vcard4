@@ -34,5 +34,27 @@ describe('DeathPlaceProperty tests', () => {
       ).repr(),
       "DEATHPLACE;VALUE=text:The hospital"
     );
+    assert.strictEqual(
+      new DeathPlaceProperty(
+        [
+          new ValueParameter(
+            new TextType('The hospital')
+          )
+        ],
+        new TextType('The hospital')
+      ).reprXML(),
+      "<deathplace><text>The hospital</text></deathplace>"
+    );
+    assert.deepEqual(
+      new DeathPlaceProperty(
+        [
+          new ValueParameter(
+            new TextType('The hospital')
+          )
+        ],
+        new TextType('The hospital')
+      ).reprJSON(),
+      ["deathplace",{}, "text", "The hospital"]
+    );
   });
 });

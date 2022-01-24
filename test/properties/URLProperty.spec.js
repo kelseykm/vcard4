@@ -31,5 +31,19 @@ describe('URLProperty tests', () => {
       ).repr(),
       "URL:http://example.org/restaurant.french/chezchic.html"
     );
+    assert.strictEqual(
+      new URLProperty(
+        [],
+        new URIType('http://example.org/restaurant.french/chezchic.html')
+      ).reprXML(),
+      "<url><uri>http://example.org/restaurant.french/chezchic.html</uri></url>"
+    );
+    assert.deepEqual(
+      new URLProperty(
+        [],
+        new URIType('http://example.org/restaurant.french/chezchic.html')
+      ).reprJSON(),
+      ["url", {}, "uri", "http://example.org/restaurant.french/chezchic.html"]
+    );
   });
 });
