@@ -20,7 +20,7 @@ export class LanguageTagType extends BaseValue {
   }
 
   get valueXML() {
-    return `<${this.constructor.type.toLowerCase()}>${this.#langTagValue}<${this.constructor.type.toLowerCase()}>`;
+    return `<${this.constructor.type.toLowerCase()}>${this.#langTagValue}</${this.constructor.type.toLowerCase()}>`;
   }
 
   get valueJSON() {
