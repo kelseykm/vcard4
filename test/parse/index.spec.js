@@ -1,7 +1,7 @@
-import { parse } from '../src/parse.js';
+import { parse } from '../../src/parse/index.js';
 import { assert } from 'chai';
 
-describe('Parse tests', () => {
+describe('parse tests', () => {
   it('Accepts valid input', () => {
     assert.doesNotThrow(() => parse(
       'BEGIN:VCARD\r\n' +
@@ -18,6 +18,17 @@ describe('Parse tests', () => {
       'CATEGORIES:Work,Test group\r\n' +
       'X-ABUID:5AD380FD-B2DE-4261-BA99-DE1D1DB52FBE\\:ABPerson\r\n' +
       'END:VCARD\r\n'
+    ));
+
+    assert.doesNotThrow(() => parse(
+      "BEGIN:VCARD\r\n" +
+      "VERSION:4.0\r\n" +
+      "FN:James Bond\r\n" +
+      "END:VCARD\r\n" +
+      "BEGIN:VCARD\r\n" +
+      "VERSION:4.0\r\n" +
+      "FN:Jane Bond\r\n" +
+      "END:VCARD\r\n"
     ));
   });
 
@@ -47,26 +58,36 @@ describe('Parse tests', () => {
 
   it('Parses vcards correctly', () => {
     assert.isArray(parse(
-        "BEGIN:VCARD\r\n" +
-        "VERSION:4.0\r\n" +
-        "FN:James Bond\r\n" +
-        "END:VCARD\r\n" +
-        "BEGIN:VCARD\r\n" +
-        "VERSION:4.0\r\n" +
-        "FN:Jane Bond\r\n" +
-        "END:VCARD\r\n"
+      "BEGIN:VCARD\r\n" +
+      "VERSION:4.0\r\n" +
+      "FN:James Bond\r\n" +
+      "END:VCARD\r\n" +
+      "BEGIN:VCARD\r\n" +
+      "VERSION:4.0\r\n" +
+      "FN:Jane Bond\r\n" +
+      "END:VCARD\r\n"
     ));
-    assert.isNotArray(parse(
-        "BEGIN:VCARD\r\n" +
-        "VERSION:4.0\r\n" +
-        "FN:James Bond\r\n" +
-        "END:VCARD\r\n"
+
+    assert.isObject(parse(
+      "BEGIN:VCARD\r\n" +
+      "VERSION:4.0\r\n" +
+      "FN:Jane Bond\r\n" +
+      "END:VCARD\r\n"
     ));
-    assert.hasAllKeys(parse(
-        "BEGIN:VCARD\r\n" +
-        "VERSION:4.0\r\n" +
-        "FN:James Bond\r\n" +
-        "END:VCARD\r\n"
-    ), ['BEGIN', 'VERSION', 'FN', 'END']);
+
+    assert.strictEqual(parse(
+      "BEGIN:VCARD\r\n" +
+      "VERSION:4.0\r\n" +
+      "FN:James Bond\r\n" +
+      "END:VCARD\r\n" +
+      "BEGIN:VCARD\r\n" +
+      "VERSION:4.0\r\n" +
+      "FN:Michael Bond\r\n" +
+      "END:VCARD\r\n" +
+      "BEGIN:VCARD\r\n" +
+      "VERSION:4.0\r\n" +
+      "FN:Jane Bond\r\n" +
+      "END:VCARD\r\n"
+    ).length, 3);
   });
 });

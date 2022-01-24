@@ -12,7 +12,7 @@
   },
   "types": "./lib/esm/index.d.d.ts",
   "scripts": {
-    "test": "mocha",
+    "test": "mocha --recursive",
     "build": "rm -r dist/ lib/esm lib/umd/index* && rollup -c"
   },
   "repository": {
