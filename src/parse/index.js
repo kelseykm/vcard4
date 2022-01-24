@@ -1,4 +1,4 @@
-import { MissingArgument, InvalidArgument } from '../errors/index.js';
+import { MissingArgument } from '../errors/index.js';
 import { Tokenizer } from './Tokenizer.js';
 import { Parser } from './Parser.js';
 
