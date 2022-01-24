@@ -25,7 +25,7 @@ export class BaseParameter {
   reprXML() {
     const tag = this.constructor.param?.toLowerCase() || this.param?.toLowerCase();
 
-    const knownTagRegExp = /^(?:altid|base|calscale|cc|geo|index|label|language|level|mediatype|pid|pref|sortas|type|tz|value)$/;
+    const knownTagRegExp = /^(?:altid|base|calscale|cc|geo|index|label|language|level|mediatype|pid|pref|sort-as|type|tz|value|x-[A-Za-z0-9]+)$/;
 
     if (!knownTagRegExp.test(tag))
     return `<unknown>${this.valueXML.replace(/<[a-z\-]+?>/g,'<text>').replace(/<\/[a-z\-]+?>/g,'</text>')}</unknown>`;
@@ -36,7 +36,7 @@ export class BaseParameter {
   }
 
   reprJSON() {
-    const key = this.constructor.param?.toLowerCase() || this.param?.toLowerCase(); 
+    const key = this.constructor.param?.toLowerCase() || this.param?.toLowerCase();
 
     if (key === 'value')
     return {};
@@ -44,7 +44,7 @@ export class BaseParameter {
     let value = this.valueJSON;
     value.shift();
     value = value.map(val => val.toString());
-    
+
     if (value.length === 1)
     value = value.pop();
 
