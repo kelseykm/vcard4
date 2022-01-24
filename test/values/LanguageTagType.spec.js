@@ -18,5 +18,13 @@ describe('LanguageTagType tests', () => {
       new LanguageTagType('en-us').repr(),
       "en-us"
     );
+    assert.strictEqual(
+      new LanguageTagType('en-us').reprXML(),
+      "<language-tag>en-us</language-tag>"
+    );
+    assert.deepEqual(
+      new LanguageTagType('en-us').reprJSON(),
+      ["language-tag", "en-us"]
+    );
   });
 });

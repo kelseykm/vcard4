@@ -29,5 +29,19 @@ describe('TextListType tests', () => {
       ]).repr(),
       "Hello,world"
     );
+    assert.strictEqual(
+      new TextListType([
+        new TextType("Hello"),
+        new TextType("world")
+      ]).reprXML(),
+      "<text>Hello</text><text>world</text>"
+    );
+    assert.deepEqual(
+      new TextListType([
+        new TextType("Hello"),
+        new TextType("world")
+      ]).reprJSON(),
+      ["text", "Hello", "world"]
+    );
   });
 });

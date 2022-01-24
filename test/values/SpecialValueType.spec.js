@@ -30,5 +30,25 @@ describe('SpecialValueType tests', () => {
       ).repr(),
       "1;uuid:123-asmm-aams"
     );
+    assert.strictEqual(
+      new SpecialValueType(
+        [
+          new IntegerType(1),
+          new URIType('uuid:123-asmm-aams')
+        ],
+        'clientpidmapProperty'
+      ).reprXML(),
+      "<integer>1</integer><uri>uuid:123-asmm-aams</uri>"
+    );
+    assert.deepEqual(
+      new SpecialValueType(
+        [
+          new IntegerType(1),
+          new URIType('uuid:123-asmm-aams')
+        ],
+        'clientpidmapProperty'
+      ).reprJSON(),
+      ["unknown", [ 1, "uuid:123-asmm-aams"]]
+    );
   });
 });

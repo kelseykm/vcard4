@@ -21,5 +21,13 @@ describe('FloatType tests', () => {
       new FloatType(30.45).repr(),
       "30.45"
     );
+    assert.strictEqual(
+      new FloatType(30.45).reprXML(),
+      "<float>30.45</float>"
+    );
+    assert.deepEqual(
+      new FloatType(30.45).reprJSON(),
+      ["float", 30.45]
+    );
   });
 });

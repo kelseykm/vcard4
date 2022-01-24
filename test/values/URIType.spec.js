@@ -20,5 +20,13 @@ describe('URIType tests', () => {
       new URIType('http://www.example.com').repr(),
       "http://www.example.com"
     );
+    assert.strictEqual(
+      new URIType('http://www.example.com').reprXML(),
+      "<uri>http://www.example.com</uri>"
+    );
+    assert.deepEqual(
+      new URIType('http://www.example.com').reprJSON(),
+      ["uri", "http://www.example.com"]
+    );
   });
 });

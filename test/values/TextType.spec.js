@@ -17,6 +17,18 @@ describe('TextType tests', () => {
     assert.strictEqual(
       new TextType("Greeting: Hello, world!").repr(),
       "Greeting\\: Hello\\, world!"
-    )
+    );
+    assert.strictEqual(
+      new TextType("Greeting: Hello, world!").reprXML(),
+      "<text>Greeting: Hello, world!</text>"
+    );
+    assert.strictEqual(
+      new TextType("Five is > than four").reprXML(),
+      "<text>Five is &gt; than four</text>"
+    );
+    assert.deepEqual(
+      new TextType("Greeting: Hello, world!").reprJSON(),
+      ["text", "Greeting: Hello, world!"]
+    );
   });
 });

@@ -30,5 +30,21 @@ describe('FloatListType tests', () => {
       ]).repr(),
       "1.45,4.00,3.3"
     );
+    assert.strictEqual(
+      new FloatListType([
+        new FloatType(1.45),
+        new FloatType('4.00'),
+        new FloatType(3.3)
+      ]).reprXML(),
+      "<float>1.45</float><float>4.00</float><float>3.3</float>"
+    );
+    assert.deepEqual(
+      new FloatListType([
+        new FloatType(1.45),
+        new FloatType('4.00'),
+        new FloatType(3.3)
+      ]).reprJSON(),
+      [ 'float', 1.45, '4.00', 3.3 ]
+    );
   });
 });

@@ -20,5 +20,13 @@ describe('SexType tests', () => {
       new SexType('F').repr(),
       "F"
     );
+    assert.strictEqual(
+      new SexType('F').reprXML(),
+      "<sex>F</sex>"
+    );
+    assert.deepEqual(
+      new SexType('F').reprJSON(),
+      ["text", "F"]
+    );
   });
 });

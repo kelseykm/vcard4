@@ -18,5 +18,13 @@ describe('BooleanType tests', () => {
       new BooleanType(false).repr(),
       "false"
     );
+    assert.strictEqual(
+      new BooleanType(false).reprXML(),
+      "<boolean>false</boolean>"
+    );
+    assert.deepEqual(
+      new BooleanType(true).reprJSON(),
+      ["boolean", true]
+    );
   });
 });

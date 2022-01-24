@@ -26,5 +26,13 @@ describe('IntegerType tests', () => {
       new IntegerType(30).repr(),
       "30"
     );
+    assert.strictEqual(
+      new IntegerType(30).reprXML(),
+      "<integer>30</integer>"
+    );
+    assert.deepEqual(
+      new IntegerType(30).reprJSON(),
+      ["integer", 30]
+    );
   });
 });

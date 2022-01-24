@@ -35,5 +35,13 @@ describe('DateTimeType tests', () => {
       new DateTimeType('---12', 'dateandortime').repr(),
       "---12"
     );
+    assert.strictEqual(
+      new DateTimeType('---12', 'dateandortime').reprXML(),
+      "<date>---12</date>"
+    );
+    assert.deepEqual(
+      new DateTimeType('---12', 'dateandortime').reprJSON(),
+      ['date-and-or-time', "---12"]
+    );
   });
 });

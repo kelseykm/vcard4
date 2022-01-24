@@ -44,5 +44,19 @@ describe('DateTimeListType tests', () => {
       ]).repr(),
       "1985-04,---12"
     );
+    assert.strictEqual(
+      new DateTimeListType([
+        new DateTimeType('1985-04', 'date'),
+        new DateTimeType('---12', 'date')
+      ]).reprXML(),
+      "<date>1985-04</date><date>---12</date>"
+    );
+    assert.deepEqual(
+      new DateTimeListType([
+        new DateTimeType('1985-04', 'date'),
+        new DateTimeType('---12', 'date')
+      ]).reprJSON(),
+      [ 'date', '1985-04', '---12' ]
+    );
   });
 })
