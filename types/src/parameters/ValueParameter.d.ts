@@ -1,16 +1,25 @@
-import { 
-  BooleanType,
+import {
   TextType,
+  TextListType,
+  BooleanType,
   DateTimeType,
+  DateTimeListType,
   IntegerType,
+  IntegerListType,
+  FloatType,
+  FloatListType,
   LanguageTagType,
   URIType,
-  FloatType,
+  SexType,
   SpecialValueType
 } from '../values/index';
 
 export class ValueParameter {
   readonly value: string;
+  readonly valueXML: string;
+  readonly valueJSON: string[];
   repr(): string;
-  constructor(valType: TextType | BooleanType | DateTimeType | IntegerType | FloatType | LanguageTagType | URIType | SpecialValueType);
+  reprXML(): string;
+  reprJSON(): Record<string, string | string[]>;
+  constructor(valType: TextType | TextListType | BooleanType | DateTimeType | DateTimeListType | IntegerType | IntegerListType | FloatType | FloatListType | LanguageTagType | URIType | SexType | SpecialValueType);
 }

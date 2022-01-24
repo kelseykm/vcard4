@@ -1,4 +1,4 @@
-export class MissingArgument {
+export class MissingArgument extends Error {
   readonly name: string;
   constructor(message: string);
 }

@@ -1,4 +1,5 @@
-export class InvalidArgument extends Error {
+export class InvalidVcard extends Error {
   readonly name: string;
   constructor(message: string);
 }
+  

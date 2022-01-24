@@ -1,5 +1,3 @@
-export { BeginProperty } from './BeginProperty';
-export { EndProperty } from './EndProperty';
 export { SourceProperty } from './SourceProperty';
 export { KindProperty } from './KindProperty';
 export { XMLProperty } from './XMLProperty';
@@ -39,7 +37,6 @@ export { SoundProperty } from './SoundProperty';
 export { UIDProperty } from './UIDProperty';
 export { ClientpidmapProperty } from './ClientpidmapProperty';
 export { URLProperty } from './URLProperty';
-export { VersionProperty } from './VersionProperty';
 export { KeyProperty } from './KeyProperty';
 export { FburlProperty } from './FburlProperty';
 export { CaladruriProperty } from './CaladruriProperty';
