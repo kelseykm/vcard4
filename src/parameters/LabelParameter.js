@@ -8,31 +8,27 @@ export class LabelParameter extends BaseParameter {
   #labelValue;
   
   get value() {
-    return `"${this.#cleanUp(this.#labelValue)}"`;
+    return `"${this.#cleanUp(this.#labelValue._unsafe_raw_value)}"`;
   }
 
   get valueXML() {
-    return `<text>${this.#cleanUpXML(this.#labelValue)}</text>`;
+    return this.#labelValue.reprXML();
   }
 
   get valueJSON() {
-    return [ 'text', this.#labelValue ];
+    return [ 'text', this.#labelValue._unsafe_raw_value ];
   }
 
   #validate(labelValue) {
     if (typeof labelValue === 'undefined')
     throw new MissingArgument('Value for LabelParameter must be supplied');
 
-    else if (typeof labelValue !== 'string')
-    throw new TypeError('Only type string allowed for LabelParameter value');
+    else if (labelValue.constructor.identifier !== 'TextType')
+    throw new TypeError('Value for LabelParameter should be of type TextType');
   }
 
   #cleanUp(labelValue) {
     return labelValue.replaceAll('^', '^^').replaceAll('\n', '^n').replaceAll('"', '^’');
-  }
-
-  #cleanUpXML(textValue) {
-    return textValue.replaceAll('&', '&amp;').replaceAll('>', '&gt;').replaceAll('<', '&lt;').replaceAll('"', '&quot;').replaceAll("'", '&apos;');
   }
 
   constructor(labelValue) {
