@@ -8,12 +8,12 @@ sidebar_position: 11
 
 * This class is for use with properties which do not have values of the types already described. Those properties include:
 
-    1. [`KindProperty`](#kindproperty)
-    2. [`NProperty`](#nproperty)
-    3. [`GenderProperty`](#genderproperty)
-    4. [`AdrProperty`](#adrproperty)
-    5. [`OrgProperty`](#orgproperty)
-    6. [`ClientpidmapProperty`](#clientpidmapproperty)
+    1. [`KindProperty`](/documentation/properties/kindproperty)
+    2. [`NProperty`](/documentation/properties/nproperty)
+    3. [`GenderProperty`](/documentation/properties/genderproperty)
+    4. [`AdrProperty`](/documentation/properties/adrproperty)
+    5. [`OrgProperty`](/documentation/properties/orgproperty)
+    6. [`ClientpidmapProperty`](/documentation/properties/clientpidmapproperty)
 
 * ```SpecialValueType``` should be called with two arguments. The first should be the value and the second should be the target property
 
