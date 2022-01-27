@@ -13,7 +13,7 @@ hide_title: true
 * ```LabelParameter``` should be called with a single argument that is an instance of [`TextType`](/documentation/values/texttype-and-textlisttype)
 
   ```js
-  let deliveryAddress = new TextType(`Mr. John Q. Public, Esq.
+  const deliveryAddress = new TextType(`Mr. John Q. Public, Esq.
   Mail Drop: TNE QB
   123 Main Street
   Any Town, CA 91921-1234
