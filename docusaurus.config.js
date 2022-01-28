@@ -15,6 +15,7 @@ const config = {
   favicon: 'img/favicon.ico',
   organizationName: 'kelseykm', // Usually your GitHub org/user name.
   projectName: 'vcard4', // Usually your repo name.
+  trailingSlash: false,
 
   presets: [
     [
