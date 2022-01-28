@@ -10,7 +10,7 @@ sidebar_position: 28
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```LogoProperty``` are [`ValueParameter`](/documentation/parameters/ValueParameter), [`LanguageParameter`](/documentation/parameters/languageparameter), [`PIDParameter`](/documentation/parameters/pidparameter), PrefParameter, [`TypeParameter`](/documentation/parameters/typeparameter), [`MediatypeParameter`](/documentation/parameters/mediatypeparameter), [`AltidParameter`](/documentation/parameters/altidparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
+* The only acceptable parameters of ```LogoProperty``` are [`ValueParameter`](/documentation/parameters/valueparameter), [`LanguageParameter`](/documentation/parameters/languageparameter), [`PIDParameter`](/documentation/parameters/pidparameter), PrefParameter, [`TypeParameter`](/documentation/parameters/typeparameter), [`MediatypeParameter`](/documentation/parameters/mediatypeparameter), [`AltidParameter`](/documentation/parameters/altidparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 

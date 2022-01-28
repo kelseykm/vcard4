@@ -10,7 +10,7 @@ sidebar_position: 13
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```DeathPlaceProperty``` are [`ValueParameter`](/documentation/parameters/ValueParameter), [`LanguageParameter`](/documentation/parameters/languageparameter), [`AltidParameter`](/documentation/parameters/altidparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
+* The only acceptable parameters of ```DeathPlaceProperty``` are [`ValueParameter`](/documentation/parameters/valueparameter), [`LanguageParameter`](/documentation/parameters/languageparameter), [`AltidParameter`](/documentation/parameters/altidparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
 
 * [`LanguageParameter`](/documentation/parameters/languageparameter) may only be used when the value is of type [`TextType`](/documentation/values/texttype-and-textlisttype)
 

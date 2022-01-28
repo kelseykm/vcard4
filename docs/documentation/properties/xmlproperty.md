@@ -10,7 +10,7 @@ sidebar_position: 4
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```XMLProperty``` are [`ValueParameter`](/documentation/parameters/ValueParameter) and [`AltidParameter`](/documentation/parameters/altidparameter)
+* The only acceptable parameters of ```XMLProperty``` are [`ValueParameter`](/documentation/parameters/valueparameter) and [`AltidParameter`](/documentation/parameters/altidparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 

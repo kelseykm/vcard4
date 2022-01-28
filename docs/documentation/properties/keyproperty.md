@@ -10,7 +10,7 @@ sidebar_position: 41
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```KeyProperty``` are [`ValueParameter`](/documentation/parameters/ValueParameter), [`MediatypeParameter`](/documentation/parameters/mediatypeparameter), [`AltidParameter`](/documentation/parameters/altidparameter), [`PIDParameter`](/documentation/parameters/pidparameter), [`PrefParameter`](/documentation/parameters/prefparameter), [`IndexParameter`](/documentation/parameters/indexparameter), [`TypeParameter`](/documentation/parameters/typeparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
+* The only acceptable parameters of ```KeyProperty``` are [`ValueParameter`](/documentation/parameters/valueparameter), [`MediatypeParameter`](/documentation/parameters/mediatypeparameter), [`AltidParameter`](/documentation/parameters/altidparameter), [`PIDParameter`](/documentation/parameters/pidparameter), [`PrefParameter`](/documentation/parameters/prefparameter), [`IndexParameter`](/documentation/parameters/indexparameter), [`TypeParameter`](/documentation/parameters/typeparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
 
 * The [`MediatypeParameter`](/documentation/parameters/mediatypeparameter) may only be used if the value is of type [`URIType`](/documentation/values/uritype)
 

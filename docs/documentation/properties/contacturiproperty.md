@@ -10,7 +10,7 @@ sidebar_position: 23
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```ContactURIProperty``` are [`ValueParameter`](/documentation/parameters/ValueParameter), [`PrefParameter`](/documentation/parameters/prefparameter) and [`IndexParameter`](/documentation/parameters/indexparameter)
+* The only acceptable parameters of ```ContactURIProperty``` are [`ValueParameter`](/documentation/parameters/valueparameter), [`PrefParameter`](/documentation/parameters/prefparameter) and [`IndexParameter`](/documentation/parameters/indexparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 

@@ -10,7 +10,7 @@ sidebar_position: 14
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```DeathDateProperty``` are [`ValueParameter`](/documentation/parameters/ValueParameter), [`LanguageParameter`](/documentation/parameters/languageparameter), [`AltidParameter`](/documentation/parameters/altidparameter), [`CalscaleParameter`](/documentation/parameters/calscaleparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
+* The only acceptable parameters of ```DeathDateProperty``` are [`ValueParameter`](/documentation/parameters/valueparameter), [`LanguageParameter`](/documentation/parameters/languageparameter), [`AltidParameter`](/documentation/parameters/altidparameter), [`CalscaleParameter`](/documentation/parameters/calscaleparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
 
 * [`CalscaleParameter`](/documentation/parameters/calscaleparameter) may only be used when the value is of type [`DateTimeType`](/documentation/values/datetimetype)
 

@@ -10,7 +10,7 @@ sidebar_position: 24
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```TzProperty``` are [`ValueParameter`](/documentation/parameters/ValueParameter), [`AltidParameter`](/documentation/parameters/altidparameter), [`PIDParameter`](/documentation/parameters/pidparameter), [`PrefParameter`](/documentation/parameters/prefparameter), [`IndexParameter`](/documentation/parameters/indexparameter), [`TypeParameter`](/documentation/parameters/typeparameter), [`MediatypeParameter`](/documentation/parameters/mediatypeparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
+* The only acceptable parameters of ```TzProperty``` are [`ValueParameter`](/documentation/parameters/valueparameter), [`AltidParameter`](/documentation/parameters/altidparameter), [`PIDParameter`](/documentation/parameters/pidparameter), [`PrefParameter`](/documentation/parameters/prefparameter), [`IndexParameter`](/documentation/parameters/indexparameter), [`TypeParameter`](/documentation/parameters/typeparameter), [`MediatypeParameter`](/documentation/parameters/mediatypeparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 

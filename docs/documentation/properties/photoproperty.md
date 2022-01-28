@@ -10,7 +10,7 @@ sidebar_position: 8
 
 * This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
 
-* The only acceptable parameters of ```PhotoProperty``` are [`ValueParameter`](/documentation/parameters/ValueParameter), [`AltidParameter`](/documentation/parameters/altidparameter), [`TypeParameter`](/documentation/parameters/typeparameter), [`MediatypeParameter`](/documentation/parameters/mediatypeparameter), [`PrefParameter`](/documentation/parameters/prefparameter), [`IndexParameter`](/documentation/parameters/indexparameter), [`PIDParameter`](/documentation/parameters/pidparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
+* The only acceptable parameters of ```PhotoProperty``` are [`ValueParameter`](/documentation/parameters/valueparameter), [`AltidParameter`](/documentation/parameters/altidparameter), [`TypeParameter`](/documentation/parameters/typeparameter), [`MediatypeParameter`](/documentation/parameters/mediatypeparameter), [`PrefParameter`](/documentation/parameters/prefparameter), [`IndexParameter`](/documentation/parameters/indexparameter), [`PIDParameter`](/documentation/parameters/pidparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
 
 * If you do not wish that the property have any parameters, leave the first argument array empty
 
