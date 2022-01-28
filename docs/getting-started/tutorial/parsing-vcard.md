@@ -7,8 +7,12 @@ sidebar_position: 5
 
 * Let's import the ```parse``` function, which we will use.
 
-  ```js
+  ```js title=ESM
   import { parse } from 'vcard4';
+  ```
+
+  ```js title=commonjs
+  const { parse } = require('vcard4');
   ```
 * Assuming you wrote the vCard to disk, let's import ```fs``` (part of __node__'s api) and read it.
 

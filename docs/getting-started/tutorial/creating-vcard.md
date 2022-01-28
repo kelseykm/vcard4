@@ -44,11 +44,12 @@ sidebar_position: 2
 
 * First off, we import the classes needed from ```vcard4```.
 
-  ```js
+  ```js title=ESM
   import { GeoProperty, TypeParameter, URIType, TextType } from 'vcard4';
+  ```
 
-  //or if you're using commonjs
-  //const { GeoProperty, TypeParameter, URIType, TextType } = require('vcard4');
+  ```js title=commonjs
+  const { GeoProperty, TypeParameter, URIType, TextType } = require('vcard4');
   ```
 
   :::tip
