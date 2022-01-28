@@ -6,7 +6,7 @@ sidebar_position: 5
 
 # `Group`
 
-* This class is grouping properties.
+* This class is for grouping properties.
 
 * The RFC has this to say about grouping properties:
 
