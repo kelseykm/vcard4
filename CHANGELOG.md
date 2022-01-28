@@ -1,3 +1,33 @@
+# 3.0.0
+
+## Breaking changes
+
+* All parts of the api provided as named exports of the main module
+
+* Changes in input and output of several classes
+
+* Change in output of parse function
+
+## New features
+
+* Fully tree shakeable
+
+* Much better parser
+
+* Added capacity for creating XML vCards
+
+* Added capacity for creating XML vCards
+
+* Added support for grouped properties in both generation and parsing
+
+* New documentation website (removed docs from README)
+
+## Bug fixes
+
+* No repeating of parameters in same property
+
+* Only properties (and grouped properties) can be passed to VCARD
+
 # 2.4.1
 
 * Bug fixes
