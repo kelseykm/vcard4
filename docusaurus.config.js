@@ -66,6 +66,9 @@ const config = {
           },
         ],
       },
+      footer: {
+        copyright: `Copyright © ${new Date().getFullYear()} <a href="mailto:kelseykm.git@gmail.com">Kelsey Mwongeli</a>. Built with Docusaurus.`,
+      },
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
