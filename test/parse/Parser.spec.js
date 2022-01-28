@@ -114,17 +114,17 @@ describe('Parser tests', () => {
 
     assert.deepEqual(parsedVcard2.parsed.repeatingProperties, { TEL: 2 });
 
-    assert.deepEqual(parsedVcard2.parsed.groups, ['STORY']);
-    assert.deepEqual(parsedVcard2.parsed.getGroup('STORY'),
+    assert.deepEqual(parsedVcard2.parsed.groups, ['story']);
+    assert.deepEqual(parsedVcard2.parsed.getGroup('story'),
       [
         {
-          group: 'STORY',
+          group: 'story',
           property: 'TITLE',
           parameters: {},
           value: 'Imaginary test person'
         },
         {
-          group: 'STORY',
+          group: 'story',
           property: 'NOTE',
           parameters: {},
           value: 'John Doe has a long and varied history, being documented on more police files than anyone else. Reports of his death are alas numerous.'

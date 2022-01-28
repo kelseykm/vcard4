@@ -315,7 +315,7 @@ export class Tokenizer {
       ) :
       firstColonIndex;
 
-    let property = contentLine.slice(0, propEndPoint).toUpperCase();
+    let property = contentLine.slice(0, propEndPoint);
     let group = null;
 
     if (property.indexOf('.') !== -1) {
@@ -325,7 +325,7 @@ export class Tokenizer {
     if (firstSemiColonIndex === -1 || firstColonIndex < firstSemiColonIndex)
     return {
       group,
-      property,
+      property: property.toUpperCase(),
       parameters: {},
       value: this.#valueSeparator(
         contentLine.slice(propEndPoint + 1)
@@ -334,7 +334,7 @@ export class Tokenizer {
 
     return {
       group,
-      property,
+      property: property.toUpperCase(),
       parameters: this.#parametersSeparator(
         contentLine.slice(firstSemiColonIndex + 1, firstColonIndex)
       ),
