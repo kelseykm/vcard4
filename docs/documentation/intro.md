@@ -11,10 +11,6 @@ slug: /
 
 * __vcard4__ may be used in node or in the browser, and it supports ESM and UMD.
 
-:::tip
-If any of the examples in the documentation will be using ESM, you may use commonjs or AMD equivalents and it would still work (as mentioned above, __vcard4__ supports UMD).
-:::
-
 :::info
 Minified bundles of both ESM and UMD are provided in the `dist/` folder.
 :::

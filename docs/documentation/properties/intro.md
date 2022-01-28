@@ -146,8 +146,12 @@ All of the classes, with the exception of a few, should generally be called with
 
 * All the classes listed above are provided as named exports from the main __vcard4__ module. For example, to import the `AdrProperty` class:
 
-  ```js
+  ```js title=ESM
   import { AdrProperty } from 'vcard4';
+  ```
+
+  ```js title=commonjs
+  const { AdrProperty } = require('vcard4');
   ```
 
 ## Methods
@@ -157,6 +161,10 @@ All of the classes, with the exception of a few, should generally be called with
   1. `repr`
 
     This method returns a string which is the representation of how the property will finally appear in the vCard.
+
+    :::note
+    '>' in the examples below is just the terminal prompt.
+    :::
 
     ```js
     > const genderPropValue = new SpecialValueType(

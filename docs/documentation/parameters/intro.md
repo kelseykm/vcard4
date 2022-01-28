@@ -53,8 +53,12 @@ hide_title: true
 
 * All the classes listed above are provided as named exports from the main __vcard4__ module. For example, to import the `LanguageParameter` class:
 
-  ```js
+  ```js title=ESM
   import { LanguageParameter } from 'vcard4';
+  ```
+
+  ```js title=commonjs
+  const { LanguageParameter } = require('vcard4');
   ```
 
 ## Methods
@@ -64,6 +68,10 @@ hide_title: true
   1. `repr`
 
     This method returns a string which is the representation of how the parameter will finally appear in the vCard.
+
+    :::note
+    '>' in the examples below is just the terminal prompt.
+    :::
 
     ```js
     > const preference = new PrefParameter(new IntegerType(1));
