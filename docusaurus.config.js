@@ -9,7 +9,7 @@ const config = {
   title: 'vcard4',
   tagline: 'A vCard version 4.0 generator and parser',
   url: 'https://kelseykm.github.io',
-  baseUrl: '/',
+  baseUrl: '/vcard4/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
