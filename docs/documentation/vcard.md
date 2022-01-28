@@ -1,14 +1,14 @@
 ---
 title: VCARD
 hide_title: true
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # ```VCARD```
 
 * This class is for assembling all the properties into one vCard object
 
-* ```VCARD``` should be called with a single argument that is an array whose items are the properties you want on the vCard
+* ```VCARD``` should be called with a single argument that is an array whose items are the [properties](/documentation/properties/intro) or [groups](/documentation/group) you want on the vCard
 
   :::note
   __vcard4__ treats `BEGIN`, `VERSION` and `END` properties as special. You do not construct them manually as you do the other properties, it adds them to the constructed vCard itself.
@@ -48,11 +48,26 @@ sidebar_position: 5
     >   new FNProperty(
     >     [],
     >     new TextType('James Bond')
+    >    ),
+    >   new Group(
+    >     [
+    >       new GenderProperty(
+    >         [],
+    >         new SpecialValueType(
+    >           [
+    >             new SexType('M'),
+    >             new TextType('Male')
+    >           ],
+    >           'GenderProperty'
+    >         )
+    >       )
+    >     ],
+    >     'milky'
     >   )
     > ]);
 
     > vc.repr();
-    'BEGIN:VCARD\r\nVERSION:4.0\r\nFN:James Bond\r\nEND:VCARD\r\n'
+    "BEGIN:VCARD\r\nVERSION:4.0\r\nFN:James Bond\r\nmilky.GENDER:M;Male\r\nEND:VCARD\r\n"
     ```
 
   2. `reprXML`
@@ -64,12 +79,26 @@ sidebar_position: 5
     >   new FNProperty(
     >     [],
     >     new TextType('James Bond')
+    >    ),
+    >   new Group(
+    >     [
+    >       new GenderProperty(
+    >         [],
+    >         new SpecialValueType(
+    >           [
+    >             new SexType('M'),
+    >             new TextType('Male')
+    >           ],
+    >           'GenderProperty'
+    >         )
+    >       )
+    >     ],
+    >     'milky'
     >   )
     > ]);
 
     > vc.reprXML();
-    '<?xml version="1.0" encoding="UTF-8"?><vcards xmlns="urn:ietf:params:xml:ns:vcard-4.0"><vcard><fn><text>James Bond</text></fn></vcard></vcards>'
-
+    '<?xml version="1.0" encoding="UTF-8"?><vcards xmlns="urn:ietf:params:xml:ns:vcard-4.0"><vcard><fn><text>James Bond</text></fn><group name="milky"><gender><sex>M</sex><text>Male</text></gender></group></vcard></vcards>'
     ```
 
   3. `reprJSON` 
@@ -81,10 +110,31 @@ sidebar_position: 5
     >   new FNProperty(
     >     [],
     >     new TextType('James Bond')
+    >    ),
+    >   new Group(
+    >     [
+    >       new GenderProperty(
+    >         [],
+    >         new SpecialValueType(
+    >           [
+    >             new SexType('M'),
+    >             new TextType('Male')
+    >           ],
+    >           'GenderProperty'
+    >         )
+    >       )
+    >     ],
+    >     'milky'
     >   )
     > ]);
 
     > vc.reprJSON();
-    [ 'vcard', [ [ 'fn', {}, 'text', 'James Bond' ] ] ]
+    [
+      "vcard",
+      [
+        [ "fn", {}, "text", "James Bond" ],
+        [ "gender", { group: "milky" }, "text", [ "M", "Male" ] ]
+      ]
+    ]
     ```
 
