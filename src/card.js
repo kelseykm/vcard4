@@ -94,12 +94,6 @@ export class VCARD {
         case 'KindProperty':
           if (/^group$/i.test(prop.value))
           kindPropertyIsGroup = true;
-          break;
-
-        case 'BeginProperty':
-        case 'VersionProperty':
-        case 'EndProperty':
-          throw new InvalidArgument('BeginProperty, VersionProperty and EndProperty instances must not be supplied');
       }
 
       if (!propertyInstanceCount.has(prop.constructor.identifier))
