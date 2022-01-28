@@ -5,7 +5,7 @@ sidebar_position: 3
 
 * __vcard4__ may also be used to create XML vCards (RFC 6351).
 
-* The process of doing so is the same as explained in the [first part of the tutorial](/docs/getting-started/tutorial/creating-vcard). The only difference is at the very end. 
+* The process of doing so is the same as explained in the [first part of the tutorial](/getting-started/tutorial/creating-vcard). The only difference is at the very end. 
 
 
 * Once we have the ```VCARD``` object, we call the ```reprXML``` method to create an XML vCard.

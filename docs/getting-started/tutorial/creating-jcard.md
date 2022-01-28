@@ -5,7 +5,7 @@ sidebar_position: 4
 
 * __vcard4__ may also be used to create a jCard, which is a JSON format for vCard data (RFC 7095).
 
-* The process of doing so is the same as explained in the [first part of the tutorial](/docs/getting-started/tutorial/creating-vcard). The only difference is at the very end. 
+* The process of doing so is the same as explained in the [first part of the tutorial](/getting-started/tutorial/creating-vcard). The only difference is at the very end. 
 
 * Once we have the ```VCARD``` object, we call the ```reprJSON``` method to create a jCard.
 

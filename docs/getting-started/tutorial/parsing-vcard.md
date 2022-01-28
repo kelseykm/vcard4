@@ -3,7 +3,7 @@ title: Parsing a vCard
 sidebar_position: 5
 ---
 
-* In this part of the tutorial, we will parse Simon's vCard, which we created in the [first part of the tutorial](/docs/getting-started/tutorial/creating-vcard).
+* In this part of the tutorial, we will parse Simon's vCard, which we created in the [first part of the tutorial](/getting-started/tutorial/creating-vcard).
 
 * Let's import the ```parse``` function, which we will use.
 
