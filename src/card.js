@@ -55,7 +55,10 @@ export class VCARD {
     return [
       'vcard',
       this.#props.reduce((accumulatedProps, currentProp) => {
-        accumulatedProps.push(currentProp.reprJSON());
+        if (currentProp.constructor.identifier === 'Group')
+        accumulatedProps = accumulatedProps.concat(currentProp.reprJSON());
+        else accumulatedProps.push(currentProp.reprJSON());
+
         return accumulatedProps;
       }, [])
     ];
@@ -86,6 +89,11 @@ export class VCARD {
     let kindPropertyIsGroup = false;
     
     for (const prop of props) {
+      if (!/(?:^Group$|Property$)/.test(prop.constructor.identifier))
+      throw new InvalidArgument('Unidentified item included in properties');
+
+      let count;
+
       switch(prop.constructor.identifier) {
         case 'MemberProperty':
           hasMemberProperty = true;
@@ -94,21 +102,39 @@ export class VCARD {
         case 'KindProperty':
           if (/^group$/i.test(prop.value))
           kindPropertyIsGroup = true;
+          break;
+
+        case 'Group':
+          if (prop.hasMemberProperty)
+          hasMemberProperty = true;
+          
+          if (prop.kindPropertyIsGroup)
+          kindPropertyIsGroup = true;
+
+          for (const propName of prop.propertyInstanceCount.keys()) {
+            const _groupCount = prop.propertyInstanceCount.get(propName);
+            const _cardcount = propertyInstanceCount.get(propName);
+            
+            count = _groupCount + _cardcount;
+
+            propertyInstanceCount.set(propName, count);
+          }
+          break;
+
+        default:
+          if (!propertyInstanceCount.has(prop.constructor.identifier))
+          continue;
+
+          count = propertyInstanceCount.get(prop.constructor.identifier);
+          count++;
+          propertyInstanceCount.set(prop.constructor.identifier, count);
       }
-
-      if (!propertyInstanceCount.has(prop.constructor.identifier))
-      continue;
-
-      let count = propertyInstanceCount.get(prop.constructor.identifier);
-      count++;
-      propertyInstanceCount.set(prop.constructor.identifier, count);
-
-      if (
-        this.constructor.cardinalityNoneOrOneProps.has(prop.constructor.identifier) &&
-        count > 1
-      )
-      throw new InvalidArgument('AnniversaryProperty, BdayProperty, GenderProperty, KindProperty, NProperty, ProdidProperty, RevProperty and UIDProperty must not have more than one instance supplied');
     }
+
+    if (Array.from(this.constructor.cardinalityNoneOrOneProps.keys()).some(
+        property => propertyInstanceCount.get(property) > 1
+    ))
+    throw new InvalidArgument('AnniversaryProperty, BdayProperty, GenderProperty, KindProperty, NProperty, ProdidProperty, RevProperty and UIDProperty must not have more than one instance supplied');
 
     if (propertyInstanceCount.get('FNProperty') < 1)
     throw new MissingArgument('One or more FNProperty instances must be supplied');
