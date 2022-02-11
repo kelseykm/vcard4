@@ -1,3 +1,11 @@
+# 3.0.1
+
+## Fixes
+
+* Bug fix in parsing tokenizer
+
+* Typo fix in v3.0.0 CHANGELOG
+
 # 3.0.0
 
 ## Breaking changes
