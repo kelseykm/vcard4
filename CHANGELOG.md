@@ -16,7 +16,7 @@
 
 * Added capacity for creating XML vCards
 
-* Added capacity for creating XML vCards
+* Added capacity for creating jCards
 
 * Added support for grouped properties in both generation and parsing
 
