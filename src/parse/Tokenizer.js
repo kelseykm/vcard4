@@ -284,7 +284,7 @@ export class Tokenizer {
       if (
         (
           holdCurrentParamValue.startsWith('"') &&
-          holdCurrentParamValue.startsWith('"')
+          holdCurrentParamValue.endsWith('"')
         ) &&
         !this.#uriRegExp.test(holdCurrentParamValue.slice(1, -1))
       )
