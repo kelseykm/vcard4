@@ -24,13 +24,13 @@ new DeathPlaceProperty(
   new TextType('Meadow village')
 );
 
-const birthplace2val = new TextType('Town center');
+const deathplace2val = new TextType('Town center');
 
 new DeathPlaceProperty(
   [
-    new ValueParameter(birthplace2val)
+    new ValueParameter(deathplace2val)
   ],
-  birthplace2val
+  deathplace2val
 );
 ```
 

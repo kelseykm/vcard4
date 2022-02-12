@@ -26,13 +26,13 @@ new DeathDateProperty(
   new DateTimeType('19960415', 'dateandortime')
 );
 
-const bday2val = new TextType('circa 1800');
+const ddp2val = new TextType('circa 1800');
 
 new DeathDateProperty(
   [
-    new ValueParameter(bday2val)
+    new ValueParameter(ddp2val)
   ],
-  bday2val
+  ddp2val
 );
 ```
 
