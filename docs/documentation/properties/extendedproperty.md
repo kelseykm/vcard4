@@ -8,7 +8,7 @@ sidebar_position: 45
 
 * This class is for creating extended properties
 
-* This class should be called with three arguments. The first argument, a string, should be the name of the extended parameter and it must be an x-name . The second should be an array of the parameters, and the third the value of the property
+* This class should be called with three arguments. The first argument, a string, should be the name of the extended property and it must be an x-name . The second should be an array of the parameters, and the third the value of the property
 
   :::info
   X-names are names that begin with "x-" or "X-" and are reserved for experimental use, not intended for released products, or for use in bilateral agreements.
