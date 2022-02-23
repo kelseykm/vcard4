@@ -77,6 +77,7 @@ describe('Parser tests', () => {
 
     assert.hasAllKeys(parsedVcard.parsed, [
       "getGroup",
+      "getProperty",
       "groups",
       "parsedVcard",
       "properties",
@@ -111,6 +112,17 @@ describe('Parser tests', () => {
       'EMAIL',
       'TEL',
     ]);
+
+    assert.deepEqual(parsedVcard2.parsed.getProperty('EMAIL'),
+      [
+        {
+          group: null,
+          property: 'EMAIL',
+          parameters: {TYPE: "work", PREF: "1"},
+          value: 'johnDoe@example.org'
+        }
+      ]
+    );
 
     assert.deepEqual(parsedVcard2.parsed.repeatingProperties, { TEL: 2 });
 

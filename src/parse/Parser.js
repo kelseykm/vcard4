@@ -231,6 +231,9 @@ export class Parser {
           return accumulated;
         }, [])));
       },
+      getProperty(property = '') {
+        return _parsedTokens.filter(parsedToken => parsedToken.property === property);
+      },
       get groups() {
         return Array.from(new Set(_parsedTokens.reduce((accumulated, current) => {
           current.group && accumulated.push(current.group);
