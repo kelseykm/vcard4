@@ -40,6 +40,7 @@ export class ExtendedProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
+    prop: string,
     params: (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | CalscaleParameter | SortAsParameter | GeoParameter | TzParameter | AnyParameter | LabelParameter | CCParameter | IndexParameter | LevelParameter)[],
     val: TextType | TextListType | BooleanType | DateTimeType | IntegerType | FloatType | LanguageTagType | URIType | SexType | SpecialValueType
   );
