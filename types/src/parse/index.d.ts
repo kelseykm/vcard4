@@ -14,11 +14,6 @@ declare type ParsedVcard = {
     property: string;
     parameters: Record<string, string | string[]>;
     value: string;
-  }|{
-    group: string;
-    property: string;
-    parameters: Record<string, string | string[]>;
-    value: string;
   }[];
   readonly repeatingProperties: Record<string, string | string[]>;
 }
