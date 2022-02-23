@@ -1,3 +1,15 @@
+# 3.1.0
+
+## New feature
+
+* getProperty method on `parse` return object
+
+## Fixes
+
+* Bug fix on types for constructor parameters of `ExtendedProperty`
+
+* Bug fix on types for getGroup method of `parse` return object
+
 # 3.0.1
 
 ## Fixes
