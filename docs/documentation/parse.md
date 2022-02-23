@@ -313,7 +313,27 @@ sidebar_position: 7
 
 ## Methods in the returned object
 
-1. ```getGroup```
+1. ```getProperty```
+
+  * This method should be called with a single argument of type string that is the name of a property in the vCard.
+
+  * It returns an array containing parsed objects of that property (may be one or more, depending on how many times the property appears in the vCard).
+
+  * If the property is not in the vCard, an empty array is returned.
+
+  ```js
+  > parsedVcard.getProperty('EMAIL');
+  [
+    {
+      group: 'work',
+      property: 'EMAIL',
+      parameters: { TYPE: 'work' },
+      value: 'simon.perreault@viagenie.ca'
+    }
+  ]
+  ```
+
+2. ```getGroup```
 
   * This method should be called with a single argument of type string that is the name of a property group in the vCard.
 
