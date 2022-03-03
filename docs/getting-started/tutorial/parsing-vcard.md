@@ -35,7 +35,7 @@ sidebar_position: 5
 * ```parse``` returns an object. Logging ```parsedContact``` to the console reveals it.
 
   ```js
-  console.log(parsedContact);
+  > console.log(parsedContact);
 
   {
     parsedVcard: [
@@ -118,6 +118,7 @@ sidebar_position: 5
     properties: [Getter],
     propertiesWithoutParameters: [Getter],
     propertiesWithParameters: [Getter],
+    getProperty: [Function: getProperty],
     groups: [Getter],
     getGroup: [Function: getGroup],
     repeatingProperties: [Getter]
