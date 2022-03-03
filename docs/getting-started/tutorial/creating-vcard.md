@@ -53,7 +53,7 @@ sidebar_position: 2
   ```
 
   :::tip
-  As you have probably already noticed, the naming of the classes is quite intuitive: just add 'property', 'parameter' or 'value' to the name depending on whether it's a property, parameter or value type, convert it to camel case, et voilà!
+  As you have probably already noticed, the naming of the classes is quite intuitive: just add 'property', 'parameter' or 'value' to the name depending on whether it's a property, parameter or value type, convert it to PascalCase, et voilà!
   :::
 
 * Then let's work our way up, by creating the value first.
