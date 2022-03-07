@@ -127,6 +127,7 @@ sidebar_position: 7
     properties: [Getter],
     propertiesWithoutParameters: [Getter],
     propertiesWithParameters: [Getter],
+    getProperty: [Function: getProperty],
     groups: [Getter],
     getGroup: [Function: getGroup],
     repeatingProperties: [Getter]
