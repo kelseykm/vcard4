@@ -1,7 +1,7 @@
 {
   "name": "vcard4",
   "version": "3.1.1",
-  "description": "vCard version 4.0 javascript library for creating or parsing vCards, with full implementation of RFC 6350",
+  "description": "An RFC 6350 compliant JavaScript library for generating and parsing version 4.0 vCards. Can also generate RFC 6351 compliant XML vCards and RFC 7095 compliant jCards. TypeScript type declarations are provided.",
   "type": "module",
   "main": "./lib/umd/index.js",
   "module": "./lib/esm/index.js",
@@ -19,18 +19,13 @@
     "type": "git",
     "url": "git+https://github.com/kelseykm/vcard4.git"
   },
-  "keywords": [
-    "vcard",
-    "vcard4",
-    "vcf",
-    "vcf4"
-  ],
+  "keywords": ["vcard", "vcard4", "vcf", "vcf4"],
   "author": "Kelsey Mwongeli <kelseykm.git@gmail.com>",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/kelseykm/vcard4/issues"
   },
-  "homepage": "https://github.com/kelseykm/vcard4#readme",
+  "homepage": "https://kelseykm.github.io/vcard4/",
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
