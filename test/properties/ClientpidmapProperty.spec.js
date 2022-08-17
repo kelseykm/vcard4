@@ -1,44 +1,48 @@
-import { URIType, IntegerType, SpecialValueType } from '../../src/values/index.js';
-import { ClientpidmapProperty } from '../../src/properties/index.js';
-import { assert } from 'chai';
+import {
+  URIType,
+  IntegerType,
+  SpecialValueType,
+} from "../../src/values/index.js";
+import { ClientpidmapProperty } from "../../src/properties/index.js";
+import { assert } from "chai";
 
-describe('ClientpidmapProperty tests', () => {
-  it('Accepts valid input', () => {
-    assert.doesNotThrow(() => new ClientpidmapProperty(
-      [],
-      new SpecialValueType(
-        [
-          new IntegerType(1),
-          new URIType('urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b')
-        ],
-        'clientpidmapproperty'
-      )
-    ));
+describe("ClientpidmapProperty tests", () => {
+  it("Accepts valid input", () => {
+    assert.doesNotThrow(
+      () =>
+        new ClientpidmapProperty(
+          [],
+          new SpecialValueType(
+            [
+              new IntegerType(1),
+              new URIType("urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"),
+            ],
+            "clientpidmapproperty"
+          )
+        )
+    );
   });
 
-  it('Rejects invalid input', () => {
-    assert.throws(() => new ClientpidmapProperty(
-      [
-        new IntegerType(55)
-      ],
-      new IntegerType(55)
-    ));
-    assert.throws(() => new ClientpidmapProperty);
+  it("Rejects invalid input", () => {
+    assert.throws(
+      () => new ClientpidmapProperty([new IntegerType(55)], new IntegerType(55))
+    );
+    assert.throws(() => new ClientpidmapProperty());
     assert.throws(() => new ClientpidmapProperty(1));
     assert.throws(() => new ClientpidmapProperty({}));
-    assert.throws(() => new ClientpidmapProperty('James Bond'));
+    assert.throws(() => new ClientpidmapProperty("James Bond"));
   });
 
-  it('Formats value properly', () => {
+  it("Formats value properly", () => {
     assert.strictEqual(
       new ClientpidmapProperty(
         [],
         new SpecialValueType(
           [
             new IntegerType(1),
-            new URIType('urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b')
+            new URIType("urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"),
           ],
-          'clientpidmapproperty'
+          "clientpidmapproperty"
         )
       ).repr(),
       "CLIENTPIDMAP:1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"
@@ -49,9 +53,9 @@ describe('ClientpidmapProperty tests', () => {
         new SpecialValueType(
           [
             new IntegerType(1),
-            new URIType('urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b')
+            new URIType("urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"),
           ],
-          'clientpidmapproperty'
+          "clientpidmapproperty"
         )
       ).reprXML(),
       "<clientpidmap><integer>1</integer><uri>urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b</uri></clientpidmap>"
@@ -62,12 +66,17 @@ describe('ClientpidmapProperty tests', () => {
         new SpecialValueType(
           [
             new IntegerType(1),
-            new URIType('urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b')
+            new URIType("urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"),
           ],
-          'clientpidmapproperty'
+          "clientpidmapproperty"
         )
       ).reprJSON(),
-      ["clientpidmap", {}, "unknown", [1, "urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"]]
+      [
+        "clientpidmap",
+        {},
+        "unknown",
+        [1, "urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"],
+      ]
     );
   });
 });

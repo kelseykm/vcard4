@@ -1,5 +1,5 @@
-import { AnyParameter } from '../parameters/index';
-import { SpecialValueType } from '../values/index';
+import { AnyParameter } from "../parameters/index";
+import { SpecialValueType } from "../values/index";
 
 export class ClientpidmapProperty {
   readonly params: string;
@@ -11,8 +11,5 @@ export class ClientpidmapProperty {
   repr(): string;
   reprXML(): string;
   reprJSON(): {}[];
-  constructor(
-    params: AnyParameter[], 
-    val: SpecialValueType
-  );
+  constructor(params: AnyParameter[], val: SpecialValueType);
 }

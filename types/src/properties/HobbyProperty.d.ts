@@ -1,13 +1,13 @@
-import { 
+import {
   LanguageParameter,
   AnyParameter,
   TypeParameter,
   LevelParameter,
   PrefParameter,
   IndexParameter,
-  AltidParameter
-} from '../parameters/index';
-import { TextType } from '../values/index';
+  AltidParameter,
+} from "../parameters/index";
+import { TextType } from "../values/index";
 
 export class HobbyProperty {
   readonly params: string;
@@ -20,7 +20,15 @@ export class HobbyProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (PrefParameter | AltidParameter | TypeParameter | AnyParameter | IndexParameter | LevelParameter | LanguageParameter)[], 
-    val: TextType 
+    params: (
+      | PrefParameter
+      | AltidParameter
+      | TypeParameter
+      | AnyParameter
+      | IndexParameter
+      | LevelParameter
+      | LanguageParameter
+    )[],
+    val: TextType
   );
 }

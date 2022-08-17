@@ -1,4 +1,4 @@
-import { URIType } from '../values/index';
+import { URIType } from "../values/index";
 
 export class GeoParameter {
   readonly value: string;

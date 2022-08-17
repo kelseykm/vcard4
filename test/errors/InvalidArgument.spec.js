@@ -1,10 +1,10 @@
-import { InvalidArgument } from '../../src/errors/index.js';
-import { expect } from 'chai';
+import { InvalidArgument } from "../../src/errors/index.js";
+import { expect } from "chai";
 
-describe('InvalidArgument tests', () => {
-  it('Should work expected', () => {
+describe("InvalidArgument tests", () => {
+  it("Should work expected", () => {
     expect(() => {
-      throw new InvalidArgument('Testing...')
-    }).to.throw(InvalidArgument, 'Testing...');
-  })
+      throw new InvalidArgument("Testing...");
+    }).to.throw(InvalidArgument, "Testing...");
+  });
 });

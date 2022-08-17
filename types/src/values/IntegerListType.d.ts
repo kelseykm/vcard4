@@ -1,4 +1,4 @@
-import { IntegerType } from './IntegerType';
+import { IntegerType } from "./IntegerType";
 
 export class IntegerListType {
   readonly value: string;
@@ -6,6 +6,6 @@ export class IntegerListType {
   readonly valueJSON: (string | number | bigint)[];
   repr(): string;
   reprXML(): string;
-  reprJSON(): (string | number| bigint)[];
+  reprJSON(): (string | number | bigint)[];
   constructor(integerlist: IntegerType[]);
 }

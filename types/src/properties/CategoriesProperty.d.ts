@@ -1,13 +1,13 @@
-import { 
+import {
   AnyParameter,
   TypeParameter,
   PrefParameter,
   PIDParameter,
   IndexParameter,
   AltidParameter,
-  ValueParameter
-} from '../parameters/index';
-import { TextType, TextListType } from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { TextType, TextListType } from "../values/index";
 
 export class CategoriesProperty {
   readonly params: string;
@@ -20,7 +20,15 @@ export class CategoriesProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | AnyParameter | IndexParameter)[], 
+    params: (
+      | ValueParameter
+      | PrefParameter
+      | AltidParameter
+      | PIDParameter
+      | TypeParameter
+      | AnyParameter
+      | IndexParameter
+    )[],
     val: TextType | TextListType
   );
 }

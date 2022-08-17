@@ -1,32 +1,37 @@
-import { BaseValue } from './BaseValue.js';
-import { MissingArgument } from '../errors/index.js';
+import { BaseValue } from "./BaseValue.js";
+import { MissingArgument } from "../errors/index.js";
 
 export class IntegerListType extends BaseValue {
-  static type = 'INTEGER';
-  static identifier = 'IntegerListType';
+  static type = "INTEGER";
+  static identifier = "IntegerListType";
 
   #integerlist;
 
   get value() {
-    return this.#integerlist.reduce((accumulatedIntegerTypes, currentIntegerType) => {
-      accumulatedIntegerTypes.push(currentIntegerType.repr());
-      return accumulatedIntegerTypes;
-    }, []).join(',');
+    return this.#integerlist
+      .reduce((accumulatedIntegerTypes, currentIntegerType) => {
+        accumulatedIntegerTypes.push(currentIntegerType.repr());
+        return accumulatedIntegerTypes;
+      }, [])
+      .join(",");
   }
 
   get valueXML() {
     return this.#integerlist.reduce(
-      (accumulatedIntegerTypes, currentIntegerType) => accumulatedIntegerTypes + currentIntegerType.reprXML()
-    , '');
+      (accumulatedIntegerTypes, currentIntegerType) =>
+        accumulatedIntegerTypes + currentIntegerType.reprXML(),
+      ""
+    );
   }
 
   get valueJSON() {
-    const value = this.#integerlist.reduce((accumulatedIntegerTypes, currentIntegerType) => {
-      accumulatedIntegerTypes.push(
-        currentIntegerType.reprJSON().pop()
-      );
-      return accumulatedIntegerTypes;
-    }, []);
+    const value = this.#integerlist.reduce(
+      (accumulatedIntegerTypes, currentIntegerType) => {
+        accumulatedIntegerTypes.push(currentIntegerType.reprJSON().pop());
+        return accumulatedIntegerTypes;
+      },
+      []
+    );
 
     value.unshift(this.constructor.type.toLowerCase());
 
@@ -34,15 +39,18 @@ export class IntegerListType extends BaseValue {
   }
 
   #validate(integerlist) {
-    if (typeof integerlist === 'undefined')
-    throw new MissingArgument('Value for IntegerListType must be supplied');
-
+    if (typeof integerlist === "undefined")
+      throw new MissingArgument("Value for IntegerListType must be supplied");
     else if (!Array.isArray(integerlist))
-    throw new TypeError('Value for IntegerListType must be passed in an array');
+      throw new TypeError(
+        "Value for IntegerListType must be passed in an array"
+      );
 
     for (const integer of integerlist) {
-      if (integer.constructor.identifier !== 'IntegerType')
-      throw new TypeError('Invalid type for value of IntegerListType. It should be an array of IntegerTypes');
+      if (integer.constructor.identifier !== "IntegerType")
+        throw new TypeError(
+          "Invalid type for value of IntegerListType. It should be an array of IntegerTypes"
+        );
     }
   }
 

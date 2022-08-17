@@ -1,4 +1,4 @@
-import { TextType } from '../values/index';
+import { TextType } from "../values/index";
 
 export class MediatypeParameter {
   readonly value: string;

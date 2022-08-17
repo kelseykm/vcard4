@@ -1,5 +1,5 @@
-import { ValueParameter, AnyParameter } from '../parameters/index';
-import { SpecialValueType } from '../values/index';
+import { ValueParameter, AnyParameter } from "../parameters/index";
+import { SpecialValueType } from "../values/index";
 
 export class KindProperty {
   readonly params: string;
@@ -11,8 +11,5 @@ export class KindProperty {
   repr(): string;
   reprXML(): string;
   reprJSON(): {}[];
-  constructor(
-    params: (ValueParameter | AnyParameter)[],
-    val: SpecialValueType
-  );
+  constructor(params: (ValueParameter | AnyParameter)[], val: SpecialValueType);
 }

@@ -1,11 +1,11 @@
-import { 
+import {
   LanguageParameter,
   SortAsParameter,
   AnyParameter,
   AltidParameter,
-  ValueParameter
-} from '../parameters/index';
-import { SpecialValueType } from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { SpecialValueType } from "../values/index";
 
 export class NProperty {
   readonly params: string;
@@ -18,7 +18,13 @@ export class NProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (ValueParameter | SortAsParameter | LanguageParameter | AltidParameter | AnyParameter)[],
+    params: (
+      | ValueParameter
+      | SortAsParameter
+      | LanguageParameter
+      | AltidParameter
+      | AnyParameter
+    )[],
     val: SpecialValueType
   );
 }

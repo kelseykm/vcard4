@@ -1,4 +1,4 @@
-import { 
+import {
   LanguageParameter,
   SortAsParameter,
   AnyParameter,
@@ -14,9 +14,9 @@ import {
   AltidParameter,
   ValueParameter,
   TzParameter,
-  CCParameter
-} from '../parameters/index';
-import { 
+  CCParameter,
+} from "../parameters/index";
+import {
   BooleanType,
   TextType,
   TextListType,
@@ -26,8 +26,8 @@ import {
   LanguageTagType,
   URIType,
   FloatType,
-  SpecialValueType
-} from '../values/index';
+  SpecialValueType,
+} from "../values/index";
 
 export class ExtendedProperty {
   readonly params: string;
@@ -41,7 +41,34 @@ export class ExtendedProperty {
   reprJSON(): {}[];
   constructor(
     prop: string,
-    params: (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | CalscaleParameter | SortAsParameter | GeoParameter | TzParameter | AnyParameter | LabelParameter | CCParameter | IndexParameter | LevelParameter)[],
-    val: TextType | TextListType | BooleanType | DateTimeType | IntegerType | FloatType | LanguageTagType | URIType | SexType | SpecialValueType
+    params: (
+      | LanguageParameter
+      | ValueParameter
+      | PrefParameter
+      | AltidParameter
+      | PIDParameter
+      | TypeParameter
+      | MediatypeParameter
+      | CalscaleParameter
+      | SortAsParameter
+      | GeoParameter
+      | TzParameter
+      | AnyParameter
+      | LabelParameter
+      | CCParameter
+      | IndexParameter
+      | LevelParameter
+    )[],
+    val:
+      | TextType
+      | TextListType
+      | BooleanType
+      | DateTimeType
+      | IntegerType
+      | FloatType
+      | LanguageTagType
+      | URIType
+      | SexType
+      | SpecialValueType
   );
 }

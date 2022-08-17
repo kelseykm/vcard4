@@ -1,13 +1,13 @@
-import { 
+import {
   AnyParameter,
   TypeParameter,
   PrefParameter,
   PIDParameter,
   IndexParameter,
   AltidParameter,
-  ValueParameter
-} from '../parameters/index';
-import { LanguageTagType } from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { LanguageTagType } from "../values/index";
 
 export class LangProperty {
   readonly params: string;
@@ -20,7 +20,15 @@ export class LangProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | AnyParameter | IndexParameter)[], 
+    params: (
+      | ValueParameter
+      | PrefParameter
+      | AltidParameter
+      | PIDParameter
+      | TypeParameter
+      | AnyParameter
+      | IndexParameter
+    )[],
     val: LanguageTagType
   );
 }

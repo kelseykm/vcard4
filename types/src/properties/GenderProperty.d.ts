@@ -1,5 +1,5 @@
-import { ValueParameter, AnyParameter } from '../parameters/index';
-import { SpecialValueType, SexType } from '../values/index';
+import { ValueParameter, AnyParameter } from "../parameters/index";
+import { SpecialValueType, SexType } from "../values/index";
 
 export class GenderProperty {
   readonly params: string;
@@ -13,6 +13,6 @@ export class GenderProperty {
   reprJSON(): {}[];
   constructor(
     params: (ValueParameter | AnyParameter)[],
-    val: SexType | SpecialValueType,
+    val: SexType | SpecialValueType
   );
 }

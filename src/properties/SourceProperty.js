@@ -1,38 +1,47 @@
-import { BaseProperty } from './BaseProperty.js';
-import { MissingArgument, InvalidArgument } from '../errors/index.js';
+import { BaseProperty } from "./BaseProperty.js";
+import { MissingArgument, InvalidArgument } from "../errors/index.js";
 
 export class SourceProperty extends BaseProperty {
-  static identifier = 'SourceProperty';
-  static prop = 'SOURCE';
-  static cardinality = '*';
+  static identifier = "SourceProperty";
+  static prop = "SOURCE";
+  static cardinality = "*";
   static acceptableParamTypes = new Set([
-    'ValueParameter',
-    'PIDParameter',
-    'PrefParameter',
-    'IndexParameter',
-    'AltidParameter',
-    'MediatypeParameter',
-    'AnyParameter'
+    "ValueParameter",
+    "PIDParameter",
+    "PrefParameter",
+    "IndexParameter",
+    "AltidParameter",
+    "MediatypeParameter",
+    "AnyParameter",
   ]);
-  static acceptableValTypes = 'URIType';
+  static acceptableValTypes = "URIType";
 
   #params;
   #value;
 
   get params() {
-    return this.#params.reduce((parametersArray, currentParameter) => {
-      parametersArray.push(currentParameter.repr());
-      return parametersArray;
-    }, []).join(';');
+    return this.#params
+      .reduce((parametersArray, currentParameter) => {
+        parametersArray.push(currentParameter.repr());
+        return parametersArray;
+      }, [])
+      .join(";");
   }
-  
+
   get paramsXML() {
-    return this.#params.reduce((accumulatedParameters, currentParameter) => accumulatedParameters + currentParameter.reprXML(), '');
+    return this.#params.reduce(
+      (accumulatedParameters, currentParameter) =>
+        accumulatedParameters + currentParameter.reprXML(),
+      ""
+    );
   }
 
   get paramsJSON() {
     return this.#params.reduce(
-      (accumulatedParameters, currentParameter) => ({ ...currentParameter.reprJSON(), ...accumulatedParameters }),
+      (accumulatedParameters, currentParameter) => ({
+        ...currentParameter.reprJSON(),
+        ...accumulatedParameters,
+      }),
       {}
     );
   }
@@ -40,7 +49,7 @@ export class SourceProperty extends BaseProperty {
   get value() {
     return this.#value.repr();
   }
-  
+
   get valueXML() {
     return this.#value.reprXML();
   }
@@ -50,36 +59,48 @@ export class SourceProperty extends BaseProperty {
   }
 
   #validate(params, value) {
-    if (typeof params === 'undefined' || typeof value === 'undefined')
-    throw new MissingArgument('Parameters and value for SourceProperty must be supplied');
-
+    if (typeof params === "undefined" || typeof value === "undefined")
+      throw new MissingArgument(
+        "Parameters and value for SourceProperty must be supplied"
+      );
     else if (!Array.isArray(params))
-    throw new InvalidArgument('Parameters for SourceProperty must be passed in an array');
+      throw new InvalidArgument(
+        "Parameters for SourceProperty must be passed in an array"
+      );
 
     const parameterInstanceCount = new Set();
 
     if (
-      !params.every(param => {
-        if (param.constructor.identifier !== 'AnyParameter') {
+      !params.every((param) => {
+        if (param.constructor.identifier !== "AnyParameter") {
           if (parameterInstanceCount.has(param.constructor.identifier))
-          throw new InvalidArgument('Parameters must not have more than one instance supplied');
+            throw new InvalidArgument(
+              "Parameters must not have more than one instance supplied"
+            );
           else parameterInstanceCount.add(param.constructor.identifier);
         } else {
           if (parameterInstanceCount.has(param.param))
-          throw new InvalidArgument('Parameters must not have more than one instance supplied');
+            throw new InvalidArgument(
+              "Parameters must not have more than one instance supplied"
+            );
           else parameterInstanceCount.add(param.param);
         }
 
-        if (param.constructor.identifier === 'ValueParameter')
-        return param.value === 'uri';
+        if (param.constructor.identifier === "ValueParameter")
+          return param.value === "uri";
 
-        return this.constructor.acceptableParamTypes.has(param.constructor.identifier);
+        return this.constructor.acceptableParamTypes.has(
+          param.constructor.identifier
+        );
       })
     )
-    throw new TypeError('Some of the parameters passed are not valid parameters for SourceProperty');
-
-    else if (value.constructor.identifier !== this.constructor.acceptableValTypes)
-    throw new TypeError('Invalid type for value of SourceProperty');
+      throw new TypeError(
+        "Some of the parameters passed are not valid parameters for SourceProperty"
+      );
+    else if (
+      value.constructor.identifier !== this.constructor.acceptableValTypes
+    )
+      throw new TypeError("Invalid type for value of SourceProperty");
   }
 
   constructor(params, val) {

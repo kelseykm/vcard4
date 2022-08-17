@@ -1,8 +1,4 @@
-import { 
-  DateTimeType,
-  TextType,
-  URIType
-} from '../values/index';
+import { DateTimeType, TextType, URIType } from "../values/index";
 
 export class TzParameter {
   readonly value: string;

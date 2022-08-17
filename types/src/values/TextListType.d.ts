@@ -1,4 +1,4 @@
-import { TextType } from './TextType';
+import { TextType } from "./TextType";
 
 export class TextListType {
   readonly value: string;

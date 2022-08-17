@@ -22,6 +22,6 @@ declare type ParsedVcard = {
     value: string;
   }[];
   readonly repeatingProperties: Record<string, string | string[]>;
-}
+};
 
 export function parse(vcard: string): ParsedVcard | ParsedVcard[];

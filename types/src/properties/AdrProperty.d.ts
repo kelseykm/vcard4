@@ -1,4 +1,4 @@
-import { 
+import {
   LanguageParameter,
   GeoParameter,
   AnyParameter,
@@ -10,9 +10,9 @@ import {
   AltidParameter,
   ValueParameter,
   TzParameter,
-  CCParameter
-} from '../parameters/index';
-import { SpecialValueType } from '../values/index';
+  CCParameter,
+} from "../parameters/index";
+import { SpecialValueType } from "../values/index";
 
 export class AdrProperty {
   readonly params: string;
@@ -25,7 +25,20 @@ export class AdrProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | GeoParameter | TzParameter | AnyParameter | LabelParameter | CCParameter | IndexParameter)[], 
+    params: (
+      | LanguageParameter
+      | ValueParameter
+      | PrefParameter
+      | AltidParameter
+      | PIDParameter
+      | TypeParameter
+      | GeoParameter
+      | TzParameter
+      | AnyParameter
+      | LabelParameter
+      | CCParameter
+      | IndexParameter
+    )[],
     val: SpecialValueType
   );
 }

@@ -1,5 +1,5 @@
-import { ValueParameter, AnyParameter } from '../parameters/index';
-import { TextType } from '../values/index';
+import { ValueParameter, AnyParameter } from "../parameters/index";
+import { TextType } from "../values/index";
 
 export class ProdidProperty {
   readonly params: string;
@@ -11,8 +11,5 @@ export class ProdidProperty {
   repr(): string;
   reprXML(): string;
   reprJSON(): {}[];
-  constructor(
-    params: (ValueParameter | AnyParameter)[], 
-    val: TextType
-  );
+  constructor(params: (ValueParameter | AnyParameter)[], val: TextType);
 }

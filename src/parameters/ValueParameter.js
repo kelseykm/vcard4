@@ -1,9 +1,9 @@
-import { BaseParameter } from './BaseParameter.js';
-import { MissingArgument, InvalidArgument } from '../errors/index.js';
+import { BaseParameter } from "./BaseParameter.js";
+import { MissingArgument, InvalidArgument } from "../errors/index.js";
 
 export class ValueParameter extends BaseParameter {
-  static param = 'VALUE';
-  static identifier = 'ValueParameter';
+  static param = "VALUE";
+  static identifier = "ValueParameter";
 
   #valueType;
 
@@ -12,19 +12,23 @@ export class ValueParameter extends BaseParameter {
     return type.toLowerCase();
   }
 
-  get valueXML() { return ''; }
+  get valueXML() {
+    return "";
+  }
 
-  get valueJSON() { return []; }
+  get valueJSON() {
+    return [];
+  }
 
   #validate(valueType) {
-    if (typeof valueType === 'undefined')
-    throw new MissingArgument('Value for ValueParameter must be supplied');
+    if (typeof valueType === "undefined")
+      throw new MissingArgument("Value for ValueParameter must be supplied");
 
     if (
-      !Object.prototype.hasOwnProperty.call(valueType, 'type') &&
-      !Object.prototype.hasOwnProperty.call(valueType.constructor, 'type')
+      !Object.prototype.hasOwnProperty.call(valueType, "type") &&
+      !Object.prototype.hasOwnProperty.call(valueType.constructor, "type")
     )
-    throw new InvalidArgument('Value for ValueParameter not recognized');
+      throw new InvalidArgument("Value for ValueParameter not recognized");
   }
 
   constructor(valueType) {

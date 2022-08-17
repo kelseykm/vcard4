@@ -1,5 +1,5 @@
-import { ValueParameter, AnyParameter } from '../parameters/index';
-import { TextType, URIType } from '../values/index';
+import { ValueParameter, AnyParameter } from "../parameters/index";
+import { TextType, URIType } from "../values/index";
 
 export class UIDProperty {
   readonly params: string;
@@ -12,7 +12,7 @@ export class UIDProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (ValueParameter | AnyParameter)[], 
-    val: URIType | TextType 
+    params: (ValueParameter | AnyParameter)[],
+    val: URIType | TextType
   );
 }

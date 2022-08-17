@@ -1,4 +1,4 @@
-import { 
+import {
   LanguageParameter,
   AnyParameter,
   TypeParameter,
@@ -6,9 +6,9 @@ import {
   PIDParameter,
   IndexParameter,
   AltidParameter,
-  ValueParameter
-} from '../parameters/index';
-import { TextType } from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { TextType } from "../values/index";
 
 export class NoteProperty {
   readonly params: string;
@@ -21,7 +21,16 @@ export class NoteProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (ValueParameter | LanguageParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | AnyParameter | IndexParameter)[], 
+    params: (
+      | ValueParameter
+      | LanguageParameter
+      | PrefParameter
+      | AltidParameter
+      | PIDParameter
+      | TypeParameter
+      | AnyParameter
+      | IndexParameter
+    )[],
     val: TextType
   );
 }

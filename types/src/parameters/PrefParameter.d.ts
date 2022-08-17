@@ -1,4 +1,4 @@
-import { IntegerType } from '../values/index';
+import { IntegerType } from "../values/index";
 
 export class PrefParameter {
   readonly value: string;

@@ -1,9 +1,9 @@
-import { BaseParameter } from './BaseParameter.js';
-import { MissingArgument } from '../errors/index.js';
+import { BaseParameter } from "./BaseParameter.js";
+import { MissingArgument } from "../errors/index.js";
 
 export class LanguageParameter extends BaseParameter {
-  static param = 'LANGUAGE';
-  static identifier = 'LanguageParameter';
+  static param = "LANGUAGE";
+  static identifier = "LanguageParameter";
 
   #langTag;
 
@@ -20,11 +20,14 @@ export class LanguageParameter extends BaseParameter {
   }
 
   #validate(langTag) {
-    if (typeof langTag === 'undefined')
-    throw new MissingArgument('Language Tag for LanguageParameter must be supplied');
-
-    else if (langTag.constructor.identifier !== 'LanguageTagType')
-    throw new TypeError('The value of the LANGUAGE property parameter should be of type LanguageTagType');
+    if (typeof langTag === "undefined")
+      throw new MissingArgument(
+        "Language Tag for LanguageParameter must be supplied"
+      );
+    else if (langTag.constructor.identifier !== "LanguageTagType")
+      throw new TypeError(
+        "The value of the LANGUAGE property parameter should be of type LanguageTagType"
+      );
   }
 
   constructor(langTag) {

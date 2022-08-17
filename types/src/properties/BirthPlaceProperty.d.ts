@@ -1,10 +1,10 @@
-import { 
+import {
   ValueParameter,
   AltidParameter,
   LanguageParameter,
-  AnyParameter
-} from '../parameters/index';
-import { TextType, URIType } from '../values/index';
+  AnyParameter,
+} from "../parameters/index";
+import { TextType, URIType } from "../values/index";
 
 export class BirthPlaceProperty {
   readonly params: string;
@@ -17,7 +17,12 @@ export class BirthPlaceProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (ValueParameter | LanguageParameter | AltidParameter | AnyParameter)[], 
+    params: (
+      | ValueParameter
+      | LanguageParameter
+      | AltidParameter
+      | AnyParameter
+    )[],
     val: TextType | URIType
   );
 }

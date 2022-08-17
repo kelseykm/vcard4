@@ -1,4 +1,4 @@
-import { TextType, IntegerType } from '../values/index';
+import { TextType, IntegerType } from "../values/index";
 
 export class AltidParameter {
   readonly value: string;

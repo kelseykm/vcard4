@@ -1,13 +1,13 @@
-import { 
+import {
   LanguageParameter,
   AnyParameter,
   TypeParameter,
   LevelParameter,
   PrefParameter,
   IndexParameter,
-  AltidParameter
-} from '../parameters/index';
-import { TextType } from '../values/index';
+  AltidParameter,
+} from "../parameters/index";
+import { TextType } from "../values/index";
 
 export class ExpertiseProperty {
   readonly params: string;
@@ -20,7 +20,15 @@ export class ExpertiseProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (LanguageParameter | PrefParameter | AltidParameter | TypeParameter | AnyParameter | IndexParameter | LevelParameter)[], 
+    params: (
+      | LanguageParameter
+      | PrefParameter
+      | AltidParameter
+      | TypeParameter
+      | AnyParameter
+      | IndexParameter
+      | LevelParameter
+    )[],
     val: TextType
   );
 }

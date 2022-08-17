@@ -1,11 +1,11 @@
-import { 
+import {
   LanguageParameter,
   CalscaleParameter,
   AnyParameter,
   AltidParameter,
-  ValueParameter
-} from '../parameters/index';
-import { DateTimeType, TextType } from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { DateTimeType, TextType } from "../values/index";
 
 export class BdayProperty {
   readonly params: string;
@@ -18,7 +18,13 @@ export class BdayProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (ValueParameter | LanguageParameter | AltidParameter | CalscaleParameter | AnyParameter)[],
-    val: DateTimeType | TextType,
+    params: (
+      | ValueParameter
+      | LanguageParameter
+      | AltidParameter
+      | CalscaleParameter
+      | AnyParameter
+    )[],
+    val: DateTimeType | TextType
   );
 }

@@ -1,4 +1,4 @@
-import { 
+import {
   LanguageParameter,
   AnyParameter,
   TypeParameter,
@@ -6,9 +6,9 @@ import {
   PIDParameter,
   IndexParameter,
   AltidParameter,
-  ValueParameter
-} from '../parameters/index';
-import { TextType } from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { TextType } from "../values/index";
 
 export class FNProperty {
   readonly params: string;
@@ -21,7 +21,16 @@ export class FNProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (ValueParameter | TypeParameter | LanguageParameter | AltidParameter | PIDParameter | PrefParameter | IndexParameter | AnyParameter)[],
+    params: (
+      | ValueParameter
+      | TypeParameter
+      | LanguageParameter
+      | AltidParameter
+      | PIDParameter
+      | PrefParameter
+      | IndexParameter
+      | AnyParameter
+    )[],
     val: TextType
   );
 }

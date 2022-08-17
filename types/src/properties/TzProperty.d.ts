@@ -1,4 +1,4 @@
-import { 
+import {
   AnyParameter,
   TypeParameter,
   MediatypeParameter,
@@ -6,13 +6,9 @@ import {
   PIDParameter,
   IndexParameter,
   AltidParameter,
-  ValueParameter
-} from '../parameters/index';
-import { 
-  DateTimeType,
-  TextType,
-  URIType
-} from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { DateTimeType, TextType, URIType } from "../values/index";
 
 export class TzProperty {
   readonly params: string;
@@ -25,7 +21,16 @@ export class TzProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
+    params: (
+      | ValueParameter
+      | PrefParameter
+      | AltidParameter
+      | PIDParameter
+      | TypeParameter
+      | MediatypeParameter
+      | AnyParameter
+      | IndexParameter
+    )[],
     val: TextType | URIType | DateTimeType
   );
 }

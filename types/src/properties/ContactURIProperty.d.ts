@@ -1,9 +1,9 @@
-import { 
+import {
   PrefParameter,
   IndexParameter,
-  ValueParameter
-} from '../parameters/index';
-import { URIType } from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { URIType } from "../values/index";
 
 export class ContactURIProperty {
   readonly params: string;
@@ -16,7 +16,7 @@ export class ContactURIProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (ValueParameter | PrefParameter | IndexParameter)[], 
+    params: (ValueParameter | PrefParameter | IndexParameter)[],
     val: URIType
   );
 }

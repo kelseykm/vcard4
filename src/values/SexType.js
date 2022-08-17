@@ -1,19 +1,18 @@
-import { BaseValue } from './BaseValue.js';
-import { MissingArgument, InvalidArgument } from '../errors/index.js';
+import { BaseValue } from "./BaseValue.js";
+import { MissingArgument, InvalidArgument } from "../errors/index.js";
 
 export class SexType extends BaseValue {
-  static type = 'TEXT';
-  static identifier = 'SexType';
+  static type = "TEXT";
+  static identifier = "SexType";
 
   #sexRegExp = /^[MFONU]$/;
   #sexValue;
 
   #validate(sexValue) {
-    if (typeof sexValue === 'undefined')
-    throw new MissingArgument('Value for SEXType must be supplied');
-
+    if (typeof sexValue === "undefined")
+      throw new MissingArgument("Value for SEXType must be supplied");
     else if (!this.#sexRegExp.test(sexValue))
-    throw new InvalidArgument('Invalid sex');
+      throw new InvalidArgument("Invalid sex");
   }
 
   get value() {
@@ -25,7 +24,7 @@ export class SexType extends BaseValue {
   }
 
   get valueJSON() {
-    return [ this.constructor.type.toLowerCase(), this.#sexValue ];
+    return [this.constructor.type.toLowerCase(), this.#sexValue];
   }
 
   constructor(sexValue) {

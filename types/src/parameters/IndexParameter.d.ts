@@ -1,4 +1,4 @@
-import { IntegerType } from '../values/index';
+import { IntegerType } from "../values/index";
 
 export class IndexParameter {
   readonly value: string;

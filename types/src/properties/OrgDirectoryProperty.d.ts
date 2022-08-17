@@ -1,13 +1,13 @@
-import { 
+import {
   LanguageParameter,
   AnyParameter,
   TypeParameter,
   PrefParameter,
   PIDParameter,
   IndexParameter,
-  AltidParameter
-} from '../parameters/index';
-import { URIType } from '../values/index';
+  AltidParameter,
+} from "../parameters/index";
+import { URIType } from "../values/index";
 
 export class OrgDirectoryProperty {
   readonly params: string;
@@ -20,7 +20,15 @@ export class OrgDirectoryProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (LanguageParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | AnyParameter | IndexParameter)[], 
+    params: (
+      | LanguageParameter
+      | PrefParameter
+      | AltidParameter
+      | PIDParameter
+      | TypeParameter
+      | AnyParameter
+      | IndexParameter
+    )[],
     val: URIType
   );
 }

@@ -1,5 +1,5 @@
-import { AltidParameter, ValueParameter } from '../parameters/index';
-import { TextType } from '../values/index';
+import { AltidParameter, ValueParameter } from "../parameters/index";
+import { TextType } from "../values/index";
 
 export class XMLProperty {
   readonly params: string;
@@ -11,8 +11,5 @@ export class XMLProperty {
   repr(): string;
   reprXML(): string;
   reprJSON(): {}[];
-  constructor(
-    params: (ValueParameter | AltidParameter)[],
-    val: TextType
-  );
+  constructor(params: (ValueParameter | AltidParameter)[], val: TextType);
 }

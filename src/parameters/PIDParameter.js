@@ -1,53 +1,57 @@
-import { BaseParameter } from './BaseParameter.js';
-import { MissingArgument, InvalidArgument } from '../errors/index.js';
+import { BaseParameter } from "./BaseParameter.js";
+import { MissingArgument, InvalidArgument } from "../errors/index.js";
 
 export class PIDParameter extends BaseParameter {
-  static param = 'PID';
-  static identifier = 'PIDParameter';
+  static param = "PID";
+  static identifier = "PIDParameter";
 
   #pidValue;
   #pidRegExp = /^\d+(?:\.\d+)?$/;
 
   get value() {
-    return Array.isArray(this.#pidValue) ?
+    return Array.isArray(this.#pidValue)
+      ? `${this.#pidValue
+          .reduce((accumulatedTypes, currentType) => {
+            if (Array.isArray(currentType)) {
+              accumulatedTypes.push(
+                currentType
+                  .reduce((accumType, currType) => {
+                    accumType.push(currType.repr());
+                    return accumType;
+                  }, [])
+                  .join(".")
+              );
+            } else accumulatedTypes.push(currentType.repr());
 
-    `${this.#pidValue.reduce((accumulatedTypes, currentType) => {
-      if (Array.isArray(currentType)) {
-        accumulatedTypes.push(
-          currentType.reduce((accumType, currType) => {
-            accumType.push(currType.repr());
-            return accumType;
-          }, []).join('.')
-        );
-      }
-      else accumulatedTypes.push(currentType.repr());
-
-      return accumulatedTypes;
-    }, []).join(',')}` :
-
-    this.#pidValue.repr();
+            return accumulatedTypes;
+          }, [])
+          .join(",")}`
+      : this.#pidValue.repr();
   }
 
   get valueXML() {
-    const xml = Array.isArray(this.#pidValue) ?
+    const xml = Array.isArray(this.#pidValue)
+      ? `${this.#pidValue
+          .reduce((accumulatedTypes, currentType) => {
+            if (Array.isArray(currentType)) {
+              accumulatedTypes.push(
+                "<integer>" +
+                  currentType
+                    .reduce((accumType, currType) => {
+                      accumType.push(currType.repr());
+                      return accumType;
+                    }, [])
+                    .join(".") +
+                  "</integer>"
+              );
+            } else accumulatedTypes.push(currentType.reprXML());
 
-    `${this.#pidValue.reduce((accumulatedTypes, currentType) => {
-      if (Array.isArray(currentType)) {
-        accumulatedTypes.push(
-          '<integer>' + currentType.reduce((accumType, currType) => {
-            accumType.push(currType.repr());
-            return accumType;
-          }, []).join('.') + '</integer>'
-        );
-      }
-      else accumulatedTypes.push(currentType.reprXML());
+            return accumulatedTypes;
+          }, [])
+          .join("")}`
+      : this.#pidValue.reprXML();
 
-      return accumulatedTypes;
-    }, []).join('')}` :
-
-    this.#pidValue.reprXML();
-
-    return xml.replaceAll('integer', 'text');
+    return xml.replaceAll("integer", "text");
   }
 
   get valueJSON() {
@@ -55,18 +59,19 @@ export class PIDParameter extends BaseParameter {
       const json = this.#pidValue.reduce((accumulatedTypes, currentType) => {
         if (Array.isArray(currentType)) {
           accumulatedTypes.push(
-            currentType.reduce((accumType, currType) => {
-              accumType.push(currType.repr());
-              return accumType;
-            }, []).join('.')
+            currentType
+              .reduce((accumType, currType) => {
+                accumType.push(currType.repr());
+                return accumType;
+              }, [])
+              .join(".")
           );
-        }
-        else accumulatedTypes.push(currentType.repr());
+        } else accumulatedTypes.push(currentType.repr());
 
         return accumulatedTypes;
       }, []);
 
-      json.unshift('integer');
+      json.unshift("integer");
 
       return json;
     }
@@ -75,26 +80,24 @@ export class PIDParameter extends BaseParameter {
   }
 
   #validate(pidValue) {
-    if (typeof pidValue === 'undefined')
-    throw new MissingArgument('Value for PIDParameter must be supplied');
-
+    if (typeof pidValue === "undefined")
+      throw new MissingArgument("Value for PIDParameter must be supplied");
     else if (
       !Array.isArray(pidValue) &&
-      pidValue.constructor.identifier !== 'IntegerType'
+      pidValue.constructor.identifier !== "IntegerType"
     )
-    throw new InvalidArgument('Invalid value for PIDParameter');
-
+      throw new InvalidArgument("Invalid value for PIDParameter");
     else if (
       Array.isArray(pidValue) &&
-      !pidValue.every(val1 => {
+      !pidValue.every((val1) => {
         if (Array.isArray(val1))
-        return val1.every(
-          val2 => val2.constructor.identifier === 'IntegerType'
-        );
-        return val1.constructor.identifier === 'IntegerType';
+          return val1.every(
+            (val2) => val2.constructor.identifier === "IntegerType"
+          );
+        return val1.constructor.identifier === "IntegerType";
       })
     )
-    throw new InvalidArgument('Invalid value for PIDParameter');
+      throw new InvalidArgument("Invalid value for PIDParameter");
   }
 
   constructor(pidValue) {

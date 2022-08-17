@@ -1,10 +1,10 @@
-import { 
+import {
   AltidParameter,
   ValueParameter,
   CalscaleParameter,
-  AnyParameter
-} from '../parameters/index';
-import { DateTimeType, TextType } from '../values/index';
+  AnyParameter,
+} from "../parameters/index";
+import { DateTimeType, TextType } from "../values/index";
 
 export class AnniversaryProperty {
   readonly params: string;
@@ -17,7 +17,12 @@ export class AnniversaryProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (ValueParameter | AltidParameter | CalscaleParameter | AnyParameter)[],
-    val: DateTimeType | TextType,
+    params: (
+      | ValueParameter
+      | AltidParameter
+      | CalscaleParameter
+      | AnyParameter
+    )[],
+    val: DateTimeType | TextType
   );
 }

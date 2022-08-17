@@ -1,4 +1,4 @@
-import { 
+import {
   LanguageParameter,
   SortAsParameter,
   AnyParameter,
@@ -7,9 +7,9 @@ import {
   PIDParameter,
   IndexParameter,
   AltidParameter,
-  ValueParameter
-} from '../parameters/index';
-import { SpecialValueType } from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { SpecialValueType } from "../values/index";
 
 export class OrgProperty {
   readonly params: string;
@@ -22,7 +22,17 @@ export class OrgProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | SortAsParameter | AnyParameter | IndexParameter)[], 
+    params: (
+      | LanguageParameter
+      | ValueParameter
+      | PrefParameter
+      | AltidParameter
+      | PIDParameter
+      | TypeParameter
+      | SortAsParameter
+      | AnyParameter
+      | IndexParameter
+    )[],
     val: SpecialValueType
   );
 }

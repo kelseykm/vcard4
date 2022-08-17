@@ -1,24 +1,21 @@
-import { BaseValue } from './BaseValue.js';
-import { MissingArgument } from '../errors/index.js';
+import { BaseValue } from "./BaseValue.js";
+import { MissingArgument } from "../errors/index.js";
 
 export class FloatType extends BaseValue {
-  static type = 'FLOAT';
-  static identifier = 'FloatType';
+  static type = "FLOAT";
+  static identifier = "FloatType";
 
   #floatValue;
 
   #validate(floatValue) {
-    if (typeof floatValue === 'undefined')
-    throw new MissingArgument('Value for FloatType must be supplied');
+    if (typeof floatValue === "undefined")
+      throw new MissingArgument("Value for FloatType must be supplied");
 
     if (
-      (
-        !(typeof floatValue === 'number') &&
-        !/\./.test(floatValue)
-      ) ||
+      (!(typeof floatValue === "number") && !/\./.test(floatValue)) ||
       !/^[-+]?\d+\.\d+$/.test(floatValue)
     )
-    throw new TypeError('Invalid value for FloatType');
+      throw new TypeError("Invalid value for FloatType");
   }
 
   get value() {
@@ -26,11 +23,13 @@ export class FloatType extends BaseValue {
   }
 
   get valueXML() {
-    return `<${this.constructor.type.toLowerCase()}>${this.#floatValue}</${this.constructor.type.toLowerCase()}>`;
+    return `<${this.constructor.type.toLowerCase()}>${
+      this.#floatValue
+    }</${this.constructor.type.toLowerCase()}>`;
   }
 
   get valueJSON() {
-    return [ this.constructor.type.toLowerCase(), this.#floatValue ];
+    return [this.constructor.type.toLowerCase(), this.#floatValue];
   }
 
   constructor(floatValue) {

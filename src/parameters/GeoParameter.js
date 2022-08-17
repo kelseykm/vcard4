@@ -1,12 +1,12 @@
-import { BaseParameter } from './BaseParameter.js';
-import { MissingArgument } from '../errors/index.js';
+import { BaseParameter } from "./BaseParameter.js";
+import { MissingArgument } from "../errors/index.js";
 
 export class GeoParameter extends BaseParameter {
-  static param = 'GEO';
-  static identifier = 'GeoParameter';
+  static param = "GEO";
+  static identifier = "GeoParameter";
 
   #geoValue;
-  
+
   get value() {
     return `"${this.#geoValue.repr()}"`;
   }
@@ -20,11 +20,10 @@ export class GeoParameter extends BaseParameter {
   }
 
   #validate(geoValue) {
-    if (typeof geoValue === 'undefined')
-    throw new MissingArgument('Value for GeoParameter must be supplied');
-
-    else if (geoValue.constructor.identifier !== 'URIType')
-    throw new TypeError('Value for GeoParameter must be of type URIType');
+    if (typeof geoValue === "undefined")
+      throw new MissingArgument("Value for GeoParameter must be supplied");
+    else if (geoValue.constructor.identifier !== "URIType")
+      throw new TypeError("Value for GeoParameter must be of type URIType");
   }
 
   constructor(geoValue) {

@@ -1,4 +1,4 @@
-import { 
+import {
   LanguageParameter,
   AnyParameter,
   TypeParameter,
@@ -7,9 +7,9 @@ import {
   PIDParameter,
   IndexParameter,
   AltidParameter,
-  ValueParameter
-} from '../parameters/index';
-import { URIType } from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { URIType } from "../values/index";
 
 export class SoundProperty {
   readonly params: string;
@@ -22,7 +22,17 @@ export class SoundProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
+    params: (
+      | LanguageParameter
+      | ValueParameter
+      | PrefParameter
+      | AltidParameter
+      | PIDParameter
+      | TypeParameter
+      | MediatypeParameter
+      | AnyParameter
+      | IndexParameter
+    )[],
     val: URIType
   );
 }

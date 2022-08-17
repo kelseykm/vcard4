@@ -1,18 +1,17 @@
-import { BaseValue } from './BaseValue.js';
-import { MissingArgument } from '../errors/index.js';
+import { BaseValue } from "./BaseValue.js";
+import { MissingArgument } from "../errors/index.js";
 
 export class LanguageTagType extends BaseValue {
-  static type = 'LANGUAGE-TAG';
-  static identifier = 'LanguageTagType';
+  static type = "LANGUAGE-TAG";
+  static identifier = "LanguageTagType";
 
   #langTagValue;
 
   #validate(langTagValue) {
-    if (typeof langTagValue === 'undefined')
-    throw new MissingArgument('Value for LanguageTagType must be supplied');
-
-    else if (typeof langTagValue !== 'string')
-    throw new TypeError('Value for LanguageTagType should be of type string');
+    if (typeof langTagValue === "undefined")
+      throw new MissingArgument("Value for LanguageTagType must be supplied");
+    else if (typeof langTagValue !== "string")
+      throw new TypeError("Value for LanguageTagType should be of type string");
   }
 
   get value() {
@@ -20,11 +19,13 @@ export class LanguageTagType extends BaseValue {
   }
 
   get valueXML() {
-    return `<${this.constructor.type.toLowerCase()}>${this.#langTagValue}</${this.constructor.type.toLowerCase()}>`;
+    return `<${this.constructor.type.toLowerCase()}>${
+      this.#langTagValue
+    }</${this.constructor.type.toLowerCase()}>`;
   }
 
   get valueJSON() {
-    return [ this.constructor.type.toLowerCase(), this.#langTagValue ];
+    return [this.constructor.type.toLowerCase(), this.#langTagValue];
   }
 
   constructor(langTagValue) {

@@ -1,11 +1,11 @@
-import { 
+import {
   LanguageParameter,
   CalscaleParameter,
   AnyParameter,
   AltidParameter,
-  ValueParameter
-} from '../parameters/index';
-import { DateTimeType, TextType } from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { DateTimeType, TextType } from "../values/index";
 
 export class DeathDateProperty {
   readonly params: string;
@@ -18,7 +18,13 @@ export class DeathDateProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (LanguageParameter | ValueParameter | AltidParameter | CalscaleParameter | AnyParameter)[],
+    params: (
+      | LanguageParameter
+      | ValueParameter
+      | AltidParameter
+      | CalscaleParameter
+      | AnyParameter
+    )[],
     val: DateTimeType | TextType
   );
 }

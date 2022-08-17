@@ -1,4 +1,4 @@
-import { DateTimeType } from './DateTimeType';
+import { DateTimeType } from "./DateTimeType";
 
 export class DateTimeListType {
   readonly value: string;

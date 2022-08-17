@@ -1,14 +1,16 @@
-import { BaseParameter } from './BaseParameter.js';
-import { MissingArgument } from '../errors/index.js';
+import { BaseParameter } from "./BaseParameter.js";
+import { MissingArgument } from "../errors/index.js";
 
 export class SortAsParameter extends BaseParameter {
-  static param = 'SORT-AS';
-  static identifier = 'SortAsParameter';
+  static param = "SORT-AS";
+  static identifier = "SortAsParameter";
 
   #sortValue;
 
   get value() {
-    return this.#sortValue.constructor.identifier === 'TextListType' ? `"${this.#sortValue.repr()}"` : this.#sortValue.repr();
+    return this.#sortValue.constructor.identifier === "TextListType"
+      ? `"${this.#sortValue.repr()}"`
+      : this.#sortValue.repr();
   }
 
   get valueXML() {
@@ -20,14 +22,15 @@ export class SortAsParameter extends BaseParameter {
   }
 
   #validate(sortValue) {
-    if (typeof sortValue === 'undefined')
-    throw new MissingArgument('Value for SortAsParameter must be supplied');
-
+    if (typeof sortValue === "undefined")
+      throw new MissingArgument("Value for SortAsParameter must be supplied");
     else if (
-      sortValue.constructor.identifier !== 'TextType' &&
-      sortValue.constructor.identifier !== 'TextListType'
+      sortValue.constructor.identifier !== "TextType" &&
+      sortValue.constructor.identifier !== "TextListType"
     )
-    throw new TypeError('Value for SortAsParameter must be of type TextType or TextListType');
+      throw new TypeError(
+        "Value for SortAsParameter must be of type TextType or TextListType"
+      );
   }
 
   constructor(sortValue) {

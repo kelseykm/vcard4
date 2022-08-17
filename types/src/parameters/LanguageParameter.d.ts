@@ -1,4 +1,4 @@
-import { LanguageTagType } from '../values/index';
+import { LanguageTagType } from "../values/index";
 
 export class LanguageParameter {
   readonly value: string;

@@ -11,8 +11,8 @@ import {
   LanguageTagType,
   URIType,
   SexType,
-  SpecialValueType
-} from '../values/index';
+  SpecialValueType,
+} from "../values/index";
 
 export class ValueParameter {
   readonly value: string;
@@ -21,5 +21,20 @@ export class ValueParameter {
   repr(): string;
   reprXML(): string;
   reprJSON(): Record<string, string | string[]>;
-  constructor(valType: TextType | TextListType | BooleanType | DateTimeType | DateTimeListType | IntegerType | IntegerListType | FloatType | FloatListType | LanguageTagType | URIType | SexType | SpecialValueType);
+  constructor(
+    valType:
+      | TextType
+      | TextListType
+      | BooleanType
+      | DateTimeType
+      | DateTimeListType
+      | IntegerType
+      | IntegerListType
+      | FloatType
+      | FloatListType
+      | LanguageTagType
+      | URIType
+      | SexType
+      | SpecialValueType
+  );
 }

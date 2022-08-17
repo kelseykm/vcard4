@@ -1,4 +1,4 @@
-import { 
+import {
   AnyParameter,
   TypeParameter,
   MediatypeParameter,
@@ -6,9 +6,9 @@ import {
   PIDParameter,
   IndexParameter,
   AltidParameter,
-  ValueParameter
-} from '../parameters/index';
-import { URIType } from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { URIType } from "../values/index";
 
 export class URLProperty {
   readonly params: string;
@@ -21,7 +21,16 @@ export class URLProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | AnyParameter | IndexParameter)[], 
+    params: (
+      | ValueParameter
+      | PrefParameter
+      | AltidParameter
+      | PIDParameter
+      | TypeParameter
+      | MediatypeParameter
+      | AnyParameter
+      | IndexParameter
+    )[],
     val: URIType
   );
 }

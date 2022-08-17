@@ -1,4 +1,4 @@
-import { FloatType } from './FloatType';
+import { FloatType } from "./FloatType";
 
 export class FloatListType {
   readonly value: string;

@@ -1,14 +1,16 @@
-import { BaseParameter } from './BaseParameter.js';
-import { MissingArgument } from '../errors/index.js';
+import { BaseParameter } from "./BaseParameter.js";
+import { MissingArgument } from "../errors/index.js";
 
 export class TzParameter extends BaseParameter {
-  static param = 'TZ';
-  static identifier = 'TzParameter';
+  static param = "TZ";
+  static identifier = "TzParameter";
 
   #tzValue;
 
   get value() {
-    return this.#tzValue.constructor.identifier === 'URIType' ? `"${this.#tzValue.repr()}"` : this.#tzValue.repr();
+    return this.#tzValue.constructor.identifier === "URIType"
+      ? `"${this.#tzValue.repr()}"`
+      : this.#tzValue.repr();
   }
 
   get valueXML() {
@@ -20,15 +22,18 @@ export class TzParameter extends BaseParameter {
   }
 
   #validate(tzValue) {
-    if (typeof tzValue === 'undefined')
-    throw new MissingArgument('Value for TzParameter must be supplied');
+    if (typeof tzValue === "undefined")
+      throw new MissingArgument("Value for TzParameter must be supplied");
 
     if (
-      tzValue.constructor.identifier !== 'TextType' &&
-      tzValue.constructor.identifier !== 'URIType' &&
-      !(tzValue.constructor.identifier === 'DateTimeType' && tzValue.type === 'UTC-OFFSET')
+      tzValue.constructor.identifier !== "TextType" &&
+      tzValue.constructor.identifier !== "URIType" &&
+      !(
+        tzValue.constructor.identifier === "DateTimeType" &&
+        tzValue.type === "UTC-OFFSET"
+      )
     )
-    throw new TypeError('Invalid type for value for TzParameter');
+      throw new TypeError("Invalid type for value for TzParameter");
   }
 
   constructor(tzValue) {

@@ -1,4 +1,4 @@
-import { 
+import {
   LanguageParameter,
   CalscaleParameter,
   AnyParameter,
@@ -8,9 +8,9 @@ import {
   PIDParameter,
   IndexParameter,
   AltidParameter,
-  ValueParameter
-} from '../parameters/index';
-import { URIType } from '../values/index';
+  ValueParameter,
+} from "../parameters/index";
+import { URIType } from "../values/index";
 
 export class LogoProperty {
   readonly params: string;
@@ -23,7 +23,18 @@ export class LogoProperty {
   reprXML(): string;
   reprJSON(): {}[];
   constructor(
-    params: (LanguageParameter | ValueParameter | PrefParameter | AltidParameter | PIDParameter | TypeParameter | MediatypeParameter | CalscaleParameter | AnyParameter | IndexParameter)[], 
+    params: (
+      | LanguageParameter
+      | ValueParameter
+      | PrefParameter
+      | AltidParameter
+      | PIDParameter
+      | TypeParameter
+      | MediatypeParameter
+      | CalscaleParameter
+      | AnyParameter
+      | IndexParameter
+    )[],
     val: URIType
   );
 }

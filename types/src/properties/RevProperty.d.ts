@@ -1,5 +1,5 @@
-import { ValueParameter, AnyParameter } from '../parameters/index';
-import { DateTimeType } from '../values/index';
+import { ValueParameter, AnyParameter } from "../parameters/index";
+import { DateTimeType } from "../values/index";
 
 export class RevProperty {
   readonly params: string;
@@ -11,8 +11,5 @@ export class RevProperty {
   repr(): string;
   reprXML(): string;
   reprJSON(): {}[];
-  constructor(
-    params: (ValueParameter | AnyParameter)[], 
-    val: DateTimeType
-  );
+  constructor(params: (ValueParameter | AnyParameter)[], val: DateTimeType);
 }
