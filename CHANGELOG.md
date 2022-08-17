@@ -1,3 +1,17 @@
+# 3.1.1
+
+## Fixes
+
+- Add `Group` as accepted type for `props` argument for `VCARD` type definition
+
+## Other patch level changes
+
+- Run `prettier` on all source code
+
+- Update browserslist database
+
+- Update dev dependencies
+
 # 3.1.0
 
 ## New feature
