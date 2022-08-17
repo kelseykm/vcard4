@@ -1,3 +1,9 @@
+# 3.1.2
+
+## Changes
+
+- Change repository description and homepage
+
 # 3.1.1
 
 ## Fixes
