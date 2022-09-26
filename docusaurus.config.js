@@ -37,7 +37,11 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      hideableSidebar: true,
+      docs: {
+        sidebar: {
+          hideable: true,
+        },
+      },
       announcementBar: {
         content: 'If you like vcard4, give us a ★ on <a href="https://github.com/kelseykm/vcard4">GitHub</a>',
       },
