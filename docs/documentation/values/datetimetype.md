@@ -4,19 +4,19 @@ sidebar_position: 4
 hide_title: true
 ---
 
-# ```DateTimeType```
+# `DateTimeType`
 
-* This class represents the "date", "time", "date-time", "date-and-or-time", "timestamp" and "utc-offset" data types
+- This class represents the "date", "time", "date-time", "date-and-or-time", "timestamp" and "utc-offset" data types
 
-* ```DateTimeType``` should be called with two arguments, the first being the value and the second being the target data type.
+- `DateTimeType` should be called with two arguments, the first being the value and the second being the target data type.
 
-* Accepted values for the second argument include: ```"date"```, ```"time"```, ```"datetime"```, ```"dateandortime"```, ```"timestamp"``` or ```"utcoffset"```. (Note that it should be of type string)
+- Accepted values for the second argument include: `"date"`, `"time"`, `"datetime"`, `"dateandortime"`, `"timestamp"` or `"utcoffset"`. (Note that it should be of type string)
 
-* The value of the first argument depends on the type specified in the value of the second argument
+- The value of the first argument depends on the type specified in the value of the second argument
 
 ## date
 
-* Where ```"date"``` is the second argument, the value of the first argument should be of the format:
+- Where `"date"` is the second argument, the value of the first argument should be of the format:
 
   ```
   year [month day]
@@ -41,17 +41,17 @@ hide_title: true
             ---12
   ```
 
-* Note the use of YYYY-MM in the second example above. YYYYMM is disallowed to prevent confusion with YYMMDD. Note also that YYYY-MM-DD is disallowed.
+- Note the use of YYYY-MM in the second example above. YYYYMM is disallowed to prevent confusion with YYMMDD. Note also that YYYY-MM-DD is disallowed.
 
-* Example for ```"date"```:
+- Example for `"date"`:
 
   ```js
-  new DateTimeType('19850412', 'date');
+  new DateTimeType("19850412", "date");
   ```
 
 ## time
 
-* Where ```"time"``` is the second argument, the value of the first argument should be of the format:
+- Where `"time"` is the second argument, the value of the first argument should be of the format:
 
   ```
   hour minute second [zone]
@@ -80,15 +80,15 @@ hide_title: true
             102200-0800
   ```
 
-* Example for ```"time"```:
+- Example for `"time"`:
 
   ```js
-  new DateTimeType('--00', 'time');
+  new DateTimeType("--00", "time");
   ```
 
 ## datetime
 
-* Where ```"datetime"``` is the second argument, the value of the first argument should be of the format:
+- Where `"datetime"` is the second argument, the value of the first argument should be of the format:
 
 ```
 date-noreduc time-designator time-notrunc
@@ -109,15 +109,15 @@ Examples:
 
 ```
 
-* Example for ```"datetime"```:
+- Example for `"datetime"`:
 
 ```js
-new DateTimeType('--1022T1400', 'datetime');
+new DateTimeType("--1022T1400", "datetime");
 ```
 
 ## dateandortime
 
-* Where ```"dateandortime"``` is the second argument, the value of the first argument should be of the format:
+- Where `"dateandortime"` is the second argument, the value of the first argument should be of the format:
 
   ```
   datetime / date / time-designator time
@@ -149,15 +149,15 @@ new DateTimeType('--1022T1400', 'datetime');
             T102200-0800
   ```
 
-* Example for ```"dateandortime"```:
+- Example for `"dateandortime"`:
 
   ```js
-  new DateTimeType('--1022T1400', 'dateandortime');
+  new DateTimeType("--1022T1400", "dateandortime");
   ```
 
 ## timestamp
 
-* Where ```"timestamp"``` is the second argument, the value of the first argument should be of the format:
+- Where `"timestamp"` is the second argument, the value of the first argument should be of the format:
 
   ```
   date-complete time-designator time-complete
@@ -176,27 +176,26 @@ new DateTimeType('--1022T1400', 'datetime');
             19961022T140000-0500
   ```
 
-* Example for ```"timestamp"```:
+- Example for `"timestamp"`:
 
   ```js
-  new DateTimeType('19961022T140000-0500', 'timestamp');
+  new DateTimeType("19961022T140000-0500", "timestamp");
 
-  new DateTimeType('19961022T140000+01', 'timestamp');
+  new DateTimeType("19961022T140000+01", "timestamp");
   ```
 
 ## utcoffset
 
-* Where ```"utcoffset"``` is the second argument, the value of the first argument should be of the format:
+- Where `"utcoffset"` is the second argument, the value of the first argument should be of the format:
 
   ```
   sign hour [minute]
   ```
 
-* Example for ```"utcoffset"```:
+- Example for `"utcoffset"`:
 
   ```js
-  new DateTimeType('-0500', 'utcoffset');
+  new DateTimeType("-0500", "utcoffset");
 
-  new DateTimeType('+03', 'utcoffset');
+  new DateTimeType("+03", "utcoffset");
   ```
-

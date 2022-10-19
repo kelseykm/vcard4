@@ -6,11 +6,11 @@ hide_title: true
 
 # `LabelParameter`
 
-* This class represents the "LABEL" parameter for use with the [`ADR`](/documentation/properties/adrproperty) property
+- This class represents the "LABEL" parameter for use with the [`ADR`](/documentation/properties/adrproperty) property
 
-* It is used to present a delivery address label for the address
+- It is used to present a delivery address label for the address
 
-* ```LabelParameter``` should be called with a single argument that is an instance of [`TextType`](/documentation/values/texttype-and-textlisttype)
+- `LabelParameter` should be called with a single argument that is an instance of [`TextType`](/documentation/values/texttype-and-textlisttype)
 
   ```js
   const deliveryAddress = new TextType(`Mr. John Q. Public, Esq.

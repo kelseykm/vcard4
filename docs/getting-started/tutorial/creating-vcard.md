@@ -3,7 +3,7 @@ title: Creating a vCard
 sidebar_position: 2
 ---
 
-* The following is a vCard containing information of the vCard specification author, __Simon Perreault__.
+- The following is a vCard containing information of the vCard specification author, **Simon Perreault**.
 
   ```
   BEGIN:VCARD
@@ -26,74 +26,81 @@ sidebar_position: 2
   URL;TYPE=home:http://nomis80.org
   END:VCARD
   ```
-* In this tutorial, we will recreate Simon's vCard using __vcard4__.
+
+- In this tutorial, we will recreate Simon's vCard using **vcard4**.
 
 ### Short overview of vCards
 
-* A vCard is divided into content lines each containing a __property__, its __parameters__, if it has any, and finally, its __value__. An example of a content line from Simon's vCard would be:
+- A vCard is divided into content lines each containing a **property**, its **parameters**, if it has any, and finally, its **value**. An example of a content line from Simon's vCard would be:
 
-    ```
-    GEO;TYPE=work:geo:46.772673,-71.282945
-    ```
+  ```
+  GEO;TYPE=work:geo:46.772673,-71.282945
+  ```
 
-* From the content line highlighted above, the _property_ is ```GEO```, the _parameter_ (it only has one), is ```TYPE=work``` and the _value_ is ```geo:46.772673,-71.282945```.
+- From the content line highlighted above, the _property_ is `GEO`, the _parameter_ (it only has one), is `TYPE=work` and the _value_ is `geo:46.772673,-71.282945`.
 
 ### Creating a single content line
 
-* Let us first create that single content line using _vcard4_.
+- Let us first create that single content line using _vcard4_.
 
-* First off, we import the classes needed from ```vcard4```.
+- First off, we import the classes needed from `vcard4`.
 
   ```js title=ESM
-  import { GeoProperty, TypeParameter, URIType, TextType } from 'vcard4';
+  import { GeoProperty, TypeParameter, URIType, TextType } from "vcard4";
   ```
 
   ```js title=commonjs
-  const { GeoProperty, TypeParameter, URIType, TextType } = require('vcard4');
+  const { GeoProperty, TypeParameter, URIType, TextType } = require("vcard4");
   ```
 
   :::tip
   As you have probably already noticed, the naming of the classes is quite intuitive: just add 'property', 'parameter' or 'value' to the name depending on whether it's a property, parameter or value type, convert it to PascalCase, et voilà!
   :::
 
-* Then let's work our way up, by creating the value first.
+- Then let's work our way up, by creating the value first.
 
   ```js
-  const geoValue = new URIType('geo:46.772673,-71.282945');
+  const geoValue = new URIType("geo:46.772673,-71.282945");
   ```
 
-* Then the parameter.
+- Then the parameter.
 
   ```js
-  const typeParameterValue = new TextType('work');
+  const typeParameterValue = new TextType("work");
 
-  const geoTypeParameter = new TypeParameter(typeParameterValue, 'geoparameter');
+  const geoTypeParameter = new TypeParameter(
+    typeParameterValue,
+    "geoparameter"
+  );
   ```
 
-* Finally, the property.
+- Finally, the property.
 
   ```js
-  const geo = new GeoProperty([ geoTypeParameter ], geoValue);
+  const geo = new GeoProperty([geoTypeParameter], geoValue);
   ```
 
-* And that's it, we have created our first content line!
+- And that's it, we have created our first content line!
 
   ```js
-  import { GeoProperty, TypeParameter, URIType, TextType } from 'vcard4';
+  import { GeoProperty, TypeParameter, URIType, TextType } from "vcard4";
 
   //or if you're using commonjs
   //const { GeoProperty, TypeParameter, URIType, TextType } = require('vcard4');
 
-  const geoValue = new URIType('geo:46.772673,-71.282945');
+  const geoValue = new URIType("geo:46.772673,-71.282945");
 
-  const typeParameterValue = new TextType('work');
+  const typeParameterValue = new TextType("work");
 
-  const geoTypeParameter = new TypeParameter(typeParameterValue, 'geoparameter');
+  const geoTypeParameter = new TypeParameter(
+    typeParameterValue,
+    "geoparameter"
+  );
 
-  const geo = new GeoProperty([ geoTypeParameter ], geoValue);
+  const geo = new GeoProperty([geoTypeParameter], geoValue);
   ```
 
-* If we want to see how it looks like, i.e. it's representation on a vCard, we may call the ```repr``` method. It returns a string, which we can log to the console in order to see.
+- If we want to see how it looks like, i.e. it's representation on a vCard, we may call the `repr` method. It returns a string, which we can log to the console in order to see.
 
   ```js
   console.log(geo.repr());
@@ -103,13 +110,13 @@ sidebar_position: 2
 
 ### Creating the rest of Simon's vCard
 
-* The rest of the properties are created in much the same way as we did the ```GEO``` property above.
+- The rest of the properties are created in much the same way as we did the `GEO` property above.
 
   :::info
-  __vcard4__ treats ```BEGIN```, ```VERSION``` and ```END``` properties as special. We do not create them ourselves; the library will do it for us.
+  **vcard4** treats `BEGIN`, `VERSION` and `END` properties as special. We do not create them ourselves; the library will do it for us.
   :::
 
-* After creating all the properties, we shall assemble them into a complete vCard using the ```VCARD``` class, as we'll see below.
+- After creating all the properties, we shall assemble them into a complete vCard using the `VCARD` class, as we'll see below.
 
   ```js
   import {
@@ -152,7 +159,10 @@ sidebar_position: 2
   const n = new NProperty([], new SpecialValueType(nArr, "nproperty"));
 
   // BDAY property
-  const bday = new BdayProperty([], new DateTimeType("--0203", "dateandortime"));
+  const bday = new BdayProperty(
+    [],
+    new DateTimeType("--0203", "dateandortime")
+  );
 
   // ANNIVERSARY property
   const anniversary = new AnniversaryProperty(
@@ -270,17 +280,19 @@ sidebar_position: 2
   ]);
   ```
 
-* Calling the ```repr``` method on the created ```VCARD``` object will return Simon's vCard as a string, which you can then write to a file, or whatever.
+- Calling the `repr` method on the created `VCARD` object will return Simon's vCard as a string, which you can then write to a file, or whatever.
 
   ```js
   vc.repr();
   ```
+
   :::tip
-    If you want to write it to a file, you may use __node__'s ```fs``` api.
+  If you want to write it to a file, you may use **node**'s `fs` api.
 
-    ```js
-    import fs from 'fs';
+  ```js
+  import fs from "fs";
 
-    await fs.promises.writeFile("simon_perreault.vcf", vc.repr());
-    ```
+  await fs.promises.writeFile("simon_perreault.vcf", vc.repr());
+  ```
+
   :::

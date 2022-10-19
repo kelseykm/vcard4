@@ -6,9 +6,9 @@ sidebar_position: 5
 
 # `Group`
 
-* This class is for grouping properties.
+- This class is for grouping properties.
 
-* The RFC has this to say about grouping properties:
+- The RFC has this to say about grouping properties:
 
   ```
   The group construct is used to group related properties together.
@@ -18,104 +18,104 @@ sidebar_position: 5
   significance.
   ```
 
-* The `Group` class should be called with two arguments. The first an array of one or more properties that you want grouped, the second a string containing the group name.
+- The `Group` class should be called with two arguments. The first an array of one or more properties that you want grouped, the second a string containing the group name.
 
-* The items in the first argument array must all be instances of the [properties](/documentation/properties/intro) provided by __vcard4__.
+- The items in the first argument array must all be instances of the [properties](/documentation/properties/intro) provided by **vcard4**.
 
 ## API
 
-* `Group` is provided as a named export from the main __vcard4__ module.
+- `Group` is provided as a named export from the main **vcard4** module.
 
   ```js title=ESM
-  import { Group } from 'vcard';
+  import { Group } from "vcard";
   ```
 
   ```js title=commonjs
-  const { Group } = require('vcard4');
+  const { Group } = require("vcard4");
   ```
 
 ## Methods
 
-* The instance objects have the following methods:
+- The instance objects have the following methods:
 
   1. `repr`
 
-    This method returns a string which is the representation of how the group will finally appear in the vCard.
+  This method returns a string which is the representation of how the group will finally appear in the vCard.
 
-    :::note
-    '>' in the examples below is just the terminal prompt.
-    :::
+  :::note
+  '>' in the examples below is just the terminal prompt.
+  :::
 
-    ```js
-    > const genderPropValue = new SpecialValueType(
-    >   [
-    >     new SexType('M'),
-    >     new TextType('Male')
-    >   ],
-    >   'GenderProperty'
-    > );
- 
-    > const genderPropValueParam = new ValueParameter(genderPropValue);
+  ```js
+  > const genderPropValue = new SpecialValueType(
+  >   [
+  >     new SexType('M'),
+  >     new TextType('Male')
+  >   ],
+  >   'GenderProperty'
+  > );
 
-    > const gender = new GenderProperty(
-    >   [ genderPropValueParam ],
-    >   genderPropValue
-    > );
+  > const genderPropValueParam = new ValueParameter(genderPropValue);
 
-    > const group = new Group([ gender ], 'milky');
+  > const gender = new GenderProperty(
+  >   [ genderPropValueParam ],
+  >   genderPropValue
+  > );
 
-    > group.repr();
-    'milky.GENDER;VALUE=text:M;Male'
-    ```
+  > const group = new Group([ gender ], 'milky');
+
+  > group.repr();
+  'milky.GENDER;VALUE=text:M;Male'
+  ```
 
   2. `reprXML`
 
-    This method returns a string which is the representation of how the group will finally appear in the XML vCard.
+  This method returns a string which is the representation of how the group will finally appear in the XML vCard.
 
-    ```js
-    > const genderPropValue = new SpecialValueType(
-    >  [
-    >    new SexType('M'),
-    >    new TextType('Male')
-    >  ],
-    >  'GenderProperty'
-    > );
+  ```js
+  > const genderPropValue = new SpecialValueType(
+  >  [
+  >    new SexType('M'),
+  >    new TextType('Male')
+  >  ],
+  >  'GenderProperty'
+  > );
 
-    > const genderPropValueParam = new ValueParameter(genderPropValue);
+  > const genderPropValueParam = new ValueParameter(genderPropValue);
 
-    > const gender = new GenderProperty(
-    >  [ genderPropValueParam ],
-    >  genderPropValue
-    > );
+  > const gender = new GenderProperty(
+  >  [ genderPropValueParam ],
+  >  genderPropValue
+  > );
 
-    > const group = new Group([ gender ], 'milky');
+  > const group = new Group([ gender ], 'milky');
 
-    > group.reprXML();
-    '<group name="milky"><gender><sex>M</sex><text>Male</text></gender></group>'
-    ```
+  > group.reprXML();
+  '<group name="milky"><gender><sex>M</sex><text>Male</text></gender></group>'
+  ```
 
-  3. `reprJSON` 
+  3. `reprJSON`
 
-    This method returns a string which is the representation of how the group will finally appear in the jCard.
+  This method returns a string which is the representation of how the group will finally appear in the jCard.
 
-    ```js
-    > const genderPropValue = new SpecialValueType(
-    >   [
-    >     new SexType('M'),
-    >     new TextType('Male')
-    >   ],
-    >   'GenderProperty'
-    > );
+  ```js
+  > const genderPropValue = new SpecialValueType(
+  >   [
+  >     new SexType('M'),
+  >     new TextType('Male')
+  >   ],
+  >   'GenderProperty'
+  > );
 
-    > const genderPropValueParam = new ValueParameter(genderPropValue);
+  > const genderPropValueParam = new ValueParameter(genderPropValue);
 
-    > const gender = new GenderProperty(
-    >   [ genderPropValueParam ],
-    >   genderPropValue
-    > );
+  > const gender = new GenderProperty(
+  >   [ genderPropValueParam ],
+  >   genderPropValue
+  > );
 
-    > const group = new Group([ gender ], 'milky');
+  > const group = new Group([ gender ], 'milky');
 
-    > group.reprJSON();
-    [ [ 'gender', { group: 'milky' }, 'text', [ 'M', 'Male' ] ] ]
-    ```
+  > group.reprJSON();
+  [ [ 'gender', { group: 'milky' }, 'text', [ 'M', 'Male' ] ] ]
+  ```

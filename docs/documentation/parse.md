@@ -4,44 +4,45 @@ hide_title: true
 sidebar_position: 7
 ---
 
-# ```parse```
+# `parse`
 
-* This function is for parsing version 4.0 vCards.
+- This function is for parsing version 4.0 vCards.
 
 ## API
 
-* `parse` is provided as a named export from the main __vcard4__ module.
+- `parse` is provided as a named export from the main **vcard4** module.
 
   ```js title=ESM
-  import { parse } from 'vcard4';
+  import { parse } from "vcard4";
   ```
 
   ```js title=commonjs
-  const { parse } = require('vcard4');
+  const { parse } = require("vcard4");
   ```
+
 ## Usage
 
-* As already mentioned `parse` is a function, and it's for parsing vCards.
+- As already mentioned `parse` is a function, and it's for parsing vCards.
 
-* It returns an object containing the parsed vCard or **an array containing the parsed vCards if the vCard passed contained multiple contacts (vCards) within**.
+- It returns an object containing the parsed vCard or **an array containing the parsed vCards if the vCard passed contained multiple contacts (vCards) within**.
 
   :::info
   The array's items would each be the object described below.
   :::
 
-* ```parse``` should be called with a single argument of type string, that is a properly formatted version 4.0 vCard.
+- `parse` should be called with a single argument of type string, that is a properly formatted version 4.0 vCard.
 
   :::note
   The following example assumes the vCard is on disk, and `fs` from node's API is used to read it.
   :::
 
   ```js
-  import fs from 'fs';
+  import fs from "fs";
 
-  const contact = await fs.promises.readFile('simon_perreault.vcf').then(
-    contact => contact.toString()
-  );
-  
+  const contact = await fs.promises
+    .readFile("simon_perreault.vcf")
+    .then((contact) => contact.toString());
+
   const parsedContact = parse(contact);
   ```
 
@@ -133,229 +134,230 @@ sidebar_position: 7
     repeatingProperties: [Getter]
   }
   ```
+
 ## Properties and getters on returned object
 
-1. ```parsedVcard```
+1. `parsedVcard`
 
-  * This is an array containing the parsed content lines of the vCard.
+- This is an array containing the parsed content lines of the vCard.
 
-  * The parsed content lines in the array are objects with the following keys:
-    ```js
-    [
-      ...,
+- The parsed content lines in the array are objects with the following keys:
+
+  ```js
+  [
+    ...,
+    {
+      group: null,
+      property: "URL",
+      parameters: { TYPE: "home" },
+      value: "http://nomis80.org"
+    },
+    ...
+  ]
+  ```
+
+  1. `group`
+
+  Its value is either `null` or a string with the name the group of the property.
+
+  ```js
+  {
+    group: null,
+    ...
+  }
+  ```
+
+  2. `property`
+
+  A string containing the property name.
+
+  ```js
+  {
+    ...,
+    property: "URL",
+    ...
+  }
+  ```
+
+  3. `parameters`
+
+  An object whose keys are the parameters of the property and the values are the parameter values. The values may be strings or arrays of strings if the particular parameter had multiple values.
+
+  ```js
+  {
+    ...,
+    parameters: { TYPE: "home" },
+    ...
+  }
+  ```
+
+  4. `value`
+
+  This may take three forms:
+
+      1. For most properties, a string containing the value of the property.
+
+      ```js
       {
-        group: null,
-        property: "URL",
-        parameters: { TYPE: "home" },
+        ...,
         value: "http://nomis80.org"
-      },
-      ...
-    ]
-    ```
-
-    1. `group`
-
-      Its value is either `null` or a string with the name the group of the property.
-      
-      ```js
-      {
-        group: null,
-        ...
       }
       ```
 
-    2. `property`
-
-      A string containing the property name.
+      2. For properties with multiple values, an array of strings.
 
       ```js
       {
         ...,
-        property: "URL",
-        ...
+        value: [ 'Example.com Inc.', 'Second Example, Inc.' ]
       }
       ```
 
-    3. `parameters`
+      3. For properties whose values are structured, such as `N`, `ADR` and `GENDER`, the value is an object whose keys are the names of each of the structured components, and the values are strings or string arrays.
 
-      An object whose keys are the parameters of the property and the values are the parameter values. The values may be strings or arrays of strings if the particular parameter had multiple values.
-
-      ```js
+      ```js title='value for N property'
       {
         ...,
-        parameters: { TYPE: "home" },
-        ...
+        value: {
+          familyNames: "Perreault",
+          givenNames: "Simon",
+          additionalNames: "",
+          honorificPrefixes: "",
+          honorificSuffixes: ["ing.", "jr."]
+        }
       }
       ```
 
-    4. `value`
-
-      This may take three forms:
-
-        1. For most properties, a string containing the value of the property.
-
-        ```js
-        {
-          ...,
-          value: "http://nomis80.org"
+      ```js title='value for ADR property'
+      {
+        ...,
+        value: {
+          postOfficeBox: "",
+          extendedAddress: "Suite D2-630",
+          streetAddress: "2875 Laurier",
+          locality: "Quebec",
+          region: "QC",
+          postalCode: "G1V 2M2",
+          countryName: "Canada"
         }
-        ```
+      }
+      ```
 
-        2. For properties with multiple values, an array of strings.
+      ```js title='value for GENDER property'
+      {
+        ...,
+        value: { sex: "M", gender: "" }
+      }
+      ```
 
-        ```js
-        {
-          ...,
-          value: [ 'Example.com Inc.', 'Second Example, Inc.' ]
-        }
-        ```
+2. `properties`
 
-        3. For properties whose values are structured, such as `N`, `ADR` and `GENDER`, the value is an object whose keys are the names of each of the structured components, and the values are strings or string arrays.
+- This getter returns a string array with the names of all properties in the parsed vCard.
 
-        ```js title='value for N property'
-        {
-          ...,
-          value: {
-            familyNames: "Perreault",
-            givenNames: "Simon",
-            additionalNames: "",
-            honorificPrefixes: "",
-            honorificSuffixes: ["ing.", "jr."]
-          }
-        }
-        ```
+:::note
+The names are not repeated if a property is repeated
+:::
 
-        ```js title='value for ADR property'
-        {
-          ...,
-          value: {
-            postOfficeBox: "",
-            extendedAddress: "Suite D2-630",
-            streetAddress: "2875 Laurier",
-            locality: "Quebec",
-            region: "QC",
-            postalCode: "G1V 2M2",
-            countryName: "Canada"
-          }
-        }
-        ```
+```js
+> parsedContact.properties
+[
+  'FN',     'N',
+  'BDAY',   'ANNIVERSARY',
+  'GENDER', 'LANG',
+  'ORG',    'ADR',
+  'TEL',    'EMAIL',
+  'GEO',    'KEY',
+  'TZ',     'URL'
+]
+```
 
-        ```js title='value for GENDER property'
-        { 
-          ...,
-          value: { sex: "M", gender: "" } 
-        }
-        ```
+3. `propertiesWithParameters`
 
-2. ```properties```
+- This getter returns a string array with the names of all properties in the parsedVcard that have parameters.
 
-  * This getter returns a string array with the names of all properties in the parsed vCard.
+```js
+> parsedContact.propertiesWithParameters
+[
+  'LANG',  'ORG',
+  'ADR',   'TEL',
+  'EMAIL', 'GEO',
+  'KEY',   'URL'
+]
+```
 
-  :::note
-  The names are not repeated if a property is repeated
-  :::
+4. `propertiesWithoutParameters`
 
-  ```js
-  > parsedContact.properties
-  [
-    'FN',     'N',
-    'BDAY',   'ANNIVERSARY',
-    'GENDER', 'LANG',
-    'ORG',    'ADR',
-    'TEL',    'EMAIL',
-    'GEO',    'KEY',
-    'TZ',     'URL'
-  ]
-  ```
+- This getter returns a string array with the names of all properties in the parsedVcard that do not have parameters.
 
-3. ```propertiesWithParameters```
+```js
+> parsedContact.propertiesWithoutParameters
+[ 'FN', 'N', 'BDAY', 'ANNIVERSARY', 'GENDER', 'TZ' ]
+```
 
-  * This getter returns a string array with the names of all properties in the parsedVcard that have parameters.
+5. `groups`
 
-  ```js
-  > parsedContact.propertiesWithParameters
-  [
-    'LANG',  'ORG',
-    'ADR',   'TEL',
-    'EMAIL', 'GEO',
-    'KEY',   'URL'
-  ]
-  ```
+- This getter returns a string array with the names of all property groups in the parsedVcard. If there are none, it returns an empty array.
 
-4. ```propertiesWithoutParameters```
-  
-  * This getter returns a string array with the names of all properties in the parsedVcard that do not have parameters.
+```js
+> parsedContact2.groups
+[ 'MILKY' ]
+```
 
-  ```js
-  > parsedContact.propertiesWithoutParameters
-  [ 'FN', 'N', 'BDAY', 'ANNIVERSARY', 'GENDER', 'TZ' ]
-  ```
+6. `repeatingProperties`
 
-5. ```groups```
+- This getter returns an object whose keys are the names of the properties and the values are the number of times they appear in the parsedVcard.
 
-  * This getter returns a string array with the names of all property groups in the parsedVcard. If there are none, it returns an empty array.
+- If there are no repeating properties, an empty object is returned
 
-  ```js
-  > parsedContact2.groups
-  [ 'MILKY' ]
-  ```
-
-6. ```repeatingProperties```
-
-  * This getter returns an object whose keys are the names of the properties and the values are the number of times they appear in the parsedVcard.
-
-  * If there are no repeating properties, an empty object is returned
-
-  ```js
-  > parsedContact.repeatingProperties
-  { LANG: 2, TEL: 2 }
-  ```
-
+```js
+> parsedContact.repeatingProperties
+{ LANG: 2, TEL: 2 }
+```
 
 ## Methods in the returned object
 
-1. ```getProperty```
+1. `getProperty`
 
-  * This method should be called with a single argument of type string that is the name of a property in the vCard.
+- This method should be called with a single argument of type string that is the name of a property in the vCard.
 
-  * It returns an array containing parsed objects of that property (may be one or more, depending on how many times the property appears in the vCard).
+- It returns an array containing parsed objects of that property (may be one or more, depending on how many times the property appears in the vCard).
 
-  * If the property is not in the vCard, an empty array is returned.
+- If the property is not in the vCard, an empty array is returned.
 
-  ```js
-  > parsedVcard.getProperty('EMAIL');
-  [
-    {
-      group: 'work',
-      property: 'EMAIL',
-      parameters: { TYPE: 'work' },
-      value: 'simon.perreault@viagenie.ca'
-    }
-  ]
-  ```
+```js
+> parsedVcard.getProperty('EMAIL');
+[
+  {
+    group: 'work',
+    property: 'EMAIL',
+    parameters: { TYPE: 'work' },
+    value: 'simon.perreault@viagenie.ca'
+  }
+]
+```
 
-2. ```getGroup```
+2. `getGroup`
 
-  * This method should be called with a single argument of type string that is the name of a property group in the vCard.
+- This method should be called with a single argument of type string that is the name of a property group in the vCard.
 
-  * It returns an array of parsed objects of all the properties in the group.
-  
-  * If there are no properties with the group, an empty array is returned.
+- It returns an array of parsed objects of all the properties in the group.
 
-  ```js
-  > parsedVcard.getGroup('STORY');
-  [
-    {
-      group: 'STORY',
-      property: 'TITLE',
-      parameters: {},
-      value: 'Imaginary test person'
-    },
-    {
-      group: 'STORY',
-      property: 'NOTE',
-      parameters: {},
-      value: 'John Doe has a long and varied history, being documented on more police files than anyone else. Reports of his death are alas numerous.'
-    }
-  ]
-  ```
+- If there are no properties with the group, an empty array is returned.
+
+```js
+> parsedVcard.getGroup('STORY');
+[
+  {
+    group: 'STORY',
+    property: 'TITLE',
+    parameters: {},
+    value: 'Imaginary test person'
+  },
+  {
+    group: 'STORY',
+    property: 'NOTE',
+    parameters: {},
+    value: 'John Doe has a long and varied history, being documented on more police files than anyone else. Reports of his death are alas numerous.'
+  }
+]
+```
