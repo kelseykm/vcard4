@@ -1,4 +1,4 @@
-![vcard4](./pics/vcard4-social-prev.png)
+![vcard4](https://raw.githubusercontent.com/kelseykm/banners/main/vcard4/banner.png)
 
 # vcard4
 
