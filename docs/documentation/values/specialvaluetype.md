@@ -17,9 +17,9 @@ sidebar_position: 11
 
 * ```SpecialValueType``` should be called with two arguments. The first should be the value and the second should be the target property
 
-* The second argument that specifies the target property should have as a value a string with the name of one the eight classes listed above (case insensitive)
+* The second argument that specifies the target property should have as a value a string with the name of one the six classes listed above (case insensitive)
 
-* The value first argument depends on the value of the second argument
+* The value of the first argument depends on the value of the second argument
 
 ## Use with `KindProperty`
 
