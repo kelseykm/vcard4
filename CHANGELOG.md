@@ -1,3 +1,9 @@
+# 3.1.3
+
+## Fixes
+
+- Unescape parameter values completely when parsing
+
 # 3.1.2
 
 ## Changes
