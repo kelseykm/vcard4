@@ -104,7 +104,7 @@ sidebar_position: 6
 
   3. `reprJSON`
 
-  This method returns the jCard in the shape defined in RFC 7095.
+  This method returns the jCard as a JavaScript object in the shape defined in RFC 7095.
 
   ```js
   > const vc = new VCARD([
