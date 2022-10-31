@@ -1,95 +1,100 @@
-# 3.1.3
+# Changelog
 
-## Fixes
+## [3.1.4] - 2022-10-31
+
+### Fixes
+
+- Emit properly named declaration files when bundling
+- Ensure value is string before using `replaceAll` when unescaping parameter
+  values
+
+### Other patch level changes
+
+- Remove development files from production bundles
+- Change changelog release notes style
+
+## [3.1.3] - 2022-10-19
+
+### Fixes
 
 - Unescape parameter values completely when parsing
 
-# 3.1.2
+## [3.1.2] - 2022-08-17
 
-## Changes
+### Changes
 
 - Change repository description and homepage
 
-# 3.1.1
+## [3.1.1] - 2022-08-17
 
-## Fixes
+### Fixes
 
 - Add `Group` as accepted type for `props` argument for `VCARD` type definition
 
-## Other patch level changes
+### Other patch level changes
 
 - Run `prettier` on all source code
-
 - Update browserslist database
-
 - Update dev dependencies
 
-# 3.1.0
+## [3.1.0] - 2022-02-24
 
-## New feature
+### New feature
 
 - getProperty method on `parse` return object
 
-## Fixes
+### Fixes
 
 - Bug fix on types for constructor parameters of `ExtendedProperty`
-
 - Bug fix on types for getGroup method of `parse` return object
 
-# 3.0.1
+## [3.0.1] - 2022-02-11
 
-## Fixes
+### Fixes
 
 - Bug fix in parsing tokenizer
-
 - Typo fix in v3.0.0 CHANGELOG
 
-# 3.0.0
+## [3.0.0] - 2022-01-29
 
-## Breaking changes
+### Breaking changes
 
 - All parts of the api provided as named exports of the main module
-
 - Changes in input and output of several classes
-
 - Change in output of parse function
 
-## New features
+### New features
 
 - Fully tree shakeable
-
 - Much better parser
-
 - Added capacity for creating XML vCards
-
 - Added capacity for creating jCards
-
 - Added support for grouped properties in both generation and parsing
-
 - New documentation website (removed docs from README)
 
-## Bug fixes
+### Bug fixes
 
 - No repeating of parameters in same property
-
 - Only properties (and grouped properties) can be passed to VCARD
 
-# 2.4.1
+<!-- Notes from here onward are pulled directly from `git log` -->
+
+## [2.4.1] - 2021-12-09
 
 - Bug fixes
   - correct ParsedVcard type
   - fix quotedParameter checking
 
-# 2.4.0
+## [2.4.0] - 2021-12-08
 
 - Added support for RFC6473 and RFC7852
 - Remove readonly from types
 
-# 2.3.1
+## [2.3.1] - 2021-12-06
 
 - Removed unused type declarations
 
-# 2.3.0
+## [2.3.0] - 2021-12-06
 
 - Update documentation and changelog
 - Added CHANGELOG.md
@@ -97,12 +102,12 @@
 - Documentation corrections
 - Added info to API overview section in documentation
 
-# 2.2.1
+## [2.2.1] - 2021-12-01
 
 - Bug fix
 - Added argument validation for backCount
 
-# 2.2.0
+## [2.2.0] - 2021-11-29
 
 - Allowed IndexParameter in multivalued properties
 - Updated documentation
@@ -130,7 +135,7 @@
 - Included added properties in validation
 - Added properties from RFC6474 extension
 
-# 2.1.2
+## [2.1.2] - 2021-11-03
 
 - Improved parsing for content lines with backslashes
 - Removed unnecessary lines of code
@@ -138,15 +143,11 @@
 - Switched let for const
 - Removed unneccessary lines of code
 
-# 2.1.1
-
-- Minimum node version
-
-# 2.1.1
+## [2.1.1] - 2021-11-02
 
 - Added specification for minimum node version
 
-# 2.1.0
+## [2.1.0] - 2021-11-02
 
 - Strip group from grouped properties
 - Modified README.md
@@ -154,12 +155,12 @@
 - Parse multiple contacts
 - Merge pull request #6 from MarcelWaldvogel/unfolding-htab
 
-# 2.0.4
+## [2.0.4] - 2021-10-31
 
 - Bug fix
 - Unfolding accepting HTAB
 
-# 2.0.3
+## [2.0.3] - 2021-10-13
 
 - Changed package description
 - Bug fix
@@ -168,18 +169,18 @@
 - Removed unused variables
 - Moved reused number to variable
 
-# 2.0.2
+## [2.0.2] - 2021-10-12
 
 - Removed unused variables
 - Removed unused variable and stopped using Object.prototype builtins directly
 - Removed unused variables
 - Removed unused variables
 
-# 2.0.1
+## [2.0.1] - 2021-10-11
 
 - Removed some mistakes in README
 
-# 2.0.0
+## [2.0.0] - 2021-10-10
 
 - Added information to documentation
 - Updated README to reflect changes to MediatypeParameter
@@ -190,23 +191,19 @@
 - Updated README to reflect changes to TypeParameter
 - Changed TypeParameter value types
 
-# 1.1.2
+## [1.1.2] - 2021-10-09
 
 - Revert "Merge pull request #2 from MarcelWaldvogel/types"
 
-# 1.1.2
-
-- Revert "Merge pull request #2 from MarcelWaldvogel/types"
-
-# 1.1.1
+## [1.1.1] - 2021-10-09
 
 - Fixed bug introduced by merged pull request
 
-# 1.1.0
+## [1.1.0] - 2021-10-09
 
 - Merge pull request #2 from MarcelWaldvogel/types
 
-# 1.0.0
+## [1.0.0] - 2021-10-09
 
 - Modified README.md
 - Modified README.md
@@ -215,17 +212,17 @@
 - Package \*.d.ts files as well
 - Provide basic TypeScript types
 
-# 0.2.1
+## [0.2.1] - 2021-09-19
 
 - Modified README.md
 
-# 0.2.0
+## [0.2.0] - 2021-09-14
 
 - Added documentation for parse
 - Added tests for parse
 - Added parse.js
 
-# 0.1.1
+## [0.1.1] - 2021-09-13
 
 - Clarified code
 - Modified package.json
