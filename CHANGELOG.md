@@ -1,8 +1,8 @@
 # Changelog
 
-##[3.1.5] - 2022-11-01
+## [3.1.5] - 2022-11-01
 
-- Return development files to production build to increase npm ranking
+- Return development files to production package to increase npm ranking
 
 ## [3.1.4] - 2022-10-31
 
