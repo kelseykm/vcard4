@@ -10,7 +10,7 @@
     "import": "./lib/esm/index.js",
     "require": "./lib/umd/index.js"
   },
-  "types": "./lib/esm/index.d.d.ts",
+  "types": "./lib/esm/index.d.ts",
   "scripts": {
     "test": "mocha --recursive",
     "build": "rm -r dist/ lib/esm lib/umd/index* && rollup -c"
@@ -19,12 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/kelseykm/vcard4.git"
   },
-  "keywords": [
-    "vcard",
-    "vcard4",
-    "vcf",
-    "vcf4"
-  ],
+  "keywords": ["vcard", "vcard4", "vcf", "vcf4"],
   "author": "Kelsey Mwongeli <kelseykm.git@gmail.com>",
   "license": "ISC",
   "bugs": {
