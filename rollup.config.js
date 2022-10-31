@@ -2,6 +2,8 @@ import resolve from "@rollup/plugin-node-resolve";
 import babel from "@rollup/plugin-babel";
 import { terser } from "rollup-plugin-terser";
 import dts from "rollup-plugin-dts";
+import glob from "glob";
+import path from "path";
 
 export default [
   {
@@ -36,11 +38,17 @@ export default [
     plugins: [resolve(), babel({ babelHelpers: "bundled" })],
   },
   {
-    input: "./types/src/index.d.ts",
+    input: Object.fromEntries(
+      glob
+        .sync("types/**/*d.ts")
+        .map((file) => [
+          path.relative("types/src", file.replace(/\.d\.ts$/, "")),
+          file,
+        ])
+    ),
     output: {
       dir: "./lib/esm/",
       format: "esm",
-      preserveModules: true,
     },
     plugins: [resolve(), dts()],
   },
