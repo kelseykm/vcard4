@@ -313,12 +313,24 @@ export class Tokenizer {
           holdCurrentParamValue.slice(1, -1)
         );
 
-      currentParam[currentParamKey] = holdCurrentParamValue
-        .replaceAll("\\n", "\n")
-        .replaceAll("\\;", ";")
-        .replaceAll("\\:", ":")
-        .replaceAll("\\,", ",")
-        .replaceAll("\\\\", "\\");
+      if (Array.isArray(holdCurrentParamValue))
+        holdCurrentParamValue.map((val) =>
+          val
+            .replaceAll("\\n", "\n")
+            .replaceAll("\\;", ";")
+            .replaceAll("\\:", ":")
+            .replaceAll("\\,", ",")
+            .replaceAll("\\\\", "\\")
+        );
+      else
+        holdCurrentParamValue
+          .replaceAll("\\n", "\n")
+          .replaceAll("\\;", ";")
+          .replaceAll("\\:", ":")
+          .replaceAll("\\,", ",")
+          .replaceAll("\\\\", "\\");
+
+      currentParam[currentParamKey] = holdCurrentParamValue;
     }
 
     return paramList.reduce((accumulatedParams, currentParam) => {
