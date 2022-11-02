@@ -30,7 +30,7 @@ sidebar_position: 5
 - `Group` is provided as a named export from the main **vcard4** module.
 
   ```js title=ESM
-  import { Group } from "vcard";
+  import { Group } from "vcard4";
   ```
 
   ```js title=commonjs
@@ -67,12 +67,12 @@ const title = new TitleProperty([], new TextType("The Boss"));
 const grp = new Group([tel, email, title], "job");
 ```
 
-- The instance objects have the following methods:
+- The instance object has the following methods:
 
   1. `repr`
 
-  This method returns a string which is the representation of how the group
-  will finally appear in the vCard.
+  This method returns a string representing how the group will finally appear
+  in the vCard.
 
   :::note
   '>' in the examples below is just the terminal prompt.
@@ -87,8 +87,8 @@ const grp = new Group([tel, email, title], "job");
 
   2. `reprXML`
 
-  This method returns a string which is the representation of how the group
-  will finally appear in the XML vCard.
+  This method returns a string representing how the group will finally appear
+  in the XML vCard.
 
   ```js
   > grp.reprXML();
@@ -97,8 +97,8 @@ const grp = new Group([tel, email, title], "job");
 
   3. `reprJSON`
 
-  This method returns a string which is the representation of how the group
-  will finally appear in the jCard.
+  This method returns an array in the same shape as how the group would appear
+  in the jCard.
 
   ```js
   > grp.reprJSON();
