@@ -29,11 +29,43 @@ sidebar_position: 5
 
 - `Group` is provided as a named export from the main **vcard4** module.
 
-  `js title=ESM import { Group } from "vcard"; `
+  ```js title=ESM
+  import { Group } from "vcard";
+  ```
 
-  `js title=commonjs const { Group } = require("vcard4"); `
+  ```js title=commonjs
+  const { Group } = require("vcard4");
+  ```
 
 ## Methods
+
+```js
+import {
+  TelProperty,
+  EmailProperty,
+  TitleProperty,
+  PrefParameter,
+  IntegerType,
+  URIType,
+  TypeParameter,
+  TextType,
+  Group,
+} from "vcard4";
+
+const tel = new TelProperty(
+  [new TypeParameter(new TextType("fax"), "TelProperty")],
+  new URIType("tel:+12345678910")
+);
+
+const email = new EmailProperty(
+  [new PrefParameter(new IntegerType(1))],
+  new TextType("mister.person@thecompany.com")
+);
+
+const title = new TitleProperty([], new TextType("The Boss"));
+
+const grp = new Group([tel, email, title], "job");
+```
 
 - The instance objects have the following methods:
 
@@ -47,37 +79,10 @@ sidebar_position: 5
   :::
 
   ```js
-  > import {
-  >   TelProperty,
-  >   EmailProperty,
-  >   TitleProperty,
-  >   PrefParameter,
-  >   IntegerType,
-  >   URIType,
-  >   TypeParameter,
-  >   TextType,
-  >   Group,
-  > } from "vcard4";
-
-  > const tel = new TelProperty(
-  >   [new TypeParameter(new TextType("fax"), "TelProperty")],
-  >   new URIType("tel:+12345678910")
-  > );
-
-  > const email = new EmailProperty(
-  >   [new PrefParameter(new IntegerType(1))],
-  >   new TextType("mister.person@thecompany.com")
-  > );
-
-  > const title = new TitleProperty([], new TextType("The Boss"));
-
-  > const grp = new Group([tel, email, title], "job");
-
   > grp.repr();
-  'job.TEL;TYPE=fax:tel:+12345678910\r\n' +
-    'job.EMAIL;PREF=1:mister.person@thecompany.com\r\n' +
-    'job.TITLE:The Boss'
-
+  "job.TEL;TYPE=fax:tel:+12345678910\r\n" +
+    "job.EMAIL;PREF=1:mister.person@thecompany.com\r\n" +
+    "job.TITLE:The Boss";
   ```
 
   2. `reprXML`
@@ -86,32 +91,6 @@ sidebar_position: 5
   will finally appear in the XML vCard.
 
   ```js
-  > import {
-  >   TelProperty,
-  >   EmailProperty,
-  >   TitleProperty,
-  >   PrefParameter,
-  >   IntegerType,
-  >   URIType,
-  >   TypeParameter,
-  >   TextType,
-  >   Group,
-  > } from "vcard4";
-
-  > const tel = new TelProperty(
-  >   [new TypeParameter(new TextType("fax"), "TelProperty")],
-  >   new URIType("tel:+12345678910")
-  > );
-
-  > const email = new EmailProperty(
-  >   [new PrefParameter(new IntegerType(1))],
-  >   new TextType("mister.person@thecompany.com")
-  > );
-
-  > const title = new TitleProperty([], new TextType("The Boss"));
-
-  > const grp = new Group([tel, email, title], "job");
-
   > grp.reprXML();
   '<group name="job"><tel><parameters><type><text>fax</text></type></parameters><uri>tel:+12345678910</uri></tel><email><parameters><pref><integer>1</integer></pref></parameters><text>mister.person@thecompany.com</text></email><title><text>The Boss</text></title></group>'
   ```
@@ -122,32 +101,6 @@ sidebar_position: 5
   will finally appear in the jCard.
 
   ```js
-  > import {
-  >   TelProperty,
-  >   EmailProperty,
-  >   TitleProperty,
-  >   PrefParameter,
-  >   IntegerType,
-  >   URIType,
-  >   TypeParameter,
-  >   TextType,
-  >   Group,
-  > } from "vcard4";
-
-  > const tel = new TelProperty(
-  >   [new TypeParameter(new TextType("fax"), "TelProperty")],
-  >   new URIType("tel:+12345678910")
-  > );
-
-  > const email = new EmailProperty(
-  >   [new PrefParameter(new IntegerType(1))],
-  >   new TextType("mister.person@thecompany.com")
-  > );
-
-  > const title = new TitleProperty([], new TextType("The Boss"));
-
-  > const grp = new Group([tel, email, title], "job");
-
   > grp.reprJSON();
   [
     [ 'tel', { type: 'fax', group: 'job' }, 'uri', 'tel:+12345678910' ],
