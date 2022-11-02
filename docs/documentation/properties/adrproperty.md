@@ -8,13 +8,28 @@ sidebar_position: 18
 
 - This class represents the "ADR" property
 
-- This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+- This class should be called with two arguments, the first an array of the
+  parameters, and the second the value of the property
 
-- The only acceptable parameters of `AdrProperty` are [`LabelParameter`](/documentation/parameters/labelparameter), [`ValueParameter`](/documentation/parameters/valueparameter), [`LanguageParameter`](/documentation/parameters/languageparameter), [`GeoParameter`](/documentation/parameters/geoparameter), [`TzParameter`](/documentation/parameters/tzparameter), [`AltidParameter`](/documentation/parameters/altidparameter), [`PIDParameter`](/documentation/parameters/pidparameter), [`PrefParameter`](/documentation/parameters/prefparameter), [`IndexParameter`](/documentation/parameters/indexparameter), [`TypeParameter`](/documentation/parameters/typeparameter), [`AnyParameter`](/documentation/parameters/anyparameter) and [`CCParameter`](/documentation/parameters/ccparameter)
+- The only acceptable parameters of `AdrProperty` are
+  [`LabelParameter`](/documentation/parameters/labelparameter),
+  [`ValueParameter`](/documentation/parameters/valueparameter),
+  [`LanguageParameter`](/documentation/parameters/languageparameter),
+  [`GeoParameter`](/documentation/parameters/geoparameter),
+  [`TzParameter`](/documentation/parameters/tzparameter),
+  [`AltidParameter`](/documentation/parameters/altidparameter),
+  [`PIDParameter`](/documentation/parameters/pidparameter),
+  [`PrefParameter`](/documentation/parameters/prefparameter),
+  [`IndexParameter`](/documentation/parameters/indexparameter),
+  [`TypeParameter`](/documentation/parameters/typeparameter),
+  [`AnyParameter`](/documentation/parameters/anyparameter) and
+  [`CCParameter`](/documentation/parameters/ccparameter)
 
-- If you do not wish that the property have any parameters, leave the first argument array empty
+- If you do not wish that the property have any parameters, leave the first
+  argument array empty
 
-- The value of `AdrProperty` should be of type [`SpecialValueType`](/documentation/values/specialvaluetype)
+- The value of `AdrProperty` should be of type
+  [`SpecialValueType`](/documentation/values/specialvaluetype)
 
 ```js
 const addrArr = new Array(7);

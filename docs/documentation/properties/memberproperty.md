@@ -8,17 +8,26 @@ sidebar_position: 30
 
 - This class represents the "MEMBER" property
 
-:::note
-This property should only be used if the value of the "KIND" ([`KindProperty`](kindproperty)) property is "group"
-:::
+:::note This property should only be used if the value of the "KIND"
+([`KindProperty`](kindproperty)) property is "group" :::
 
-- This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+- This class should be called with two arguments, the first an array of the
+  parameters, and the second the value of the property
 
-- The only acceptable parameters of `MemberProperty` are [`ValueParameter`](/documentation/parameters/valueparameter), [`PIDParameter`](/documentation/parameters/pidparameter), [`PrefParameter`](/documentation/parameters/prefparameter), [`IndexParameter`](/documentation/parameters/indexparameter), [`AltidParameter`](/documentation/parameters/altidparameter), [`MediatypeParameter`](/documentation/parameters/mediatypeparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
+- The only acceptable parameters of `MemberProperty` are
+  [`ValueParameter`](/documentation/parameters/valueparameter),
+  [`PIDParameter`](/documentation/parameters/pidparameter),
+  [`PrefParameter`](/documentation/parameters/prefparameter),
+  [`IndexParameter`](/documentation/parameters/indexparameter),
+  [`AltidParameter`](/documentation/parameters/altidparameter),
+  [`MediatypeParameter`](/documentation/parameters/mediatypeparameter) and
+  [`AnyParameter`](/documentation/parameters/anyparameter)
 
-- If you do not wish that the property have any parameters, leave the first argument array empty
+- If you do not wish that the property have any parameters, leave the first
+  argument array empty
 
-- The value of `MemberProperty` should be of type [`URIType`](/documentation/values/uritype)
+- The value of `MemberProperty` should be of type
+  [`URIType`](/documentation/values/uritype)
 
 ```js
 new MemberProperty(

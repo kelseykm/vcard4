@@ -14,7 +14,8 @@ hide_title: true
 const greeting = new TextType("Hello, world");
 ```
 
-- `TextListType` should be called with a single argument that is an array of `TextType`s
+- `TextListType` should be called with a single argument that is an array of
+  `TextType` instances
 
 ```js
 const person1 = new TextType("Jane");

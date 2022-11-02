@@ -6,7 +6,8 @@ sidebar_position: 11
 
 # `SpecialValueType`
 
-- This class is for use with properties which do not have values of the types already described. Those properties include:
+- This class is for use with properties which do not have values of the types
+  already described. Those properties include:
 
   1. [`KindProperty`](/documentation/properties/kindproperty)
   2. [`NProperty`](/documentation/properties/nproperty)
@@ -15,15 +16,19 @@ sidebar_position: 11
   5. [`OrgProperty`](/documentation/properties/orgproperty)
   6. [`ClientpidmapProperty`](/documentation/properties/clientpidmapproperty)
 
-- `SpecialValueType` should be called with two arguments. The first should be the value and the second should be the target property
+- `SpecialValueType` should be called with two arguments. The first should be
+  the value and the second should be the target property
 
-- The second argument that specifies the target property should have as a value a string with the name of one the six classes listed above (case insensitive)
+- The second argument that specifies the target property should have as a value
+  a string with the name of one the six classes listed above (case insensitive)
 
 - The value of the first argument depends on the value of the second argument
 
 ## Use with `KindProperty`
 
-- Where the second argument is `'KindProperty'` (case insensitive), the only accepted values for the first argument are `'individual'`, `'group'`, `'org'`, `'location'`, `'application'` or an identifier registered with IANA
+- Where the second argument is `'KindProperty'` (case insensitive), the only
+  accepted values for the first argument are `'individual'`, `'group'`,
+  `'org'`, `'location'`, `'application'` or an identifier registered with IANA
 
   ```js
   new SpecialValueType("org", "KindProperty");
@@ -31,10 +36,15 @@ sidebar_position: 11
 
 ## Use with `NProperty`
 
-- Where the second argument is `'NProperty'` (case insensitive), the only accepted value for the first argument is an array of length 5. The items in the array, if present, must be of type [`TextType`](texttype-and-textlisttype) or [`TextListType`](texttype-and-textlisttype), otherwise, **they must be left empty**
+- Where the second argument is `'NProperty'` (case insensitive), the only
+  accepted value for the first argument is an array of length 5. The items in
+  the array, if present, must be of type [`TextType`](texttype-and-textlisttype)
+  or [`TextListType`](texttype-and-textlisttype), otherwise, **they must be left
+  empty**
 
   :::tip
-  If you want some array elements to be left empty, you initialise an array of the requisite length, and then only fill the indices you want to fill
+  If you want some array elements to be left empty, you initialise an array of
+  the requisite length, and then only fill the indices you want to fill
   :::
 
 - The 5 items in the array correspond to the following respectively:
@@ -45,7 +55,9 @@ sidebar_position: 11
   4. Honorific Prefixes
   5. Honorific Suffixes
 
-- Individual text components can include multiple text values (hence the use of [`TextListType`](texttype-and-textlisttype)). In the example below, the person has multiple honorific prefixes
+- Individual text components can include multiple text values (hence the use of
+  [`TextListType`](texttype-and-textlisttype)). In the example below, the
+  person has multiple honorific prefixes
 
   ```js
   const nameArr = new Array(5);
@@ -58,7 +70,13 @@ sidebar_position: 11
 
 ## Use with `GenderProperty`
 
-- Where the second argument is `'GenderProperty'` (case insensitive), the only accepted value for the first argument is an array of length 2. The first item in the array, if present, must be of type [`SexType`](sextype), while the second, if present, must be of the type [`TextType`](texttype-and-textlisttype), otherwise, **they must be left empty**. Note that **only one** can be left empty, so if one is left empty, the other must be present
+- Where the second argument is `'GenderProperty'` (case insensitive), the only
+  accepted value for the first argument is an array of length 2. The first item
+  in the array, if present, must be of type [`SexType`](sextype), while the
+  second, if present, must be of the type
+  [`TextType`](texttype-and-textlisttype), otherwise, **they must be left
+  empty**. Note that **only one** can be left empty, so if one is left empty, the
+  other must be present
 
   ```js
   new SpecialValueType(
@@ -69,7 +87,10 @@ sidebar_position: 11
 
 ## Use with `AdrProperty`
 
-- Where the second argument is `'AdrProperty'` (case insensitive), the only accepted value for the first argument is an array of length 7. The items in the array, if present, must be of type [`TextType`](texttype-and-textlisttype), otherwise, **they must be left empty**
+- Where the second argument is `'AdrProperty'` (case insensitive), the only
+  accepted value for the first argument is an array of length 7. The items in
+  the array, if present, must be of type [`TextType`](texttype-and-textlisttype),
+  otherwise, **they must be left empty**
 
 - The 7 items in the array correspond to the following respectively:
 
@@ -90,7 +111,10 @@ sidebar_position: 11
 
 ## Use with `OrgProperty`
 
-- Where the second argument is `'OrgProperty'` (case insensitive), the only accepted value for the first argument is an array, with at least one item but with no length limit. The items in the array must be of type [`TextType`](texttype-and-textlisttype)
+- Where the second argument is `'OrgProperty'` (case insensitive), the only
+  accepted value for the first argument is an array, with at least one item but
+  with no length limit. The items in the array must be of type
+  [`TextType`](texttype-and-textlisttype)
 
   ```js
   new SpecialValueType(
@@ -101,7 +125,11 @@ sidebar_position: 11
 
 ## Use with `ClientpidmapProperty`
 
-- Where the second argument is `'ClientpidmapProperty'` (case insensitive), the only accepted value for the first argument is an array of length 2. The first item in the array must be of type [`IntegerType`](integertype-and-integerlisttype), while the second, must be of the type [`URIType`](uritype). **None of the items can be left empty**
+- Where the second argument is `'ClientpidmapProperty'` (case insensitive), the
+  only accepted value for the first argument is an array of length 2. The first
+  item in the array must be of type
+  [`IntegerType`](integertype-and-integerlisttype), while the second, must be of
+  the type [`URIType`](uritype). **None of the items can be left empty**
 
   ```js
   new SpecialValueType(

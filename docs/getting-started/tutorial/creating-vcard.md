@@ -3,7 +3,8 @@ title: Creating a vCard
 sidebar_position: 2
 ---
 
-- The following is a vCard containing information of the vCard specification author, **Simon Perreault**.
+- The following is a vCard containing information of the vCard specification
+  author, **Simon Perreault**.
 
   ```
   BEGIN:VCARD
@@ -31,13 +32,17 @@ sidebar_position: 2
 
 ### Short overview of vCards
 
-- A vCard is divided into content lines each containing a **property**, its **parameters**, if it has any, and finally, its **value**. An example of a content line from Simon's vCard would be:
+- A vCard is divided into content lines each containing a **property**, its
+  **parameters**, if it has any, and finally, its **value**. An example of a
+  content line from Simon's vCard would be:
 
   ```
   GEO;TYPE=work:geo:46.772673,-71.282945
   ```
 
-- From the content line highlighted above, the _property_ is `GEO`, the _parameter_ (it only has one), is `TYPE=work` and the _value_ is `geo:46.772673,-71.282945`.
+- From the content line highlighted above, the _property_ is `GEO`, the
+  _parameter_ (it only has one), is `TYPE=work` and the _value_ is
+  `geo:46.772673,-71.282945`.
 
 ### Creating a single content line
 
@@ -54,7 +59,10 @@ sidebar_position: 2
   ```
 
   :::tip
-  As you have probably already noticed, the naming of the classes is quite intuitive: just add 'property', 'parameter' or 'value' to the name depending on whether it's a property, parameter or value type, convert it to PascalCase, et voilà!
+  As you have probably already noticed, the naming of the classes is quite
+  intuitive: just add 'property', 'parameter' or 'value' to the name depending on
+  whether it's a property, parameter or value type, convert it to PascalCase, et
+  voilà!
   :::
 
 - Then let's work our way up, by creating the value first.
@@ -100,7 +108,9 @@ sidebar_position: 2
   const geo = new GeoProperty([geoTypeParameter], geoValue);
   ```
 
-- If we want to see how it looks like, i.e. it's representation on a vCard, we may call the `repr` method. It returns a string, which we can log to the console in order to see.
+- If we want to see how it looks like, i.e. it's representation on a vCard, we
+  may call the `repr` method. It returns a string, which we can log to the
+  console in order to see.
 
   ```js
   console.log(geo.repr());
@@ -110,13 +120,16 @@ sidebar_position: 2
 
 ### Creating the rest of Simon's vCard
 
-- The rest of the properties are created in much the same way as we did the `GEO` property above.
+- The rest of the properties are created in much the same way as we did the
+  `GEO` property above.
 
   :::info
-  **vcard4** treats `BEGIN`, `VERSION` and `END` properties as special. We do not create them ourselves; the library will do it for us.
+  **vcard4** treats `BEGIN`, `VERSION` and `END` properties as special. We do
+  not create them ourselves; the library will do it for us.
   :::
 
-- After creating all the properties, we shall assemble them into a complete vCard using the `VCARD` class, as we'll see below.
+- After creating all the properties, we shall assemble them into a complete
+  vCard using the `VCARD` class, as we'll see below.
 
   ```js
   import {
@@ -280,7 +293,8 @@ sidebar_position: 2
   ]);
   ```
 
-- Calling the `repr` method on the created `VCARD` object will return Simon's vCard as a string, which you can then write to a file, or whatever.
+- Calling the `repr` method on the created `VCARD` object will return Simon's
+  vCard as a string, which you can then write to a file, or whatever.
 
   ```js
   vc.repr();

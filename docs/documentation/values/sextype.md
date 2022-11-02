@@ -6,7 +6,8 @@ hide_title: true
 
 # `SexType`
 
-- This class is for use with the [`GenderProperty`](/documentation/properties/genderproperty)
+- This class is for use with the
+  [`GenderProperty`](/documentation/properties/genderproperty)
 
 - `SexType` should be called with a single argument of type string
 

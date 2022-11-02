@@ -8,7 +8,8 @@ hide_title: true
 
 - This class represents the "LANGUAGE" parameter
 
-- `LanguageParameter` should be called with a single argument that is an instance of [`LanguageTagType`](/documentation/values/languagetagtype)
+- `LanguageParameter` should be called with a single argument that is an
+  instance of [`LanguageTagType`](/documentation/values/languagetagtype)
 
   ```js
   new LanguageParameter(new LanguageTagType("tr"));

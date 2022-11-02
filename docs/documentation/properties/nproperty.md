@@ -8,13 +8,21 @@ sidebar_position: 6
 
 - This class represents the "N" property
 
-- This class should be called with two arguments, the first an array of the parameters, and the second the value of the property
+- This class should be called with two arguments, the first an array of the
+  parameters, and the second the value of the property
 
-- The only acceptable parameters of `NProperty` are [`ValueParameter`](/documentation/parameters/valueparameter), [`SortAsParameter`](/documentation/parameters/sortasparameter), [`LanguageParameter`](/documentation/parameters/languageparameter), [`AltidParameter`](/documentation/parameters/altidparameter) and [`AnyParameter`](/documentation/parameters/anyparameter)
+- The only acceptable parameters of `NProperty` are
+  [`ValueParameter`](/documentation/parameters/valueparameter),
+  [`SortAsParameter`](/documentation/parameters/sortasparameter),
+  [`LanguageParameter`](/documentation/parameters/languageparameter),
+  [`AltidParameter`](/documentation/parameters/altidparameter) and
+  [`AnyParameter`](/documentation/parameters/anyparameter)
 
-- If you do not wish that the property have any parameters, leave the first argument array empty
+- If you do not wish that the property have any parameters, leave the first
+  argument array empty
 
-- The value of `NProperty` should be of type [`SpecialValueType`](/documentation/values/specialvaluetype)
+- The value of `NProperty` should be of type
+  [`SpecialValueType`](/documentation/values/specialvaluetype)
 
 ```js
 const nArr = [

@@ -6,17 +6,23 @@ hide_title: true
 
 # `DateTimeType`
 
-- This class represents the "date", "time", "date-time", "date-and-or-time", "timestamp" and "utc-offset" data types
+- This class represents the "date", "time", "date-time", "date-and-or-time",
+  "timestamp" and "utc-offset" data types
 
-- `DateTimeType` should be called with two arguments, the first being the value and the second being the target data type.
+- `DateTimeType` should be called with two arguments, the first being the value
+  and the second being the target data type.
 
-- Accepted values for the second argument include: `"date"`, `"time"`, `"datetime"`, `"dateandortime"`, `"timestamp"` or `"utcoffset"`. (Note that it should be of type string)
+- Accepted values for the second argument include: `"date"`, `"time"`,
+  `"datetime"`, `"dateandortime"`, `"timestamp"` or `"utcoffset"`. (Note that
+  it should be of type string)
 
-- The value of the first argument depends on the type specified in the value of the second argument
+- The value of the first argument depends on the type specified in the value of
+  the second argument
 
 ## date
 
-- Where `"date"` is the second argument, the value of the first argument should be of the format:
+- Where `"date"` is the second argument, the value of the first argument should
+  be of the format:
 
   ```
   year [month day]
@@ -41,7 +47,8 @@ hide_title: true
             ---12
   ```
 
-- Note the use of YYYY-MM in the second example above. YYYYMM is disallowed to prevent confusion with YYMMDD. Note also that YYYY-MM-DD is disallowed.
+- Note the use of YYYY-MM in the second example above. YYYYMM is disallowed to
+  prevent confusion with YYMMDD. Note also that YYYY-MM-DD is disallowed.
 
 - Example for `"date"`:
 
@@ -51,7 +58,8 @@ hide_title: true
 
 ## time
 
-- Where `"time"` is the second argument, the value of the first argument should be of the format:
+- Where `"time"` is the second argument, the value of the first argument should
+  be of the format:
 
   ```
   hour minute second [zone]
@@ -88,7 +96,8 @@ hide_title: true
 
 ## datetime
 
-- Where `"datetime"` is the second argument, the value of the first argument should be of the format:
+- Where `"datetime"` is the second argument, the value of the first argument
+  should be of the format:
 
 ```
 date-noreduc time-designator time-notrunc
@@ -117,7 +126,8 @@ new DateTimeType("--1022T1400", "datetime");
 
 ## dateandortime
 
-- Where `"dateandortime"` is the second argument, the value of the first argument should be of the format:
+- Where `"dateandortime"` is the second argument, the value of the first
+  argument should be of the format:
 
   ```
   datetime / date / time-designator time
@@ -157,7 +167,8 @@ new DateTimeType("--1022T1400", "datetime");
 
 ## timestamp
 
-- Where `"timestamp"` is the second argument, the value of the first argument should be of the format:
+- Where `"timestamp"` is the second argument, the value of the first argument
+  should be of the format:
 
   ```
   date-complete time-designator time-complete
@@ -186,7 +197,8 @@ new DateTimeType("--1022T1400", "datetime");
 
 ## utcoffset
 
-- Where `"utcoffset"` is the second argument, the value of the first argument should be of the format:
+- Where `"utcoffset"` is the second argument, the value of the first argument
+  should be of the format:
 
   ```
   sign hour [minute]

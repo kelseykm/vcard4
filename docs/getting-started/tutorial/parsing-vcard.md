@@ -3,7 +3,9 @@ title: Parsing a vCard
 sidebar_position: 5
 ---
 
-- In this part of the tutorial, we will parse Simon's vCard, which we created in the [first part of the tutorial](/getting-started/tutorial/creating-vcard).
+- In this part of the tutorial, we will parse Simon's vCard, which we created
+  in the [first part of the
+  tutorial](/getting-started/tutorial/creating-vcard).
 
 - Let's import the `parse` function, which we will use.
 
@@ -15,7 +17,8 @@ sidebar_position: 5
   const { parse } = require("vcard4");
   ```
 
-- Assuming you wrote the vCard to disk, let's import `fs` (part of **node**'s api) and read it.
+- Assuming you wrote the vCard to disk, let's import `fs` (part of **node**'s
+  api) and read it.
 
   ```js
   import fs from "fs";
@@ -25,7 +28,8 @@ sidebar_position: 5
     .then((contact) => contact.toString());
   ```
 
-- We have converted the `contact` buffer into a string because `parse` only accepts strings.
+- We have converted the `contact` buffer into a string because `parse` only
+  accepts strings.
 
 - To parse the `contact`, we just pass it to `parse`!
 

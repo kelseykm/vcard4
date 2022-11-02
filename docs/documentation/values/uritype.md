@@ -8,7 +8,8 @@ hide_title: true
 
 - This class represents the "URI" data type
 
-- `URIType` should be called with a single argument of type string, that is formatted as s URI as defined in Section 3 of RFC3986
+- `URIType` should be called with a single argument of type string, that is
+  formatted as a URI as defined in Section 3 of RFC 3986
 
 ```js
 new URIType("http://www.example.com/my/picture.jpg");

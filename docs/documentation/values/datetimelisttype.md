@@ -6,9 +6,11 @@ hide_title: true
 
 # `DateTimeListType`
 
-- This class represents the "date-list", "time-list", "date-time-list", "date-and-or-time-list" and "timestamp-list" data types
+- This class represents the "date-list", "time-list", "date-time-list",
+  "date-and-or-time-list" and "timestamp-list" data types
 
-- `DateTimeListType` should be called with a single argument that is an array of `DateTimeType`s of the same type
+- `DateTimeListType` should be called with a single argument that is an array
+  of `DateTimeType`s of the same type
 
   ```js
   new DateTimeListType([

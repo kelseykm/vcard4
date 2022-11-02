@@ -5,9 +5,12 @@ sidebar_position: 3
 
 - **vcard4** may also be used to create XML vCards (RFC 6351).
 
-- The process of doing so is the same as explained in the [first part of the tutorial](/getting-started/tutorial/creating-vcard). The only difference is at the very end.
+- The process of doing so is the same as explained in the [first part of the
+  tutorial](/getting-started/tutorial/creating-vcard). The only difference is
+  at the very end.
 
-- Once we have the `VCARD` object, we call the `reprXML` method to create an XML vCard.
+- Once we have the `VCARD` object, we call the `reprXML` method to create an
+  XML vCard.
 
   ```js
   const vc = new VCARD([...]);
@@ -17,10 +20,12 @@ sidebar_position: 3
 
   ```
 
-- That method will return a string containing Simon's vCard in XML format as below.
+- That method will return a string containing Simon's vCard in XML format as
+  below.
 
   :::note
-  The XML returned by the `reprXML` method is not prettied/indented. I've only prettied it in the code block below to allow us to read it easily.
+  The XML returned by the `reprXML` method is not prettied/indented. I've only
+  prettied it in the code block below to allow us to read it easily.
   :::
 
   ```xml

@@ -8,7 +8,8 @@ hide_title: true
 
 - These classes represent the "float" and "float-list" data types respectively
 
-- `FloatType` should be called with a single argument of type number or string. The value may have a sign ("-" or "+")
+- `FloatType` should be called with a single argument of type number or string.
+  The value may have a sign ("-" or "+")
 
 - The value must have a decimal point.
 
@@ -18,7 +19,8 @@ hide_title: true
   new FloatType(90.234);
   ```
 
-- `FloatListType` should be called with a single argument that is an array of `FloatType`s
+- `FloatListType` should be called with a single argument that is an array of
+  `FloatType`s
 
   ```js
   new FloatListType([

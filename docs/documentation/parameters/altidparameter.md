@@ -8,7 +8,10 @@ hide_title: true
 
 - This class represents the "ALTID" parameter
 
-- `AltidParameter` should be called with a single argument that is an instance of either [`IntegerType`](/documentation/values/integertype-and-integerlisttype) or [`TextType`](/documentation/values/texttype-and-textlisttype)
+- `AltidParameter` should be called with a single argument that is an instance
+  of either
+  [`IntegerType`](/documentation/values/integertype-and-integerlisttype) or
+  [`TextType`](/documentation/values/texttype-and-textlisttype)
 
   ```js
   new AltidParameter(new IntegerType(23));
