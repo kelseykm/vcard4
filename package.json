@@ -19,12 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/kelseykm/vcard4.git"
   },
-  "keywords": [
-    "vcard",
-    "vcard4",
-    "vcf",
-    "vcf4"
-  ],
+  "keywords": ["vcard", "vcard4", "vcf", "vcf4"],
   "author": "Kelsey Mwongeli <kelseykm.git@gmail.com>",
   "license": "ISC",
   "bugs": {
