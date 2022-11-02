@@ -24,7 +24,8 @@ hide_title: true
   ]);
   ```
 
-- The following will throw an error, since the `DateTimeType`s in the array are not of the same type
+- The following will throw an error, since the `DateTimeType` instances in the
+  array are not of the same type
 
   ```js
   new DateTimeListType([
@@ -32,5 +33,6 @@ hide_title: true
     new DateTimeType("---12", "dateandortime"),
   ]);
 
-  //TypeError: Invalid type for value of DateTimeListType. It should be an array of DateTimeTypes of the same type
+  // TypeError: Invalid type for value of DateTimeListType. It should be an
+  // array of DateTimeTypes of the same type
   ```
