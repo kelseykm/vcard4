@@ -12,9 +12,11 @@ sidebar_position: 6
   are the [properties](/documentation/properties/intro) or
   [groups](/documentation/group) you want on the vCard
 
-  :::note **vcard4** treats `BEGIN`, `VERSION` and `END` properties as special.
-  You do not construct them manually as you do the other properties, it adds them
-  to the constructed vCard itself. :::
+  :::note
+  **vcard4** treats `BEGIN`, `VERSION` and `END` properties as special. You do
+  not construct them manually as you do the other properties, it adds them to the
+  constructed vCard itself.
+  :::
 
 - There **must be at least one** instance of
   [`FNProperty`](/documentation/properties/fnproperty) supplied
