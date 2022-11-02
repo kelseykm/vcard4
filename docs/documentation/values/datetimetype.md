@@ -13,8 +13,8 @@ hide_title: true
   and the second being the target data type.
 
 - Accepted values for the second argument include: `"date"`, `"time"`,
-  `"datetime"`, `"dateandortime"`, `"timestamp"` or `"utcoffset"`. (Note that
-  it should be of type string)
+  `"datetime"`, `"dateandortime"`, `"timestamp"` or `"utcoffset"`. Note that
+  it should be of type string.
 
 - The value of the first argument depends on the type specified in the value of
   the second argument

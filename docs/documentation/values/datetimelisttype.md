@@ -10,7 +10,7 @@ hide_title: true
   "date-and-or-time-list" and "timestamp-list" data types
 
 - `DateTimeListType` should be called with a single argument that is an array
-  of `DateTimeType`s of the same type
+  of `DateTimeType` intances of the same type
 
   ```js
   new DateTimeListType([
