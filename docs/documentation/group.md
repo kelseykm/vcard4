@@ -97,8 +97,8 @@ const grp = new Group([tel, email, title], "job");
 
   3. `reprJSON`
 
-  This method returns an array in the same shape as how the group would appear
-  in the jCard.
+  This method returns an array in the same shape as how the group will finally
+  appear in the jCard.
 
   ```js
   > grp.reprJSON();

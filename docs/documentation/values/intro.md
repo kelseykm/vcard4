@@ -101,7 +101,7 @@ hide_title: true
 
   3. `reprJSON`
 
-  This method returns an array showing how the value type would finally appear
+  This method returns an array showing how the value type will finally appear
   in the jCard.
 
   ```js
