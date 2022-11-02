@@ -6,7 +6,8 @@ hide_title: true
 
 # Properties
 
-- After documenting the property value data types and the property parameters, what follows now is the documentation of the properties themselves
+- After documenting the property value data types and the property parameters,
+  what follows now is the documentation of the properties themselves
 
 - According to the RFC, the following are the properties:
 
@@ -86,7 +87,9 @@ hide_title: true
   - Extended Properties
 
 :::info
-**vcard4** treats `BEGIN`, `VERSION` and `END` properties as special. You do not construct them manually as you do the other properties, it adds them to the constructed vCard itself.
+**vcard4** treats `BEGIN`, `VERSION` and `END` properties as special. You do
+not construct them manually as you do the other properties, it adds them to the
+constructed vCard itself.
 :::
 
 - In the library, they are represented by the following classes:
@@ -136,15 +139,20 @@ hide_title: true
   43. [`CaluriProperty`](caluriproperty)
   44. [`ExtendedProperty`](extendedproperty)
 
-- The instance object is frozen and therefore its properties and methods cannot be modified after construction, neither can new ones be added
+- The instance object is frozen and therefore its properties and methods cannot
+  be modified after construction, neither can new ones be added
 
 :::tip
-All of the classes, with the exception of a few, should generally be called with two arguments, the first being an array whose items are the [parameters](/documentation/parameters/intro) of the property and the second argument being the property's [value](/documentation/values/intro).
+All of the classes, with the exception of a few, should generally be called
+with two arguments, the first being an array whose items are the
+[parameters](/documentation/parameters/intro) of the property and the second
+argument being the property's [value](/documentation/values/intro).
 :::
 
 ## API
 
-- All the classes listed above are provided as named exports from the main **vcard4** module. For example, to import the `AdrProperty` class:
+- All the classes listed above are provided as named exports from the main
+  **vcard4** module. For example, to import the `AdrProperty` class:
 
   ```js title=ESM
   import { AdrProperty } from "vcard4";
@@ -160,7 +168,8 @@ All of the classes, with the exception of a few, should generally be called with
 
   1. `repr`
 
-  This method returns a string which is the representation of how the property will finally appear in the vCard.
+  This method returns a string which is the representation of how the property
+  will finally appear in the vCard.
 
   :::note
   '>' in the examples below is just the terminal prompt.
@@ -188,7 +197,8 @@ All of the classes, with the exception of a few, should generally be called with
 
   2. `reprXML`
 
-  This method returns a string which is the representation of how the property will finally appear in the XML vCard.
+  This method returns a string which is the representation of how the property
+  will finally appear in the XML vCard.
 
   ```js
   > const genderPropValue = new SpecialValueType(
@@ -212,7 +222,8 @@ All of the classes, with the exception of a few, should generally be called with
 
   3. `reprJSON`
 
-  This method returns a string which is the representation of how the property will finally appear in the jCard.
+  This method returns an array showing how the property will finally appear in
+  the jCard.
 
   ```js
   > const genderPropValue = new SpecialValueType(

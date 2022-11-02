@@ -6,7 +6,8 @@ hide_title: true
 
 # Property Parameters
 
-- These "property parameters" contain meta-information about the property or the property value
+- These "property parameters" contain meta-information about the property or
+  the property value
 
 - According to the RFC, the property parameters include:
 
@@ -45,15 +46,18 @@ hide_title: true
   15. [`IndexParameter`](indexparameter)
   16. [`LevelParameter`](levelparameter)
 
-- The instance object is frozen and therefore its properties and methods cannot be modified after construction, neither can new ones be added
+- The instance object is frozen and therefore its properties and methods cannot
+  be modified after construction, neither can new ones be added
 
   :::note
-  The actual parameter used depends on property. Each property accepts only certain parameters.
+  The actual parameter used depends on property. Each property accepts only
+  certain parameters.
   :::
 
 ## API
 
-- All the classes listed above are provided as named exports from the main **vcard4** module. For example, to import the `LanguageParameter` class:
+- All the classes listed above are provided as named exports from the main
+  **vcard4** module. For example, to import the `LanguageParameter` class:
 
   ```js title=ESM
   import { LanguageParameter } from "vcard4";
@@ -69,7 +73,8 @@ hide_title: true
 
   1. `repr`
 
-  This method returns a string which is the representation of how the parameter will finally appear in the vCard.
+  This method returns a string which is the representation of how the parameter
+  will finally appear in the vCard.
 
   :::note
   '>' in the examples below is just the terminal prompt.
@@ -84,7 +89,8 @@ hide_title: true
 
   2. `reprXML`
 
-  This method returns a string which is the representation of how the parameter will finally appear in the XML vCard.
+  This method returns a string which is the representation of how the parameter
+  will finally appear in the XML vCard.
 
   ```js
   > const preference = new PrefParameter(new IntegerType(1));
@@ -95,7 +101,8 @@ hide_title: true
 
   3. `reprJSON`
 
-  This method returns a string which is the representation of how the parameter will finally appear in the jCard.
+  This method returns an array showing how the parameter will finally appear in
+  the jCard.
 
   ```js
   > const preference = new PrefParameter(new IntegerType(1));
