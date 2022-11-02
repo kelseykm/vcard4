@@ -1,6 +1,2 @@
 node_modules/
 Research/
-dist/
-lib/esm
-lib/umd/*js
-lib/umd/*map
