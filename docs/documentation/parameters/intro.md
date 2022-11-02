@@ -101,8 +101,8 @@ hide_title: true
 
   3. `reprJSON`
 
-  This method returns an array showing how the parameter will finally appear in
-  the jCard.
+  This method returns an Object showing how the parameter will finally appear
+  in the jCard.
 
   ```js
   > const preference = new PrefParameter(new IntegerType(1));
