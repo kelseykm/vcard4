@@ -1,9 +1,9 @@
-export class TextType {
-  readonly value: string;
-  readonly valueXML: string;
-  readonly valueJSON: [string, string];
-  repr(): string;
-  reprXML(): string;
+import { BaseValue } from "./BaseValue";
+
+/**
+ * Represents the "text" data type
+ */
+export class TextType extends BaseValue {
   reprJSON(): [string, string];
   constructor(textValue: string);
 }

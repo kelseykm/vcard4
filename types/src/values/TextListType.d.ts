@@ -1,11 +1,10 @@
+import { BaseValue } from "./BaseValue";
 import { TextType } from "./TextType";
 
-export class TextListType {
-  readonly value: string;
-  readonly valueXML: string;
-  readonly valueJSON: string[];
-  repr(): string;
-  reprXML(): string;
+/**
+ * Represents the "text-list" data type
+ */
+export class TextListType extends BaseValue {
   reprJSON(): string[];
   constructor(textlist: TextType[]);
 }

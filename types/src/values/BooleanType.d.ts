@@ -1,9 +1,9 @@
-export class BooleanType {
-  readonly value: string;
-  readonly valueXML: string;
-  readonly valueJSON: [string, boolean];
-  repr(): string;
-  reprXML(): string;
+import { BaseValue } from "./BaseValue";
+
+/**
+ * Represents the "boolean" data type
+ */
+export class BooleanType extends BaseValue {
   reprJSON(): [string, boolean];
   constructor(boolValue: boolean);
 }

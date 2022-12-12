@@ -1,11 +1,10 @@
+import { BaseValue } from "./BaseValue";
 import { IntegerType } from "./IntegerType";
 
-export class IntegerListType {
-  readonly value: string;
-  readonly valueXML: string;
-  readonly valueJSON: (string | number | bigint)[];
-  repr(): string;
-  reprXML(): string;
+/**
+ * Represents the "integer-list" data type
+ */
+export class IntegerListType extends BaseValue {
   reprJSON(): (string | number | bigint)[];
   constructor(integerlist: IntegerType[]);
 }
