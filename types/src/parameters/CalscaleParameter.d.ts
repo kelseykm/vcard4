@@ -1,11 +1,15 @@
 import { TextType } from "../values/index";
+import { BaseParameter } from "./BaseParameter";
 
-export class CalscaleParameter {
-  readonly value: string;
-  readonly valueXML: string;
-  readonly valueJSON: string[];
-  repr(): string;
-  reprXML(): string;
-  reprJSON(): Record<string, string | string[]>;
+/**
+ * Represents the "CALSCALE" parameter
+ * Used to define the calendar system in which a "date" or "date-time" value is
+ * expressed.
+ */
+export class CalscaleParameter extends BaseParameter {
+  /**
+   * @param calscaleValue - the value of the `TextType` instance should be
+   * either "gregorian" or an x-name (a name beginning with "X-" or "x-")
+   */
   constructor(calscaleValue: TextType);
 }
