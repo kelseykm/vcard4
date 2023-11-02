@@ -16,7 +16,7 @@ export class LabelParameter extends BaseParameter {
   }
 
   get valueJSON() {
-    return ["text", this.#labelValue._unsafe_raw_value];
+    return this.#labelValue.reprJSON();
   }
 
   #validate(labelValue) {
