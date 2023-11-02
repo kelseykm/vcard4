@@ -11,3 +11,4 @@ export { LanguageTagType } from "./LanguageTagType";
 export { URIType } from "./URIType";
 export { SexType } from "./SexType";
 export { SpecialValueType } from "./SpecialValueType";
+export { ParameterValueType } from "./ParameterValueType";
