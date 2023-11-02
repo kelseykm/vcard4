@@ -8,7 +8,7 @@ export class TextType extends BaseValue {
   #textValue;
 
   #validate(textValue) {
-    if (typeof textValue === "undefined")
+    if (typeof textValue === "undefined" || textValue === "")
       throw new MissingArgument("Value for TextType must be supplied");
     else if (typeof textValue !== "string")
       throw new TypeError("Only type string allowed for TextType value");
