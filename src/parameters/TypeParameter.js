@@ -35,11 +35,19 @@ export class TypeParameter extends BaseParameter {
         "Value and target property for TypeParameter must be supplied"
       );
     else if (
-      typeValue.constructor.identifier !== "TextType" &&
-      typeValue.constructor.identifier !== "TextListType"
+      !(
+        !Array.isArray(typeValue) &&
+        typeValue.constructor.identifier === "ParameterValueType"
+      ) &&
+      !(
+        Array.isArray(typeValue) &&
+        typeValue.every(
+          (val) => val.constructor.identifier === "ParameterValueType"
+        )
+      )
     )
       throw new TypeError(
-        "Value for TypeParameter must be of type TextType or TextListType"
+        "Value for TypeParameter must be of type ParameterValueType or an array of ParameterValueTypes"
       );
 
     const telre = new RegExp(

@@ -23,7 +23,7 @@ export class CCParameter extends BaseParameter {
     if (typeof ccValue === "undefined")
       throw new MissingArgument("Value for CCParameter must be supplied");
     else if (
-      ccValue.constructor.identifier !== "TextType" ||
+      ccValue.constructor.identifier !== "ParameterValueType" ||
       !/^[A-Za-z0-9]{2}$/.test(ccValue.repr())
     )
       throw new InvalidArgument("Invalid value for CCParameter");

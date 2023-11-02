@@ -23,9 +23,9 @@ export class CalscaleParameter extends BaseParameter {
   #validate(calscaleValue) {
     if (typeof calscaleValue === "undefined")
       throw new MissingArgument("Value for CalscaleParameter must be supplied");
-    else if (calscaleValue.constructor.identifier !== "TextType")
+    else if (calscaleValue.constructor.identifier !== "ParameterValueType")
       throw new MissingArgument(
-        "Value for CalscaleParameter must of type TextType"
+        "Value for CalscaleParameter must of type ParameterValueType"
       );
     else if (!this.#calscaleRegExp.test(calscaleValue.repr()))
       throw new InvalidArgument("Invalid calscale value");

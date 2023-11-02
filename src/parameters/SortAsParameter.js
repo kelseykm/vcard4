@@ -8,28 +8,43 @@ export class SortAsParameter extends BaseParameter {
   #sortValue;
 
   get value() {
-    return this.#sortValue.constructor.identifier === "TextListType"
-      ? `"${this.#sortValue.repr()}"`
+    return Array.isArray(this.#sortValue)
+      ? `"${this.#sortValue
+          .map((val) => val.repr())
+          .join(",")
+          .replaceAll('"', "")}"`
       : this.#sortValue.repr();
   }
 
   get valueXML() {
-    return this.#sortValue.reprXML();
+    return Array.isArray(this.#sortValue)
+      ? this.#sortValue.map((val) => val.reprXML()).join("")
+      : this.#sortValue.reprXML();
   }
 
   get valueJSON() {
-    return this.#sortValue.reprJSON();
+    return Array.isArray(this.#sortValue)
+      ? ["text", ...this.#sortValue.map((val) => val._unsafe_raw_value)]
+      : this.#sortValue.reprJSON();
   }
 
   #validate(sortValue) {
     if (typeof sortValue === "undefined")
       throw new MissingArgument("Value for SortAsParameter must be supplied");
     else if (
-      sortValue.constructor.identifier !== "TextType" &&
-      sortValue.constructor.identifier !== "TextListType"
+      !(
+        !Array.isArray(sortValue) &&
+        sortValue.constructor.identifier === "ParameterValueType"
+      ) &&
+      !(
+        Array.isArray(sortValue) &&
+        sortValue.every(
+          (val) => val.constructor.identifier === "ParameterValueType"
+        )
+      )
     )
       throw new TypeError(
-        "Value for SortAsParameter must be of type TextType or TextListType"
+        "Value for SortAsParameter must be of type ParameterValueType or an array of ParameterValueTypes"
       );
   }
 

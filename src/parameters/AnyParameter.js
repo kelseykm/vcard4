@@ -12,7 +12,7 @@ export class AnyParameter extends BaseParameter {
   }
 
   get value() {
-    return this.#cleanUp(this.#value.repr());
+    return this.#value.repr();
   }
 
   get valueXML() {
@@ -43,7 +43,7 @@ export class AnyParameter extends BaseParameter {
       );
     else if (!this.#paramRegExp.test(param))
       throw new InvalidArgument("Invalid parameter name for AnyParameter");
-    else if (!this.#valueRegExp.test(value?.constructor?.identifier))
+    else if (value.constructor.identifier !== "ParameterValueType")
       throw new InvalidArgument("Invalid value for AnyParameter");
   }
 

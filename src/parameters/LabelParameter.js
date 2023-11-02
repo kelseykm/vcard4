@@ -8,7 +8,7 @@ export class LabelParameter extends BaseParameter {
   #labelValue;
 
   get value() {
-    return `"${this.#cleanUp(this.#labelValue._unsafe_raw_value)}"`;
+    return this.#labelValue.repr();
   }
 
   get valueXML() {
@@ -22,17 +22,10 @@ export class LabelParameter extends BaseParameter {
   #validate(labelValue) {
     if (typeof labelValue === "undefined")
       throw new MissingArgument("Value for LabelParameter must be supplied");
-    else if (labelValue.constructor.identifier !== "TextType")
+    else if (labelValue.constructor.identifier !== "ParameterValueType")
       throw new TypeError(
-        "Value for LabelParameter should be of type TextType"
+        "Value for LabelParameter should be of type ParameterValueType"
       );
-  }
-
-  #cleanUp(labelValue) {
-    return labelValue
-      .replaceAll("^", "^^")
-      .replaceAll("\n", "^n")
-      .replaceAll('"', "^’");
   }
 
   constructor(labelValue) {

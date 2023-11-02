@@ -56,12 +56,15 @@ export class MediatypeParameter extends BaseParameter {
         "Value for MediatypeParameter must be supplied"
       );
     else if (
-      mediaValue.constructor.identifier !== "TextType" &&
-      Array.isArray(mediaValue) &&
-      !mediaValue.every((val) => val.constructor.identifier === "TextType")
+      (!Array.isArray(mediaValue) &&
+        mediaValue.constructor.identifier !== "ParameterValueType") ||
+      (Array.isArray(mediaValue) &&
+        !mediaValue.every(
+          (val) => val.constructor.identifier === "ParameterValueType"
+        ))
     )
       throw new TypeError(
-        "Value for MediatypeParameter must be of TextType or an array of TextTypes"
+        "Value for MediatypeParameter must be of ParameterValueType or an array of ParameterValueTypes"
       );
     else if (
       !Array.isArray(mediaValue) &&

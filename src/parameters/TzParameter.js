@@ -26,7 +26,7 @@ export class TzParameter extends BaseParameter {
       throw new MissingArgument("Value for TzParameter must be supplied");
 
     if (
-      tzValue.constructor.identifier !== "TextType" &&
+      tzValue.constructor.identifier !== "ParameterValueType" &&
       tzValue.constructor.identifier !== "URIType" &&
       !(
         tzValue.constructor.identifier === "DateTimeType" &&

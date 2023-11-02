@@ -22,9 +22,9 @@ export class AltidParameter extends BaseParameter {
   #validate(altidValue) {
     if (typeof altidValue === "undefined")
       throw new MissingArgument("Value for AltidParameter must be supplied");
-    else if (altidValue.constructor.identifier !== "TextType")
+    else if (altidValue.constructor.identifier !== "ParameterValueType")
       throw new InvalidArgument(
-        "Value for AltidParameter must be of type TextType"
+        "Value for AltidParameter must be of type ParameterValueType"
       );
   }
 
