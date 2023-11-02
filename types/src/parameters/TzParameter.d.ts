@@ -1,4 +1,4 @@
-import { DateTimeType, TextType, URIType } from "../values/index";
+import { DateTimeType, ParameterValueType, URIType } from "../values/index";
 import { BaseParameter } from "./BaseParameter";
 
 /**
@@ -10,5 +10,5 @@ export class TzParameter extends BaseParameter {
    * @param tzValue - when the value is an instance of `DateTimeType`, its type
    * must be "utcoffset"
    */
-  constructor(tzValue: TextType | URIType | DateTimeType);
+  constructor(tzValue: ParameterValueType | URIType | DateTimeType);
 }

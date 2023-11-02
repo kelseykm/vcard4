@@ -1,4 +1,4 @@
-import { TextType } from "../values/index";
+import { ParameterValueType } from "../values/index";
 import { BaseParameter } from "./BaseParameter";
 
 /**
@@ -8,8 +8,8 @@ import { BaseParameter } from "./BaseParameter";
  */
 export class CalscaleParameter extends BaseParameter {
   /**
-   * @param calscaleValue - the value of the `TextType` instance should be
+   * @param calscaleValue - the value of the `ParameterValueType` instance should be
    * either "gregorian" or an x-name (a name beginning with "X-" or "x-")
    */
-  constructor(calscaleValue: TextType);
+  constructor(calscaleValue: ParameterValueType);
 }

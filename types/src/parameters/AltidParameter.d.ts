@@ -1,5 +1,5 @@
-import { TextType, IntegerType } from "../values/index";
-import {BaseParameter} from "./BaseParameter";
+import { ParameterValueType } from "../values/index";
+import { BaseParameter } from "./BaseParameter";
 
 /**
  * Represents the "ALTID" parameter
@@ -11,5 +11,5 @@ export class AltidParameter extends BaseParameter {
    * @param altidValue - treated as an opaque string.  Its sole purpose is to
    * be compared for equality against other ALTID parameter values.
    */
-  constructor(altidValue: IntegerType | TextType);
+  constructor(altidValue: ParameterValueType);
 }

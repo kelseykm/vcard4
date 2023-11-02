@@ -1,4 +1,4 @@
-import { TextType, TextListType } from "../values/index";
+import { ParameterValueType } from "../values/index";
 import { BaseParameter } from "./BaseParameter";
 
 /**
@@ -10,5 +10,8 @@ export class TypeParameter extends BaseParameter {
    * @see For comprehensive usage explanation and examples, see the documentation
    * {@link https://kelseykm.github.io/vcard4/documentation/parameters/typeparameter}
    */
-  constructor(typeValue: TextType | TextListType, targetProp: string);
+  constructor(
+    typeValue: ParameterValueType | ParameterValueType[],
+    targetProp: string
+  );
 }

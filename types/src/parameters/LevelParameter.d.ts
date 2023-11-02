@@ -1,4 +1,4 @@
-import { TextType } from "../values/index";
+import { ParameterValueType } from "../values/index";
 import { BaseParameter } from "./BaseParameter";
 
 /**
@@ -9,7 +9,7 @@ import { BaseParameter } from "./BaseParameter";
  */
 export class LevelParameter extends BaseParameter {
   /**
-   * @param levelValue - the value of the `TextType` instance should be either
+   * @param levelValue - the value of the `ParameterValueType` instance should be either
    * "beginner", "average", "expert", "high", "medium" or "low", depending on
    * the value of the `targetProp` argument.
    * When the `targetProp` is "ExpertiseProperty", the only valid values are
@@ -21,5 +21,5 @@ export class LevelParameter extends BaseParameter {
    * property. Its value should be either "ExpertiseProperty", "HobbyProperty"
    * or "InterestProperty"
    */
-  constructor(levelValue: TextType, targetProp: string);
+  constructor(levelValue: ParameterValueType, targetProp: string);
 }
