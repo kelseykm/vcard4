@@ -38,7 +38,7 @@ export class ExtendedProperty extends BaseProperty {
     "SpecialValueType",
   ]);
 
-  #propRegExp = /^[Xx]-[A-Za-z0-9]+$/;
+  #propRegExp = /^x-[a-z0-9-]+$/i;
   #params;
   #value;
 

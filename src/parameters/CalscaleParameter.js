@@ -6,7 +6,7 @@ export class CalscaleParameter extends BaseParameter {
   static identifier = "CalscaleParameter";
 
   #calscaleValue;
-  #calscaleRegExp = /^(?:gregorian|x-[A-Za-z0-9]+)$/;
+  #calscaleRegExp = /^(?:gregorian|[Xx]-[A-Za-z0-9-]+)$/;
 
   get value() {
     return this.#calscaleValue.repr();

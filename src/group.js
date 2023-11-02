@@ -97,6 +97,8 @@ export class Group {
       throw new MissingArgument("Properties to be grouped must be supplied");
     else if (typeof groupName !== "string")
       throw new TypeError("Group name must be of type string");
+    else if (!/^[A-Za-z0-9-]+$/.test(groupName))
+      throw new InvalidArgument("Invalid group name");
 
     for (const prop of props) {
       if (!/Property$/.test(prop.constructor.identifier))
