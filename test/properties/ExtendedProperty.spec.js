@@ -7,6 +7,9 @@ describe("ExtendedProperty tests", () => {
     assert.doesNotThrow(
       () => new ExtendedProperty("X-CAR", [], new TextType("Volvo"))
     );
+    assert.doesNotThrow(
+      () => new ExtendedProperty("X-LAST-MAN", [], new TextType("Standing"))
+    );
   });
 
   it("Rejects invalid input", () => {

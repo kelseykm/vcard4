@@ -10,6 +10,9 @@ describe("CalscaleParameter tests", () => {
     assert.doesNotThrow(
       () => new CalscaleParameter(new ParameterValueType("x-arabian"))
     );
+    assert.doesNotThrow(
+      () => new CalscaleParameter(new ParameterValueType("x-mandarin-chinese"))
+    );
   });
 
   it("Rejects invalid input", () => {
