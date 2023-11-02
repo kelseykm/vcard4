@@ -1,6 +1,8 @@
 import { AnyParameter } from '../parameters/AnyParameter.js';
 import { SpecialValueType } from '../values/SpecialValueType.js';
+import '../parameters/BaseParameter.js';
 import '../values/TextType.js';
+import '../values/BaseValue.js';
 import '../values/TextListType.js';
 import '../values/BooleanType.js';
 import '../values/DateTimeType.js';

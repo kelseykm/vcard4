@@ -1,7 +1,9 @@
 import { ValueParameter } from '../parameters/ValueParameter.js';
 import { AltidParameter } from '../parameters/AltidParameter.js';
 import { TextType } from '../values/TextType.js';
+import '../parameters/BaseParameter.js';
 import '../values/TextListType.js';
+import '../values/BaseValue.js';
 import '../values/BooleanType.js';
 import '../values/DateTimeType.js';
 import '../values/DateTimeListType.js';

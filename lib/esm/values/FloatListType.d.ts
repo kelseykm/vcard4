@@ -1,11 +1,10 @@
+import { BaseValue } from './BaseValue.js';
 import { FloatType } from './FloatType.js';
 
-declare class FloatListType {
-  readonly value: string;
-  readonly valueXML: string;
-  readonly valueJSON: (string | number)[];
-  repr(): string;
-  reprXML(): string;
+/**
+ * Represents the "float-list" data type
+ */
+declare class FloatListType extends BaseValue {
   reprJSON(): (string | number)[];
   constructor(floatlist: FloatType[]);
 }

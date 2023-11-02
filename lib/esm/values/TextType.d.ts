@@ -1,9 +1,9 @@
-declare class TextType {
-  readonly value: string;
-  readonly valueXML: string;
-  readonly valueJSON: [string, string];
-  repr(): string;
-  reprXML(): string;
+import { BaseValue } from './BaseValue.js';
+
+/**
+ * Represents the "text" data type
+ */
+declare class TextType extends BaseValue {
   reprJSON(): [string, string];
   constructor(textValue: string);
 }

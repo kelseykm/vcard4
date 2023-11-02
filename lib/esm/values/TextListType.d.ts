@@ -1,11 +1,10 @@
+import { BaseValue } from './BaseValue.js';
 import { TextType } from './TextType.js';
 
-declare class TextListType {
-  readonly value: string;
-  readonly valueXML: string;
-  readonly valueJSON: string[];
-  repr(): string;
-  reprXML(): string;
+/**
+ * Represents the "text-list" data type
+ */
+declare class TextListType extends BaseValue {
   reprJSON(): string[];
   constructor(textlist: TextType[]);
 }

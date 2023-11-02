@@ -1,12 +1,15 @@
+import { BaseParameter } from './BaseParameter.js';
 import { LanguageTagType } from '../values/LanguageTagType.js';
+import '../values/BaseValue.js';
 
-declare class LanguageParameter {
-  readonly value: string;
-  readonly valueXML: string;
-  readonly valueJSON: string[];
-  repr(): string;
-  reprXML(): string;
-  reprJSON(): Record<string, string | string[]>;
+/**
+ * Represents the "LANGUAGE" parameter
+ * Used to identify data in multiple languages
+ */
+declare class LanguageParameter extends BaseParameter {
+  /**
+   * @param langTag - a language tag
+   */
   constructor(langTag: LanguageTagType);
 }
 
