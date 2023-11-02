@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
-import { TextType } from '../values/TextType.js';
-import { TextListType } from '../values/TextListType.js';
+import { ParameterValueType } from '../values/ParameterValueType.js';
 import '../values/BaseValue.js';
 
 /**
@@ -13,12 +12,12 @@ declare class SortAsParameter extends BaseParameter {
    * @param sortValue - the value to use for sorting
    * @example
    * new SortAsParameter(
-   *  new TextListType([new TextType("Harten"), new TextType("Rene")])
+   *  [new ParameterValueType("Harten"), new ParameterValueType("Rene")]
    * );
    *
-   * new SortAsParameter(new TextType("Pau Shou Chang"));
+   * new SortAsParameter(new ParameterValueType("Pau Shou Chang"));
    */
-  constructor(sortValue: TextType | TextListType);
+  constructor(sortValue: ParameterValueType | ParameterValueType[]);
 }
 
 export { SortAsParameter };

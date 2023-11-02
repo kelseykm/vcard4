@@ -18,6 +18,7 @@ import '../values/FloatListType.js';
 import '../values/LanguageTagType.js';
 import '../values/URIType.js';
 import '../values/SexType.js';
+import '../values/ParameterValueType.js';
 
 declare class NProperty {
   readonly params: string;

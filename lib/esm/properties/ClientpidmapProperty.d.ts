@@ -1,19 +1,13 @@
 import { AnyParameter } from '../parameters/AnyParameter.js';
 import { SpecialValueType } from '../values/SpecialValueType.js';
 import '../parameters/BaseParameter.js';
-import '../values/TextType.js';
+import '../values/ParameterValueType.js';
 import '../values/BaseValue.js';
-import '../values/TextListType.js';
-import '../values/BooleanType.js';
-import '../values/DateTimeType.js';
-import '../values/DateTimeListType.js';
 import '../values/IntegerType.js';
-import '../values/IntegerListType.js';
-import '../values/FloatType.js';
-import '../values/FloatListType.js';
-import '../values/LanguageTagType.js';
-import '../values/URIType.js';
+import '../values/TextListType.js';
+import '../values/TextType.js';
 import '../values/SexType.js';
+import '../values/URIType.js';
 
 declare class ClientpidmapProperty {
   readonly params: string;

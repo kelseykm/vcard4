@@ -25,6 +25,7 @@ import '../values/FloatType.js';
 import '../values/FloatListType.js';
 import '../values/URIType.js';
 import '../values/SexType.js';
+import '../values/ParameterValueType.js';
 
 declare class AdrProperty {
   readonly params: string;

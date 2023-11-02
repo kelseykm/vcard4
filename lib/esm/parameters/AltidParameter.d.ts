@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
-import { IntegerType } from '../values/IntegerType.js';
-import { TextType } from '../values/TextType.js';
+import { ParameterValueType } from '../values/ParameterValueType.js';
 import '../values/BaseValue.js';
 
 /**
@@ -13,7 +12,7 @@ declare class AltidParameter extends BaseParameter {
    * @param altidValue - treated as an opaque string.  Its sole purpose is to
    * be compared for equality against other ALTID parameter values.
    */
-  constructor(altidValue: IntegerType | TextType);
+  constructor(altidValue: ParameterValueType);
 }
 
 export { AltidParameter };

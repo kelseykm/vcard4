@@ -1,6 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
-import { TextType } from '../values/TextType.js';
-import { TextListType } from '../values/TextListType.js';
+import { ParameterValueType } from '../values/ParameterValueType.js';
 import '../values/BaseValue.js';
 
 /**
@@ -12,7 +11,10 @@ declare class TypeParameter extends BaseParameter {
    * @see For comprehensive usage explanation and examples, see the documentation
    * {@link https://kelseykm.github.io/vcard4/documentation/parameters/typeparameter}
    */
-  constructor(typeValue: TextType | TextListType, targetProp: string);
+  constructor(
+    typeValue: ParameterValueType | ParameterValueType[],
+    targetProp: string
+  );
 }
 
 export { TypeParameter };

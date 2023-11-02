@@ -63,6 +63,7 @@ import './parameters/PIDParameter.js';
 import './parameters/PrefParameter.js';
 import './parameters/IndexParameter.js';
 import './parameters/AltidParameter.js';
+import './values/ParameterValueType.js';
 import './parameters/MediatypeParameter.js';
 import './parameters/AnyParameter.js';
 import './parameters/TypeParameter.js';

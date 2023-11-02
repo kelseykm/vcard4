@@ -17,6 +17,7 @@ export { LanguageTagType } from './values/LanguageTagType.js';
 export { URIType } from './values/URIType.js';
 export { SexType } from './values/SexType.js';
 export { SpecialValueType } from './values/SpecialValueType.js';
+export { ParameterValueType } from './values/ParameterValueType.js';
 export { LanguageParameter } from './parameters/LanguageParameter.js';
 export { ValueParameter } from './parameters/ValueParameter.js';
 export { PrefParameter } from './parameters/PrefParameter.js';

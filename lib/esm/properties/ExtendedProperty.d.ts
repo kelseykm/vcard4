@@ -29,6 +29,7 @@ import '../values/DateTimeListType.js';
 import '../values/BaseValue.js';
 import '../values/IntegerListType.js';
 import '../values/FloatListType.js';
+import '../values/ParameterValueType.js';
 
 declare class ExtendedProperty {
   readonly params: string;

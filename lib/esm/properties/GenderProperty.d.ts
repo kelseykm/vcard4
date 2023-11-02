@@ -15,6 +15,7 @@ import '../values/FloatType.js';
 import '../values/FloatListType.js';
 import '../values/LanguageTagType.js';
 import '../values/URIType.js';
+import '../values/ParameterValueType.js';
 
 declare class GenderProperty {
   readonly params: string;

@@ -15,6 +15,7 @@ import '../values/LanguageTagType.js';
 import '../values/URIType.js';
 import '../values/SexType.js';
 import '../values/SpecialValueType.js';
+import '../values/ParameterValueType.js';
 
 declare class ProdidProperty {
   readonly params: string;

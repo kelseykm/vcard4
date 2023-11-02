@@ -1,5 +1,5 @@
 import { BaseParameter } from './BaseParameter.js';
-import { TextType } from '../values/TextType.js';
+import { ParameterValueType } from '../values/ParameterValueType.js';
 import '../values/BaseValue.js';
 
 /**
@@ -9,10 +9,10 @@ import '../values/BaseValue.js';
  */
 declare class CalscaleParameter extends BaseParameter {
   /**
-   * @param calscaleValue - the value of the `TextType` instance should be
+   * @param calscaleValue - the value of the `ParameterValueType` instance should be
    * either "gregorian" or an x-name (a name beginning with "X-" or "x-")
    */
-  constructor(calscaleValue: TextType);
+  constructor(calscaleValue: ParameterValueType);
 }
 
 export { CalscaleParameter };

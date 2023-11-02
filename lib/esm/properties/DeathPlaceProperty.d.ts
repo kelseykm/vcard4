@@ -17,6 +17,7 @@ import '../values/FloatType.js';
 import '../values/FloatListType.js';
 import '../values/SexType.js';
 import '../values/SpecialValueType.js';
+import '../values/ParameterValueType.js';
 
 declare class DeathPlaceProperty {
   readonly params: string;

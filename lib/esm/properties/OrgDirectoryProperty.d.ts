@@ -10,16 +10,7 @@ import '../parameters/BaseParameter.js';
 import '../values/LanguageTagType.js';
 import '../values/BaseValue.js';
 import '../values/IntegerType.js';
-import '../values/TextType.js';
-import '../values/TextListType.js';
-import '../values/BooleanType.js';
-import '../values/DateTimeType.js';
-import '../values/DateTimeListType.js';
-import '../values/IntegerListType.js';
-import '../values/FloatType.js';
-import '../values/FloatListType.js';
-import '../values/SexType.js';
-import '../values/SpecialValueType.js';
+import '../values/ParameterValueType.js';
 
 declare class OrgDirectoryProperty {
   readonly params: string;
