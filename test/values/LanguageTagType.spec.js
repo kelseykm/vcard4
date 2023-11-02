@@ -4,10 +4,13 @@ import { assert } from "chai";
 describe("LanguageTagType tests", () => {
   it("Accepts valid input", () => {
     assert.doesNotThrow(() => new LanguageTagType("en"));
+    assert.doesNotThrow(() => new LanguageTagType("en-us"));
+    assert.doesNotThrow(() => new LanguageTagType("en-us-123"));
   });
 
   it("Rejects invalid input", () => {
     assert.throws(() => new LanguageTagType());
+    assert.throws(() => new LanguageTagType("en|us"));
     assert.throws(() => new LanguageTagType(55));
     assert.throws(() => new LanguageTagType(["en"]));
     assert.throws(() => new LanguageTagType({}));
