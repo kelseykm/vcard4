@@ -7,6 +7,9 @@ describe("ExtendedProperty tests", () => {
     assert.doesNotThrow(
       () => new ExtendedProperty("X-CAR", [], new TextType("Volvo"))
     );
+    assert.doesNotThrow(
+      () => new ExtendedProperty("X-LIKED-PLANE", [], new TextType("SAAB"))
+    );
   });
 
   it("Rejects invalid input", () => {
@@ -31,6 +34,18 @@ describe("ExtendedProperty tests", () => {
     assert.deepEqual(
       new ExtendedProperty("X-CAR", [], new TextType("Volvo")).reprJSON(),
       ["x-car", {}, "text", "Volvo"]
+    );
+    assert.strictEqual(
+      new ExtendedProperty("X-LIKED-PLANE", [], new TextType("SAAB")).repr(),
+      "X-LIKED-PLANE:SAAB"
+    );
+    assert.strictEqual(
+      new ExtendedProperty("X-LIKED-PLANE", [], new TextType("SAAB")).reprXML(),
+      "<x-liked-plane><text>SAAB</text></x-liked-plane>"
+    );
+    assert.deepEqual(
+      new ExtendedProperty("X-LIKED-PLANE", [], new TextType("SAAB")).reprJSON(),
+      ["x-liked-plane", {}, "text", "SAAB"]
     );
   });
 });
