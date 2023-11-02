@@ -68,11 +68,11 @@ export class TypeParameter extends BaseParameter {
     switch (true) {
       case /^TelProperty$/i.test(targetProp):
         if (
-          !telre.test(typeValue.repr()) &&
-          !typeValue
-            .repr()
-            .split(",")
-            .every((type) => telre.test(type))
+          !(!Array.isArray(typeValue) && telre.test(typeValue.repr())) &&
+          !(
+            Array.isArray(typeValue) &&
+            typeValue.every((type) => telre.test(type.repr()))
+          )
         )
           throw new InvalidArgument(
             "Invalid value for TypeParameter for TelProperty"
@@ -81,11 +81,11 @@ export class TypeParameter extends BaseParameter {
         break;
       case /^RelatedProperty$/i.test(targetProp):
         if (
-          !relatedre.test(typeValue.repr()) &&
-          !typeValue
-            .repr()
-            .split(",")
-            .every((type) => relatedre.test(type))
+          !(!Array.isArray(typeValue) && relatedre.test(typeValue.repr())) &&
+          !(
+            Array.isArray(typeValue) &&
+            typeValue.every((type) => relatedre.test(type.repr()))
+          )
         )
           throw new InvalidArgument(
             "Invalid value for TypeParameter for RelatedProperty"
@@ -94,11 +94,13 @@ export class TypeParameter extends BaseParameter {
         break;
       default:
         if (
-          !this.#typeRegExp.test(typeValue.repr()) &&
-          !typeValue
-            .repr()
-            .split(",")
-            .every((type) => this.#typeRegExp.test(type))
+          !(
+            !Array.isArray(typeValue) && this.#typeRegExp.test(typeValue.repr())
+          ) &&
+          !(
+            Array.isArray(typeValue) &&
+            typeValue.every((type) => this.#typeRegExp.test(type.repr()))
+          )
         )
           throw new InvalidArgument("Invalid value for TypeParameter");
     }
