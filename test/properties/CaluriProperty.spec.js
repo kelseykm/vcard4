@@ -1,4 +1,8 @@
-import { TextType, URIType, IntegerType } from "../../src/values/index.js";
+import {
+  URIType,
+  IntegerType,
+  ParameterValueType,
+} from "../../src/values/index.js";
 import { MediatypeParameter } from "../../src/parameters/index.js";
 import { CaluriProperty } from "../../src/properties/index.js";
 import { assert } from "chai";
@@ -8,7 +12,7 @@ describe("CaluriProperty tests", () => {
     assert.doesNotThrow(
       () =>
         new CaluriProperty(
-          [new MediatypeParameter(new TextType("text/calendar"))],
+          [new MediatypeParameter(new ParameterValueType("text/calendar"))],
           new URIType("ftp://ftp.example.com/calA.ics")
         )
     );
@@ -27,21 +31,21 @@ describe("CaluriProperty tests", () => {
   it("Formats value properly", () => {
     assert.strictEqual(
       new CaluriProperty(
-        [new MediatypeParameter(new TextType("text/calendar"))],
+        [new MediatypeParameter(new ParameterValueType("text/calendar"))],
         new URIType("ftp://ftp.example.com/calA.ics")
       ).repr(),
       "CALURI;MEDIATYPE=text/calendar:ftp://ftp.example.com/calA.ics"
     );
     assert.strictEqual(
       new CaluriProperty(
-        [new MediatypeParameter(new TextType("text/calendar"))],
+        [new MediatypeParameter(new ParameterValueType("text/calendar"))],
         new URIType("ftp://ftp.example.com/calA.ics")
       ).reprXML(),
       "<caluri><parameters><mediatype><text>text/calendar</text></mediatype></parameters><uri>ftp://ftp.example.com/calA.ics</uri></caluri>"
     );
     assert.deepEqual(
       new CaluriProperty(
-        [new MediatypeParameter(new TextType("text/calendar"))],
+        [new MediatypeParameter(new ParameterValueType("text/calendar"))],
         new URIType("ftp://ftp.example.com/calA.ics")
       ).reprJSON(),
       [

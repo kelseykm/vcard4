@@ -1,11 +1,11 @@
-import { TextType } from "../../src/values/index.js";
+import { ParameterValueType } from "../../src/values/index.js";
 import { LabelParameter } from "../../src/parameters/index.js";
 import { assert } from "chai";
 
 describe("LabelParameter tests", () => {
   it("Accepts valid input", () => {
     assert.doesNotThrow(
-      () => new LabelParameter(new TextType("Somestreet, somewhere"))
+      () => new LabelParameter(new ParameterValueType("Somestreet, somewhere"))
     );
   });
 
@@ -18,7 +18,7 @@ describe("LabelParameter tests", () => {
   it("Formats value properly", () => {
     assert.strictEqual(
       new LabelParameter(
-        new TextType(
+        new ParameterValueType(
           `Mr. John Q. Public, Esq.
 Mail Drop: TNE QB
 123 Main Street
@@ -30,7 +30,7 @@ U.S.A.`
     );
     assert.strictEqual(
       new LabelParameter(
-        new TextType(
+        new ParameterValueType(
           `Mr. John Q. Public, Esq.
 Mail Drop: TNE QB
 123 Main Street
@@ -42,7 +42,7 @@ U.S.A.`
     );
     assert.deepEqual(
       new LabelParameter(
-        new TextType(
+        new ParameterValueType(
           `Mr. John Q. Public, Esq.
 Mail Drop: TNE QB
 123 Main Street

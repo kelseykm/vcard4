@@ -1,4 +1,4 @@
-import { TextType, IntegerType } from "../../src/values/index.js";
+import { ParameterValueType, IntegerType } from "../../src/values/index.js";
 import { PrefParameter } from "../../src/parameters/index.js";
 import { assert } from "chai";
 
@@ -10,7 +10,7 @@ describe("PrefParameter tests", () => {
   it("Rejects invalid input", () => {
     assert.throws(() => new PrefParameter(1));
     assert.throws(() => new PrefParameter());
-    assert.throws(() => new PrefParameter(new TextType("en-us")));
+    assert.throws(() => new PrefParameter(new ParameterValueType("en-us")));
     assert.throws(() => new PrefParameter({}));
   });
 

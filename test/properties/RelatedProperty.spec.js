@@ -1,4 +1,9 @@
-import { TextType, URIType, IntegerType } from "../../src/values/index.js";
+import {
+  TextType,
+  URIType,
+  IntegerType,
+  ParameterValueType,
+} from "../../src/values/index.js";
 import { ValueParameter, TypeParameter } from "../../src/parameters/index.js";
 import { RelatedProperty } from "../../src/properties/index.js";
 import { assert } from "chai";
@@ -8,7 +13,12 @@ describe("RelatedProperty tests", () => {
     assert.doesNotThrow(
       () =>
         new RelatedProperty(
-          [new TypeParameter(new TextType("friend"), "relatedproperty")],
+          [
+            new TypeParameter(
+              new ParameterValueType("friend"),
+              "relatedproperty"
+            ),
+          ],
           new URIType("uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
         )
     );
@@ -17,7 +27,10 @@ describe("RelatedProperty tests", () => {
       () =>
         new RelatedProperty(
           [
-            new TypeParameter(new TextType("co-worker"), "relatedproperty"),
+            new TypeParameter(
+              new ParameterValueType("co-worker"),
+              "relatedproperty"
+            ),
             new ValueParameter(
               new TextType(
                 "Please contact my assistant Jane Doe for any inquiries."
@@ -45,7 +58,10 @@ describe("RelatedProperty tests", () => {
     assert.strictEqual(
       new RelatedProperty(
         [
-          new TypeParameter(new TextType("co-worker"), "relatedproperty"),
+          new TypeParameter(
+            new ParameterValueType("co-worker"),
+            "relatedproperty"
+          ),
           new ValueParameter(
             new TextType(
               "Please contact my assistant Jane Doe for any inquiries."
@@ -59,7 +75,10 @@ describe("RelatedProperty tests", () => {
     assert.strictEqual(
       new RelatedProperty(
         [
-          new TypeParameter(new TextType("co-worker"), "relatedproperty"),
+          new TypeParameter(
+            new ParameterValueType("co-worker"),
+            "relatedproperty"
+          ),
           new ValueParameter(
             new TextType(
               "Please contact my assistant Jane Doe for any inquiries."
@@ -73,7 +92,10 @@ describe("RelatedProperty tests", () => {
     assert.deepEqual(
       new RelatedProperty(
         [
-          new TypeParameter(new TextType("co-worker"), "relatedproperty"),
+          new TypeParameter(
+            new ParameterValueType("co-worker"),
+            "relatedproperty"
+          ),
           new ValueParameter(
             new TextType(
               "Please contact my assistant Jane Doe for any inquiries."

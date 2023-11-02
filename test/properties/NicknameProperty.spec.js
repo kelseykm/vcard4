@@ -1,4 +1,9 @@
-import { TextType, TextListType, IntegerType } from "../../src/values/index.js";
+import {
+  TextType,
+  TextListType,
+  IntegerType,
+  ParameterValueType,
+} from "../../src/values/index.js";
 import { PrefParameter, TypeParameter } from "../../src/parameters/index.js";
 import { NicknameProperty } from "../../src/properties/index.js";
 import { assert } from "chai";
@@ -40,21 +45,21 @@ describe("NicknameProperty tests", () => {
   it("Formats value properly", () => {
     assert.strictEqual(
       new NicknameProperty(
-        [new TypeParameter(new TextType("work"), "nicknameproperty")],
+        [new TypeParameter(new ParameterValueType("work"), "nicknameproperty")],
         new TextType("Boss")
       ).repr(),
       "NICKNAME;TYPE=work:Boss"
     );
     assert.strictEqual(
       new NicknameProperty(
-        [new TypeParameter(new TextType("work"), "nicknameproperty")],
+        [new TypeParameter(new ParameterValueType("work"), "nicknameproperty")],
         new TextType("Boss")
       ).reprXML(),
       "<nickname><parameters><type><text>work</text></type></parameters><text>Boss</text></nickname>"
     );
     assert.deepEqual(
       new NicknameProperty(
-        [new TypeParameter(new TextType("work"), "nicknameproperty")],
+        [new TypeParameter(new ParameterValueType("work"), "nicknameproperty")],
         new TextType("Boss")
       ).reprJSON(),
       ["nickname", { type: "work" }, "text", "Boss"]

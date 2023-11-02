@@ -1,4 +1,8 @@
-import { TextType, URIType, IntegerType } from "../../src/values/index.js";
+import {
+  ParameterValueType,
+  URIType,
+  IntegerType,
+} from "../../src/values/index.js";
 import { MediatypeParameter } from "../../src/parameters/index.js";
 import { KeyProperty } from "../../src/properties/index.js";
 import { assert } from "chai";
@@ -8,7 +12,11 @@ describe("KeyProperty tests", () => {
     assert.doesNotThrow(
       () =>
         new KeyProperty(
-          [new MediatypeParameter(new TextType("application/pgp-keys"))],
+          [
+            new MediatypeParameter(
+              new ParameterValueType("application/pgp-keys")
+            ),
+          ],
           new URIType("ftp://example.com/keys/jdoe")
         )
     );
@@ -27,21 +35,33 @@ describe("KeyProperty tests", () => {
   it("Formats value properly", () => {
     assert.strictEqual(
       new KeyProperty(
-        [new MediatypeParameter(new TextType("application/pgp-keys"))],
+        [
+          new MediatypeParameter(
+            new ParameterValueType("application/pgp-keys")
+          ),
+        ],
         new URIType("ftp://example.com/keys/jdoe")
       ).repr(),
       "KEY;MEDIATYPE=application/pgp-keys:ftp://example.com/keys/jdoe"
     );
     assert.strictEqual(
       new KeyProperty(
-        [new MediatypeParameter(new TextType("application/pgp-keys"))],
+        [
+          new MediatypeParameter(
+            new ParameterValueType("application/pgp-keys")
+          ),
+        ],
         new URIType("ftp://example.com/keys/jdoe")
       ).reprXML(),
       "<key><parameters><mediatype><text>application/pgp-keys</text></mediatype></parameters><uri>ftp://example.com/keys/jdoe</uri></key>"
     );
     assert.deepEqual(
       new KeyProperty(
-        [new MediatypeParameter(new TextType("application/pgp-keys"))],
+        [
+          new MediatypeParameter(
+            new ParameterValueType("application/pgp-keys")
+          ),
+        ],
         new URIType("ftp://example.com/keys/jdoe")
       ).reprJSON(),
       [

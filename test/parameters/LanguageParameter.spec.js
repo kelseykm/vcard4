@@ -1,4 +1,4 @@
-import { TextType, LanguageTagType } from "../../src/values/index.js";
+import { ParameterValueType, LanguageTagType } from "../../src/values/index.js";
 import { LanguageParameter } from "../../src/parameters/index.js";
 import { assert } from "chai";
 
@@ -12,7 +12,7 @@ describe("LanguageParameter tests", () => {
   it("Rejects invalid input", () => {
     assert.throws(() => new LanguageParameter(1));
     assert.throws(() => new LanguageParameter());
-    assert.throws(() => new LanguageParameter(new TextType("en-us")));
+    assert.throws(() => new LanguageParameter(new ParameterValueType("en-us")));
     assert.throws(() => new LanguageParameter({}));
   });
 

@@ -1,15 +1,18 @@
-import { TextType, TextListType } from "../../src/values/index.js";
+import { ParameterValueType } from "../../src/values/index.js";
 import { SortAsParameter } from "../../src/parameters/index.js";
 import { assert } from "chai";
 
 describe("SortAsParameter tests", () => {
   it("Accepts valid input", () => {
-    assert.doesNotThrow(() => new SortAsParameter(new TextType("Marcus")));
+    assert.doesNotThrow(
+      () => new SortAsParameter(new ParameterValueType("Marcus"))
+    );
     assert.doesNotThrow(
       () =>
-        new SortAsParameter(
-          new TextListType([new TextType("Luther"), new TextType("Martin")])
-        )
+        new SortAsParameter([
+          new ParameterValueType("Luther"),
+          new ParameterValueType("Martin"),
+        ])
     );
   });
 
@@ -19,21 +22,24 @@ describe("SortAsParameter tests", () => {
 
   it("Formats value properly", () => {
     assert.strictEqual(
-      new SortAsParameter(
-        new TextListType([new TextType("Luther"), new TextType("Martin")])
-      ).repr(),
+      new SortAsParameter([
+        new ParameterValueType("Luther"),
+        new ParameterValueType("Martin"),
+      ]).repr(),
       'SORT-AS="Luther,Martin"'
     );
     assert.strictEqual(
-      new SortAsParameter(
-        new TextListType([new TextType("Luther"), new TextType("Martin")])
-      ).reprXML(),
+      new SortAsParameter([
+        new ParameterValueType("Luther"),
+        new ParameterValueType("Martin"),
+      ]).reprXML(),
       "<sort-as><text>Luther</text><text>Martin</text></sort-as>"
     );
     assert.deepEqual(
-      new SortAsParameter(
-        new TextListType([new TextType("Luther"), new TextType("Martin")])
-      ).reprJSON(),
+      new SortAsParameter([
+        new ParameterValueType("Luther"),
+        new ParameterValueType("Martin"),
+      ]).reprJSON(),
       { "sort-as": ["Luther", "Martin"] }
     );
   });

@@ -1,11 +1,15 @@
-import { TextType, DateTimeType, URIType } from "../../src/values/index.js";
+import {
+  ParameterValueType,
+  DateTimeType,
+  URIType,
+} from "../../src/values/index.js";
 import { TzParameter } from "../../src/parameters/index.js";
 import { assert } from "chai";
 
 describe("TzParameter tests", () => {
   it("Accepts valid input", () => {
     assert.doesNotThrow(
-      () => new TzParameter(new TextType("Raleigh/North America"))
+      () => new TzParameter(new ParameterValueType("Raleigh/North America"))
     );
     assert.doesNotThrow(
       () => new TzParameter(new DateTimeType("-0500", "utcoffset"))
@@ -24,15 +28,19 @@ describe("TzParameter tests", () => {
 
   it("Formats value properly", () => {
     assert.strictEqual(
-      new TzParameter(new TextType("Raleigh/North America")).repr(),
+      new TzParameter(new ParameterValueType("Raleigh/North America")).repr(),
       "TZ=Raleigh/North America"
     );
     assert.strictEqual(
-      new TzParameter(new TextType("Raleigh/North America")).reprXML(),
+      new TzParameter(
+        new ParameterValueType("Raleigh/North America")
+      ).reprXML(),
       "<tz><text>Raleigh/North America</text></tz>"
     );
     assert.deepEqual(
-      new TzParameter(new TextType("Raleigh/North America")).reprJSON(),
+      new TzParameter(
+        new ParameterValueType("Raleigh/North America")
+      ).reprJSON(),
       { tz: "Raleigh/North America" }
     );
   });

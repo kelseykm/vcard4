@@ -23,13 +23,13 @@ describe("VCARD tests", () => {
           new Group(
             [
               new FNProperty(
-                [new ValueParameter(new TextType(""))],
+                [new ValueParameter(new TextType(" "))],
                 new TextType("James Bond")
               ),
               new NicknameProperty(
                 [
                   new PrefParameter(new IntegerType(1)),
-                  new ValueParameter(new TextType("")),
+                  new ValueParameter(new TextType(" ")),
                 ],
                 new TextType("Jamie")
               ),
@@ -97,13 +97,13 @@ describe("VCARD tests", () => {
         new Group(
           [
             new FNProperty(
-              [new ValueParameter(new TextType(""))],
+              [new ValueParameter(new TextType(" "))],
               new TextType("James Bond")
             ),
             new NicknameProperty(
               [
                 new PrefParameter(new IntegerType(1)),
-                new ValueParameter(new TextType("")),
+                new ValueParameter(new TextType(" ")),
               ],
               new TextType("Jamie")
             ),
@@ -128,13 +128,13 @@ describe("VCARD tests", () => {
         new Group(
           [
             new FNProperty(
-              [new ValueParameter(new TextType(""))],
+              [new ValueParameter(new TextType(" "))],
               new TextType("James Bond")
             ),
             new NicknameProperty(
               [
                 new PrefParameter(new IntegerType(1)),
-                new ValueParameter(new TextType("")),
+                new ValueParameter(new TextType(" ")),
               ],
               new TextType("Jamie")
             ),
@@ -155,13 +155,13 @@ describe("VCARD tests", () => {
         new Group(
           [
             new FNProperty(
-              [new ValueParameter(new TextType(""))],
+              [new ValueParameter(new TextType(" "))],
               new TextType("James Bond")
             ),
             new NicknameProperty(
               [
                 new PrefParameter(new IntegerType(1)),
-                new ValueParameter(new TextType("")),
+                new ValueParameter(new TextType(" ")),
               ],
               new TextType("Jamie")
             ),

@@ -1,12 +1,14 @@
-import { TextType } from "../../src/values/index.js";
+import { ParameterValueType } from "../../src/values/index.js";
 import { AnyParameter } from "../../src/parameters/index.js";
 import { assert } from "chai";
 
 describe("AnyParameter tests", () => {
   it("Accepts valid input", () => {
-    assert.doesNotThrow(() => new AnyParameter("X-CAR", new TextType("Volvo")));
     assert.doesNotThrow(
-      () => new AnyParameter("networkTDOA", new TextType("strong"))
+      () => new AnyParameter("X-CAR", new ParameterValueType("Volvo"))
+    );
+    assert.doesNotThrow(
+      () => new AnyParameter("x-network-TDOA", new ParameterValueType("strong"))
     );
   });
 
@@ -20,15 +22,15 @@ describe("AnyParameter tests", () => {
 
   it("Formats value properly", () => {
     assert.strictEqual(
-      new AnyParameter("X-CAR", new TextType("Volvo")).repr(),
+      new AnyParameter("X-CAR", new ParameterValueType("Volvo")).repr(),
       "X-CAR=Volvo"
     );
     assert.strictEqual(
-      new AnyParameter("X-CAR", new TextType("Volvo")).reprXML(),
+      new AnyParameter("X-CAR", new ParameterValueType("Volvo")).reprXML(),
       "<x-car><text>Volvo</text></x-car>"
     );
     assert.deepEqual(
-      new AnyParameter("X-CAR", new TextType("Volvo")).reprJSON(),
+      new AnyParameter("X-CAR", new ParameterValueType("Volvo")).reprJSON(),
       { "x-car": "Volvo" }
     );
   });

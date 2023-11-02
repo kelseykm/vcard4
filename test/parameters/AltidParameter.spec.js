@@ -1,10 +1,10 @@
-import { TextType } from "../../src/values/index.js";
+import { ParameterValueType } from "../../src/values/index.js";
 import { AltidParameter } from "../../src/parameters/index.js";
 import { assert } from "chai";
 
 describe("AltidParameter tests", () => {
   it("Accepts valid input", () => {
-    assert.doesNotThrow(() => new AltidParameter(new TextType("1")));
+    assert.doesNotThrow(() => new AltidParameter(new ParameterValueType("1")));
   });
 
   it("Rejects invalid input", () => {
@@ -19,15 +19,18 @@ describe("AltidParameter tests", () => {
 
   it("Formats value properly", () => {
     assert.strictEqual(
-      new AltidParameter(new TextType("yah")).repr(),
+      new AltidParameter(new ParameterValueType("yah")).repr(),
       "ALTID=yah"
     );
     assert.strictEqual(
-      new AltidParameter(new TextType("yah")).reprXML(),
+      new AltidParameter(new ParameterValueType("yah")).reprXML(),
       "<altid><text>yah</text></altid>"
     );
-    assert.deepEqual(new AltidParameter(new TextType("yah")).reprJSON(), {
-      altid: "yah",
-    });
+    assert.deepEqual(
+      new AltidParameter(new ParameterValueType("yah")).reprJSON(),
+      {
+        altid: "yah",
+      }
+    );
   });
 });
