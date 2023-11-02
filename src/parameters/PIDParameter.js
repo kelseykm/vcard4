@@ -10,73 +10,46 @@ export class PIDParameter extends BaseParameter {
 
   get value() {
     return Array.isArray(this.#pidValue)
-      ? `${this.#pidValue
-          .reduce((accumulatedTypes, currentType) => {
-            if (Array.isArray(currentType)) {
-              accumulatedTypes.push(
-                currentType
-                  .reduce((accumType, currType) => {
-                    accumType.push(currType.repr());
-                    return accumType;
-                  }, [])
-                  .join(".")
-              );
-            } else accumulatedTypes.push(currentType.repr());
-
-            return accumulatedTypes;
-          }, [])
-          .join(",")}`
+      ? this.#pidValue
+          .map((val) => {
+            if (Array.isArray(val))
+              return val.map((innerVal) => innerVal.repr()).join(".");
+            return val.repr();
+          })
+          .join(",")
       : this.#pidValue.repr();
   }
 
   get valueXML() {
     const xml = Array.isArray(this.#pidValue)
-      ? `${this.#pidValue
-          .reduce((accumulatedTypes, currentType) => {
-            if (Array.isArray(currentType)) {
-              accumulatedTypes.push(
+      ? this.#pidValue
+          .map((val) => {
+            if (Array.isArray(val))
+              return (
                 "<integer>" +
-                  currentType
-                    .reduce((accumType, currType) => {
-                      accumType.push(currType.repr());
-                      return accumType;
-                    }, [])
-                    .join(".") +
-                  "</integer>"
+                val.map((innerVal) => innerVal.repr()).join(".") +
+                "</integer>"
               );
-            } else accumulatedTypes.push(currentType.reprXML());
 
-            return accumulatedTypes;
-          }, [])
-          .join("")}`
+            return val.reprXML();
+          })
+          .join("")
       : this.#pidValue.reprXML();
 
     return xml.replaceAll("integer", "text");
   }
 
   get valueJSON() {
-    if (Array.isArray(this.#pidValue)) {
-      const json = this.#pidValue.reduce((accumulatedTypes, currentType) => {
-        if (Array.isArray(currentType)) {
-          accumulatedTypes.push(
-            currentType
-              .reduce((accumType, currType) => {
-                accumType.push(currType.repr());
-                return accumType;
-              }, [])
-              .join(".")
-          );
-        } else accumulatedTypes.push(currentType.repr());
-
-        return accumulatedTypes;
-      }, []);
-
-      json.unshift("integer");
-
-      return json;
-    }
-
-    return this.#pidValue.reprJSON();
+    return Array.isArray(this.#pidValue)
+      ? [
+          "integer",
+          ...this.#pidValue.map((val) => {
+            if (Array.isArray(val))
+              return Number(val.map((innerVal) => innerVal.repr()).join("."));
+            return val.reprJSON().pop();
+          }),
+        ]
+      : this.#pidValue.reprJSON();
   }
 
   #validate(pidValue) {
@@ -91,8 +64,9 @@ export class PIDParameter extends BaseParameter {
       Array.isArray(pidValue) &&
       !pidValue.every((val1) => {
         if (Array.isArray(val1))
-          return val1.every(
-            (val2) => val2.constructor.identifier === "IntegerType"
+          return (
+            val1.length === 2 &&
+            val1.every((val2) => val2.constructor.identifier === "IntegerType")
           );
         return val1.constructor.identifier === "IntegerType";
       })

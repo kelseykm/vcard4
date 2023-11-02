@@ -12,12 +12,7 @@ export class MediatypeParameter extends BaseParameter {
 
   get value() {
     return Array.isArray(this.#mediaValue)
-      ? `"${this.#mediaValue
-          .reduce((accumulated, current) => {
-            accumulated.push(current.repr());
-            return accumulated;
-          }, [])
-          .join(";")}"`
+      ? `"${this.#mediaValue.map((val) => val.repr()).join(";")}"`
       : this.#mediaValue.repr();
   }
 
@@ -25,10 +20,7 @@ export class MediatypeParameter extends BaseParameter {
     return Array.isArray(this.#mediaValue)
       ? "<text>" +
           this.#mediaValue
-            .reduce((accumulated, current) => {
-              accumulated.push(current.reprXML());
-              return accumulated;
-            }, [])
+            .map((val) => val.reprXML())
             .join(";")
             .replace(/<\/?text>/g, "") +
           "</text>"
@@ -39,12 +31,7 @@ export class MediatypeParameter extends BaseParameter {
     if (Array.isArray(this.#mediaValue))
       return [
         "text",
-        this.#mediaValue
-          .reduce((accumulated, current) => {
-            accumulated.push(current.repr());
-            return accumulated;
-          }, [])
-          .join(";"),
+        this.#mediaValue.map((val) => val._unsafe_raw_value).join(";"),
       ];
 
     return this.#mediaValue.reprJSON();
