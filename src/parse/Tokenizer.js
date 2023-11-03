@@ -60,6 +60,10 @@ export class Tokenizer {
     let quotedValueIndex = 0;
     for (let index = 0; index < value.length; index++) {
       if (value[index] === '"') {
+        const backslashCount = this.#backCount("\\", value.slice(0, index));
+
+        if (backslashCount % 2 !== 0) continue;
+
         if (typeof quotedValues[quotedValueIndex] !== "object")
           quotedValues[quotedValueIndex] = {
             start: index,
@@ -104,6 +108,13 @@ export class Tokenizer {
       let quotedComponentIndex = 0;
       for (let index = 0; index < component.length; index++) {
         if (component[index] === '"') {
+          const backslashCount = this.#backCount(
+            "\\",
+            component.slice(0, index)
+          );
+
+          if (backslashCount % 2 !== 0) continue;
+
           if (typeof quotedComponents[quotedComponentIndex] !== "object")
             quotedComponents[quotedComponentIndex] = {
               start: index,
@@ -175,6 +186,10 @@ export class Tokenizer {
     let quotedParamIndex = 0;
     for (let index = 0; index < params.length; index++) {
       if (params[index] === '"') {
+        const backslashCount = this.#backCount("\\", params.slice(0, index));
+
+        if (backslashCount % 2 !== 0) continue;
+
         if (typeof quotedParams[quotedParamIndex] !== "object")
           quotedParams[quotedParamIndex] = {
             start: index,
@@ -343,7 +358,7 @@ export class Tokenizer {
 
   #contentLineTokenizer(contentLine) {
     const firstSemiColonIndex = contentLine.indexOf(";");
-    const firstColonIndex = contentLine.indexOf(":");
+    let firstColonIndex = contentLine.indexOf(":");
 
     const propEndPoint =
       firstSemiColonIndex !== -1
@@ -366,6 +381,46 @@ export class Tokenizer {
         parameters: {},
         value: this.#valueSeparator(contentLine.slice(propEndPoint + 1)),
       };
+
+    const quotedParts = [];
+    let quotedPartsIndex = 0;
+    for (let index = 0; index < contentLine.length; index++) {
+      if (contentLine[index] === '"') {
+        const backslashCount = this.#backCount(
+          "\\",
+          contentLine.slice(0, index)
+        );
+
+        if (backslashCount % 2 !== 0) continue;
+
+        if (typeof quotedParts[quotedPartsIndex] !== "object") {
+          quotedParts[quotedPartsIndex] = {
+            start: index,
+          };
+        } else {
+          quotedParts[quotedPartsIndex]["stop"] = index;
+          quotedPartsIndex++;
+        }
+      }
+    }
+
+    if (
+      quotedParts.some(
+        (part) => part.start < firstColonIndex && part.stop > firstColonIndex
+      )
+    )
+      for (let index = firstColonIndex; index < contentLine.length; index++) {
+        if (contentLine[index] === ":") {
+          if (
+            quotedParts.some((part) => part.start < index && part.stop > index)
+          )
+            continue;
+          else {
+            firstColonIndex = index;
+            break;
+          }
+        }
+      }
 
     return {
       group,
