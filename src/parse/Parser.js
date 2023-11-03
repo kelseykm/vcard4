@@ -144,10 +144,25 @@ export class Parser {
           break;
 
         default:
-          if (relevantPropCount.get(prop) > 1)
-            throw new InvalidVcard(
-              "vCard must not have more than one ANNIVERSARY, BDAY, GENDER, BIRTHPLACE, DEATHPLACE, DEATHDATE, KIND, N, PRODID, REV or UID property"
+          if (relevantPropCount.get(prop) > 1) {
+            const offendingTokens = tokenizedVcard.filter(
+              (token) => token.property === prop
             );
+
+            if (
+              !offendingTokens.every((token) =>
+                token.parameters.hasOwnProperty("ALTID")
+              ) ||
+              offendingTokens.some(
+                (token) =>
+                  token.parameters["ALTID"] !==
+                  offendingTokens[0].parameters["ALTID"]
+              )
+            )
+              throw new InvalidVcard(
+                "vCard must not have more than one ANNIVERSARY, BDAY, GENDER, BIRTHPLACE, DEATHPLACE, DEATHDATE, KIND, N, PRODID, REV or UID property, unless they have the same ALTID parameter"
+              );
+          }
       }
     }
   }
