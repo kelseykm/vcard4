@@ -54,6 +54,9 @@ export class Tokenizer {
   }
 
   #valueSeparator(value) {
+    if (value.startsWith('"') && value.endsWith('"'))
+      value = value.slice(1, -1);
+
     if (this.#uriRegExp.test(value)) return value;
 
     const quotedValues = [];
@@ -327,9 +330,14 @@ export class Tokenizer {
         holdCurrentParamValue = this.#valueSeparator(
           holdCurrentParamValue.slice(1, -1)
         );
+      else if (
+        holdCurrentParamValue.startsWith('"') &&
+        holdCurrentParamValue.endsWith('"')
+      )
+        holdCurrentParamValue = holdCurrentParamValue.slice(1, -1);
 
       if (Array.isArray(holdCurrentParamValue))
-        holdCurrentParamValue.map((val) =>
+        holdCurrentParamValue = holdCurrentParamValue.map((val) =>
           val
             .replaceAll("\\n", "\n")
             .replaceAll("\\;", ";")
@@ -338,7 +346,7 @@ export class Tokenizer {
             .replaceAll("\\\\", "\\")
         );
       else
-        holdCurrentParamValue
+        holdCurrentParamValue = holdCurrentParamValue
           .replaceAll("\\n", "\n")
           .replaceAll("\\;", ";")
           .replaceAll("\\:", ":")
