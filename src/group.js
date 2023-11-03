@@ -38,6 +38,10 @@ export class Group {
     return this.#propertyInstanceCount;
   }
 
+  get properties() {
+    return this.#props;
+  }
+
   hasMemberProperty = false;
   kindPropertyIsGroup = false;
 
