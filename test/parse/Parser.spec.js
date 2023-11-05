@@ -25,6 +25,20 @@ describe("Parser tests", () => {
           ).tokens
         )
     );
+
+    assert.doesNotThrow(
+      () =>
+        new Parser(
+          new Tokenizer(
+            "BEGIN:VCARD\r\n" +
+              "VERSION:4.0\r\n" +
+              "FN:James Bond\r\n" +
+              "BIRTHPLACE;ALTID=1;LANGUAGE=en:Germany\r\n" +
+              "BIRTHPLACE;ALTID=1;LANGUAGE=de:Deutschland\r\n" +
+              "END:VCARD\r\n"
+          ).tokens
+        )
+    );
   });
 
   it("Rejects invalid input", () => {
@@ -38,6 +52,19 @@ describe("Parser tests", () => {
               "TITLE:Imaginary test person\r\n" +
               "EMAIL;TYPE=work;PREF=1:johnDoe@example.org\r\n" +
               "TEL;TYPE=cell:tel:+1 781 555 1212\r\n"
+          ).tokens
+        )
+    );
+    assert.throws(
+      () =>
+        new Parser(
+          new Tokenizer(
+            "BEGIN:VCARD\r\n" +
+              "VERSION:4.0\r\n" +
+              "FN:James Bond\r\n" +
+              "BIRTHPLACE;ALTID=1;LANGUAGE=en:Germany\r\n" +
+              "BIRTHPLACE;ALTID=2;LANGUAGE=de:Deutschland\r\n" +
+              "END:VCARD\r\n"
           ).tokens
         )
     );

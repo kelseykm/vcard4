@@ -69,6 +69,36 @@ describe("Tokenizer tests", () => {
     );
   });
 
+  it("Tokenizes parameters correctly", () => {
+    new Tokenizer(
+      "BEGIN:VCARD\r\n" +
+        "VERSION:4.0\r\n" +
+        "FN:Mister Person\r\n" +
+        'ADR;LABEL="Mr. John Q. Public, Esq.^nMail Drop: TNE QB^n123 Main Street^nAn\r\n' +
+        ' y Town, CA 91921-1234^nU.S.A.":;;123 Main Street;Any Town;AAH;91921-1234;No\r\n' +
+        " wayar\r\n" +
+        'job.TITLE;ALTID="mkuu:wao^nin the ^’building^’":The Boss\r\n' +
+        "END:VCARD\r\n"
+    ).tokens.map((token) => {
+      if (token.property === "ADR") {
+        const label = token.parameters["LABEL"];
+
+        assert.equal(
+          label,
+          "Mr. John Q. Public, Esq.\n" +
+            "Mail Drop: TNE QB\n" +
+            "123 Main Street\n" +
+            "Any Town, CA 91921-1234\n" +
+            "U.S.A."
+        );
+      } else if (token.property === "TITLE") {
+        const altid = token.parameters["ALTID"];
+
+        assert.equal(altid, 'mkuu:wao\nin the "building"');
+      }
+    });
+  });
+
   it("Tokenizes vcards correctly", () => {
     new Tokenizer(
       "BEGIN:VCARD\r\n" +
