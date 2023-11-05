@@ -13,16 +13,16 @@ import { BaseValue } from './BaseValue.js';
 declare class SpecialValueType extends BaseValue {
   reprJSON(): (string | string[])[];
   /**
-   * @param value - the value
    * @param targetProp - the name of the target property (case insensitive)
+   * @param value - the value
    * @see For comprehensive explanation and examples of usage, see the
    * documentation
    * {@link https://kelseykm.github.io/vcard4/documentation/values/specialvaluetype}
    */
-  constructor(value: (TextType | TextListType)[], targetProp: string);
-  constructor(value: [SexType, TextType], targetProp: string);
-  constructor(value: [IntegerType, URIType], targetProp: string);
-  constructor(value: string, targetProp: string);
+  constructor(targetProp: string, value: (TextType | TextListType)[]);
+  constructor(targetProp: string, value: [SexType, TextType]);
+  constructor(targetProp: string, value: [IntegerType, URIType]);
+  constructor(targetProp: string, value: string);
 }
 
 export { SpecialValueType };
