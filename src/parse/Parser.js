@@ -262,8 +262,8 @@ export class Parser {
         );
       },
       getProperty(property = "") {
-        return _parsedTokens.filter(
-          (parsedToken) => parsedToken.property === property
+        return _parsedTokens.filter((parsedToken) =>
+          new RegExp(`^${property}$`, "i").test(parsedToken.property)
         );
       },
       get groups() {
@@ -277,8 +277,8 @@ export class Parser {
         );
       },
       getGroup(group = "") {
-        return _parsedTokens.filter(
-          (parsedToken) => parsedToken.group === group
+        return _parsedTokens.filter((parsedToken) =>
+          new RegExp(`^${group}$`, "i").test(parsedToken.group)
         );
       },
       get repeatingProperties() {
