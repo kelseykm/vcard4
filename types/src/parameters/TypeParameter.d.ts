@@ -11,7 +11,7 @@ export class TypeParameter extends BaseParameter {
    * {@link https://kelseykm.github.io/vcard4/documentation/parameters/typeparameter}
    */
   constructor(
-    typeValue: ParameterValueType | ParameterValueType[],
-    targetProp: string
+    targetProp: string,
+    typeValue: ParameterValueType | ParameterValueType[]
   );
 }

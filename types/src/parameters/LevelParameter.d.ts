@@ -9,6 +9,10 @@ import { BaseParameter } from "./BaseParameter";
  */
 export class LevelParameter extends BaseParameter {
   /**
+   * @param targetProp - case insensitive string specifying the target
+   * property. Its value should be either "ExpertiseProperty", "HobbyProperty"
+   * or "InterestProperty"
+   *
    * @param levelValue - the value of the `ParameterValueType` instance should be either
    * "beginner", "average", "expert", "high", "medium" or "low", depending on
    * the value of the `targetProp` argument.
@@ -16,10 +20,6 @@ export class LevelParameter extends BaseParameter {
    * "beginner", "average" and "expert".
    * When the `targetProp` is either "HobbyProperty" or "InterestProperty", the
    * only valid values are "high", "medium" and "low".
-   *
-   * @param targetProp - case insensitive string specifying the target
-   * property. Its value should be either "ExpertiseProperty", "HobbyProperty"
-   * or "InterestProperty"
    */
-  constructor(levelValue: ParameterValueType, targetProp: string);
+  constructor(targetProp: string, levelValue: ParameterValueType);
 }
