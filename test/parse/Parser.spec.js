@@ -170,7 +170,7 @@ describe("Parser tests", () => {
     assert.deepEqual(parsedVcard2.parsed.repeatingProperties, { TEL: 2 });
 
     assert.deepEqual(parsedVcard2.parsed.groups, ["story"]);
-    assert.deepEqual(parsedVcard2.parsed.getGroup("story"), [
+    assert.deepEqual(parsedVcard2.parsed.getGroup("sToRy"), [
       {
         group: "story",
         property: "TITLE",
