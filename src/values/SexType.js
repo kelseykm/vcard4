@@ -10,7 +10,7 @@ export class SexType extends BaseValue {
 
   #validate(sexValue) {
     if (typeof sexValue === "undefined")
-      throw new MissingArgument("Value for SEXType must be supplied");
+      throw new MissingArgument("Value for SexType must be supplied");
     else if (!this.#sexRegExp.test(sexValue))
       throw new InvalidArgument("Invalid sex");
   }
