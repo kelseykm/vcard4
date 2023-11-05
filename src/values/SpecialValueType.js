@@ -5,7 +5,7 @@ export class SpecialValueType extends BaseValue {
   static identifier = "SpecialValueType";
   static type = "TEXT";
 
-  #validateAndSet(value, targetProp) {
+  #validateAndSet(targetProp, value) {
     if (typeof value === "undefined" || typeof targetProp === "undefined")
       throw new MissingArgument(
         "Value and target property for SpecialValueType must be supplied"
@@ -438,10 +438,10 @@ export class SpecialValueType extends BaseValue {
     }
   }
 
-  constructor(value, targetProp) {
+  constructor(targetProp, value) {
     super();
 
-    this.#validateAndSet(value, targetProp);
+    this.#validateAndSet(targetProp, value);
     this.targetProp = targetProp.toUpperCase();
 
     this.checkAbstractPropertiesAndMethods();

@@ -125,7 +125,7 @@ export class DateTimeType extends BaseValue {
 
   #utcOffsetRegExp = /^(?:[+-]((?:[01]\d)|(?:2[0-3]))(?:[0-5]\d)?)$/;
 
-  #validateAndSetType(dateTimeValue, type) {
+  #validateAndSetType(type, dateTimeValue) {
     if (typeof dateTimeValue === "undefined" || typeof type === "undefined")
       throw new MissingArgument(
         "Value and type for DateTimeType must be supplied"
@@ -195,9 +195,9 @@ export class DateTimeType extends BaseValue {
     }
   }
 
-  constructor(dateTimeValue, type) {
+  constructor(type, dateTimeValue) {
     super();
-    this.#validateAndSetType(dateTimeValue, type);
+    this.#validateAndSetType(type, dateTimeValue);
     this.#dateTimeValue = dateTimeValue;
 
     this.checkAbstractPropertiesAndMethods();

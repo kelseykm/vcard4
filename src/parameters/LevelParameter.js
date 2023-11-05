@@ -21,7 +21,7 @@ export class LevelParameter extends BaseParameter {
     return this.#levelValue.reprJSON();
   }
 
-  #validate(levelValue, targetProp) {
+  #validate(targetProp, levelValue) {
     if (typeof levelValue === "undefined" || typeof targetProp === "undefined")
       throw new MissingArgument(
         "Value and target property for LevelParameter must be supplied"
@@ -41,10 +41,10 @@ export class LevelParameter extends BaseParameter {
     }
   }
 
-  constructor(levelValue, targetProp) {
+  constructor(targetProp, levelValue) {
     super();
 
-    this.#validate(levelValue, targetProp);
+    this.#validate(targetProp, levelValue);
     this.#levelValue = levelValue;
     this.targetProp = targetProp.toUpperCase();
 

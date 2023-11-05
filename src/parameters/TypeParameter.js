@@ -35,7 +35,7 @@ export class TypeParameter extends BaseParameter {
   #relatedTypeRegExp =
     /(?:contact|acquaintance|friend|met|co-worker|colleague|co-resident|neighbor|child|parent|sibling|spouse|kin|muse|crush|date|sweetheart|me|agent|emergency)/i;
 
-  #validate(typeValue, targetProp) {
+  #validate(targetProp, typeValue) {
     if (typeof typeValue === "undefined" || typeof targetProp === "undefined")
       throw new MissingArgument(
         "Value and target property for TypeParameter must be supplied"
@@ -106,10 +106,10 @@ export class TypeParameter extends BaseParameter {
     }
   }
 
-  constructor(typeValue, targetProp) {
+  constructor(targetProp, typeValue) {
     super();
 
-    this.#validate(typeValue, targetProp);
+    this.#validate(targetProp, typeValue);
     this.#typeValue = typeValue;
 
     this.targetProp = targetProp.toUpperCase();
