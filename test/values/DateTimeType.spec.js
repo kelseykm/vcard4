@@ -3,44 +3,44 @@ import { assert } from "chai";
 
 describe("DateTimeType tests", () => {
   it("Accepts valid input", () => {
-    assert.doesNotThrow(() => new DateTimeType("1985-04", "date"));
-    assert.doesNotThrow(() => new DateTimeType("---12", "date"));
+    assert.doesNotThrow(() => new DateTimeType("date", "1985-04"));
+    assert.doesNotThrow(() => new DateTimeType("date", "---12"));
 
-    assert.doesNotThrow(() => new DateTimeType(1400, "time"));
-    assert.doesNotThrow(() => new DateTimeType("102200Z", "time"));
+    assert.doesNotThrow(() => new DateTimeType("time", 1400));
+    assert.doesNotThrow(() => new DateTimeType("time", "102200Z"));
 
-    assert.doesNotThrow(() => new DateTimeType("19961022T140000", "datetime"));
-    assert.doesNotThrow(() => new DateTimeType("---22T14", "datetime"));
+    assert.doesNotThrow(() => new DateTimeType("datetime", "19961022T140000"));
+    assert.doesNotThrow(() => new DateTimeType("datetime", "---22T14"));
 
-    assert.doesNotThrow(() => new DateTimeType("T10", "dateandortime"));
-    assert.doesNotThrow(() => new DateTimeType("---12", "dateandortime"));
+    assert.doesNotThrow(() => new DateTimeType("dateandortime", "T10"));
+    assert.doesNotThrow(() => new DateTimeType("dateandortime", "---12"));
 
-    assert.doesNotThrow(() => new DateTimeType("19961022T140000", "timestamp"));
+    assert.doesNotThrow(() => new DateTimeType("timestamp", "19961022T140000"));
     assert.doesNotThrow(
-      () => new DateTimeType("19961022T140000-05", "timestamp")
+      () => new DateTimeType("timestamp", "19961022T140000-05")
     );
 
-    assert.doesNotThrow(() => new DateTimeType("-0500", "utcoffset"));
-    assert.doesNotThrow(() => new DateTimeType("+03", "utcoffset"));
+    assert.doesNotThrow(() => new DateTimeType("utcoffset", "-0500"));
+    assert.doesNotThrow(() => new DateTimeType("utcoffset", "+03"));
   });
 
   it("Rejects invalid input", () => {
     assert.throws(() => new DateTimeType());
-    assert.throws(() => new DateTimeType("19961022T14", "timestamp"));
-    assert.throws(() => new DateTimeType("T102200Z", "time"));
+    assert.throws(() => new DateTimeType("timestamp", "19961022T14"));
+    assert.throws(() => new DateTimeType("time", "T102200Z"));
     assert.throws(() => new DateTimeType({}));
   });
 
   it("Formats value properly", () => {
     assert.strictEqual(
-      new DateTimeType("---12", "dateandortime").repr(),
+      new DateTimeType("dateandortime", "---12").repr(),
       "---12"
     );
     assert.strictEqual(
-      new DateTimeType("---12", "dateandortime").reprXML(),
+      new DateTimeType("dateandortime", "---12").reprXML(),
       "<date>---12</date>"
     );
-    assert.deepEqual(new DateTimeType("---12", "dateandortime").reprJSON(), [
+    assert.deepEqual(new DateTimeType("dateandortime", "---12").reprJSON(), [
       "date-and-or-time",
       "---12",
     ]);

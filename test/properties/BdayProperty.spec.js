@@ -6,13 +6,13 @@ import { assert } from "chai";
 describe("BdayProperty tests", () => {
   it("Accepts valid input", () => {
     assert.doesNotThrow(
-      () => new BdayProperty([], new DateTimeType("19960415", "dateandortime"))
+      () => new BdayProperty([], new DateTimeType("dateandortime", "19960415"))
     );
   });
 
   it("Rejects invalid input", () => {
     assert.throws(
-      () => new BdayProperty([], new DateTimeType("19960415", "date"))
+      () => new BdayProperty([], new DateTimeType("date", "19960415"))
     );
     assert.throws(() => new BdayProperty());
     assert.throws(() => new BdayProperty(1));

@@ -12,7 +12,7 @@ describe("TzParameter tests", () => {
       () => new TzParameter(new ParameterValueType("Raleigh/North America"))
     );
     assert.doesNotThrow(
-      () => new TzParameter(new DateTimeType("-0500", "utcoffset"))
+      () => new TzParameter(new DateTimeType("utcoffset", "-0500"))
     );
     assert.doesNotThrow(
       () => new TzParameter(new URIType("something:///zone"))

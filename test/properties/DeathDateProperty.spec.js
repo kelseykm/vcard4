@@ -7,13 +7,13 @@ describe("DeathDateProperty tests", () => {
   it("Accepts valid input", () => {
     assert.doesNotThrow(
       () =>
-        new DeathDateProperty([], new DateTimeType("19960415", "dateandortime"))
+        new DeathDateProperty([], new DateTimeType("dateandortime", "19960415"))
     );
   });
 
   it("Rejects invalid input", () => {
     assert.throws(
-      () => new DeathDateProperty([], new DateTimeType("19960415", "date"))
+      () => new DeathDateProperty([], new DateTimeType("date", "19960415"))
     );
     assert.throws(() => new DeathDateProperty());
     assert.throws(() => new DeathDateProperty(1));

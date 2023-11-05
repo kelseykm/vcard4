@@ -12,13 +12,10 @@ describe("ClientpidmapProperty tests", () => {
       () =>
         new ClientpidmapProperty(
           [],
-          new SpecialValueType(
-            [
-              new IntegerType(1),
-              new URIType("urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"),
-            ],
-            "clientpidmapproperty"
-          )
+          new SpecialValueType("clientpidmapproperty", [
+            new IntegerType(1),
+            new URIType("urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"),
+          ])
         )
     );
   });
@@ -37,39 +34,30 @@ describe("ClientpidmapProperty tests", () => {
     assert.strictEqual(
       new ClientpidmapProperty(
         [],
-        new SpecialValueType(
-          [
-            new IntegerType(1),
-            new URIType("urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"),
-          ],
-          "clientpidmapproperty"
-        )
+        new SpecialValueType("clientpidmapproperty", [
+          new IntegerType(1),
+          new URIType("urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"),
+        ])
       ).repr(),
       "CLIENTPIDMAP:1;urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"
     );
     assert.strictEqual(
       new ClientpidmapProperty(
         [],
-        new SpecialValueType(
-          [
-            new IntegerType(1),
-            new URIType("urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"),
-          ],
-          "clientpidmapproperty"
-        )
+        new SpecialValueType("clientpidmapproperty", [
+          new IntegerType(1),
+          new URIType("urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"),
+        ])
       ).reprXML(),
       "<clientpidmap><integer>1</integer><uri>urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b</uri></clientpidmap>"
     );
     assert.deepEqual(
       new ClientpidmapProperty(
         [],
-        new SpecialValueType(
-          [
-            new IntegerType(1),
-            new URIType("urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"),
-          ],
-          "clientpidmapproperty"
-        )
+        new SpecialValueType("clientpidmapproperty", [
+          new IntegerType(1),
+          new URIType("urn:uuid:3df403f4-5924-4bb7-b077-3c711d9eb34b"),
+        ])
       ).reprJSON(),
       [
         "clientpidmap",

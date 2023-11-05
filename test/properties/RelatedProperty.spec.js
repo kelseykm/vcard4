@@ -15,8 +15,8 @@ describe("RelatedProperty tests", () => {
         new RelatedProperty(
           [
             new TypeParameter(
-              new ParameterValueType("friend"),
-              "relatedproperty"
+              "relatedproperty",
+              new ParameterValueType("friend")
             ),
           ],
           new URIType("uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
@@ -28,8 +28,8 @@ describe("RelatedProperty tests", () => {
         new RelatedProperty(
           [
             new TypeParameter(
-              new ParameterValueType("co-worker"),
-              "relatedproperty"
+              "relatedproperty",
+              new ParameterValueType("co-worker")
             ),
             new ValueParameter(
               new TextType(
@@ -59,8 +59,8 @@ describe("RelatedProperty tests", () => {
       new RelatedProperty(
         [
           new TypeParameter(
-            new ParameterValueType("co-worker"),
-            "relatedproperty"
+            "relatedproperty",
+            new ParameterValueType("co-worker")
           ),
           new ValueParameter(
             new TextType(
@@ -76,8 +76,8 @@ describe("RelatedProperty tests", () => {
       new RelatedProperty(
         [
           new TypeParameter(
-            new ParameterValueType("co-worker"),
-            "relatedproperty"
+            "relatedproperty",
+            new ParameterValueType("co-worker")
           ),
           new ValueParameter(
             new TextType(
@@ -93,8 +93,8 @@ describe("RelatedProperty tests", () => {
       new RelatedProperty(
         [
           new TypeParameter(
-            new ParameterValueType("co-worker"),
-            "relatedproperty"
+            "relatedproperty",
+            new ParameterValueType("co-worker")
           ),
           new ValueParameter(
             new TextType(

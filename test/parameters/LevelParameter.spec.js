@@ -7,21 +7,21 @@ describe("LevelParameter tests", () => {
     assert.doesNotThrow(
       () =>
         new LevelParameter(
-          new ParameterValueType("beginner"),
-          "expertiseproperty"
+          "expertiseproperty",
+          new ParameterValueType("beginner")
         )
     );
 
     assert.doesNotThrow(
       () =>
-        new LevelParameter(new ParameterValueType("low"), "interestProperty")
+        new LevelParameter("interestProperty", new ParameterValueType("low"))
     );
   });
 
   it("Rejects invalid input", () => {
     assert.throws(
       () =>
-        new LevelParameter(new ParameterValueType("low"), "expertiseProperty")
+        new LevelParameter("expertiseProperty", new ParameterValueType("low"))
     );
     assert.throws(() => new LevelParameter(new IntegerType(-2)));
     assert.throws(() => new LevelParameter(1));
@@ -31,22 +31,22 @@ describe("LevelParameter tests", () => {
   it("Formats value properly", () => {
     assert.strictEqual(
       new LevelParameter(
-        new ParameterValueType("beginner"),
-        "expertiseproperty"
+        "expertiseproperty",
+        new ParameterValueType("beginner")
       ).repr(),
       "LEVEL=beginner"
     );
     assert.strictEqual(
       new LevelParameter(
-        new ParameterValueType("beginner"),
-        "expertiseproperty"
+        "expertiseproperty",
+        new ParameterValueType("beginner")
       ).reprXML(),
       "<level><text>beginner</text></level>"
     );
     assert.deepEqual(
       new LevelParameter(
-        new ParameterValueType("beginner"),
-        "expertiseproperty"
+        "expertiseproperty",
+        new ParameterValueType("beginner")
       ).reprJSON(),
       { level: "beginner" }
     );

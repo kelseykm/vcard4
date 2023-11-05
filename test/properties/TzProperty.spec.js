@@ -10,7 +10,7 @@ describe("TzProperty tests", () => {
     );
 
     assert.doesNotThrow(
-      () => new TzProperty([], new DateTimeType("-0500", "utcoffset"))
+      () => new TzProperty([], new DateTimeType("utcoffset", "-0500"))
     );
   });
 

@@ -8,14 +8,11 @@ describe("OrgProperty tests", () => {
       () =>
         new OrgProperty(
           [],
-          new SpecialValueType(
-            [
-              new TextType("ABC, Inc."),
-              new TextType("North American Division"),
-              new TextType("Marketing"),
-            ],
-            "orgproperty"
-          )
+          new SpecialValueType("orgproperty", [
+            new TextType("ABC, Inc."),
+            new TextType("North American Division"),
+            new TextType("Marketing"),
+          ])
         )
     );
   });
@@ -34,42 +31,33 @@ describe("OrgProperty tests", () => {
     assert.strictEqual(
       new OrgProperty(
         [],
-        new SpecialValueType(
-          [
-            new TextType("ABC, Inc."),
-            new TextType("North American Division"),
-            new TextType("Marketing"),
-          ],
-          "orgproperty"
-        )
+        new SpecialValueType("orgproperty", [
+          new TextType("ABC, Inc."),
+          new TextType("North American Division"),
+          new TextType("Marketing"),
+        ])
       ).repr(),
       "ORG:ABC\\, Inc.;North American Division;Marketing"
     );
     assert.strictEqual(
       new OrgProperty(
         [],
-        new SpecialValueType(
-          [
-            new TextType("ABC, Inc."),
-            new TextType("North American Division"),
-            new TextType("Marketing"),
-          ],
-          "orgproperty"
-        )
+        new SpecialValueType("orgproperty", [
+          new TextType("ABC, Inc."),
+          new TextType("North American Division"),
+          new TextType("Marketing"),
+        ])
       ).reprXML(),
       "<org><text>ABC, Inc.</text><text>North American Division</text><text>Marketing</text></org>"
     );
     assert.deepEqual(
       new OrgProperty(
         [],
-        new SpecialValueType(
-          [
-            new TextType("ABC, Inc."),
-            new TextType("North American Division"),
-            new TextType("Marketing"),
-          ],
-          "orgproperty"
-        )
+        new SpecialValueType("orgproperty", [
+          new TextType("ABC, Inc."),
+          new TextType("North American Division"),
+          new TextType("Marketing"),
+        ])
       ).reprJSON(),
       ["org", {}, "text", ["ABC, Inc.", "North American Division", "Marketing"]]
     );

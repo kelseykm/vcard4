@@ -5,22 +5,22 @@ import { assert } from "chai";
 describe("TypeParameter tests", () => {
   it("Accepts valid input", () => {
     assert.doesNotThrow(
-      () => new TypeParameter(new ParameterValueType("work"), "emailproperty")
+      () => new TypeParameter("emailproperty", new ParameterValueType("work"))
+    );
+
+    assert.doesNotThrow(
+      () =>
+        new TypeParameter("telproperty", [
+          new ParameterValueType("voice"),
+          new ParameterValueType("home"),
+        ])
     );
 
     assert.doesNotThrow(
       () =>
         new TypeParameter(
-          [new ParameterValueType("voice"), new ParameterValueType("home")],
-          "telproperty"
-        )
-    );
-
-    assert.doesNotThrow(
-      () =>
-        new TypeParameter(
-          new ParameterValueType("sweetheart"),
-          "relatedproperty"
+          "relatedproperty",
+          new ParameterValueType("sweetheart")
         )
     );
   });
@@ -29,10 +29,10 @@ describe("TypeParameter tests", () => {
     assert.throws(() => new TypeParameter());
     assert.throws(() => new TypeParameter(1));
     assert.throws(() => new TypeParameter("1"));
-    assert.throws(() => new TypeParameter("sweetheart", "relatedproperty"));
+    assert.throws(() => new TypeParameter("relatedproperty", "sweetheart"));
     assert.throws(
       () =>
-        new TypeParameter(new ParameterValueType("sweetheart"), "soundproperty")
+        new TypeParameter("soundproperty", new ParameterValueType("sweetheart"))
     );
     assert.throws(() => new TypeParameter([1, true, null]));
     assert.throws(() => new TypeParameter(false));
@@ -41,24 +41,24 @@ describe("TypeParameter tests", () => {
 
   it("Formats value properly", () => {
     assert.strictEqual(
-      new TypeParameter(
-        [new ParameterValueType("voice"), new ParameterValueType("home")],
-        "telproperty"
-      ).repr(),
+      new TypeParameter("telproperty", [
+        new ParameterValueType("voice"),
+        new ParameterValueType("home"),
+      ]).repr(),
       'TYPE="voice,home"'
     );
     assert.strictEqual(
-      new TypeParameter(
-        [new ParameterValueType("voice"), new ParameterValueType("home")],
-        "telproperty"
-      ).reprXML(),
+      new TypeParameter("telproperty", [
+        new ParameterValueType("voice"),
+        new ParameterValueType("home"),
+      ]).reprXML(),
       "<type><text>voice</text><text>home</text></type>"
     );
     assert.deepEqual(
-      new TypeParameter(
-        [new ParameterValueType("voice"), new ParameterValueType("home")],
-        "telproperty"
-      ).reprJSON(),
+      new TypeParameter("telproperty", [
+        new ParameterValueType("voice"),
+        new ParameterValueType("home"),
+      ]).reprJSON(),
       { type: ["voice", "home"] }
     );
   });

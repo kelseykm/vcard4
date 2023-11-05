@@ -23,7 +23,7 @@ describe("AdrProperty tests", () => {
       () =>
         new AdrProperty(
           [new GeoParameter(new URIType("geo:12.3457,78.910"))],
-          new SpecialValueType(addrArr, "AdrProperty")
+          new SpecialValueType("AdrProperty", addrArr2)
         )
     );
   });
@@ -42,21 +42,21 @@ describe("AdrProperty tests", () => {
     assert.strictEqual(
       new AdrProperty(
         [new GeoParameter(new URIType("geo:12.3457,78.910"))],
-        new SpecialValueType(addrArr2, "AdrProperty")
+        new SpecialValueType("AdrProperty", addrArr2)
       ).repr(),
       'ADR;GEO="geo:12.3457,78.910":;;123 Main Street;Any Town;CA;91921-1234;U.S.A\r\n .'
     );
     assert.strictEqual(
       new AdrProperty(
         [new GeoParameter(new URIType("geo:12.3457,78.910"))],
-        new SpecialValueType(addrArr2, "AdrProperty")
+        new SpecialValueType("AdrProperty", addrArr2)
       ).reprXML(),
       "<adr><parameters><geo><uri>geo:12.3457,78.910</uri></geo></parameters><pobox/><ext/><street>123 Main Street</street><locality>Any Town</locality><region>CA</region><code>91921-1234</code><country>U.S.A.</country></adr>"
     );
     assert.deepEqual(
       new AdrProperty(
         [new GeoParameter(new URIType("geo:12.3457,78.910"))],
-        new SpecialValueType(addrArr2, "AdrProperty")
+        new SpecialValueType("AdrProperty", addrArr2)
       ).reprJSON(),
       [
         "adr",

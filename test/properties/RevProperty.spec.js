@@ -6,7 +6,7 @@ describe("RevProperty tests", () => {
   it("Accepts valid input", () => {
     assert.doesNotThrow(
       () =>
-        new RevProperty([], new DateTimeType("19951031T222710Z", "timestamp"))
+        new RevProperty([], new DateTimeType("timestamp", "19951031T222710Z"))
     );
   });
 
@@ -24,21 +24,21 @@ describe("RevProperty tests", () => {
     assert.strictEqual(
       new RevProperty(
         [],
-        new DateTimeType("19951031T222710Z", "timestamp")
+        new DateTimeType("timestamp", "19951031T222710Z")
       ).repr(),
       "REV:19951031T222710Z"
     );
     assert.strictEqual(
       new RevProperty(
         [],
-        new DateTimeType("19951031T222710Z", "timestamp")
+        new DateTimeType("timestamp", "19951031T222710Z")
       ).reprXML(),
       "<rev><timestamp>19951031T222710Z</timestamp></rev>"
     );
     assert.deepEqual(
       new RevProperty(
         [],
-        new DateTimeType("19951031T222710Z", "timestamp")
+        new DateTimeType("timestamp", "19951031T222710Z")
       ).reprJSON(),
       ["rev", {}, "timestamp", "1995-10-31T22:27:10Z"]
     );

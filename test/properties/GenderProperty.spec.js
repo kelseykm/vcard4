@@ -13,10 +13,10 @@ describe("GenderProperty tests", () => {
       () =>
         new GenderProperty(
           [],
-          new SpecialValueType(
-            [new SexType("O"), new TextType("intersex")],
-            "genderproperty"
-          )
+          new SpecialValueType("genderproperty", [
+            new SexType("O"),
+            new TextType("intersex"),
+          ])
         )
     );
   });
@@ -34,30 +34,30 @@ describe("GenderProperty tests", () => {
     assert.strictEqual(
       new GenderProperty(
         [],
-        new SpecialValueType(
-          [new SexType("O"), new TextType("intersex")],
-          "genderproperty"
-        )
+        new SpecialValueType("genderproperty", [
+          new SexType("O"),
+          new TextType("intersex"),
+        ])
       ).repr(),
       "GENDER:O;intersex"
     );
     assert.strictEqual(
       new GenderProperty(
         [],
-        new SpecialValueType(
-          [new SexType("O"), new TextType("intersex")],
-          "genderproperty"
-        )
+        new SpecialValueType("genderproperty", [
+          new SexType("O"),
+          new TextType("intersex"),
+        ])
       ).reprXML(),
       "<gender><sex>O</sex><text>intersex</text></gender>"
     );
     assert.deepEqual(
       new GenderProperty(
         [],
-        new SpecialValueType(
-          [new SexType("O"), new TextType("intersex")],
-          "genderproperty"
-        )
+        new SpecialValueType("genderproperty", [
+          new SexType("O"),
+          new TextType("intersex"),
+        ])
       ).reprJSON(),
       ["gender", {}, "text", ["O", "intersex"]]
     );

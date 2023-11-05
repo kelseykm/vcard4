@@ -11,7 +11,7 @@ describe("KindProperty tests", () => {
   it("Accepts valid input", () => {
     assert.doesNotThrow(
       () =>
-        new KindProperty([], new SpecialValueType("individual", "kindproperty"))
+        new KindProperty([], new SpecialValueType("kindproperty", "individual"))
     );
 
     assert.doesNotThrow(
@@ -19,10 +19,10 @@ describe("KindProperty tests", () => {
         new KindProperty(
           [
             new ValueParameter(
-              new SpecialValueType("individual", "kindproperty")
+              new SpecialValueType("kindproperty", "individual")
             ),
           ],
-          new SpecialValueType("individual", "kindproperty")
+          new SpecialValueType("kindproperty", "individual")
         )
     );
   });
@@ -34,7 +34,7 @@ describe("KindProperty tests", () => {
       () =>
         new KindProperty(
           [new PrefParameter(new IntegerType(1))],
-          new SpecialValueType("individual", "kindproperty")
+          new SpecialValueType("kindproperty", "individual")
         )
     );
 
@@ -46,10 +46,10 @@ describe("KindProperty tests", () => {
       new KindProperty(
         [
           new ValueParameter(
-            new SpecialValueType("individual", "kindproperty")
+            new SpecialValueType("kindproperty", "individual")
           ),
         ],
-        new SpecialValueType("individual", "kindproperty")
+        new SpecialValueType("kindproperty", "individual")
       ).repr(),
       "KIND;VALUE=text:individual"
     );
@@ -57,10 +57,10 @@ describe("KindProperty tests", () => {
       new KindProperty(
         [
           new ValueParameter(
-            new SpecialValueType("individual", "kindproperty")
+            new SpecialValueType("kindproperty", "individual")
           ),
         ],
-        new SpecialValueType("individual", "kindproperty")
+        new SpecialValueType("kindproperty", "individual")
       ).reprXML(),
       "<kind><text>individual</text></kind>"
     );
@@ -68,10 +68,10 @@ describe("KindProperty tests", () => {
       new KindProperty(
         [
           new ValueParameter(
-            new SpecialValueType("individual", "kindproperty")
+            new SpecialValueType("kindproperty", "individual")
           ),
         ],
-        new SpecialValueType("individual", "kindproperty")
+        new SpecialValueType("kindproperty", "individual")
       ).reprJSON(),
       ["kind", {}, "text", "individual"]
     );

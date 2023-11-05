@@ -9,14 +9,14 @@ describe("AnniversaryProperty tests", () => {
       () =>
         new AnniversaryProperty(
           [],
-          new DateTimeType("19960415", "dateandortime")
+          new DateTimeType("dateandortime", "19960415")
         )
     );
   });
 
   it("Rejects invalid input", () => {
     assert.throws(
-      () => new AnniversaryProperty([], new DateTimeType("19960415", "date"))
+      () => new AnniversaryProperty([], new DateTimeType("date", "19960415"))
     );
     assert.throws(() => new AnniversaryProperty(1));
     assert.throws(() => new AnniversaryProperty({}));
