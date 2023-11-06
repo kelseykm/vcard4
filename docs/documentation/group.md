@@ -49,17 +49,18 @@ import {
   URIType,
   TypeParameter,
   TextType,
+  ParameterValueType,
   Group,
 } from "vcard4";
 
 const tel = new TelProperty(
-  [new TypeParameter(new TextType("fax"), "TelProperty")],
-  new URIType("tel:+12345678910")
+  [new TypeParameter("TelProperty", new ParameterValueType("fax"))],
+  new URIType("tel:+12345678910"),
 );
 
 const email = new EmailProperty(
   [new PrefParameter(new IntegerType(1))],
-  new TextType("mister.person@thecompany.com")
+  new TextType("mister.person@thecompany.com"),
 );
 
 const title = new TitleProperty([], new TextType("The Boss"));

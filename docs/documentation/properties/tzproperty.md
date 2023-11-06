@@ -32,5 +32,5 @@ sidebar_position: 24
 ```js
 new TzProperty([], new TextType("Raleigh/North America"));
 
-new TzProperty([], new DateTimeType("-0500", "utcoffset"));
+new TzProperty([], new DateTimeType("utcoffset", "-0500"));
 ```

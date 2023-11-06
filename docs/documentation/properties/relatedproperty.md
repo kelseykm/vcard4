@@ -31,18 +31,18 @@ sidebar_position: 31
 
 ```js
 new RelatedProperty(
-  [new TypeParameter(new TextType("friend"), "relatedproperty")],
-  new URIType("uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
+  [new TypeParameter("relatedproperty", new ParameterValueType("friend"))],
+  new URIType("uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"),
 );
 
 const relPropVal = new TextType(
-  "Please contact my assistant Jane Doe for any inquiries."
+  "Please contact my assistant Jane Doe for any inquiries.",
 );
 new RelatedProperty(
   [
-    new TypeParameter(new TextType("co-worker"), "relatedproperty"),
+    new TypeParameter("relatedproperty", new ParameterValueType("co-worker")),
     new ValueParameter(relPropVal),
   ],
-  relPropVal
+  relPropVal,
 );
 ```

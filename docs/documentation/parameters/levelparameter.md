@@ -13,20 +13,20 @@ hide_title: true
   2. [`HobbyProperty`](/documentation/properties/hobbyproperty)
   3. [`InterestProperty`](/documentation/properties/interestproperty)
 
-- `LevelParameter` should be called with a two arguments, the first an instance
-  of [`TextType`](/documentation/values/texttype-and-textlisttype), and the
-  second, a case-insensitive string.
+- `LevelParameter` should be called with a two arguments, the first a
+  case-insensitive string, and the second, an instance of
+  [`ParameterValueType`](/documentation/values/parametervaluetype)
 
-- The first argument specifies the value of the parameter while the second
-  specifies the target property.
+- The first argument specifies the target property while the second specifies
+  the value of the parameter.
 
 - When the target property is `"ExpertiseProperty"`, the only valid values for
-  the first argument TextType are `"beginner"`, `"average"` and `"expert"`.
+  the second argument ParameterValueType are `"beginner"`, `"average"` and `"expert"`.
 
 - When the target property is either `"HobbyProperty"` or `"InterestProperty"`,
-  the only valid values for the first argument TextType are `"high"`,
+  the only valid values for the second argument ParameterValueType are `"high"`,
   `"medium"` and `"low"`.
 
   ```js
-  new LevelParameter(new TextType("high"), "hobbyproperty");
+  new LevelParameter("hobbyproperty", new ParameterValueType("high"));
   ```

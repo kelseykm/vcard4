@@ -45,6 +45,7 @@ hide_title: true
   11. [` URIType`](uritype)
   12. [` SexType`](sextype)
   13. [` SpecialValueType`](specialvaluetype)
+  14. [`ParameterValueType`](parametervaluetype)
 
 - The instance object is frozen and therefore its properties and methods cannot
   be modified after construction, neither can new ones be added.

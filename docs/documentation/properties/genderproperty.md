@@ -27,14 +27,14 @@ new GenderProperty([], new SexType("M"));
 
 new GenderProperty(
   [],
-  new SpecialValueType(
-    [new SexType("O"), new TextType("intersex")],
-    "genderproperty"
-  )
+  new SpecialValueType("genderproperty", [
+    new SexType("O"),
+    new TextType("intersex"),
+  ]),
 );
 
 const gpArr = new Array(2);
 gpArr[1] = new TextType("it's complicated");
 
-new GenderProperty([], new SpecialValueType(gpArr, "genderproperty"));
+new GenderProperty([], new SpecialValueType("genderproperty", gpArr));
 ```

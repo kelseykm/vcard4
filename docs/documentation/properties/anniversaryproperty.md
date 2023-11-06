@@ -30,5 +30,5 @@ sidebar_position: 10
   [`TextType`](/documentation/values/texttype-and-textlisttype)
 
 ```js
-new AnniversaryProperty([], new DateTimeType("19960415", "dateandortime"));
+new AnniversaryProperty([], new DateTimeType("dateandortime", "19960415"));
 ```

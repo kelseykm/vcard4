@@ -12,10 +12,10 @@ hide_title: true
 - It is used to present a delivery address label for the address
 
 - `LabelParameter` should be called with a single argument that is an instance
-  of [`TextType`](/documentation/values/texttype-and-textlisttype)
+  of [`ParameterValueType`](/documentation/values/parametervaluetype)
 
   ```js
-  const deliveryAddress = new TextType(`Mr. John Q. Public, Esq.
+  const deliveryAddress = new ParameterValueType(`Mr. John Q. Public, Esq.
   Mail Drop: TNE QB
   123 Main Street
   Any Town, CA 91921-1234

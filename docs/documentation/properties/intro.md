@@ -177,11 +177,11 @@ argument being the property's [value](/documentation/values/intro).
 
   ```js
   > const genderPropValue = new SpecialValueType(
+  >   'GenderProperty',
   >   [
   >     new SexType('M'),
   >     new TextType('Male')
   >   ],
-  >   'GenderProperty'
   > );
 
   > const genderPropValueParam = new ValueParameter(genderPropValue);
@@ -202,11 +202,11 @@ argument being the property's [value](/documentation/values/intro).
 
   ```js
   > const genderPropValue = new SpecialValueType(
+  >   'GenderProperty',
   >  [
   >    new SexType('M'),
   >    new TextType('Male')
   >  ],
-  >  'GenderProperty'
   > );
 
   > const genderPropValueParam = new ValueParameter(genderPropValue);
@@ -227,11 +227,11 @@ argument being the property's [value](/documentation/values/intro).
 
   ```js
   > const genderPropValue = new SpecialValueType(
+  >   'GenderProperty',
   >   [
   >     new SexType('M'),
   >     new TextType('Male')
   >   ],
-  >   'GenderProperty'
   > );
 
   > const genderPropValueParam = new ValueParameter(genderPropValue);

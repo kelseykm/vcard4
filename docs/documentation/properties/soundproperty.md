@@ -31,13 +31,13 @@ sidebar_position: 37
 ```js
 new SoundProperty(
   [],
-  new URIType("CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com")
+  new URIType("CID:JOHNQPUBLIC.part8.19960229T080000.xyzMail@example.com"),
 );
 
 new SoundProperty(
   [],
   new URIType(
-    "data:audio/basic;base64,MIICajCCAdOgAwIBAgICBEUwDQYJKoZIhAQEEBQAwdzELMAkGA1UEBhMCVVMxLDAqBgNVBAoTI05ldHNjYXBlIENvbW11bmljYXRpb25zIENvcnBvcmF0aW9uMRwwGgYDVQQLExNJbmZvcm1hdGlvbiBTeXN0"
-  )
+    "data:audio/basic;base64,MIICajCCAdOgAwIBAgICBEUwDQYJKoZIhAQEEBQAwdzELMAkGA1UEBhMCVVMxLDAqBgNVBAoTI05ldHNjYXBlIENvbW11bmljYXRpb25zIENvcnBvcmF0aW9uMRwwGgYDVQQLExNJbmZvcm1hdGlvbiBTeXN0",
+  ),
 );
 ```

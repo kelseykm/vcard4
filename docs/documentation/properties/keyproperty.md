@@ -34,7 +34,7 @@ sidebar_position: 41
 
 ```js
 new KeyProperty(
-  [new MediatypeParameter(new TextType("application/pgp-keys"))],
-  new URIType("ftp://example.com/keys/jdoe")
+  [new MediatypeParameter(new ParameterValueType("application/pgp-keys"))],
+  new URIType("ftp://example.com/keys/jdoe"),
 );
 ```

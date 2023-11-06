@@ -9,7 +9,7 @@ hide_title: true
 - This class represents the "CALSCALE" parameter
 
 - `CalscaleParameter` should be called with a single argument that is an
-  instance of [`TextType`](/documentation/values/texttype-and-textlisttype),
+  instance of [`ParameterValueType`](/documentation/values/parametervaluetype),
   and whose value is either `'gregorian'` or an x-name
 
   :::info
@@ -18,8 +18,11 @@ hide_title: true
   agreements
   :::
 
-  ```js
-  new CalscaleParameter(new TextType("gregorian"));
+- The characters allowed in an x-name include hyphens and alphanumeric
+  characters
 
-  new CalscaleParameter(new TextType("x-mything"));
-  ```
+```js
+new CalscaleParameter(new ParameterValueType("gregorian"));
+
+new CalscaleParameter(new ParameterValueType("x-mything"));
+```

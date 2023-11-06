@@ -24,6 +24,6 @@ sidebar_position: 35
 ```js
 new ProdidProperty(
   [],
-  new TextType("-//ONLINE DIRECTORY//NONSGML Version 1//EN")
+  new TextType("-//ONLINE DIRECTORY//NONSGML Version 1//EN"),
 );
 ```

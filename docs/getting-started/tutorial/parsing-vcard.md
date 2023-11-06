@@ -39,93 +39,107 @@ sidebar_position: 5
 
 - `parse` returns an object. Logging `parsedContact` to the console reveals it.
 
-  ```js
-  > console.log(parsedContact);
+```js
+> console.log(parsedContact);
 
-  {
-    parsedVcard: [
-      { group: null, property: "FN", parameters: {}, value: "Simon Perreault" },
-      {
-        group: null,
-        property: "N",
-        parameters: {},
-        value: {
-          familyNames: "Perreault",
-          givenNames: "Simon",
-          additionalNames: "",
-          honorificPrefixes: "",
-          honorificSuffixes: [Array]
-        }
+{
+  parsedVcard: [
+    { group: null, property: "FN", parameters: {}, value: "Simon Perreault" },
+    {
+      group: null,
+      property: "N",
+      parameters: {},
+      value: {
+        familyNames: "Perreault",
+        givenNames: "Simon",
+        additionalNames: "",
+        honorificPrefixes: "",
+        honorificSuffixes: ["ing. jr", "M.Sc."],
       },
-      { group: null, property: "BDAY", parameters: {}, value: "--0203" },
-      {
-        group: null,
-        property: "ANNIVERSARY",
-        parameters: {},
-        value: "20090808T1430-0500"
+    },
+    { group: null, property: "BDAY", parameters: {}, value: "--0203" },
+    {
+      group: null,
+      property: "ANNIVERSARY",
+      parameters: {},
+      value: "20090808T1430-0500",
+    },
+    {
+      group: null,
+      property: "GENDER",
+      parameters: {},
+      value: { sex: "M", gender: "" },
+    },
+    { group: null, property: "LANG", parameters: { PREF: "1" }, value: "fr" },
+    { group: null, property: "LANG", parameters: { PREF: "2" }, value: "en" },
+    {
+      group: null,
+      property: "ORG",
+      parameters: { TYPE: "work" },
+      value: "Viagenie",
+    },
+    {
+      group: null,
+      property: "ADR",
+      parameters: { TYPE: "work" },
+      value: {
+        postOfficeBox: "",
+        extendedAddress: "Suite D2-630",
+        streetAddress: "2875 Laurier",
+        locality: "Quebec",
+        region: "QC",
+        postalCode: "G1V 2M2",
+        countryName: "Canada",
       },
-      { group: null, property: "GENDER", parameters: {}, value: { sex: "M", gender: "" } },
-      { group: null, property: "LANG", parameters: { PREF: "1" }, value: "fr" },
-      { group: null, property: "LANG", parameters: { PREF: "2" }, value: "en" },
-      { group: null, property: "ORG", parameters: { TYPE: "work" }, value: "Viagenie" },
-      {
-        group: null,
-        property: "ADR",
-        parameters: { TYPE: "work" },
-        value: {
-          postOfficeBox: "",
-          extendedAddress: "Suite D2-630",
-          streetAddress: "2875 Laurier",
-          locality: "Quebec",
-          region: "QC",
-          postalCode: "G1V 2M2",
-          countryName: "Canada"
-        }
+    },
+    {
+      group: null,
+      property: "TEL",
+      parameters: { VALUE: "uri", TYPE: ["work", "voice"], PREF: "1" },
+      value: "tel:+1-418-656-9254;ext=102",
+    },
+    {
+      group: null,
+      property: "TEL",
+      parameters: {
+        VALUE: "uri",
+        TYPE: ["work", "cell", "voice", "video", "text"],
       },
-      {
-        group: null,
-        property: "TEL",
-        parameters: { VALUE: "uri", TYPE: [Array], PREF: "1" },
-        value: "tel:+1-418-656-9254;ext=102"
-      },
-      {
-        group: null,
-        property: "TEL",
-        parameters: { VALUE: "uri", TYPE: [Array] },
-        value: "tel:+1-418-262-6501"
-      },
-      {
-        group: null,
-        property: "EMAIL",
-        parameters: { TYPE: "work" },
-        value: "simon.perreault@viagenie.ca"
-      },
-      {
-        group: null,
-        property: "GEO",
-        parameters: { TYPE: "work" },
-        value: "geo:46.772673,-71.282945"
-      },
-      {
-        group: null,
-        property: "KEY",
-        parameters: { TYPE: "work" },
-        value: "http://www.viagenie.ca/simon.perreault/simon.asc"
-      },
-      { group: null, property: "TZ", parameters: {}, value: "-0500" },
-      {
-        group: null,
-        property: "URL",
-        parameters: { TYPE: "home" },
-        value: "http://nomis80.org"
-      }
-    ],
-    properties: [Getter],
-    propertiesWithoutParameters: [Getter],
-    propertiesWithParameters: [Getter],
-    getProperty: [Function: getProperty],
-    groups: [Getter],
-    getGroup: [Function: getGroup],
-    repeatingProperties: [Getter]
-  }
-  ```
+      value: "tel:+1-418-262-6501",
+    },
+    {
+      group: null,
+      property: "EMAIL",
+      parameters: { TYPE: "work" },
+      value: "simon.perreault@viagenie.ca",
+    },
+    {
+      group: null,
+      property: "GEO",
+      parameters: { TYPE: "work" },
+      value: "geo:46.772673,-71.282945",
+    },
+    {
+      group: null,
+      property: "KEY",
+      parameters: { TYPE: "work" },
+      value: "http://www.viagenie.ca/simon.perreault/simon.asc",
+    },
+    { group: null, property: "TZ", parameters: {}, value: "-0500" },
+    {
+      group: null,
+      property: "URL",
+      parameters: { TYPE: "home" },
+      value: "http://nomis80.org",
+    },
+  ],
+  properties: [Getter],
+  propertiesWithoutParameters: [Getter],
+  propertiesWithParameters: [Getter],
+  getProperty: [Function: getProperty],
+  groups: [Getter],
+  getGroup: [Function: getGroup],
+  repeatingProperties: [Getter],
+}
+
+```

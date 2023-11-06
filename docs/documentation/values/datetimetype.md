@@ -9,19 +9,19 @@ hide_title: true
 - This class represents the "date", "time", "date-time", "date-and-or-time",
   "timestamp" and "utc-offset" data types
 
-- `DateTimeType` should be called with two arguments, the first being the value
-  and the second being the target data type.
+- `DateTimeType` should be called with two arguments, the first being the target data type
+  and the second being the value.
 
-- Accepted values for the second argument include: `"date"`, `"time"`,
+- Accepted values for the first argument include: `"date"`, `"time"`,
   `"datetime"`, `"dateandortime"`, `"timestamp"` or `"utcoffset"`. Note that
   it should be of type string.
 
-- The value of the first argument depends on the type specified in the value of
-  the second argument
+- The value of the second argument depends on the type specified in the value of
+  the first argument
 
 ## date
 
-- Where `"date"` is the second argument, the value of the first argument should
+- Where `"date"` is the first argument, the value of the second argument should
   be of the format:
 
   ```
@@ -53,12 +53,12 @@ hide_title: true
 - Example for `"date"`:
 
   ```js
-  new DateTimeType("19850412", "date");
+  new DateTimeType("date", "19850412");
   ```
 
 ## time
 
-- Where `"time"` is the second argument, the value of the first argument should
+- Where `"time"` is the first argument, the value of the second argument should
   be of the format:
 
   ```
@@ -91,12 +91,12 @@ hide_title: true
 - Example for `"time"`:
 
   ```js
-  new DateTimeType("--00", "time");
+  new DateTimeType("time", "--00");
   ```
 
 ## datetime
 
-- Where `"datetime"` is the second argument, the value of the first argument
+- Where `"datetime"` is the first argument, the value of the second argument
   should be of the format:
 
 ```
@@ -120,13 +120,13 @@ Examples:
 
 - Example for `"datetime"`:
 
-```js
-new DateTimeType("--1022T1400", "datetime");
-```
+  ```js
+  new DateTimeType("datetime", "--1022T1400");
+  ```
 
 ## dateandortime
 
-- Where `"dateandortime"` is the second argument, the value of the first
+- Where `"dateandortime"` is the first argument, the value of the second
   argument should be of the format:
 
   ```
@@ -162,12 +162,12 @@ new DateTimeType("--1022T1400", "datetime");
 - Example for `"dateandortime"`:
 
   ```js
-  new DateTimeType("--1022T1400", "dateandortime");
+  new DateTimeType("dateandortime", "--1022T1400");
   ```
 
 ## timestamp
 
-- Where `"timestamp"` is the second argument, the value of the first argument
+- Where `"timestamp"` is the first argument, the value of the second argument
   should be of the format:
 
   ```
@@ -190,14 +190,14 @@ new DateTimeType("--1022T1400", "datetime");
 - Example for `"timestamp"`:
 
   ```js
-  new DateTimeType("19961022T140000-0500", "timestamp");
+  new DateTimeType("timestamp", "19961022T140000-0500");
 
-  new DateTimeType("19961022T140000+01", "timestamp");
+  new DateTimeType("timestamp", "19961022T140000+01");
   ```
 
 ## utcoffset
 
-- Where `"utcoffset"` is the second argument, the value of the first argument
+- Where `"utcoffset"` is the first argument, the value of the second argument
   should be of the format:
 
   ```
@@ -207,7 +207,7 @@ new DateTimeType("--1022T1400", "datetime");
 - Example for `"utcoffset"`:
 
   ```js
-  new DateTimeType("-0500", "utcoffset");
+  new DateTimeType("utcoffset", "-0500");
 
-  new DateTimeType("+03", "utcoffset");
+  new DateTimeType("utcoffset", "+03");
   ```

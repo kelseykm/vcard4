@@ -31,12 +31,12 @@ sidebar_position: 8
 new PhotoProperty(
   [],
   new URIType(
-    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
-  )
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==",
+  ),
 );
 
 new PhotoProperty(
   [],
-  new URIType("http://www.example.com/pub/photos/jqpublic.gif")
+  new URIType("http://www.example.com/pub/photos/jqpublic.gif"),
 );
 ```

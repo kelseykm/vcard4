@@ -33,11 +33,11 @@ new NicknameProperty([], new TextType("Robbie"));
 
 new NicknameProperty(
   [],
-  new TextListType([new TextType("Jim"), new TextType("Jimmie")])
+  new TextListType([new TextType("Jim"), new TextType("Jimmie")]),
 );
 
 new NicknameProperty(
-  [new TypeParameter(new TextType("work"), "nicknameproperty")],
-  new TextType("Boss")
+  [new TypeParameter("nicknameproperty", new ParameterValueType("work"))],
+  new TextType("Boss"),
 );
 ```

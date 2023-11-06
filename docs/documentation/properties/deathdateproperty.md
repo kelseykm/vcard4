@@ -35,7 +35,7 @@ sidebar_position: 14
   [`TextType`](/documentation/values/texttype-and-textlisttype)
 
 ```js
-new DeathDateProperty([], new DateTimeType("19960415", "dateandortime"));
+new DeathDateProperty([], new DateTimeType("dateandortime", "19960415"));
 
 const ddp2val = new TextType("circa 1800");
 

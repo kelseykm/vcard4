@@ -51,16 +51,26 @@ sidebar_position: 2
 - First off, we import the classes needed from `vcard4`.
 
   ```js title=ESM
-  import { GeoProperty, TypeParameter, URIType, TextType } from "vcard4";
+  import {
+    GeoProperty,
+    TypeParameter,
+    URIType,
+    ParameterValueType,
+  } from "vcard4";
   ```
 
   ```js title=commonjs
-  const { GeoProperty, TypeParameter, URIType, TextType } = require("vcard4");
+  const {
+    GeoProperty,
+    TypeParameter,
+    URIType,
+    ParameterValueType,
+  } = require("vcard4");
   ```
 
   :::tip
   As you have probably already noticed, the naming of the classes is quite
-  intuitive: just add 'property', 'parameter' or 'value' to the name depending on
+  intuitive: just add 'property', 'parameter' or 'type' to the name depending on
   whether it's a property, parameter or value type, convert it to PascalCase, et
   voilà!
   :::
@@ -74,11 +84,11 @@ sidebar_position: 2
 - Then the parameter.
 
   ```js
-  const typeParameterValue = new TextType("work");
+  const typeParameterValue = new ParameterValueType("work");
 
   const geoTypeParameter = new TypeParameter(
+    "geoparameter",
     typeParameterValue,
-    "geoparameter"
   );
   ```
 
@@ -91,18 +101,23 @@ sidebar_position: 2
 - And that's it, we have created our first content line!
 
   ```js
-  import { GeoProperty, TypeParameter, URIType, TextType } from "vcard4";
+  import {
+    GeoProperty,
+    TypeParameter,
+    URIType,
+    ParameterValueType,
+  } from "vcard4";
 
   //or if you're using commonjs
-  //const { GeoProperty, TypeParameter, URIType, TextType } = require('vcard4');
+  //const { GeoProperty, TypeParameter, URIType, ParameterValueType } = require('vcard4');
 
   const geoValue = new URIType("geo:46.772673,-71.282945");
 
-  const typeParameterValue = new TextType("work");
+  const typeParameterValue = new ParameterValueType("work");
 
   const geoTypeParameter = new TypeParameter(
+    "geoparameter",
     typeParameterValue,
-    "geoparameter"
   );
 
   const geo = new GeoProperty([geoTypeParameter], geoValue);
@@ -141,6 +156,7 @@ sidebar_position: 2
     URIType,
     SexType,
     SpecialValueType,
+    ParameterValueType,
     ValueParameter,
     PrefParameter,
     TypeParameter,
@@ -169,18 +185,18 @@ sidebar_position: 2
   nArr[0] = new TextType("Perreault");
   nArr[1] = new TextType("Simon");
   nArr[4] = new TextListType([new TextType("ing. jr"), new TextType("M.Sc.")]);
-  const n = new NProperty([], new SpecialValueType(nArr, "nproperty"));
+  const n = new NProperty([], new SpecialValueType("nproperty", nArr));
 
   // BDAY property
   const bday = new BdayProperty(
     [],
-    new DateTimeType("--0203", "dateandortime")
+    new DateTimeType("dateandortime", "--0203"),
   );
 
   // ANNIVERSARY property
   const anniversary = new AnniversaryProperty(
     [],
-    new DateTimeType("20090808T1430-0500", "dateandortime")
+    new DateTimeType("dateandortime", "20090808T1430-0500"),
   );
 
   // GENDER property
@@ -189,17 +205,17 @@ sidebar_position: 2
   // LANG properties
   const lang1 = new LangProperty(
     [new PrefParameter(new IntegerType(1))],
-    new LanguageTagType("fr")
+    new LanguageTagType("fr"),
   );
   const lang2 = new LangProperty(
     [new PrefParameter(new IntegerType(2))],
-    new LanguageTagType("en")
+    new LanguageTagType("en"),
   );
 
   // ORG property
   const org = new OrgProperty(
-    [new TypeParameter(new TextType("work"), "orgproperty")],
-    new SpecialValueType([new TextType("Viagenie")], "orgproperty")
+    [new TypeParameter("orgproperty", new ParameterValueType("work"))],
+    new SpecialValueType("orgproperty", [new TextType("Viagenie")]),
   );
 
   // ADR property
@@ -211,65 +227,62 @@ sidebar_position: 2
   aArr[5] = new TextType("G1V 2M2");
   aArr[6] = new TextType("Canada");
   const adr = new AdrProperty(
-    [new TypeParameter(new TextType("work"), "adrproperty")],
-    new SpecialValueType(aArr, "adrproperty")
+    [new TypeParameter("adrproperty", new ParameterValueType("work"))],
+    new SpecialValueType("adrproperty", aArr),
   );
 
   // TEL properties
   const tel1 = new TelProperty(
     [
       new ValueParameter(new URIType("tel:+1-418-656-9254;ext=102")),
-      new TypeParameter(
-        new TextListType([new TextType("work"), new TextType("voice")]),
-        "telproperty"
-      ),
+      new TypeParameter("telproperty", [
+        new ParameterValueType("work"),
+        new ParameterValueType("voice"),
+      ]),
       new PrefParameter(new IntegerType(1)),
     ],
-    new URIType("tel:+1-418-656-9254;ext=102")
+    new URIType("tel:+1-418-656-9254;ext=102"),
   );
 
   const tel2 = new TelProperty(
     [
       new ValueParameter(new URIType("tel:+1-418-262-6501")),
-      new TypeParameter(
-        new TextListType([
-          new TextType("work"),
-          new TextType("cell"),
-          new TextType("voice"),
-          new TextType("video"),
-          new TextType("text"),
-        ]),
-        "telproperty"
-      ),
+      new TypeParameter("telproperty", [
+        new ParameterValueType("work"),
+        new ParameterValueType("cell"),
+        new ParameterValueType("voice"),
+        new ParameterValueType("video"),
+        new ParameterValueType("text"),
+      ]),
     ],
-    new URIType("tel:+1-418-262-6501")
+    new URIType("tel:+1-418-262-6501"),
   );
 
   // EMAIL property
   const email = new EmailProperty(
-    [new TypeParameter(new TextType("work"), "emailproperty")],
-    new TextType("simon.perreault@viagenie.ca")
+    [new TypeParameter("emailproperty", new ParameterValueType("work"))],
+    new TextType("simon.perreault@viagenie.ca"),
   );
 
   // GEO property
   const geo = new GeoProperty(
-    [new TypeParameter(new TextType("work"), "geoproperty")],
-    new URIType("geo:46.772673,-71.282945")
+    [new TypeParameter("geoproperty", new ParameterValueType("work"))],
+    new URIType("geo:46.772673,-71.282945"),
   );
 
   // KEY property
   const key = new KeyProperty(
-    [new TypeParameter(new TextType("work"), "keyproperty")],
-    new URIType("http://www.viagenie.ca/simon.perreault/simon.asc")
+    [new TypeParameter("keyproperty", new ParameterValueType("work"))],
+    new URIType("http://www.viagenie.ca/simon.perreault/simon.asc"),
   );
 
   // TZ property
-  const tz = new TzProperty([], new DateTimeType("-0500", "utcoffset"));
+  const tz = new TzProperty([], new DateTimeType("utcoffset", "-0500"));
 
   // URL property
   const url = new URLProperty(
-    [new TypeParameter(new TextType("home"), "urlproperty")],
-    new URIType("http://nomis80.org")
+    [new TypeParameter("urlproperty", new ParameterValueType("home"))],
+    new URIType("http://nomis80.org"),
   );
 
   // assembling all the properties into a vCard

@@ -36,6 +36,6 @@ new CategoriesProperty(
     new TextType("INTERNET"),
     new TextType("IETF"),
     new TextType("INDUSTRY"),
-  ])
+  ]),
 );
 ```

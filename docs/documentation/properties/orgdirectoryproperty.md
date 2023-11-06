@@ -30,6 +30,6 @@ sidebar_position: 32
 ```js
 new OrgDirectoryProperty(
   [],
-  new URIType("uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6")
+  new URIType("uuid:f81d4fae-7dec-11d0-a765-00a0c91e6bf6"),
 );
 ```

@@ -9,14 +9,15 @@ hide_title: true
 - This class represents the "SORT-AS" parameter
 
 - `SortAsParameter` should be called with a single argument that is an instance
-  of [`TextType`](/documentation/values/texttype-and-textlisttype) or
-  [`TextListType`](/documentation/values/texttype-and-textlisttype) if you wish
-  to specify multiple values, an array of string items
+  of [`ParameterValueType`](/documentation/values/parametervaluetype) or an array of
+  [`ParameterValueType`](/documentation/values/parametervaluetype)s if you wish
+  to specify multiple values
 
-  ```js
-  new SortAsParameter(
-    new TextListType([new TextType("Harten"), new TextType("Rene")])
-  );
+```js
+new SortAsParameter([
+  new ParameterValueType("Harten"),
+  new ParameterValueType("Rene"),
+]);
 
-  new SortAsParameter(new TextType("Pau Shou Chang"));
-  ```
+new SortAsParameter(new ParameterValueType("Pau Shou Chang"));
+```

@@ -10,11 +10,11 @@ hide_title: true
 
 - `TzParameter` should be called with a single argument that is an instance of
   [`URIType`](/documentation/values/uritype), or
-  [`TextType`](/documentation/values/texttype-and-textlisttype), or
+  [`ParameterValueType`](/documentation/values/parametervaluetype), or
   [`DateTimeType`](/documentation/values/datetimetype) with the type `utc-offset`
 
   ```js
-  new TzParameter(new TextType("Raleigh/North America"));
+  new TzParameter(new ParameterValueType("Raleigh/North America"));
 
-  new TzParameter(new DateTimeType("-0500", "utcoffset"));
+  new TzParameter(new DateTimeType("utcoffset", "-0500"));
   ```

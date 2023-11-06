@@ -29,13 +29,13 @@ sidebar_position: 28
 ```js
 new LogoProperty(
   [],
-  new URIType("http://www.example.com/pub/logos/abccorp.jpg")
+  new URIType("http://www.example.com/pub/logos/abccorp.jpg"),
 );
 
 new LogoProperty(
   [],
   new URIType(
-    "data:image/jpeg;base64,MIICajCCAdOgAwIBAgICBEUwDQYJKoZIhvcAQEEBQAwdzELMAkGA1UEBhMCVVMxLDAqBgNVBAoTI05ldHNjYXBlIENvbW11bmljYXRpb25zIENvcnBvcmF0aW9uMRwwGgYDVQQLExNJbmZvcm1hdGlvbiBTeXN0"
-  )
+    "data:image/jpeg;base64,MIICajCCAdOgAwIBAgICBEUwDQYJKoZIhvcAQEEBQAwdzELMAkGA1UEBhMCVVMxLDAqBgNVBAoTI05ldHNjYXBlIENvbW11bmljYXRpb25zIENvcnBvcmF0aW9uMRwwGgYDVQQLExNJbmZvcm1hdGlvbiBTeXN0",
+  ),
 );
 ```

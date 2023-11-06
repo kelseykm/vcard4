@@ -31,13 +31,10 @@ sidebar_position: 29
 ```js
 new OrgProperty(
   [],
-  new SpecialValueType(
-    [
-      new TextType("ABC, Inc."),
-      new TextType("North American Division"),
-      new TextType("Marketing"),
-    ],
-    "orgproperty"
-  )
+  new SpecialValueType("orgproperty", [
+    new TextType("ABC, Inc."),
+    new TextType("North American Division"),
+    new TextType("Marketing"),
+  ]),
 );
 ```

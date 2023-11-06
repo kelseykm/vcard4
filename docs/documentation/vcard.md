@@ -63,6 +63,7 @@ import {
   FNProperty,
   AdrProperty,
   SpecialValueType,
+  ParameterValueType,
   NProperty,
   VCARD,
 } from "vcard4";
@@ -72,11 +73,11 @@ const fn = new FNProperty([], new TextType("Mister Person"));
 const nArr = new Array(5);
 nArr[0] = new TextType("Person");
 nArr[1] = new TextType("Mister");
-const n = new NProperty([], new SpecialValueType(nArr, "NProperty"));
+const n = new NProperty([], new SpecialValueType("NProperty", nArr));
 
 const telHome = new TelProperty(
-  [new TypeParameter(new TextType("home"), "TelProperty")],
-  new URIType("tel:+9876543210")
+  [new TypeParameter("TelProperty", new ParameterValueType("home"))],
+  new URIType("tel:+9876543210"),
 );
 
 const addrArr = new Array(7);
@@ -86,20 +87,20 @@ addrArr[4] = new TextType("AAH");
 addrArr[5] = new TextType("91921-1234");
 addrArr[6] = new TextType("Nowayar");
 
-const addr = new AdrProperty([], new SpecialValueType(addrArr, "AdrProperty"));
+const addr = new AdrProperty([], new SpecialValueType("AdrProperty", addrArr));
 
 const tel = new TelProperty(
-  [new TypeParameter(new TextType("fax"), "TelProperty")],
-  new URIType("tel:+12345678910")
+  [new TypeParameter("TelProperty", new ParameterValueType("fax"))],
+  new URIType("tel:+12345678910"),
 );
 
 const email = new EmailProperty(
   [new PrefParameter(new IntegerType(1))],
-  new TextType("mister.person@thecompany.com")
+  new TextType("mister.person@thecompany.com"),
 );
 const email2 = new EmailProperty(
   [],
-  new TextType("mister.person@thecompany.org")
+  new TextType("mister.person@thecompany.org"),
 );
 
 const title = new TitleProperty([], new TextType("The Boss"));

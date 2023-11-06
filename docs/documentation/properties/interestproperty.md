@@ -28,7 +28,7 @@ sidebar_position: 17
 
 ```js
 new InterestProperty(
-  [new LevelParameter(new TextType("average"), "interestProperty")],
-  new TextType("Arbitrage betting")
+  [new LevelParameter("interestProperty", new ParameterValueType("average"))],
+  new TextType("Arbitrage betting"),
 );
 ```

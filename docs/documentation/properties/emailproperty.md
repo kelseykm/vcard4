@@ -29,6 +29,6 @@ sidebar_position: 20
 ```js
 new EmailProperty(
   [new PrefParameter(new IntegerType(1))],
-  new TextType("jane_doe@example.com")
+  new TextType("jane_doe@example.com"),
 );
 ```

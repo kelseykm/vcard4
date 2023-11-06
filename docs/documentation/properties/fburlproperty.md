@@ -29,7 +29,7 @@ sidebar_position: 42
 
 ```js
 new FburlProperty(
-  [new MediatypeParameter(new TextType("text/calendar"))],
-  new URIType("ftp://example.com/busy/project-a.ifb")
+  [new MediatypeParameter(new ParameterValueType("text/calendar"))],
+  new URIType("ftp://example.com/busy/project-a.ifb"),
 );
 ```

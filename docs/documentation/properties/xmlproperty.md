@@ -42,7 +42,7 @@ new XMLProperty(
         <heading>Reminder</heading>
         <body>Don't forget me, this weekend!</body>
       </note>
-    </love-letter>`
-  )
+    </love-letter>`,
+  ),
 );
 ```

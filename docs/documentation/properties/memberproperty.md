@@ -32,6 +32,6 @@ sidebar_position: 30
 ```js
 new MemberProperty(
   [],
-  new URIType("urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af")
+  new URIType("urn:uuid:03a0e51f-d1aa-4385-8a53-e29025acd8af"),
 );
 ```

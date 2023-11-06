@@ -14,13 +14,13 @@ hide_title: true
 
   ```js
   new DateTimeListType([
-    new DateTimeType("1985-04", "date"),
-    new DateTimeType("---12", "date"),
+    new DateTimeType("date", "1985-04"),
+    new DateTimeType("date", "---12"),
   ]);
 
   new DateTimeListType([
-    new DateTimeType("19961022T140000-0500", "timestamp"),
-    new DateTimeType("19961022T140000+01", "timestamp"),
+    new DateTimeType("timestamp", "19961022T140000-0500"),
+    new DateTimeType("timestamp", "19961022T140000+01"),
   ]);
   ```
 
@@ -29,8 +29,8 @@ hide_title: true
 
   ```js
   new DateTimeListType([
-    new DateTimeType("---22T14", "datetime"),
-    new DateTimeType("---12", "dateandortime"),
+    new DateTimeType("datetime", "---22T14"),
+    new DateTimeType("dateandortime", "---12"),
   ]);
 
   // TypeError: Invalid type for value of DateTimeListType. It should be an

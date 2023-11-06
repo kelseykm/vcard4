@@ -30,6 +30,6 @@ sidebar_position: 40
 ```js
 new URLProperty(
   [],
-  new URIType("http://example.org/restaurant.french/chezchic.html")
+  new URIType("http://example.org/restaurant.french/chezchic.html"),
 );
 ```

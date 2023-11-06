@@ -30,6 +30,6 @@ sidebar_position: 34
 ```js
 new NoteProperty(
   [],
-  new TextType("This fax number is operational 0800 to 1715 EST, Mon-Fri.")
+  new TextType("This fax number is operational 0800 to 1715 EST, Mon-Fri."),
 );
 ```

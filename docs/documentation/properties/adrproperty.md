@@ -41,6 +41,6 @@ addrArr[6] = new TextType("U.S.A.");
 
 new AdrProperty(
   [new GeoParameter(new URIType("geo:12.3457,78.910"))],
-  new SpecialValueType(addrArr, "AdrProperty")
+  new SpecialValueType("AdrProperty", addrArr),
 );
 ```

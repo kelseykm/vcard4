@@ -35,7 +35,7 @@ sidebar_position: 9
   [`TextType`](/documentation/values/texttype-and-textlisttype)
 
 ```js
-new BdayProperty([], new DateTimeType("19960415", "dateandortime"));
+new BdayProperty([], new DateTimeType("dateandortime", "19960415"));
 
 const bday2val = new TextType("circa 1800");
 

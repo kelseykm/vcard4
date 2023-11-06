@@ -17,27 +17,29 @@ sidebar_position: 11
   6. [`ClientpidmapProperty`](/documentation/properties/clientpidmapproperty)
 
 - `SpecialValueType` should be called with two arguments. The first should be
-  the value and the second should be the target property
+  the target property and the second should be the value
 
-- The second argument that specifies the target property should have as a value
+- The first argument that specifies the target property should have as a value
   a string with the name of one the six classes listed above (case insensitive)
 
-- The value of the first argument depends on the value of the second argument
+- The value of the second argument depends on the value of the first argument
 
 ## Use with `KindProperty`
 
-- Where the second argument is `'KindProperty'` (case insensitive), the only
-  accepted values for the first argument are `'individual'`, `'group'`,
-  `'org'`, `'location'`, `'application'` or an identifier registered with IANA
+- Where the first argument is `'KindProperty'` (case insensitive), the only
+  accepted values for the second argument are `'individual'`, `'group'`,
+  `'org'`, `'location'`, `'application'` or an x-name (names that begin with
+  "x-" or "X-" and are reserved for experimental use, not intended for released
+  products, or for use in bilateral agreements)
 
   ```js
-  new SpecialValueType("org", "KindProperty");
+  new SpecialValueType("KindProperty", "org");
   ```
 
 ## Use with `NProperty`
 
-- Where the second argument is `'NProperty'` (case insensitive), the only
-  accepted value for the first argument is an array of length 5. The items in
+- Where the first argument is `'NProperty'` (case insensitive), the only
+  accepted value for the second argument is an array of length 5. The items in
   the array, if present, must be of type [`TextType`](texttype-and-textlisttype)
   or [`TextListType`](texttype-and-textlisttype), otherwise, **they must be left
   empty**
@@ -65,30 +67,33 @@ sidebar_position: 11
   nameArr[1] = new TextType("John");
   nameArr[3] = new TextListType([new TextType("Mr."), new TextType("Dr.")]);
 
-  new SpecialValueType(nameArr, "NProperty");
+  new SpecialValueType("NProperty", nameArr);
   ```
 
 ## Use with `GenderProperty`
 
-- Where the second argument is `'GenderProperty'` (case insensitive), the only
-  accepted value for the first argument is an array of length 2. The first item
+- Where the first argument is `'GenderProperty'` (case insensitive), the only
+  accepted value for the second argument is an array of length 2. The first item
   in the array, if present, must be of type [`SexType`](sextype), while the
   second, if present, must be of the type
   [`TextType`](texttype-and-textlisttype), otherwise, **they must be left
   empty**. Note that **only one** can be left empty, so if one is left empty, the
   other must be present
 
+- The items specify the components of the sex and gender identity,
+  respectively, of the object the vCard represents.
+
   ```js
-  new SpecialValueType(
-    [new SexType("O"), new TextType("intersex")],
-    "GenderProperty"
-  );
+  new SpecialValueType("GenderProperty", [
+    new SexType("O"),
+    new TextType("intersex"),
+  ]);
   ```
 
 ## Use with `AdrProperty`
 
-- Where the second argument is `'AdrProperty'` (case insensitive), the only
-  accepted value for the first argument is an array of length 7. The items in
+- Where the first argument is `'AdrProperty'` (case insensitive), the only
+  accepted value for the second argument is an array of length 7. The items in
   the array, if present, must be of type [`TextType`](texttype-and-textlisttype),
   otherwise, **they must be left empty**
 
@@ -106,34 +111,38 @@ sidebar_position: 11
   const adrArr = new Array(7);
   adrArr[3] = new TextType("Main street");
 
-  new SpecialValueType(adrArr, "AdrProperty");
+  new SpecialValueType("AdrProperty", adrArr);
   ```
 
 ## Use with `OrgProperty`
 
-- Where the second argument is `'OrgProperty'` (case insensitive), the only
-  accepted value for the first argument is an array, with at least one item but
+- Where the first argument is `'OrgProperty'` (case insensitive), the only
+  accepted value for the second argument is an array, with at least one item but
   with no length limit. The items in the array must be of type
   [`TextType`](texttype-and-textlisttype)
 
   ```js
-  new SpecialValueType(
-    [new TextType("Example.com Inc."), new TextType("Marketing")],
-    "orgproperty"
-  );
+  new SpecialValueType("orgproperty", [
+    new TextType("Example.com Inc."),
+    new TextType("Marketing"),
+  ]);
   ```
 
 ## Use with `ClientpidmapProperty`
 
-- Where the second argument is `'ClientpidmapProperty'` (case insensitive), the
-  only accepted value for the first argument is an array of length 2. The first
+- Where the first argument is `'ClientpidmapProperty'` (case insensitive), the
+  only accepted value for the second argument is an array of length 2. The first
   item in the array must be of type
   [`IntegerType`](integertype-and-integerlisttype), while the second, must be of
   the type [`URIType`](uritype). **None of the items can be left empty**
 
   ```js
-  new SpecialValueType(
-    [new IntegerType(1), new URIType("uuid:123-asmm-aams")],
-    "clientpidmapProperty"
-  );
+  new SpecialValueType("clientpidmapProperty", [
+    new IntegerType(1),
+    new URIType("uuid:123-asmm-aams"),
+  ]);
   ```
+
+```
+
+```

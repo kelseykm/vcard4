@@ -14,9 +14,9 @@ hide_title: true
   component](/documentation/values/specialvaluetype)
 
 - `CCParameter` should be called with a single argument that is an instance of
-  [`TextType`](/documentation/values/texttype-and-textlisttype), whose value is
+  [`ParameterValueType`](/documentation/values/parametervaluetype), whose value is
   2 alphanumeric characters
 
   ```js
-  new CCParameter(new TextType("US"));
+  new CCParameter(new ParameterValueType("US"));
   ```

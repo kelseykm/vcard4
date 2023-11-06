@@ -9,44 +9,46 @@ hide_title: true
 - This class represents the "TYPE" parameter
 
 - `TypeParameter` should be called with a two arguments, the first being the
-  value and the second being the target property. The value of the first
-  argument depends on the value of the second
+  target property and the second being the value. The value of the second
+  argument depends on the value of the first
 
-- The value of the second argument should be a string with the name of the
+- The value of the first argument should be a string with the name of the
   target property as already mentioned
 
-- For all target properties, the first argument should be an instance of
-  [`TextType`](/documentation/values/texttype-and-textlisttype), whose value is
-  either `"work"`, `"home"`, an identifier registered with IANA or an x-name
-  (names that begin with "x-" or "X-" and are reserved for experimental use, not
-  intended for released products, or for use in bilateral agreements)
+- The second argument specifying the value of the `TypeParameter` should be
+  an instance of [`ParameterValueType`](/documentation/values/parametervaluetype)
 
-- Where the value of the second argument is `"TelProperty"` (case insensitive),
-  the value of the first argument may be `"text"`, `"voice"`, `"fax"`,
+- For all target properties, either `"work"`, `"home"` or an x-name (names
+  that begin with "x-" or "X-" and are reserved for experimental use, not
+  intended for released products, or for use in bilateral agreements), are
+  allowed as values for the
+  [`ParameterValueType`](/documentation/values/parametervaluetype) value
+
+- Where the value of the first argument is `"TelProperty"` (case insensitive),
+  the value of the second argument may be `"text"`, `"voice"`, `"fax"`,
   `"cell"`, `"video"`, `"pager"`, `"textphone"` or `"main"` in addition to the
   values specified above for all target properties
 
-- Where the value of the second argument is `"RelatedProperty"` (case
-  insensitive), the value of the first argument may be `"contact"`,
+- Where the value of the first argument is `"RelatedProperty"` (case
+  insensitive), the value of the second argument may be `"contact"`,
   `"acquaintance"`, `"friend"`, `"met"`, `"co-worker"`, `"colleague"`,
   `"co-resident"`, `"neighbor"`, `"child"`, `"parent"`, `"sibling"`, `"spouse"`,
   `"kin"`, `"muse"`, `"crush"`, `"date"`, `"sweetheart"`, `"me"`, `"agent"` or
   `"emergency"`, in addition to the values specified above for all target
   properties
 
-- If you wish to have multiple values for the same TYPE parameter, the value of
-  the first argument may be an instance of
-  [`TextListType`](/documentation/values/texttype-and-textlisttype), whose values
-  for individual [`TextType`](/documentation/values/texttype-and-textlisttype)
-  components are those specified above, according to the rules specified above
+- If you wish to have multiple values for the same TYPE parameter, put the
+  [`ParameterValueType`](/documentation/values/parametervaluetype) values in an
+  array and pass the array as the value of the second argument. The rules
+  specified above still apply.
 
   ```js
-  new TypeParameter(new TextType("work"), "emailproperty");
+  new TypeParameter("emailproperty", new ParameterValueType("work"));
 
-  new TypeParameter(
-    new TextListType([new TextType("voice"), new TextType("home")]),
-    "telproperty"
-  );
+  new TypeParameter("telproperty", [
+    new ParameterValueType("voice"),
+    new ParameterValueType("home"),
+  ]);
 
-  new TypeParameter(new TextType("sweetheart"), "relatedproperty");
+  new TypeParameter("relatedproperty", new ParameterValueType("sweetheart"));
   ```

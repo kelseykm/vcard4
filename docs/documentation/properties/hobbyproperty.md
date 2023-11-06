@@ -28,7 +28,7 @@ sidebar_position: 16
 
 ```js
 new HobbyProperty(
-  [new LevelParameter(new TextType("beginner"), "hobbyProperty")],
-  new TextType("Chess")
+  [new LevelParameter("hobbyProperty", new ParameterValueType("beginner"))],
+  new TextType("Chess"),
 );
 ```

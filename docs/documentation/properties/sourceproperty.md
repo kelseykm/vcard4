@@ -29,6 +29,6 @@ sidebar_position: 2
 ```js
 new SourceProperty(
   [],
-  new URIType("ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US")
+  new URIType("ldap://ldap.example.com/cn=Babs%20Jensen,%20o=Babsco,%20c=US"),
 );
 ```

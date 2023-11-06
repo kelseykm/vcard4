@@ -29,7 +29,7 @@ sidebar_position: 44
 
 ```js
 new CaluriProperty(
-  [new MediatypeParameter(new TextType("text/calendar"))],
-  new URIType("ftp://ftp.example.com/calA.ics")
+  [new MediatypeParameter(new ParameterValueType("text/calendar"))],
+  new URIType("ftp://ftp.example.com/calA.ics"),
 );
 ```

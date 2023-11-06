@@ -22,5 +22,5 @@ sidebar_position: 3
   [`SpecialValueType`](/documentation/values/specialvaluetype)
 
 ```js
-new KindProperty([], new SpecialValueType("individual", "kindproperty"));
+new KindProperty([], new SpecialValueType("kindproperty", "individual"));
 ```

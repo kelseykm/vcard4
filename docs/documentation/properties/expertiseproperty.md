@@ -28,7 +28,7 @@ sidebar_position: 15
 
 ```js
 new ExpertiseProperty(
-  [new LevelParameter(new TextType("expert"), "expertiseProperty")],
-  new TextType("Theoretical Physics")
+  [new LevelParameter("expertiseProperty", new ParameterValueType("expert"))],
+  new TextType("Theoretical Physics"),
 );
 ```

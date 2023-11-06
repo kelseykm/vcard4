@@ -22,5 +22,5 @@ sidebar_position: 36
   [`DateTimeType`](/documentation/values/datetimetype) of type `timestamp`
 
 ```js
-new RevProperty([], new DateTimeType("19951031T222710Z", "timestamp"));
+new RevProperty([], new DateTimeType("timestamp", "19951031T222710Z"));
 ```
