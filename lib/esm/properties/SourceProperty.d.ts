@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { ValueParameter } from '../parameters/ValueParameter.js';
 import { PIDParameter } from '../parameters/PIDParameter.js';
 import { PrefParameter } from '../parameters/PrefParameter.js';
@@ -22,7 +23,7 @@ import '../values/SexType.js';
 import '../values/SpecialValueType.js';
 import '../values/ParameterValueType.js';
 
-declare class SourceProperty {
+declare class SourceProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { PrefParameter } from '../parameters/PrefParameter.js';
 import { AltidParameter } from '../parameters/AltidParameter.js';
 import { TypeParameter } from '../parameters/TypeParameter.js';
@@ -12,7 +13,7 @@ import '../values/BaseValue.js';
 import '../values/ParameterValueType.js';
 import '../values/LanguageTagType.js';
 
-declare class HobbyProperty {
+declare class HobbyProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

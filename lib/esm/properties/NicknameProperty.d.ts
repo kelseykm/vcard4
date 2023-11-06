@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { ValueParameter } from '../parameters/ValueParameter.js';
 import { TypeParameter } from '../parameters/TypeParameter.js';
 import { LanguageParameter } from '../parameters/LanguageParameter.js';
@@ -23,7 +24,7 @@ import '../values/SexType.js';
 import '../values/SpecialValueType.js';
 import '../values/ParameterValueType.js';
 
-declare class NicknameProperty {
+declare class NicknameProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

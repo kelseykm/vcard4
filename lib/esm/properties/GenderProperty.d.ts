@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { ValueParameter } from '../parameters/ValueParameter.js';
 import { AnyParameter } from '../parameters/AnyParameter.js';
 import { SexType } from '../values/SexType.js';
@@ -17,7 +18,7 @@ import '../values/LanguageTagType.js';
 import '../values/URIType.js';
 import '../values/ParameterValueType.js';
 
-declare class GenderProperty {
+declare class GenderProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

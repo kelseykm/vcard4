@@ -42,6 +42,7 @@ import { FburlProperty } from './properties/FburlProperty.js';
 import { CaladruriProperty } from './properties/CaladruriProperty.js';
 import { CaluriProperty } from './properties/CaluriProperty.js';
 import { ExtendedProperty } from './properties/ExtendedProperty.js';
+import './properties/BaseProperty.js';
 import './parameters/ValueParameter.js';
 import './parameters/BaseParameter.js';
 import './values/TextType.js';

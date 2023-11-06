@@ -78,5 +78,6 @@ export { FburlProperty } from './properties/FburlProperty.js';
 export { CaladruriProperty } from './properties/CaladruriProperty.js';
 export { CaluriProperty } from './properties/CaluriProperty.js';
 export { ExtendedProperty } from './properties/ExtendedProperty.js';
+import './properties/BaseProperty.js';
 import './parameters/BaseParameter.js';
 import './values/BaseValue.js';

@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { AnyParameter } from '../parameters/AnyParameter.js';
 import { SpecialValueType } from '../values/SpecialValueType.js';
 import '../parameters/BaseParameter.js';
@@ -9,7 +10,7 @@ import '../values/TextType.js';
 import '../values/SexType.js';
 import '../values/URIType.js';
 
-declare class ClientpidmapProperty {
+declare class ClientpidmapProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

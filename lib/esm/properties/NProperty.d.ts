@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { ValueParameter } from '../parameters/ValueParameter.js';
 import { SortAsParameter } from '../parameters/SortAsParameter.js';
 import { LanguageParameter } from '../parameters/LanguageParameter.js';
@@ -20,7 +21,7 @@ import '../values/URIType.js';
 import '../values/SexType.js';
 import '../values/ParameterValueType.js';
 
-declare class NProperty {
+declare class NProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

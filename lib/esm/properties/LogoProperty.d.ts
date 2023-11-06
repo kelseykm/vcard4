@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { LanguageParameter } from '../parameters/LanguageParameter.js';
 import { ValueParameter } from '../parameters/ValueParameter.js';
 import { PrefParameter } from '../parameters/PrefParameter.js';
@@ -25,7 +26,7 @@ import '../values/SexType.js';
 import '../values/SpecialValueType.js';
 import '../values/ParameterValueType.js';
 
-declare class LogoProperty {
+declare class LogoProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

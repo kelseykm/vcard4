@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { ValueParameter } from '../parameters/ValueParameter.js';
 import { AnyParameter } from '../parameters/AnyParameter.js';
 import { TextType } from '../values/TextType.js';
@@ -17,7 +18,7 @@ import '../values/SexType.js';
 import '../values/SpecialValueType.js';
 import '../values/ParameterValueType.js';
 
-declare class ProdidProperty {
+declare class ProdidProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

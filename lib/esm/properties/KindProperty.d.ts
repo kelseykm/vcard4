@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { ValueParameter } from '../parameters/ValueParameter.js';
 import { AnyParameter } from '../parameters/AnyParameter.js';
 import { SpecialValueType } from '../values/SpecialValueType.js';
@@ -17,7 +18,7 @@ import '../values/URIType.js';
 import '../values/SexType.js';
 import '../values/ParameterValueType.js';
 
-declare class KindProperty {
+declare class KindProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

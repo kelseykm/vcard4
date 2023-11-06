@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { ValueParameter } from '../parameters/ValueParameter.js';
 import { PrefParameter } from '../parameters/PrefParameter.js';
 import { IndexParameter } from '../parameters/IndexParameter.js';
@@ -17,7 +18,7 @@ import '../values/LanguageTagType.js';
 import '../values/SexType.js';
 import '../values/SpecialValueType.js';
 
-declare class ContactURIProperty {
+declare class ContactURIProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

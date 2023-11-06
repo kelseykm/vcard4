@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { LanguageParameter } from '../parameters/LanguageParameter.js';
 import { PrefParameter } from '../parameters/PrefParameter.js';
 import { AltidParameter } from '../parameters/AltidParameter.js';
@@ -12,7 +13,7 @@ import '../values/BaseValue.js';
 import '../values/IntegerType.js';
 import '../values/ParameterValueType.js';
 
-declare class InterestProperty {
+declare class InterestProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

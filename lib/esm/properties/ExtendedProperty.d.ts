@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { LanguageParameter } from '../parameters/LanguageParameter.js';
 import { ValueParameter } from '../parameters/ValueParameter.js';
 import { PrefParameter } from '../parameters/PrefParameter.js';
@@ -31,7 +32,7 @@ import '../values/IntegerListType.js';
 import '../values/FloatListType.js';
 import '../values/ParameterValueType.js';
 
-declare class ExtendedProperty {
+declare class ExtendedProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

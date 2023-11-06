@@ -1,3 +1,4 @@
+import { BaseProperty } from './BaseProperty.js';
 import { ValueParameter } from '../parameters/ValueParameter.js';
 import { AnyParameter } from '../parameters/AnyParameter.js';
 import { URIType } from '../values/URIType.js';
@@ -17,7 +18,7 @@ import '../values/SexType.js';
 import '../values/SpecialValueType.js';
 import '../values/ParameterValueType.js';
 
-declare class UIDProperty {
+declare class UIDProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};
