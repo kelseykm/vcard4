@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   LanguageParameter,
   CalscaleParameter,
@@ -7,7 +8,7 @@ import {
 } from "../parameters/index";
 import { DateTimeType, TextType } from "../values/index";
 
-export class BdayProperty {
+export class BdayProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

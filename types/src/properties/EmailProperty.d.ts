@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   AnyParameter,
   TypeParameter,
@@ -9,7 +10,7 @@ import {
 } from "../parameters/index";
 import { TextType } from "../values/index";
 
-export class EmailProperty {
+export class EmailProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

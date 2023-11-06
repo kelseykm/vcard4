@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   PrefParameter,
   IndexParameter,
@@ -5,7 +6,7 @@ import {
 } from "../parameters/index";
 import { URIType } from "../values/index";
 
-export class ContactURIProperty {
+export class ContactURIProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

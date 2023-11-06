@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   AnyParameter,
   TypeParameter,
@@ -10,7 +11,7 @@ import {
 } from "../parameters/index";
 import { URIType } from "../values/index";
 
-export class FburlProperty {
+export class FburlProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

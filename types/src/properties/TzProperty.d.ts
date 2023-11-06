@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   AnyParameter,
   TypeParameter,
@@ -10,7 +11,7 @@ import {
 } from "../parameters/index";
 import { DateTimeType, TextType, URIType } from "../values/index";
 
-export class TzProperty {
+export class TzProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

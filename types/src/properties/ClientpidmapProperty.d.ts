@@ -1,7 +1,8 @@
+import { BaseProperty } from "./BaseProperty";
 import { AnyParameter } from "../parameters/index";
 import { SpecialValueType } from "../values/index";
 
-export class ClientpidmapProperty {
+export class ClientpidmapProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

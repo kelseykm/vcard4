@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   LanguageParameter,
   AnyParameter,
@@ -10,7 +11,7 @@ import {
 } from "../parameters/index";
 import { TextType, TextListType } from "../values/index";
 
-export class NicknameProperty {
+export class NicknameProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

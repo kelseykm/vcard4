@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   LanguageParameter,
   AnyParameter,
@@ -11,7 +12,7 @@ import {
 } from "../parameters/index";
 import { URIType } from "../values/index";
 
-export class SoundProperty {
+export class SoundProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

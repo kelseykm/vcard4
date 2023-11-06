@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   AnyParameter,
   MediatypeParameter,
@@ -9,7 +10,7 @@ import {
 } from "../parameters/index";
 import { URIType } from "../values/index";
 
-export class MemberProperty {
+export class MemberProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

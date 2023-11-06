@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   LanguageParameter,
   SortAsParameter,
@@ -11,7 +12,7 @@ import {
 } from "../parameters/index";
 import { SpecialValueType } from "../values/index";
 
-export class OrgProperty {
+export class OrgProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

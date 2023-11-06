@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   AltidParameter,
   ValueParameter,
@@ -6,7 +7,7 @@ import {
 } from "../parameters/index";
 import { DateTimeType, TextType } from "../values/index";
 
-export class AnniversaryProperty {
+export class AnniversaryProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

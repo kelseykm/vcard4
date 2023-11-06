@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   LanguageParameter,
   CalscaleParameter,
@@ -12,7 +13,7 @@ import {
 } from "../parameters/index";
 import { URIType } from "../values/index";
 
-export class LogoProperty {
+export class LogoProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

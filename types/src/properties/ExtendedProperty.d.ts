@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   LanguageParameter,
   SortAsParameter,
@@ -29,7 +30,7 @@ import {
   SpecialValueType,
 } from "../values/index";
 
-export class ExtendedProperty {
+export class ExtendedProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

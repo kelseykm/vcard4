@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   ValueParameter,
   AltidParameter,
@@ -6,7 +7,7 @@ import {
 } from "../parameters/index";
 import { TextType, URIType } from "../values/index";
 
-export class DeathPlaceProperty {
+export class DeathPlaceProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

@@ -1,3 +1,4 @@
+import { BaseProperty } from "./BaseProperty";
 import {
   LanguageParameter,
   AnyParameter,
@@ -11,7 +12,7 @@ import {
 } from "../parameters/index";
 import { TextType, URIType } from "../values/index";
 
-export class RelatedProperty {
+export class RelatedProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};

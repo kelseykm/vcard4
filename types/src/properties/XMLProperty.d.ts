@@ -1,7 +1,8 @@
+import { BaseProperty } from "./BaseProperty";
 import { AltidParameter, ValueParameter } from "../parameters/index";
 import { TextType } from "../values/index";
 
-export class XMLProperty {
+export class XMLProperty extends BaseProperty {
   readonly params: string;
   readonly paramsXML: string;
   readonly paramsJSON: {};
