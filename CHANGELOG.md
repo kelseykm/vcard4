@@ -1,6 +1,38 @@
 # Changelog
 
+## [4.0.0] - 2023-11-06
+
+### Breaking Changes
+
+- Reordered arguments for increased clarity in several classes:
+  1. `LevelParameter`
+  2. `TypeParameter`
+  3. `SpecialValueType`
+  4. `DateTimeType`
+- Updated value types for parameters previously using `TextType` to `ParameterValueType` to enforce value specifications better.
+- Dropped support for IANA tokens due to their large number. Use an x-name format for token names.
+- No longer accept empty strings as `TextType` values.
+
+### New Features
+
+- Introduced a new value type: `ParameterValueType`, along with corresponding tests and type definitions.
+- Added additional unit tests for `Tokenizer` and `Parser`.
+- Included ts-doc comments in type definitions for improved documentation.
+- Enabled case-insensitive string matching for arguments in `getProperty` and `getGroup` methods on the parse return object.
+- Implemented unquoting of quoted values in `Tokenizer`.
+- Validated `LanguageTagType` values and added tests for this type.
+
+### Bug Fixes
+
+- Allowed properties with `ALTID` parameter count as 1 for cardinality in `Parser`, `Group`, and `VCARD`.
+- Permitted hyphens in x-names.
+- Improved validation for `Group` names.
+- Corrected the algorithm for finding the first colon index in `Tokenizer`.
+- Fixed spelling and case issues in property identifier names in `VCARD` and `Group`.
+
 ## [3.1.5] - 2022-11-01
+
+### Patch level changes
 
 - Return development files to production package to increase npm ranking
 
@@ -25,7 +57,7 @@
 
 ## [3.1.2] - 2022-08-17
 
-### Changes
+### Patch level changes
 
 - Change repository description and homepage
 
