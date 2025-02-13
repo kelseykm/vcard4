@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.0.1] - 2025-13-02
+
+### Bug Fix
+
+- Fixed regular expression in `DateTimeType` that was flagging 9th and 19th February as invalid
+
 ## [4.0.0] - 2023-11-06
 
 ### Breaking Changes
@@ -371,7 +377,7 @@
 - Initialized new npm project & added values.js
 - Added example vCard with multiple contacts
 - Created examples folder and added 2 vcard examples
-- Merge branch 'main' of https://github.com/kelseykm/CSV-VCF-Project
+- Merge branch 'main' of <https://github.com/kelseykm/CSV-VCF-Project>
 - Added the actual readMe for VCF file from github
 - Added actual VCF specification file
 - Updated VCF spec to 4.3
