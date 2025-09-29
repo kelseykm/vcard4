@@ -5,7 +5,7 @@ export class IMPPProperty extends BaseProperty {
   static identifier = "IMPPProperty";
   static prop = "IMPP";
   static cardinality = "*";
-  static acceptableParamTypes = [
+  static acceptableParamTypes = new Set([
     "ValueParameter",
     "PIDParameter",
     "PrefParameter",
@@ -14,7 +14,7 @@ export class IMPPProperty extends BaseProperty {
     "MediatypeParameter",
     "AltidParameter",
     "AnyParameter",
-  ];
+  ]);
   static acceptableValTypes = "URIType";
 
   #params;
