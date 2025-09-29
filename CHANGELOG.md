@@ -1,6 +1,16 @@
 # Changelog
 
-## [4.0.1] - 2025-13-02
+## [4.0.2] - 2025-09-30
+
+### Bug Fix
+
+- Changed `acceptableParamTypes` in `IMPPProperty` from array to set since the `#validate` function is designed to be used with sets
+
+### Other patch level changes
+
+- Updated development dependencies
+
+## [4.0.1] - 2025-02-13
 
 ### Bug Fix
 
