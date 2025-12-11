@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.0.3] - 2025-12-11
+
+### Bug Fix
+
+- Changed typing for the value of `LabelParameter` from `text` to `ParameterValueType`
+
 ## [4.0.2] - 2025-09-30
 
 ### Bug Fix
