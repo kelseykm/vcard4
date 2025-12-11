@@ -4,7 +4,7 @@
 
 ### Bug Fix
 
-- Changed typing for the value of `LabelParameter` from `text` to `ParameterValueType`
+- Changed typing for the value of `LabelParameter` from `string` to `ParameterValueType`
 
 ## [4.0.2] - 2025-09-30
 
