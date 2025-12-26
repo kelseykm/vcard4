@@ -125,6 +125,8 @@ export class DateTimeType extends BaseValue {
 
   #utcOffsetRegExp = /^(?:[+-]((?:[01]\d)|(?:2[0-3]))(?:[0-5]\d)?)$/;
 
+  #MAX_DATETIMEVALUE_LEN = 20;
+
   #validateAndSetType(type, dateTimeValue) {
     if (typeof dateTimeValue === "undefined" || typeof type === "undefined")
       throw new MissingArgument(
@@ -137,7 +139,9 @@ export class DateTimeType extends BaseValue {
     )
       throw new InvalidArgument(
         "Accepted values of type for DateTimeType are date, time, datetime, dateandortime, timestamp or utcoffset"
-      );
+      )
+    else if (`${dateTimeValue}`.length > this.#MAX_DATETIMEVALUE_LEN)
+      throw new InvalidArgument(`The value must not exceed ${this.#MAX_DATETIMEVALUE_LEN} characters`)
 
     switch (type) {
       case "date":

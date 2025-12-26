@@ -10,6 +10,7 @@ describe("LanguageTagType tests", () => {
 
   it("Rejects invalid input", () => {
     assert.throws(() => new LanguageTagType());
+    assert.throws(() => new LanguageTagType("en-Latn-US-variantone-varianttwo-variantthree-variantfour-variantfive-variantSix-variantSeven-variantEight-variantNine-variantTen-u-ca-gregory-co-phonebk-x-private-subtag-one-two-three-four-five-six-seven-eight-nine-ten-eleven-twelve-thirteen-fourteen-fifteen"));
     assert.throws(() => new LanguageTagType("en|us"));
     assert.throws(() => new LanguageTagType(55));
     assert.throws(() => new LanguageTagType(["en"]));
