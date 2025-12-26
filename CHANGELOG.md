@@ -1,5 +1,12 @@
 # Changelog
 
+## [4.0.4] - [2025-12-26]
+
+### Security Fix
+
+- Mitigated potential ReDOS backtracking vulnerabilities in validation functions using regular expressions by enforcing input length limits or using safer alternatives. Safeguards applied in `DateTimeType`, `URIType`, `LanguageTagType` and `Tokenizer`.
+- Added relevant tests
+
 ## [4.0.3] - 2025-12-11
 
 ### Bug Fix
