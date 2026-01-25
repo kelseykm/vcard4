@@ -2,6 +2,8 @@
 
 # vcard4
 
+![npm](https://img.shields.io/npm/v/vcard4) ![GitHub stars](https://img.shields.io/github/stars/kelseykm/vcard4?style=social) [![Sponsor](https://img.shields.io/badge/Sponsor-❤️-pink)](https://github.com/sponsors/kelseykm)
+
 **vcard4** is a javascript library for generating and parsing version 4.0
 vCards. It can also be used to generate XML vCards and jCards.
 
@@ -17,11 +19,14 @@ final bundle.
 TypeScript type declarations are provided for all the public parts of
 **vcard4**'s API.
 
-## Documentation
+## Documentation 📝
 
 **vcard4** is fully documented. You may find the docs
 [here](https://kelseykm.github.io/vcard4/).
 
-## Installation
+## Installation 💾
 
 `npm install vcard4`
+
+## Support My Work 💌
+If you find this project useful, consider [sponsoring me on GitHub](https://github.com/sponsors/kelseykm).
