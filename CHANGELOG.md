@@ -1,5 +1,11 @@
 # Changelog
 
+## [4.0.5] - [2026-02-04]
+
+### Bug Fix
+
+- Updated the `SpecialValueType` constructor signatures to allow `undefined` in unions for structured property values that can have empty fields, i.e. for `AdrProperty`, `NProperty`, and `GenderProperty`.
+
 ## [4.0.4] - [2025-12-26]
 
 ### Security Fix
