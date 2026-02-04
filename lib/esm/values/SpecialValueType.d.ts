@@ -19,8 +19,9 @@ declare class SpecialValueType extends BaseValue {
    * documentation
    * {@link https://kelseykm.github.io/vcard4/documentation/values/specialvaluetype}
    */
-  constructor(targetProp: string, value: (TextType | TextListType)[]);
-  constructor(targetProp: string, value: [SexType, TextType]);
+  constructor(targetProp: string, value: (TextType | TextListType | undefined)[]);
+  constructor(targetProp: string, value: [SexType | undefined, TextType]);
+  constructor(targetProp: string, value: [SexType, TextType | undefined]);
   constructor(targetProp: string, value: [IntegerType, URIType]);
   constructor(targetProp: string, value: string);
 }
